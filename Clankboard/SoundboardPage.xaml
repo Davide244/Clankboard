@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Clankboard.SoundboardPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Clankboard"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    NavigationCacheMode="Required">
+
+    <Grid VerticalAlignment="Top">
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid Margin="10, 10, 10, 0" Background="{ThemeResource Clankboard_AppCardBackground}" Padding="8" CornerRadius="5" Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" Grid.Row="0">
+                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8D6;" Margin="3, 5.25, 0, 0" FontSize="22"/>
+                    <TextBlock Style="{StaticResource TitleTextBlockStyle}" Margin="5, 0, 0, 0">Playback</TextBlock>
+                </StackPanel>
+                <StackPanel Grid.Row="1" >
+                    <NavigationViewItemSeparator/>
+                    <TextBlock TextWrapping="WrapWholeWords" Style="{StaticResource BodyTextBlockStyle}" Margin="5, 6">You can change simple playback settings here. You can find more advanced settings on the settings page.</TextBlock>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5, 5, 0, 0">
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE81E;" Margin="0" FontSize="13"/>
+                        <TextBlock Margin="3, 0, 6, 0" Style="{StaticResource BodyStrongTextBlockStyle}" VerticalAlignment="Center">Overlap Sounds</TextBlock>
+                        <CheckBox/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5, 5, 0, 0">
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE7F5;" Margin="0" FontSize="13"/>
+                        <TextBlock Margin="3, 0, 0, 0" Style="{StaticResource BodyStrongTextBlockStyle}" VerticalAlignment="Center">Pause / Play Keybind:</TextBlock>
+                        <HyperlinkButton Margin="2, 0">None</HyperlinkButton>
+                    </StackPanel>
+                    <NavigationViewItemSeparator Margin="0, 10, 0, 5"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Horizontal" Margin="0">
+                            <Button Padding="6">
+                                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xF5B0;" Margin="0" FontSize="16"/>
+                            </Button>
+                            <Button Padding="6" Margin="4, 0, 0, 0">
+                                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xF8AE;" Margin="0" FontSize="16"/>
+                            </Button>
+                        </StackPanel>
+                        <HyperlinkButton HorizontalAlignment="Right" Grid.Column="1">Settings Page</HyperlinkButton>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+            <Grid Margin="10, 10, 10, 0" Background="{ThemeResource Clankboard_AppCardBackground}" Padding="8" CornerRadius="5" VerticalAlignment="Stretch" Grid.Row="1">
+                <ScrollViewer VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Visible">
+                    <ListView x:Name="MainSoundboardListview" SelectionMode="Extended" CanDragItems="True" Margin="-3, 0">
+                        <ListViewItem>
+                            <Grid>
+                                <FontIcon Glyph="&#xE8A5;" HorizontalAlignment="Left"/>
+                                <StackPanel Margin="20 0, 50, 0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock
+                            Text="Test Sound"
+                            Style="{ThemeResource BodyStrongTextBlockStyle}"
+                            Margin="12,6,0,0"/>
+                                    </StackPanel>
+                                    <TextBlock 
+                            Grid.Row="1"
+                            Text="C:\Users\009da\Soundboard\Test_Sound.mp3"
+                            Style="{ThemeResource CaptionTextBlockStyle}"
+                            TextWrapping="NoWrap"
+                            Margin="12,0,70,8"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <HyperlinkButton Margin="0, 0, 5, 0">Ctrl + 1</HyperlinkButton>
+                                    <Button Foreground="Lime" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                        <FontIcon Glyph="&#xF5B0;" />
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                        </ListViewItem>
+                        <ListViewItem>
+                            <Grid>
+                                <FontIcon Glyph="&#xEBD3;" HorizontalAlignment="Left"/>
+                                <StackPanel Margin="20 0, 50, 0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock
+                            Text="Test Sound 2"
+                            Style="{ThemeResource BodyStrongTextBlockStyle}"
+                            Margin="12,6,0,0"/>
+                                    </StackPanel>
+                                    <TextBlock 
+                            Grid.Row="1"
+                            Text="youtube.com/watch?v=C7aGuETBzw8"
+                            Style="{ThemeResource CaptionTextBlockStyle}"
+                            TextWrapping="NoWrap"
+                            Margin="12,0,70,8"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <HyperlinkButton Margin="0, 0, 5, 0">Ctrl + 1</HyperlinkButton>
+                                    <Button Foreground="Lime" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                        <FontIcon Glyph="&#xF5B0;" />
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                        </ListViewItem>
+                        <ListViewItem>
+                            <Grid>
+                                <FontIcon Glyph="&#xE783;" HorizontalAlignment="Left" Foreground="Orange" ToolTipService.ToolTip="Could not find the sound file!"/>
+                                <StackPanel Margin="20 0, 50, 0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock
+                            Text="Test Sound 3"
+                            Style="{ThemeResource BodyStrongTextBlockStyle}"
+                            Margin="12,6,0,0"/>
+                                    </StackPanel>
+                                    <TextBlock 
+                            Grid.Row="1"
+                            Text="C:\Users\009da\Soundboard\Test_Sound3.mp3"
+                            Style="{ThemeResource CaptionTextBlockStyle}"
+                            TextWrapping="NoWrap"
+                            Margin="12,0,70,8"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <HyperlinkButton Margin="0, 0, 5, 0">Ctrl + 1</HyperlinkButton>
+                                    <Button Foreground="Lime" HorizontalAlignment="Right" VerticalAlignment="Center" IsEnabled="False">
+                                        <FontIcon Glyph="&#xF5B0;" />
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                        </ListViewItem>
+                        <ListViewItem>
+                            <Grid>
+                                <FontIcon Glyph="&#xE783;" HorizontalAlignment="Left" Foreground="Orange" ToolTipService.ToolTip="Could not find the sound file!" Visibility="Collapsed"/>
+                                <ProgressRing IsActive="True" HorizontalAlignment="Left" VerticalAlignment="Center" Width="20" Height="20"/>
+                                <StackPanel Margin="20 0, 50, 0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock
+                            Text="Test Sound 3"
+                            Style="{ThemeResource BodyStrongTextBlockStyle}"
+                            Margin="12,6,0,0"/>
+                                    </StackPanel>
+                                    <TextBlock 
+                            Grid.Row="1"
+                            Text="C:\Users\009da\Soundboard\Test_Sound3.mp3"
+                            Style="{ThemeResource CaptionTextBlockStyle}"
+                            TextWrapping="NoWrap"
+                            Margin="12,0,70,8"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <HyperlinkButton Margin="0, 0, 5, 0" Foreground="Firebrick">Ctrl + 1</HyperlinkButton>
+                                    <Button Foreground="Lime" HorizontalAlignment="Right" VerticalAlignment="Center" IsEnabled="False">
+                                        <FontIcon Glyph="&#xF5B0;" />
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                        </ListViewItem>
+                    </ListView>
+                </ScrollViewer>
+            </Grid>
+            <StackPanel Grid.Row="2">
+                <InfoBar x:Name="AppMainInforbar" Title="Missing Drivers" Message="You do not have any supported drivers installed!" Severity="Error" IsOpen="True" Margin="10, 10, 10, 0" VerticalAlignment="Bottom"/>
+                <InfoBar x:Name="AppSecondaryInfobar" Title="Missing Files" Message="Some sound files could not be located!" Severity="Warning" IsOpen="True" Margin="10, 10, 10, 10" VerticalAlignment="Bottom"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>
