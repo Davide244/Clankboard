@@ -72,8 +72,24 @@
             </StackPanel>
             <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right" Grid.Row="0" HorizontalAlignment="Left" x:Name="MainCommandBar">
                 <CommandBar.PrimaryCommands >
-                    <AppBarButton Icon="Add" Label="Add Sound" />
+                    <AppBarButton Icon="Add" Label="Add Sound" IsCompact="True">
+                        <AppBarButton.Flyout>
+                            <MenuFlyout>
+                                <MenuFlyoutItem Text="Add Sound File" Click="AddSoundFile_Click">
+                                    <MenuFlyoutItem.Icon>
+                                        <FontIcon Glyph="&#xE8E5;"/>
+                                    </MenuFlyoutItem.Icon>
+                                </MenuFlyoutItem>
+                                <MenuFlyoutItem Text="Download Sound File">
+                                    <MenuFlyoutItem.Icon>
+                                        <FontIcon Glyph="&#xEBD3;"/>
+                                    </MenuFlyoutItem.Icon>
+                                </MenuFlyoutItem>
+                            </MenuFlyout>
+                        </AppBarButton.Flyout>
+                    </AppBarButton>
                     <AppBarSeparator/>
+                    <AppBarButton Icon="Share" Label="Voicebox"/>
                     <AppBarButton Icon="Edit" Label="Edit"/>
                     <AppBarButton Icon="Share" Label="Share"/>
                     <AppBarSeparator/>

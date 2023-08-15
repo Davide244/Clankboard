@@ -38,12 +38,17 @@ public partial class App : Application
     /// Invoked when the application is launched.
     /// </summary>
     /// <param name="args">Details about the launch request and process.</param>
+    /// 
+
+    public static FrameworkElement MainRoot { get; private set; }
+
     protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
     {
         m_window = new MainWindow();
         m_window.Activate();
         m_window.Content = new ShellPage();
+        MainRoot = m_window.Content as FrameworkElement;
     }
 
-    private Window m_window;
+    internal Window m_window;
 }

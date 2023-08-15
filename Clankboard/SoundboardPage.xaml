@@ -13,7 +13,7 @@
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <Grid Margin="10, 10, 10, 0" Background="{ThemeResource Clankboard_AppCardBackground}" Padding="8" CornerRadius="5" Grid.Row="0">
@@ -57,116 +57,64 @@
                     </Grid>
                 </StackPanel>
             </Grid>
-            <Grid Margin="10, 10, 10, 0" Background="{ThemeResource Clankboard_AppCardBackground}" Padding="8" CornerRadius="5" VerticalAlignment="Stretch" Grid.Row="1">
+            <Grid Margin="10, 10, 10, 0" Background="{ThemeResource Clankboard_AppCardBackground}" Padding="4" CornerRadius="5" VerticalAlignment="Stretch" Grid.Row="1">
                 <ScrollViewer VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Visible">
-                    <ListView x:Name="MainSoundboardListview" SelectionMode="Extended" CanDragItems="True" Margin="-3, 0">
-                        <ListViewItem>
-                            <Grid>
-                                <FontIcon Glyph="&#xE8A5;" HorizontalAlignment="Left"/>
-                                <StackPanel Margin="20 0, 50, 0">
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock
-                            Text="Test Sound"
-                            Style="{ThemeResource BodyStrongTextBlockStyle}"
-                            Margin="12,6,0,0"/>
+                    <ListView x:Name="MainSoundboardListview" SelectionMode="Extended" CanDragItems="True" Margin="-3, 0" >
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="local:SoundBoardItem">
+                                <Grid>
+                                    <Grid.ContextFlyout>
+                                        <MenuFlyout>
+                                            <MenuFlyoutItem Text="Edit">
+                                                <MenuFlyoutItem.Icon>
+                                                    <FontIcon Glyph="&#xE70F;"/>
+                                                </MenuFlyoutItem.Icon>
+                                            </MenuFlyoutItem>
+                                            <MenuFlyoutItem Text="Delete">
+                                                <MenuFlyoutItem.Icon>
+                                                    <FontIcon Glyph="&#xE74D;"/>
+                                                </MenuFlyoutItem.Icon>
+                                            </MenuFlyoutItem>
+                                        </MenuFlyout>
+                                    </Grid.ContextFlyout>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <FontIcon Glyph="{x:Bind SoundLocationIcon}" x:Phase="1" HorizontalAlignment="Left" Foreground="{Binding SoundIconColor, TargetNullValue={ThemeResource TextFillColorPrimaryBrush}}" ToolTipService.ToolTip="{x:Bind SoundIconTooltip}" Visibility="{x:Bind SoundIconVisible}"/>
+                                    <ProgressRing IsActive="{x:Bind ProgressRingEnabled}" x:Phase="1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="20" Height="20"/>
+                                    <StackPanel Margin="20 0, 0, 0">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock
+                                                Text="{x:Bind SoundName}"
+                                                x:Phase="1"
+                                                Style="{ThemeResource BodyStrongTextBlockStyle}"
+                                                TextWrapping="NoWrap"
+                                                Margin="12,6,0,0"/>
+                                        </StackPanel>
+                                        <TextBlock 
+                                            Grid.Row="1"
+                                            Text="{x:Bind SoundLocation}"
+                                            x:Phase="1"
+                                            Style="{ThemeResource CaptionTextBlockStyle}"
+                                            TextWrapping="NoWrap"
+                                            Margin="12,0,0,8"/>
                                     </StackPanel>
-                                    <TextBlock 
-                            Grid.Row="1"
-                            Text="C:\Users\009da\Soundboard\Test_Sound.mp3"
-                            Style="{ThemeResource CaptionTextBlockStyle}"
-                            TextWrapping="NoWrap"
-                            Margin="12,0,70,8"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                    <HyperlinkButton Margin="0, 0, 5, 0">Ctrl + 1</HyperlinkButton>
-                                    <Button Foreground="Lime" HorizontalAlignment="Right" VerticalAlignment="Center">
-                                        <FontIcon Glyph="&#xF5B0;" />
-                                    </Button>
-                                </StackPanel>
-                            </Grid>
-                        </ListViewItem>
-                        <ListViewItem>
-                            <Grid>
-                                <FontIcon Glyph="&#xEBD3;" HorizontalAlignment="Left"/>
-                                <StackPanel Margin="20 0, 50, 0">
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock
-                            Text="Test Sound 2"
-                            Style="{ThemeResource BodyStrongTextBlockStyle}"
-                            Margin="12,6,0,0"/>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1">
+                                        <HyperlinkButton Margin="0, 0, 5, 0" Foreground="{Binding SoundKeybindForecolor, TargetNullValue={ThemeResource AccentTextFillColorPrimaryBrush}}" x:Phase="1" Content="{x:Bind SoundKeybind}"/>     <!-- Double Keybind color (No Overlap mode): Foreground="#ff99a4"-->
+                                        <Button Foreground="LightGreen" HorizontalAlignment="Right" VerticalAlignment="Center" x:Phase="1" IsEnabled="{x:Bind BtnEnabled}">
+                                            <FontIcon Glyph="&#xF5B0;" />
+                                        </Button>
                                     </StackPanel>
-                                    <TextBlock 
-                            Grid.Row="1"
-                            Text="youtube.com/watch?v=C7aGuETBzw8"
-                            Style="{ThemeResource CaptionTextBlockStyle}"
-                            TextWrapping="NoWrap"
-                            Margin="12,0,70,8"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                    <HyperlinkButton Margin="0, 0, 5, 0">Ctrl + 1</HyperlinkButton>
-                                    <Button Foreground="Lime" HorizontalAlignment="Right" VerticalAlignment="Center">
-                                        <FontIcon Glyph="&#xF5B0;" />
-                                    </Button>
-                                </StackPanel>
-                            </Grid>
-                        </ListViewItem>
-                        <ListViewItem>
-                            <Grid>
-                                <FontIcon Glyph="&#xE783;" HorizontalAlignment="Left" Foreground="Orange" ToolTipService.ToolTip="Could not find the sound file!"/>
-                                <StackPanel Margin="20 0, 50, 0">
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock
-                            Text="Test Sound 3"
-                            Style="{ThemeResource BodyStrongTextBlockStyle}"
-                            Margin="12,6,0,0"/>
-                                    </StackPanel>
-                                    <TextBlock 
-                            Grid.Row="1"
-                            Text="C:\Users\009da\Soundboard\Test_Sound3.mp3"
-                            Style="{ThemeResource CaptionTextBlockStyle}"
-                            TextWrapping="NoWrap"
-                            Margin="12,0,70,8"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                    <HyperlinkButton Margin="0, 0, 5, 0">Ctrl + 1</HyperlinkButton>
-                                    <Button Foreground="Lime" HorizontalAlignment="Right" VerticalAlignment="Center" IsEnabled="False">
-                                        <FontIcon Glyph="&#xF5B0;" />
-                                    </Button>
-                                </StackPanel>
-                            </Grid>
-                        </ListViewItem>
-                        <ListViewItem>
-                            <Grid>
-                                <FontIcon Glyph="&#xE783;" HorizontalAlignment="Left" Foreground="Orange" ToolTipService.ToolTip="Could not find the sound file!" Visibility="Collapsed"/>
-                                <ProgressRing IsActive="True" HorizontalAlignment="Left" VerticalAlignment="Center" Width="20" Height="20"/>
-                                <StackPanel Margin="20 0, 50, 0">
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock
-                            Text="Test Sound 3"
-                            Style="{ThemeResource BodyStrongTextBlockStyle}"
-                            Margin="12,6,0,0"/>
-                                    </StackPanel>
-                                    <TextBlock 
-                            Grid.Row="1"
-                            Text="C:\Users\009da\Soundboard\Test_Sound3.mp3"
-                            Style="{ThemeResource CaptionTextBlockStyle}"
-                            TextWrapping="NoWrap"
-                            Margin="12,0,70,8"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                    <HyperlinkButton Margin="0, 0, 5, 0" Foreground="Firebrick">Ctrl + 1</HyperlinkButton>
-                                    <Button Foreground="Lime" HorizontalAlignment="Right" VerticalAlignment="Center" IsEnabled="False">
-                                        <FontIcon Glyph="&#xF5B0;" />
-                                    </Button>
-                                </StackPanel>
-                            </Grid>
-                        </ListViewItem>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
                     </ListView>
                 </ScrollViewer>
             </Grid>
             <StackPanel Grid.Row="2">
-                <InfoBar x:Name="AppMainInforbar" Title="Missing Drivers" Message="You do not have any supported drivers installed!" Severity="Error" IsOpen="True" Margin="10, 10, 10, 0" VerticalAlignment="Bottom"/>
-                <InfoBar x:Name="AppSecondaryInfobar" Title="Missing Files" Message="Some sound files could not be located!" Severity="Warning" IsOpen="True" Margin="10, 10, 10, 10" VerticalAlignment="Bottom"/>
+                <InfoBar x:Name="AppMainInforbar" Title="Missing Drivers" Message="You do not have any supported drivers installed!" Severity="Error" IsOpen="False" Margin="10, 10, 10, 0" VerticalAlignment="Bottom"/>
+                <InfoBar x:Name="AppSecondaryInfobar" Title="Missing Files" Message="Some files are missing!" Severity="Warning" IsOpen="False" Margin="10, 10, 10, 10" VerticalAlignment="Bottom"/>
             </StackPanel>
         </Grid>
     </Grid>

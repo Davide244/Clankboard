@@ -27,4 +27,26 @@ public sealed partial class ShellPage : Page
         this.InitializeComponent();
         NavigationFrame.Navigate(typeof(SoundboardPage));
     }
+
+    private async void AddSoundFile_Click(object sender, RoutedEventArgs e)
+    {
+        // Show the file picker so the user can select a file
+        var picker = new Windows.Storage.Pickers.FileOpenPicker();
+
+        var window = (Application.Current as App)?.m_window as MainWindow;
+        var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(window);
+
+        WinRT.Interop.InitializeWithWindow.Initialize(picker, hWnd);
+
+        picker.FileTypeFilter.Add(".mp3");
+        picker.FileTypeFilter.Add(".wav");
+        picker.FileTypeFilter.Add(".ogg");
+        picker.FileTypeFilter.Add(".mp4");
+
+        var file = await picker.PickSingleFileAsync();
+        if (file != null)
+        {
+            //SoundboardPage.AddSoundFile("TESTADD", file.Name);
+        }
+    }
 }
