@@ -59,7 +59,7 @@ public class SoundBoardItemViewmodel
 
 public sealed partial class SoundboardPage : Page
 {
-    public SoundBoardItemViewmodel soundBoardItemViewmodel = new();
+    public static SoundBoardItemViewmodel soundBoardItemViewmodel = new();
     const string LocalFileIcon = "\uE8A5";
     const string WarningFileIcon = "\uE783";
     const string DownloadedFileIcon = "\uE753";
@@ -74,19 +74,18 @@ public sealed partial class SoundboardPage : Page
         soundBoardItemViewmodel.SoundBoardItems.Add(new SoundBoardItem("Sound 3", "Downloading: 47%", "\uE753", false, "Downloaded File", "None", true, false));
     }
 
-    public void AddSoundFile(string Name, string FilePath)
+    public static void AddSoundFile(string Name, string FilePath)
     {
-        if (!Regex.IsMatch(FilePath, "^.*\\.(mp3|.ogg|.wav|.mp4)$", RegexOptions.IgnoreCase)) { return; }
+        if (!Regex.IsMatch(FilePath, "^.*\\.(mp3|.ogg|.wav|.mp4)$", RegexOptions.IgnoreCase)) return;
 
         if (File.Exists(FilePath))
         {
             if (Regex.IsMatch(Name, "[A-Za-z0-9_!*ÜüÄäÖö#+ß?-]+"))
-            {
                 soundBoardItemViewmodel.SoundBoardItems.Add(new SoundBoardItem(Name, FilePath, LocalFileIcon, true, "Local File", "None", false, true));
-            }
         }
-        else { AppSecondaryInfobar.IsOpen = true; }
     }
+
+    public static void RemoveAllSounds() => soundBoardItemViewmodel.SoundBoardItems.Clear();
 
     public void DownloadSoundFile(string Name, string Url)
     {

@@ -59,7 +59,7 @@
             </Grid>
             <Grid Margin="10, 10, 10, 0" Background="{ThemeResource Clankboard_AppCardBackground}" Padding="4" CornerRadius="5" VerticalAlignment="Stretch" Grid.Row="1">
                 <ScrollViewer VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Visible">
-                    <ListView x:Name="MainSoundboardListview" SelectionMode="Extended" CanDragItems="True" Margin="-3, 0" >
+                    <ListView x:Name="MainSoundboardListview" SelectionMode="Extended" CanDragItems="True" Margin="-3, 0" CanReorderItems="True">
                         <ListView.ItemTemplate>
                             <DataTemplate x:DataType="local:SoundBoardItem">
                                 <Grid>
@@ -73,6 +73,12 @@
                                             <MenuFlyoutItem Text="Delete">
                                                 <MenuFlyoutItem.Icon>
                                                     <FontIcon Glyph="&#xE74D;"/>
+                                                </MenuFlyoutItem.Icon>
+                                            </MenuFlyoutItem>
+                                            <MenuFlyoutSeparator/>
+                                            <MenuFlyoutItem Text="Play">
+                                                <MenuFlyoutItem.Icon>
+                                                    <FontIcon Glyph="&#xE768;"/>
                                                 </MenuFlyoutItem.Icon>
                                             </MenuFlyoutItem>
                                         </MenuFlyout>
@@ -112,10 +118,10 @@
                     </ListView>
                 </ScrollViewer>
             </Grid>
-            <StackPanel Grid.Row="2">
-                <InfoBar x:Name="AppMainInforbar" Title="Missing Drivers" Message="You do not have any supported drivers installed!" Severity="Error" IsOpen="False" Margin="10, 10, 10, 0" VerticalAlignment="Bottom"/>
+            <!--StackPanel Grid.Row="2" x:Name="InfobarHolder">
+                <InfoBar x:Name="AppMissingDriverInfo" Title="Missing Drivers" Message="You do not have any supported drivers installed!" Severity="Error" IsOpen="False" Margin="10, 10, 10, 0" VerticalAlignment="Bottom"/>
                 <InfoBar x:Name="AppSecondaryInfobar" Title="Missing Files" Message="Some files are missing!" Severity="Warning" IsOpen="False" Margin="10, 10, 10, 10" VerticalAlignment="Bottom"/>
-            </StackPanel>
+            </StackPanel-->
         </Grid>
     </Grid>
 </Page>
