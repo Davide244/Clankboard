@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -13,6 +15,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Popups;
@@ -54,11 +57,12 @@ public class SoundBoardItem
 }
 public class SoundBoardItemViewmodel
 {
-    public List<SoundBoardItem> SoundBoardItems = new();
+    public ObservableCollection<SoundBoardItem> SoundBoardItems = new();
 }
 
 public sealed partial class SoundboardPage : Page
 {
+    public static SoundboardEvents g_SoundboardEvents = new();
     public static SoundBoardItemViewmodel soundBoardItemViewmodel = new();
     const string LocalFileIcon = "\uE8A5";
     const string WarningFileIcon = "\uE783";
@@ -68,27 +72,48 @@ public sealed partial class SoundboardPage : Page
     public SoundboardPage()
     {
         this.InitializeComponent();
+        
+        // Events
+        g_SoundboardEvents.NewSoundboardItem_FILE += AddSoundFile;
+        g_SoundboardEvents.DeleteAllSoundboardItems += RemoveAllSounds;
+
         MainSoundboardListview.ItemsSource = soundBoardItemViewmodel.SoundBoardItems;
         soundBoardItemViewmodel.SoundBoardItems.Add(new SoundBoardItem("Sound 1", "C:\\Users\\User\\Desktop\\Clankboard\\Clankboard\\Assets\\Sound1.mp3", "\uE8A5", true, "Local File", "Ctrl + 1", false, true));
         soundBoardItemViewmodel.SoundBoardItems.Add(new SoundBoardItem("Sound 2", "C:\\Users\\User\\Desktop\\Clankboard\\Clankboard\\Assets\\Sound2.mp3", "\uE753", true, "Downloaded File", "None", false, true));
         soundBoardItemViewmodel.SoundBoardItems.Add(new SoundBoardItem("Sound 3", "Downloading: 47%", "\uE753", false, "Downloaded File", "None", true, false));
     }
 
-    public static void AddSoundFile(string Name, string FilePath)
+    public void AddSoundFile(object sender, RoutedEventArgs e, string Name, string FilePath)
     {
         if (!Regex.IsMatch(FilePath, "^.*\\.(mp3|.ogg|.wav|.mp4)$", RegexOptions.IgnoreCase)) return;
 
         if (File.Exists(FilePath))
         {
-            if (Regex.IsMatch(Name, "[A-Za-z0-9_!*ÜüÄäÖö#+ß?-]+"))
-                soundBoardItemViewmodel.SoundBoardItems.Add(new SoundBoardItem(Name, FilePath, LocalFileIcon, true, "Local File", "None", false, true));
+            if (soundBoardItemViewmodel.SoundBoardItems.Any(x => x.SoundLocation == FilePath))
+            {
+                ShellPage.g_AppMessageBox.ShowMessagebox("File already exists", "The specified file already exists in this soundboard.\nThe file has not been added.", "", "", "Okay", ContentDialogButton.Close);
+                return;
+            }
+
+            soundBoardItemViewmodel.SoundBoardItems.Add(new SoundBoardItem(Name, FilePath, LocalFileIcon, true, "Local File", "None", false, true));
         }
+        else
+            ShellPage.g_AppMessageBox.ShowMessagebox("File not found", "The specified file could not be found!\nPlease check if the file exists and try again.", "", "", "Okay", ContentDialogButton.Close);
     }
 
-    public static void RemoveAllSounds() => soundBoardItemViewmodel.SoundBoardItems.Clear();
+    private void RemoveAllSounds(object Sender, EventArgs e) => soundBoardItemViewmodel.SoundBoardItems.Clear();
 
     public void DownloadSoundFile(string Name, string Url)
     {
         throw new NotImplementedException();
+    }
+
+    // Soundboard button Events
+
+    public void Soundboard_Removeitem_Click(object sender, RoutedEventArgs e)
+    {
+        var item = ((FrameworkElement)sender).DataContext;
+        var index = MainSoundboardListview.Items.IndexOf(item);
+        soundBoardItemViewmodel.SoundBoardItems.RemoveAt(index);
     }
 }

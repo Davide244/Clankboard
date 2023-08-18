@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
@@ -23,18 +24,22 @@ namespace Clankboard;
 /// </summary>
 public sealed partial class ShellPage : Page
 {
+
+    public static AppMessagebox g_AppMessageBox = new();
+
     public ShellPage()
     {
         this.InitializeComponent();
         NavigationFrame.Navigate(typeof(SoundboardPage));
+
+        g_AppMessageBox.NewMessageBox += DisplayDialog;
     }
 
-    public static async Task<int> DisplayDialog(ShellPage page, String Title, String Text, String PrimaryButtonText, String SecondaryButtonText, String CloseButtonText, ContentDialogButton DefaultButton = ContentDialogButton.None)
+    public async Task<int> DisplayDialog(object sender, RoutedEventArgs e, string Title, string Text, string PrimaryButtonText, string SecondaryButtonText, string CloseButtonText, ContentDialogButton DefaultButton)
     {
-        if (page == null) throw new ArgumentNullException(nameof(page));
 
         ContentDialog dialog = new ContentDialog();
-        dialog.XamlRoot = page.XamlRoot;
+        dialog.XamlRoot = this.XamlRoot;
 
         dialog.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
         dialog.Title = Title;
@@ -54,9 +59,9 @@ public sealed partial class ShellPage : Page
 
     private async void RemoveAllSounds_Click(object sender, RoutedEventArgs e)
     {
-        if (await DisplayDialog(this, "Delete Data", "Are you sure that you want to remove all sounds from your soundboard? This action may be irreversible.", "", "Yes", "No", ContentDialogButton.Close) == 1)
+        if ((await g_AppMessageBox.ShowMessagebox("Remove Sounds", "Are you sure that you want to remove all sounds from your soundboard?\nThis action may be irreversible!", "Yes", "", "No", ContentDialogButton.Close)) == 1)
         {
-
+            SoundboardPage.g_SoundboardEvents.DeleteAllItems();
         }
     }
 
@@ -78,9 +83,9 @@ public sealed partial class ShellPage : Page
         var file = await picker.PickSingleFileAsync();
         if (file != null && File.Exists(file.Path))
         {
-
+            SoundboardPage.g_SoundboardEvents.AddFile(Path.GetFileNameWithoutExtension(file.Name), file.Path);
         }
-        else if (file != null)
-            await DisplayDialog(this, "File not found", "The specified file could not be found!\nPlease check if the file exists and try again.", "", "", "Okay", ContentDialogButton.Close);
+        //else if (file != null)
+            //await DisplayDialog("File not found", "The specified file could not be found!\nPlease check if the file exists and try again.", "", "", "Okay", ContentDialogButton.Close);
     }
 }

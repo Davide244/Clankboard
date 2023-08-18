@@ -25,20 +25,12 @@ namespace Clankboard;
 /// </summary>
 public partial class App : Application
 {
-    /// <summary>
-    /// Initializes the singleton application object.  This is the first line of authored code
-    /// executed, and as such is the logical equivalent of main() or WinMain().
-    /// </summary>
     public App()
     {
         this.InitializeComponent();
     }
 
-    /// <summary>
-    /// Invoked when the application is launched.
-    /// </summary>
-    /// <param name="args">Details about the launch request and process.</param>
-    /// 
+    public static ShellPage m_shellPage = new ShellPage();
 
     public static FrameworkElement MainRoot { get; private set; }
 
@@ -46,7 +38,7 @@ public partial class App : Application
     {
         m_window = new MainWindow();
         m_window.Activate();
-        m_window.Content = new ShellPage();
+        m_window.Content = m_shellPage;
         MainRoot = m_window.Content as FrameworkElement;
     }
 
