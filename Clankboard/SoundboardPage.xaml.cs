@@ -3,11 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -19,45 +21,71 @@ using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Popups;
+using YoutubeExplode;
+using YoutubeExplode.Videos;
+using YoutubeExplode.Videos.Streams;
+using YoutubeExplode.Converter;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace Clankboard;
 
-public class SoundBoardItem
+public partial class SoundBoardItem : ObservableObject
 {
-    public string SoundName { get; set; }
+    [ObservableProperty]
+    public string _soundName;
+    [ObservableProperty]
+    public string _soundLocation;
+    [ObservableProperty]
+    public string _soundLocationIcon;
+    [ObservableProperty]
+    public string _soundIconColor;
+    [ObservableProperty]
+    public string _soundIconVisible;
+    [ObservableProperty]
+    public string _soundIconTooltip;
 
-    public string SoundLocation { get; set; }
-    public string SoundLocationIcon { get; set; }
-    public string SoundIconColor { get; set; }
-    public string SoundIconVisible { get; set; }
-    public string SoundIconTooltip { get; set; }
+    [ObservableProperty]
+    public string _soundKeybindForecolor;
+    [ObservableProperty]
+    public string _soundKeybind;
+    [ObservableProperty]
+    public bool _progressRingEnabled;
+    [ObservableProperty]
+    public bool _progressRingIntermediate;
+    [ObservableProperty]
+    public int _progressRingProgress;
+    [ObservableProperty]
+    public bool _btnEnabled;
 
-    public string SoundKeybindForecolor { get; set; }
-    public string SoundKeybind { get; set; }
-    public bool ProgressRingEnabled { get; set; }
-    public bool BtnEnabled { get; set; }
+    // Non-Observable fields
+    public string PhysicalFilePath { get; set; }
 
-    public SoundBoardItem(string soundName, string soundLocation, string soundLocationIcon, bool soundIconVisible, string soundIconTooltip, string soundKeybind, bool progressRingEnabled, bool btnEnabled, string soundIconColor = null, string soundKeybindForecolor = null)
+    public SoundBoardItem(string soundName, string soundLocation, string soundLocationIcon, bool soundIconVisible, string soundIconTooltip, string soundKeybind, bool progressRingEnabled, bool btnEnabled, bool progressRingIntermediate = true, int progressRingProgress = 100, string soundIconColor = null, string soundKeybindForecolor = null, string physicalFilePath = null)
     {
-    
+
         SoundName = soundName;
-        SoundLocation = soundLocation;
+        _soundLocation = soundLocation;
         SoundLocationIcon = soundLocationIcon;
         SoundIconColor = soundIconColor;
         SoundIconTooltip = soundIconTooltip;
         SoundKeybindForecolor = soundKeybindForecolor;
         SoundKeybind = soundKeybind;
         ProgressRingEnabled = progressRingEnabled;
+        ProgressRingIntermediate = progressRingIntermediate;
+        ProgressRingProgress = progressRingProgress;
         BtnEnabled = btnEnabled;
-        if (soundIconVisible == true) { SoundIconVisible = "Visible"; } else { SoundIconVisible = "Collapsed"; }
+        if (soundIconVisible == true) SoundIconVisible = "Visible"; else SoundIconVisible = "Collapsed"; // ease of use
+
+        PhysicalFilePath = physicalFilePath;
     }
 }
-public class SoundBoardItemViewmodel
+
+public partial class SoundBoardItemViewmodel : ObservableObject
 {
-    public ObservableCollection<SoundBoardItem> SoundBoardItems = new();
+    [ObservableProperty]
+    public ObservableCollection<SoundBoardItem> soundBoardItems = new();
 }
 
 public sealed partial class SoundboardPage : Page
@@ -75,6 +103,7 @@ public sealed partial class SoundboardPage : Page
         
         // Events
         g_SoundboardEvents.NewSoundboardItem_FILE += AddSoundFile;
+        g_SoundboardEvents.NewSoundboardItem_URL += DownloadSoundFile;
         g_SoundboardEvents.DeleteAllSoundboardItems += RemoveAllSounds;
 
         MainSoundboardListview.ItemsSource = soundBoardItemViewmodel.SoundBoardItems;
@@ -83,10 +112,9 @@ public sealed partial class SoundboardPage : Page
         soundBoardItemViewmodel.SoundBoardItems.Add(new SoundBoardItem("Sound 3", "Downloading: 47%", "\uE753", false, "Downloaded File", "None", true, false));
     }
 
-    public void AddSoundFile(object sender, RoutedEventArgs e, string Name, string FilePath)
+    private void AddSoundFile(object sender, RoutedEventArgs e, string Name, string FilePath)
     {
-        if (!Regex.IsMatch(FilePath, "^.*\\.(mp3|.ogg|.wav|.mp4)$", RegexOptions.IgnoreCase)) return;
-
+        //if (!Regex.IsMatch(FilePath, "^.*\\.(mp3|.ogg|.wav|.mp4)$", RegexOptions.IgnoreCase)) return; // To self: broken & wont fix :(
         if (File.Exists(FilePath))
         {
             if (soundBoardItemViewmodel.SoundBoardItems.Any(x => x.SoundLocation == FilePath))
@@ -103,9 +131,61 @@ public sealed partial class SoundboardPage : Page
 
     private void RemoveAllSounds(object Sender, EventArgs e) => soundBoardItemViewmodel.SoundBoardItems.Clear();
 
-    public void DownloadSoundFile(string Name, string Url)
+    private async void DownloadSoundFile(object sender, RoutedEventArgs e, string Name, string Url)
     {
-        throw new NotImplementedException();
+        if (soundBoardItemViewmodel.SoundBoardItems.Any(x => x.SoundLocation == Url || x.SoundLocation == "Downloading " + Url))
+        {
+            await ShellPage.g_AppMessageBox.ShowMessagebox("URL already exists", "The specified URL / Sound already exist in this soundboard.\nThe sound has not been added.", "", "", "Okay", ContentDialogButton.Close);
+            return;
+        }
+
+        YoutubeClient youtube = new();
+
+        StreamManifest streamManifest;
+        IStreamInfo streamInfo;
+        Stream audioOnlyStreamInfo;
+        string CurrentName;
+
+        var FilePath = AppDomain.CurrentDomain.BaseDirectory + "DownloadedSounds\\";
+
+        if (!Directory.Exists(FilePath))
+            Directory.CreateDirectory(FilePath);
+
+        try
+        {
+            streamManifest = await youtube.Videos.Streams.GetManifestAsync(Url);
+            streamInfo = streamManifest.GetAudioOnlyStreams().GetWithHighestBitrate();
+            audioOnlyStreamInfo = await youtube.Videos.Streams.GetAsync(streamInfo);
+
+            Video VideoInfo = (await youtube.Videos.GetAsync(Url));
+
+            if (Name != "")
+                CurrentName = Name;
+            else
+                CurrentName = VideoInfo.Title;
+
+            SoundBoardItem soundboardItem = new(CurrentName, "Downloading " + Url, DownloadedFileIcon, false, "Downloaded File", "None", true, false, false, 0);
+            soundBoardItemViewmodel.SoundBoardItems.Add(soundboardItem);
+
+            var ProgressHandler = new Progress<double>(p => { soundboardItem.ProgressRingProgress = Convert.ToInt32(p * 100); });
+
+            await youtube.Videos.Streams.DownloadAsync(streamInfo, FilePath + $"audio_youtube.{VideoInfo.Id}.{streamInfo.Container}", ProgressHandler);
+            soundboardItem.ProgressRingIntermediate = true;
+
+            soundboardItem.ProgressRingIntermediate = true;
+            soundboardItem.ProgressRingEnabled = false;
+            soundboardItem.BtnEnabled = true;
+            soundboardItem.SoundIconVisible = "Visible";
+            soundboardItem.SoundLocation = Url;
+        }
+        catch (Exception ex)
+        {
+            await ShellPage.g_AppMessageBox.ShowMessagebox("Download Error", "An error has occured while downloading the youtube video: " + Url + "\n\nPlease make sure that the URL is correct and links to a valid youtube video.\nPlease note that age restricted videos are not supported.\n\nException: " + ex.Message, "", "", "Okay", ContentDialogButton.Close);
+            return;
+        }
+
+
+
     }
 
     // Soundboard button Events
