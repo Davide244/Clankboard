@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Clankboard.AppContentDialogs.DownloadYoutubeVideoDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Clankboard.AppContentDialogs"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <!-- Content body -->
+        <TextBlock Text="Please note that this app currently only supports YouTube video links. Other services are not supported." TextWrapping="Wrap" />
+        <TextBlock Text="Please enter a valid URL!" Foreground="OrangeRed" Visibility="Collapsed" TextWrapping="Wrap" x:Name="InvalidURLText"/>
+        <TextBox Header="Enter a YouTube video link:" PlaceholderText="URL" Margin="7" TextChanged="TextBox_TextChanged" x:Name="URLTextBox"/>
+        <CheckBox Content="Override Name" Margin="7, 7, 7, 0" x:Name="OverrideCheckbox" IsChecked="False" Checked="CheckBox_Checked" Unchecked="Checkbox_Unchecked"/>
+        <TextBox Header="Enter a custom name:" PlaceholderText="Name" Margin="7, 0, 7, 7" TextChanged="NameTextBox_TextChanged" Visibility="Collapsed" x:Name="NameTextBox"/>
+    </StackPanel>
+</Page>

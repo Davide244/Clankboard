@@ -35,7 +35,7 @@ public sealed partial class ShellPage : Page
         g_AppMessageBox.NewMessageBox += DisplayDialog;
     }
 
-    public async Task<int> DisplayDialog(object sender, RoutedEventArgs e, string Title, string Text, string PrimaryButtonText, string SecondaryButtonText, string CloseButtonText, ContentDialogButton DefaultButton)
+    private async Task<int> DisplayDialog(object sender, RoutedEventArgs e, string Title, string Text, string PrimaryButtonText, string SecondaryButtonText, string CloseButtonText, ContentDialogButton DefaultButton, object content)
     {
 
         ContentDialog dialog = new ContentDialog();
@@ -48,6 +48,7 @@ public sealed partial class ShellPage : Page
         dialog.SecondaryButtonText = SecondaryButtonText;
         dialog.CloseButtonText = CloseButtonText;
         dialog.DefaultButton = DefaultButton;
+        if (content != null) dialog.Content = content;
 
         var DialogResult = await dialog.ShowAsync();
         if (DialogResult == ContentDialogResult.Primary) return 1;
@@ -87,5 +88,13 @@ public sealed partial class ShellPage : Page
         }
         //else if (file != null)
             //await DisplayDialog("File not found", "The specified file could not be found!\nPlease check if the file exists and try again.", "", "", "Okay", ContentDialogButton.Close);
+    }
+
+    private async void DownloadSoundFile_Click(object sender, RoutedEventArgs e)
+    {
+        if ((await g_AppMessageBox.ShowMessagebox("Download Sound", "", "Download", "", "Cancel", ContentDialogButton.Primary, new AppContentDialogs.DownloadYoutubeVideoDialog())) == 1)
+        {
+            SoundboardPage.g_SoundboardEvents.AddFileURL(AppContentDialogs.DownloadYoutubeVideoDialog.CurrentNameOverride, AppContentDialogs.DownloadYoutubeVideoDialog.CurrentURL);
+        }
     }
 }
