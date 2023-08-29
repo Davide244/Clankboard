@@ -66,7 +66,7 @@ public partial class SoundBoardItem : ObservableObject
     {
 
         SoundName = soundName;
-        _soundLocation = soundLocation;
+        SoundLocation = soundLocation;
         SoundLocationIcon = soundLocationIcon;
         SoundIconColor = soundIconColor;
         SoundIconTooltip = soundIconTooltip;
@@ -97,6 +97,8 @@ public sealed partial class SoundboardPage : Page
     const string DownloadedFileIcon = "\uE753";
     const string DownloadingFileIcon = "\uEBD3";
 
+    private int OngoingDownloads = 0;
+
     public SoundboardPage()
     {
         this.InitializeComponent();
@@ -107,9 +109,6 @@ public sealed partial class SoundboardPage : Page
         g_SoundboardEvents.DeleteAllSoundboardItems += RemoveAllSounds;
 
         MainSoundboardListview.ItemsSource = soundBoardItemViewmodel.SoundBoardItems;
-        soundBoardItemViewmodel.SoundBoardItems.Add(new SoundBoardItem("Sound 1", "C:\\Users\\User\\Desktop\\Clankboard\\Clankboard\\Assets\\Sound1.mp3", "\uE8A5", true, "Local File", "Ctrl + 1", false, true));
-        soundBoardItemViewmodel.SoundBoardItems.Add(new SoundBoardItem("Sound 2", "C:\\Users\\User\\Desktop\\Clankboard\\Clankboard\\Assets\\Sound2.mp3", "\uE753", true, "Downloaded File", "None", false, true));
-        soundBoardItemViewmodel.SoundBoardItems.Add(new SoundBoardItem("Sound 3", "Downloading: 47%", "\uE753", false, "Downloaded File", "None", true, false));
     }
 
     private void AddSoundFile(object sender, RoutedEventArgs e, string Name, string FilePath)
@@ -123,7 +122,7 @@ public sealed partial class SoundboardPage : Page
                 return;
             }
 
-            soundBoardItemViewmodel.SoundBoardItems.Add(new SoundBoardItem(Name, FilePath, LocalFileIcon, true, "Local File", "None", false, true));
+            soundBoardItemViewmodel.SoundBoardItems.Add(new SoundBoardItem(Name, FilePath, LocalFileIcon, true, "Local File", "None", false, true, true, 0, null, null, FilePath));
         }
         else
             ShellPage.g_AppMessageBox.ShowMessagebox("File not found", "The specified file could not be found!\nPlease check if the file exists and try again.", "", "", "Okay", ContentDialogButton.Close);
@@ -138,6 +137,9 @@ public sealed partial class SoundboardPage : Page
             await ShellPage.g_AppMessageBox.ShowMessagebox("URL already exists", "The specified URL / Sound already exist in this soundboard.\nThe sound has not been added.", "", "", "Okay", ContentDialogButton.Close);
             return;
         }
+
+        OngoingDownloads++;
+        ShellPage.g_AppInfobar.OpenAppInfobar(AppInfobar.AppInfobarType.FileDownloadInfobar);
 
         YoutubeClient youtube = new();
 
@@ -172,6 +174,7 @@ public sealed partial class SoundboardPage : Page
             await youtube.Videos.Streams.DownloadAsync(streamInfo, FilePath + $"audio_youtube.{VideoInfo.Id}.{streamInfo.Container}", ProgressHandler);
             soundboardItem.ProgressRingIntermediate = true;
 
+            soundboardItem.PhysicalFilePath = FilePath + $"audio_youtube.{VideoInfo.Id}.{streamInfo.Container}";
             soundboardItem.ProgressRingIntermediate = true;
             soundboardItem.ProgressRingEnabled = false;
             soundboardItem.BtnEnabled = true;
@@ -180,11 +183,14 @@ public sealed partial class SoundboardPage : Page
         }
         catch (Exception ex)
         {
+            OngoingDownloads--;
+            if (OngoingDownloads <= 0) ShellPage.g_AppInfobar.OpenAppInfobar(AppInfobar.AppInfobarType.FileDownloadInfobar, false);
             await ShellPage.g_AppMessageBox.ShowMessagebox("Download Error", "An error has occured while downloading the youtube video: " + Url + "\n\nPlease make sure that the URL is correct and links to a valid youtube video.\nPlease note that age restricted videos are not supported.\n\nException: " + ex.Message, "", "", "Okay", ContentDialogButton.Close);
             return;
         }
 
-
+        OngoingDownloads--;
+        if (OngoingDownloads <= 0) ShellPage.g_AppInfobar.OpenAppInfobar(AppInfobar.AppInfobarType.FileDownloadInfobar, false);
 
     }
 

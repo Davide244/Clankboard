@@ -19,6 +19,23 @@ namespace Clankboard
         }
     }
 
+    public class AppInfobar
+    {
+        public enum AppInfobarType
+        {
+            FileDownloadInfobar,
+            DriverMissingInfobar,
+            FileMissingInfobar
+        }
+
+        public delegate void InfobarEventHandler(object sender, RoutedEventArgs e, AppInfobarType type, bool Open);
+        public event InfobarEventHandler OpenInfobar;
+        public void OpenAppInfobar(AppInfobarType type, bool Open = true)
+        {
+            OpenInfobar(this, null, type, Open);
+        }
+    }
+
     public class SoundboardEvents
     {
         #region Soundboard: Add File

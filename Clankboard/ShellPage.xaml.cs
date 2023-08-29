@@ -12,6 +12,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
@@ -26,6 +27,7 @@ public sealed partial class ShellPage : Page
 {
 
     public static AppMessagebox g_AppMessageBox = new();
+    public static AppInfobar g_AppInfobar = new();
 
     public ShellPage()
     {
@@ -33,6 +35,7 @@ public sealed partial class ShellPage : Page
         NavigationFrame.Navigate(typeof(SoundboardPage));
 
         g_AppMessageBox.NewMessageBox += DisplayDialog;
+        g_AppInfobar.OpenInfobar += AppInfoBar_Open;
     }
 
     private async Task<int> DisplayDialog(object sender, RoutedEventArgs e, string Title, string Text, string PrimaryButtonText, string SecondaryButtonText, string CloseButtonText, ContentDialogButton DefaultButton, object content)
@@ -95,6 +98,24 @@ public sealed partial class ShellPage : Page
         if ((await g_AppMessageBox.ShowMessagebox("Download Sound", "", "Download", "", "Cancel", ContentDialogButton.Primary, new AppContentDialogs.DownloadYoutubeVideoDialog())) == 1)
         {
             SoundboardPage.g_SoundboardEvents.AddFileURL(AppContentDialogs.DownloadYoutubeVideoDialog.CurrentNameOverride, AppContentDialogs.DownloadYoutubeVideoDialog.CurrentURL);
+        }
+    }
+
+    private void AppInfoBar_Open(object sender, RoutedEventArgs e, AppInfobar.AppInfobarType type, bool Open)
+    {
+        switch (type)
+        {
+            case AppInfobar.AppInfobarType.FileDownloadInfobar:
+                AppDownloadingFilesInfobar.IsOpen = Open;
+                break;
+            case AppInfobar.AppInfobarType.FileMissingInfobar:
+                AppMissingFilesInfobar.IsOpen = Open;
+                break;
+            case AppInfobar.AppInfobarType.DriverMissingInfobar:
+                AppMissingDriverInfobar.IsOpen = Open;
+                break;
+            default:
+                return;
         }
     }
 }

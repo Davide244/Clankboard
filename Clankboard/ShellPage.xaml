@@ -115,13 +115,13 @@
         </Grid>
 
         <StackPanel Grid.Row="3" x:Name="InfobarHolder" Background="{ThemeResource Clankboard_AppPageBackground}">
-            <!--<InfoBar x:Name="AppMissingDriverInfo" Title="Missing Drivers" Message="You are missing drivers required by this app!" Severity="Error" IsOpen="True" Margin="10, 0, 10, 10" VerticalAlignment="Bottom" IsClosable="False"/>
-            <InfoBar x:Name="AppSecondaryInfobar" Title="Missing Files" Message="Some files are missing!" Severity="Warning" IsOpen="True" Margin="10, 0, 10, 10" VerticalAlignment="Bottom"/>
-            <InfoBar x:Name="AppDownloadingFilesInfobar" Title="File Download" Message="Some files are currently being downloaded." Severity="Informational" IsOpen="True" Margin="10, 0, 10, 10" VerticalAlignment="Bottom" IsClosable="False">
+            <InfoBar x:Name="AppMissingDriverInfobar" Title="Missing Drivers" Message="You are missing drivers required by this app!" Severity="Error" IsOpen="False" Margin="10, 0, 10, 10" VerticalAlignment="Bottom" IsClosable="False"/>
+            <InfoBar x:Name="AppMissingFilesInfobar" Title="Missing Files" Message="Some files are missing!" Severity="Warning" IsOpen="False" Margin="10, 0, 10, 10" VerticalAlignment="Bottom"/>
+            <InfoBar x:Name="AppDownloadingFilesInfobar" Title="File Download" Message="Some files are currently being downloaded." Severity="Informational" IsOpen="False" Margin="10, 0, 10, 10" VerticalAlignment="Bottom" IsClosable="False">
                 <InfoBar.Content>
                     <ProgressBar IsIndeterminate="True" Margin="0,-6,50,5"/>
                 </InfoBar.Content>
-            </InfoBar>-->
+            </InfoBar>
         </StackPanel>
     </Grid>
 </Page>
