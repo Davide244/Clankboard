@@ -39,7 +39,11 @@ public partial class App : Application
         m_window = new MainWindow();
         m_window.Activate();
         m_window.Content = new ShellPage();
+
         m_window.Title = "Clankboard";
+        if (System.Diagnostics.Debugger.IsAttached)
+            m_window.Title = "Clankboard DEBUG";
+
         MainRoot = m_window.Content as FrameworkElement;
 
         RegisterWindowMinMax(m_window);
