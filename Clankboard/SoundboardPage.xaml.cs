@@ -202,4 +202,12 @@ public sealed partial class SoundboardPage : Page
         var index = MainSoundboardListview.Items.IndexOf(item);
         soundBoardItemViewmodel.SoundBoardItems.RemoveAt(index);
     }
+
+    private void MainSoundboardListview_ContainerContentChanging(ListViewBase sender, ContainerContentChangingEventArgs args)
+    {
+        if (soundBoardItemViewmodel.SoundBoardItems.Count > 0)
+            SoundboardNoItems.Visibility = Visibility.Collapsed;
+        else
+            SoundboardNoItems.Visibility = Visibility.Visible;
+    }
 }

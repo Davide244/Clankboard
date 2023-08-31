@@ -56,14 +56,20 @@
                     </Grid>
                 </StackPanel>
             </Grid>
-            <Grid Margin="10, 10, 10, 10" Background="{ThemeResource Clankboard_AppCardBackground}" Padding="4" CornerRadius="5" VerticalAlignment="Stretch" Grid.Row="1">
+            <Grid Margin="10, 10, 10, 0" Background="{ThemeResource Clankboard_AppCardBackground}" Padding="4" CornerRadius="5" VerticalAlignment="Stretch" Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBox Margin="2, 2, 2, 5" PlaceholderText="Search Sound"></TextBox>
+                <StackPanel>
+                    <TextBox Margin="2, 2, 2, 5" PlaceholderText="Search Sound" Visibility="Visible"/>
+                    <StackPanel Visibility="Visible" x:Name="SoundboardNoItems">
+                        <BitmapIcon UriSource="ms-appx:///Assets/NoSoundboardItems.png" ShowAsMonochrome="True" Opacity="0.8" HorizontalAlignment="Center" Width="200"/>
+                        <TextBlock Text="Soundboard empty." FontSize="30" FontWeight="Bold" Opacity="0.8" HorizontalAlignment="Center" Margin="0, 0, 0, 5"/>
+                    </StackPanel>
+                </StackPanel>
                 <ScrollViewer Grid.Row="1" VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Visible">
-                    <ListView x:Name="MainSoundboardListview" SelectionMode="Extended" CanDragItems="True" Margin="-3, 0" CanReorderItems="True">
+                    <ListView x:Name="MainSoundboardListview" SelectionMode="Extended" CanDragItems="True" Margin="-3, 0" CanReorderItems="True" ContainerContentChanging="MainSoundboardListview_ContainerContentChanging">
                         <ListView.ItemTemplate>
                             <DataTemplate x:DataType="local:SoundBoardItem">
                                 <Grid>
@@ -111,7 +117,8 @@
                                             Margin="12,0,0,8"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1">
-                                        <HyperlinkButton Margin="0, 0, 5, 0" Foreground="{Binding SoundKeybindForecolor, Mode=TwoWay, TargetNullValue={ThemeResource AccentTextFillColorPrimaryBrush}}" x:Phase="1" Content="{x:Bind SoundKeybind, Mode=TwoWay}"/>     <!-- Double Keybind color (No Overlap mode): Foreground="#ff99a4"-->
+                                        <HyperlinkButton Margin="0, 0, 5, 0" Foreground="{Binding SoundKeybindForecolor, Mode=TwoWay, TargetNullValue={ThemeResource AccentTextFillColorPrimaryBrush}}" x:Phase="1" Content="{x:Bind SoundKeybind, Mode=TwoWay}"/>
+                                        <!-- Double Keybind color (No Overlap mode): Foreground="#ff99a4"-->
                                         <Button Foreground="LightGreen" HorizontalAlignment="Right" VerticalAlignment="Center" x:Phase="1" IsEnabled="{x:Bind BtnEnabled, Mode=TwoWay}">
                                             <FontIcon Glyph="&#xF5B0;" />
                                         </Button>
