@@ -26,9 +26,6 @@ using YoutubeExplode.Videos;
 using YoutubeExplode.Videos.Streams;
 using YoutubeExplode.Converter;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
-
 namespace Clankboard;
 
 public partial class SoundBoardItem : ObservableObject
@@ -132,7 +129,7 @@ public sealed partial class SoundboardPage : Page
 
     private async void DownloadSoundFile(object sender, RoutedEventArgs e, string Name, string Url)
     {
-        if (soundBoardItemViewmodel.SoundBoardItems.Any(x => x.SoundLocation == Url || x.SoundLocation == "Downloading " + Url))
+        if (soundBoardItemViewmodel.SoundBoardItems.Any(x => x.SoundLocation == Url || x.SoundLocation == $"Downloading {Url}"))
         {
             await ShellPage.g_AppMessageBox.ShowMessagebox("URL already exists", "The specified URL / Sound already exist in this soundboard.\nThe sound has not been added.", "", "", "Okay", ContentDialogButton.Close);
             return;
@@ -166,7 +163,7 @@ public sealed partial class SoundboardPage : Page
             else
                 CurrentName = VideoInfo.Title;
 
-            SoundBoardItem soundboardItem = new(CurrentName, "Downloading " + Url, DownloadedFileIcon, false, "Downloaded File", "None", true, false, false, 0);
+            SoundBoardItem soundboardItem = new(CurrentName, $"Downloading {Url}", DownloadedFileIcon, false, "Downloaded File", "None", true, false, false, 0);
             soundBoardItemViewmodel.SoundBoardItems.Add(soundboardItem);
 
             var ProgressHandler = new Progress<double>(p => { soundboardItem.ProgressRingProgress = Convert.ToInt32(p * 100); });
@@ -185,7 +182,7 @@ public sealed partial class SoundboardPage : Page
         {
             OngoingDownloads--;
             if (OngoingDownloads <= 0) ShellPage.g_AppInfobar.OpenAppInfobar(AppInfobar.AppInfobarType.FileDownloadInfobar, false);
-            await ShellPage.g_AppMessageBox.ShowMessagebox("Download Error", "An error has occured while downloading the youtube video: " + Url + "\n\nPlease make sure that the URL is correct and links to a valid youtube video.\nPlease note that age restricted videos are not supported.\n\nException: " + ex.Message, "", "", "Okay", ContentDialogButton.Close);
+            await ShellPage.g_AppMessageBox.ShowMessagebox("Download Error", $"An error has occured while downloading the youtube video: {Url}\n\nPlease make sure that the URL is correct and links to a valid youtube video.\nPlease note that age restricted videos are not supported.\n\nException: {ex.Message}", "", "", "Okay", ContentDialogButton.Close);
             return;
         }
 
