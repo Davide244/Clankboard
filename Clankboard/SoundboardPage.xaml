@@ -75,7 +75,7 @@
                                 <Grid>
                                     <Grid.ContextFlyout>
                                         <MenuFlyout>
-                                            <MenuFlyoutItem Text="Edit">
+                                            <MenuFlyoutItem Text="Change Name">
                                                 <MenuFlyoutItem.Icon>
                                                     <FontIcon Glyph="&#xE70F;"/>
                                                 </MenuFlyoutItem.Icon>

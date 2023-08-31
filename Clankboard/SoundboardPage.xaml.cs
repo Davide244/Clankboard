@@ -145,7 +145,7 @@ public sealed partial class SoundboardPage : Page
         Stream audioOnlyStreamInfo;
         string CurrentName;
 
-        var FilePath = AppDomain.CurrentDomain.BaseDirectory + "DownloadedSounds\\";
+        var FilePath = $"{AppDomain.CurrentDomain.BaseDirectory}DownloadedSounds\\";
 
         if (!Directory.Exists(FilePath))
             Directory.CreateDirectory(FilePath);
@@ -197,6 +197,10 @@ public sealed partial class SoundboardPage : Page
     {
         var item = ((FrameworkElement)sender).DataContext;
         var index = MainSoundboardListview.Items.IndexOf(item);
+        
+        if (soundBoardItemViewmodel.SoundBoardItems[index].PhysicalFilePath.Contains($"{AppDomain.CurrentDomain.BaseDirectory}DownloadedSounds\\") && File.Exists(soundBoardItemViewmodel.SoundBoardItems[index].PhysicalFilePath))
+            File.Delete(soundBoardItemViewmodel.SoundBoardItems[index].PhysicalFilePath);
+
         soundBoardItemViewmodel.SoundBoardItems.RemoveAt(index);
     }
 
