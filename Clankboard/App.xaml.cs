@@ -68,9 +68,7 @@ public partial class App : Application
     private static extern IntPtr CallWindowProc(IntPtr lpPrevWndFunc, IntPtr hWnd, WindowMessage Msg, IntPtr wParam, IntPtr lParam);
 
     public static int MinWindowWidth { get; set; } = 497;
-    //public static int MaxWindowWidth { get; set; } = 1800;
     public static int MinWindowHeight { get; set; } = 650;
-    //public static int MaxWindowHeight { get; set; } = 1600;
 
     private static void RegisterWindowMinMax(Window window)
     {
@@ -93,9 +91,7 @@ public partial class App : Application
 
                 var minMaxInfo = Marshal.PtrToStructure<MINMAXINFO>(lParam);
                 minMaxInfo.ptMinTrackSize.x = (int)(MinWindowWidth * scalingFactor);
-                //minMaxInfo.ptMaxTrackSize.x = (int)(MaxWindowWidth * scalingFactor);
                 minMaxInfo.ptMinTrackSize.y = (int)(MinWindowHeight * scalingFactor);
-                //minMaxInfo.ptMaxTrackSize.y = (int)(MaxWindowHeight * scalingFactor);
 
                 Marshal.StructureToPtr(minMaxInfo, lParam, true);
                 break;
