@@ -72,8 +72,26 @@
                 </Button>
             </StackPanel>
             <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right" Grid.Row="0" HorizontalAlignment="Left" x:Name="MainCommandBar">
-                <CommandBar.PrimaryCommands >
-                    <AppBarButton Icon="Add" Label="Add Sound" IsCompact="True">
+                <CommandBar.PrimaryCommands>
+                    <AppBarButton Icon="Document" Label="File" IsCompact="True">
+                        <AppBarButton.Flyout>
+                            <MenuFlyout>
+                                <MenuFlyoutItem Text="Save As / Export" Icon="Save"/>
+                                <MenuFlyoutItem Text="Open / Import">
+                                    <MenuFlyoutItem.Icon>
+                                        <FontIcon Glyph="&#xE8B5;"/>
+                                    </MenuFlyoutItem.Icon>
+                                </MenuFlyoutItem>
+                                <MenuFlyoutItem Text="Share" Icon="Share"/>
+                                <MenuFlyoutSeparator/>
+                                <MenuFlyoutItem Text="Delete Sounds" Icon="Delete" Click="RemoveAllSounds_Click"/>
+                            </MenuFlyout>
+                        </AppBarButton.Flyout>
+                    </AppBarButton>
+                    <AppBarButton Label="Add Sound" IsCompact="True">
+                        <AppBarButton.Icon>
+                            <FontIcon Glyph="&#xECC8;"/>
+                        </AppBarButton.Icon>
                         <AppBarButton.Flyout>
                             <MenuFlyout>
                                 <MenuFlyoutItem Text="Add Sound File" Click="AddSoundFile_Click">
@@ -91,8 +109,6 @@
                     </AppBarButton>
                     <AppBarSeparator/>
                     <AppBarButton Icon="Share" Label="Voicebox"/>
-                    <AppBarButton Icon="Delete" Label="Delete Sounds" Click="RemoveAllSounds_Click"/>
-                    <AppBarButton Icon="Share" Label="Share"/>
                     <AppBarSeparator/>
                 </CommandBar.PrimaryCommands>
                 <CommandBar.SecondaryCommands>
