@@ -86,7 +86,7 @@
                                                 </MenuFlyoutItem.Icon>
                                             </MenuFlyoutItem>
                                             <MenuFlyoutSeparator/>
-                                            <MenuFlyoutItem Text="Play">
+                                            <MenuFlyoutItem Text="Play" IsEnabled="{x:Bind BtnEnabled, Mode=TwoWay}">
                                                 <MenuFlyoutItem.Icon>
                                                     <FontIcon Glyph="&#xE768;"/>
                                                 </MenuFlyoutItem.Icon>
