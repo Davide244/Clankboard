@@ -125,7 +125,20 @@ public sealed partial class SoundboardPage : Page
             ShellPage.g_AppMessageBox.ShowMessagebox("File not found", "The specified file could not be found!\nPlease check if the file exists and try again.", "", "", "Okay", ContentDialogButton.Close);
     }
 
-    private void RemoveAllSounds(object Sender, EventArgs e) => soundBoardItemViewmodel.SoundBoardItems.Clear();
+    private void RemoveAllSounds(object Sender, EventArgs e)
+    {
+        // loop through all items and remove them
+        // TODO: FIX THIS!!! CRASHES
+        foreach (var item in soundBoardItemViewmodel.SoundBoardItems)
+        {
+            if (item.PhysicalFilePath.Contains($"{AppDomain.CurrentDomain.BaseDirectory}DownloadedSounds\\") && File.Exists(item.PhysicalFilePath))
+                File.Delete(item.PhysicalFilePath);
+            soundBoardItemViewmodel.SoundBoardItems.Remove(item);
+        }
+
+
+        soundBoardItemViewmodel.SoundBoardItems.Clear();
+    }
 
     private async void DownloadSoundFile(object sender, RoutedEventArgs e, string Name, string Url)
     {
