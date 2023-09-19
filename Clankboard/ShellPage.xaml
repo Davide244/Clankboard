@@ -76,12 +76,38 @@
                     <AppBarButton Icon="Document" Label="File" IsCompact="True">
                         <AppBarButton.Flyout>
                             <MenuFlyout>
-                                <MenuFlyoutItem Text="Save As / Export" Icon="Save"/>
-                                <MenuFlyoutItem Text="Open / Import">
-                                    <MenuFlyoutItem.Icon>
+                                <MenuFlyoutSubItem Text="Load">
+                                    <MenuFlyoutSubItem.Icon>
                                         <FontIcon Glyph="&#xE8B5;"/>
-                                    </MenuFlyoutItem.Icon>
-                                </MenuFlyoutItem>
+                                    </MenuFlyoutSubItem.Icon>
+                                    <MenuFlyoutItem Text="Open">
+                                        <MenuFlyoutItem.Icon>
+                                            <FontIcon Glyph="&#xE8E5;"/>
+                                        </MenuFlyoutItem.Icon>
+                                    </MenuFlyoutItem>
+                                    <MenuFlyoutSeparator/>
+                                    <MenuFlyoutItem Text="Profile 1">
+                                        <MenuFlyoutItem.Icon>
+                                            <FontIcon Glyph="&#xE8A7;"/>
+                                        </MenuFlyoutItem.Icon>
+                                    </MenuFlyoutItem>
+                                    <MenuFlyoutItem Text="Profile 2">
+                                        <MenuFlyoutItem.Icon>
+                                            <FontIcon Glyph="&#xE8A7;"/>
+                                        </MenuFlyoutItem.Icon>
+                                    </MenuFlyoutItem>
+                                    <MenuFlyoutItem Text="Profile 3">
+                                        <MenuFlyoutItem.Icon>
+                                            <FontIcon Glyph="&#xE8A7;"/>
+                                        </MenuFlyoutItem.Icon>
+                                    </MenuFlyoutItem>
+                                    <MenuFlyoutItem Text="Profile 4">
+                                        <MenuFlyoutItem.Icon>
+                                            <FontIcon Glyph="&#xE8A7;"/>
+                                        </MenuFlyoutItem.Icon>
+                                    </MenuFlyoutItem>
+                                </MenuFlyoutSubItem>
+                                <MenuFlyoutItem Text="Save As" Icon="Save"/>
                                 <MenuFlyoutItem Text="Share" Icon="Share"/>
                                 <MenuFlyoutSeparator/>
                                 <MenuFlyoutItem Text="Delete Sounds" Icon="Delete" Click="RemoveAllSounds_Click"/>
