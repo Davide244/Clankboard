@@ -15,11 +15,13 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+            
             <Grid Margin="10, 10, 10, 0" Background="{ThemeResource Clankboard_AppCardBackground}" Padding="8" CornerRadius="5" Grid.Row="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
+                
                 <StackPanel Orientation="Horizontal" Grid.Row="0">
                     <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8D6;" Margin="3, 5.25, 0, 0" FontSize="22"/>
                     <TextBlock Style="{StaticResource TitleTextBlockStyle}" Margin="5, 0, 0, 0">Playback</TextBlock>
@@ -52,7 +54,7 @@
                                 <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xF8AE;" Margin="0" FontSize="16"/>
                             </Button>
                         </StackPanel>
-                        <HyperlinkButton HorizontalAlignment="Right" Grid.Column="1">Settings Page</HyperlinkButton>
+                        <HyperlinkButton HorizontalAlignment="Right" Grid.Column="1" Click="LocalSettingsButton_Click">Settings Page</HyperlinkButton>
                     </Grid>
                 </StackPanel>
             </Grid>

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Clankboard.AppInfobar;
 
 namespace Clankboard
 {
@@ -30,10 +31,13 @@ namespace Clankboard
 
         public delegate void InfobarEventHandler(object sender, RoutedEventArgs e, AppInfobarType type, bool Open);
         public event InfobarEventHandler OpenInfobar;
-        public void OpenAppInfobar(AppInfobarType type, bool Open = true)
-        {
-            OpenInfobar(this, null, type, Open);
-        }
+        public void OpenAppInfobar(AppInfobarType type, bool Open = true) => OpenInfobar(this, null, type, Open);
+    }
+
+    public class ShellPageEvents
+    {
+        public event RoutedEventHandler SettingsOpenClick;
+        public void OpenAppSettings(object sender) => SettingsOpenClick(sender, null);
     }
 
     public class SoundboardEvents
@@ -51,9 +55,6 @@ namespace Clankboard
         #endregion
 
         public event EventHandler DeleteAllSoundboardItems;
-        public void DeleteAllItems()
-        {
-            DeleteAllSoundboardItems(this, null);
-        }
+        public void DeleteAllItems() => DeleteAllSoundboardItems(this, null);
     }
 }

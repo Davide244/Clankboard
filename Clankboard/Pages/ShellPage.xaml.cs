@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using Windows.ApplicationModel.VoiceCommands;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -28,6 +30,7 @@ public sealed partial class ShellPage : Page
 
     public static AppMessagebox g_AppMessageBox = new();
     public static AppInfobar g_AppInfobar = new();
+    public static ShellPageEvents g_ShellPageEvents = new();
 
     public ShellPage()
     {
@@ -36,7 +39,41 @@ public sealed partial class ShellPage : Page
 
         g_AppMessageBox.NewMessageBox += DisplayDialog;
         g_AppInfobar.OpenInfobar += AppInfoBar_Open;
+        g_ShellPageEvents.SettingsOpenClick += SettingspageButton_Click;
     }
+
+    protected override void OnNavigatedTo(NavigationEventArgs e)
+    {
+        base.OnNavigatedTo(e);
+        RectShadow.Receivers.Add(NavFrameParent);
+        AppTopBar.Translation += new Vector3(0, 0, 32);
+    }
+
+    #region Navigation
+    private void SettingspageButton_Click(object sender, RoutedEventArgs e)
+    {
+        NavigationFrame.Navigate(typeof(Pages.SettingsPage));
+        MainCommandBar.Visibility = Visibility.Collapsed;
+        AppbarBackButton.Visibility = Visibility.Visible;
+    }
+
+    private void AppbarBackButton_Click(object sender, RoutedEventArgs e)
+    {
+        NavigationFrame.GoBack();
+        if (NavigationFrame.SourcePageType == typeof(SoundboardPage))
+        {
+            MainCommandBar.Visibility = Visibility.Visible;
+            AppbarBackButton.Visibility = Visibility.Collapsed;
+        }
+    }
+
+    private void AppbarHomeButton_Click(object sender, RoutedEventArgs e)
+    {
+        NavigationFrame.Navigate(typeof(SoundboardPage));
+        MainCommandBar.Visibility = Visibility.Visible;
+        AppbarBackButton.Visibility = Visibility.Collapsed;
+    }
+    #endregion
 
     private async Task<int> DisplayDialog(object sender, RoutedEventArgs e, string Title, string Text, string PrimaryButtonText, string SecondaryButtonText, string CloseButtonText, ContentDialogButton DefaultButton, object content)
     {
@@ -61,6 +98,7 @@ public sealed partial class ShellPage : Page
         //return await dialog.ShowAsync();
     }
 
+    #region Sound file management
     private async void RemoveAllSounds_Click(object sender, RoutedEventArgs e)
     {
         if ((await g_AppMessageBox.ShowMessagebox("Remove Sounds", "Are you sure that you want to remove all sounds from your soundboard?\nThis action may be irreversible!", "Yes", "", "No", ContentDialogButton.Close)) == 1)
@@ -100,6 +138,7 @@ public sealed partial class ShellPage : Page
             SoundboardPage.g_SoundboardEvents.AddFileURL(AppContentDialogs.DownloadYoutubeVideoDialog.CurrentNameOverride, AppContentDialogs.DownloadYoutubeVideoDialog.CurrentURL);
         }
     }
+    #endregion
 
     private void AppInfoBar_Open(object sender, RoutedEventArgs e, AppInfobar.AppInfobarType type, bool Open)
     {

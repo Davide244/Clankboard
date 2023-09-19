@@ -108,6 +108,11 @@ public sealed partial class SoundboardPage : Page
         MainSoundboardListview.ItemsSource = soundBoardItemViewmodel.SoundBoardItems;
     }
 
+    private void LocalSettingsButton_Click(object sender, RoutedEventArgs e)
+    {
+        ShellPage.g_ShellPageEvents.OpenAppSettings(sender);
+    }
+
     private void AddSoundFile(object sender, RoutedEventArgs e, string Name, string FilePath)
     {
         //if (!Regex.IsMatch(FilePath, "^.*\\.(mp3|.ogg|.wav|.mp4)$", RegexOptions.IgnoreCase)) return; // To self: broken & wont fix :(
