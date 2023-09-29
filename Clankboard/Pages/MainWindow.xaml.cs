@@ -18,6 +18,9 @@ using Microsoft.UI;
 using WinRT.Interop;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml.Documents;
+using Windows.UI.WindowManagement;
+using AppWindow = Microsoft.UI.Windowing.AppWindow;
+using AppWindowChangedEventArgs = Microsoft.UI.Windowing.AppWindowChangedEventArgs;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
