@@ -84,7 +84,7 @@
                                     <MenuFlyoutSubItem.Icon>
                                         <FontIcon Glyph="&#xE8B5;"/>
                                     </MenuFlyoutSubItem.Icon>
-                                    <MenuFlyoutItem Text="Open">
+                                    <MenuFlyoutItem Text="Open" Click="OpenSoundboard_Click">
                                         <MenuFlyoutItem.Icon>
                                             <FontIcon Glyph="&#xE8E5;"/>
                                         </MenuFlyoutItem.Icon>
@@ -160,14 +160,17 @@
             </Frame>
         </Grid>
 
-        <StackPanel Grid.Row="3" x:Name="InfobarHolder" Background="{ThemeResource Clankboard_AppPageBackground}" Spacing="-10">
-            <InfoBar x:Name="AppMissingDriverInfobar" Title="Missing Drivers" Message="You are missing drivers required by this app!" Severity="Error" IsOpen="True" Margin="10, 10, 10, 10" VerticalAlignment="Bottom" IsClosable="False"/>
-            <InfoBar x:Name="AppMissingFilesInfobar" Title="Missing Files" Message="Some files are missing!" Severity="Warning" IsOpen="True" Margin="10, 10, 10, 10" VerticalAlignment="Bottom"/>
-            <InfoBar x:Name="AppDownloadingFilesInfobar" Title="File Download" Message="Some files are currently being downloaded." Severity="Informational" IsOpen="True" Margin="10, 10, 10, 10" VerticalAlignment="Bottom" IsClosable="False">
+        <Grid Background="{ThemeResource Clankboard_AppPageBackground}" Grid.Row="3">
+            <StackPanel x:Name="InfobarHolder" Spacing="-12" Margin="0, 0, 0, 10">
+            <InfoBar x:Name="AppMissingDriverInfobar" Title="Missing Drivers" Message="You are missing drivers required by this app!" Severity="Error" IsOpen="True" Margin="10, 7, 10, 0" VerticalAlignment="Bottom" IsClosable="False"/>
+            <InfoBar x:Name="AppMissingFilesInfobar" Title="Missing Files" Message="Some files are missing!" Severity="Warning" IsOpen="True" Margin="10, 17, 10, 0" VerticalAlignment="Bottom"/>
+            <InfoBar x:Name="AppDownloadingFilesInfobar" Title="File Download" Message="Some files are currently being downloaded." Severity="Informational" IsOpen="True" Margin="10, 17, 10, 0" VerticalAlignment="Bottom" IsClosable="False">
                 <InfoBar.Content>
                     <ProgressBar IsIndeterminate="True" Margin="0,-6,50,5"/>
                 </InfoBar.Content>
             </InfoBar>
         </StackPanel>
+        </Grid>
+        
     </Grid>
 </Page>

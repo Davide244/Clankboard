@@ -140,6 +140,24 @@ public sealed partial class ShellPage : Page
     }
     #endregion
 
+    private async void OpenSoundboard_Click(object sender, RoutedEventArgs e)
+    {
+        var picker = new Windows.Storage.Pickers.FileOpenPicker();
+
+        var window = (Application.Current as App)?.m_window as MainWindow;
+        var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(window);
+
+        WinRT.Interop.InitializeWithWindow.Initialize(picker, hWnd);
+
+        picker.FileTypeFilter.Add(".clankboard");
+
+        var file = await picker.PickSingleFileAsync();
+        if (file != null && File.Exists(file.Path))
+        {
+            //TODO: Open file
+        }
+    }
+
     private void AppInfoBar_Open(object sender, RoutedEventArgs e, AppInfobar.AppInfobarType type, bool Open)
     {
         switch (type)
