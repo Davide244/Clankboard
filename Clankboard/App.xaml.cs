@@ -47,6 +47,8 @@ public partial class App : Application
         MainRoot = m_window.Content as FrameworkElement;
 
         RegisterWindowMinMax(m_window);
+        if (System.Diagnostics.Debugger.IsAttached)
+            MakeWindowAlwaysOnTop(m_window);
     }
 
     internal Window m_window;
@@ -83,6 +85,9 @@ public partial class App : Application
 
     private static IntPtr WndProc(IntPtr hWnd, WindowMessage Msg, IntPtr wParam, IntPtr lParam)
     {
+       
+
+
         switch (Msg)
         {
             case WindowMessage.WM_GETMINMAXINFO:
@@ -106,6 +111,14 @@ public partial class App : Application
             return SetWindowLongPtr64(hWnd, nIndex, newProc);
         else
             return new IntPtr(SetWindowLong32(hWnd, nIndex, newProc));
+    }
+    [DllImport("user32.dll")]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
+
+    public void MakeWindowAlwaysOnTop(Window window)
+    {
+        SetWindowPos(GetWindowHandleForCurrentWindow(window), (IntPtr)(-1), 0, 0, 0, 0, 0x0002 | 0x0001);
     }
 
     private struct POINT
