@@ -27,6 +27,8 @@ namespace Clankboard;
 /// </summary>
 public partial class App : Application
 {
+    public static float DpiScalingFactor = 1;
+
     public App()
     {
         this.InitializeComponent();
@@ -70,7 +72,7 @@ public partial class App : Application
     private static extern IntPtr CallWindowProc(IntPtr lpPrevWndFunc, IntPtr hWnd, WindowMessage Msg, IntPtr wParam, IntPtr lParam);
 
     public static int MinWindowWidth { get; set; } = 497;
-    public static int MinWindowHeight { get; set; } = 650;
+    public static int MinWindowHeight { get; set; } = 685;
 
     private static void RegisterWindowMinMax(Window window)
     {
@@ -92,11 +94,11 @@ public partial class App : Application
         {
             case WindowMessage.WM_GETMINMAXINFO:
                 var dpi = GetDpiForWindow(hWnd);
-                var scalingFactor = (float)dpi / 96;
+                DpiScalingFactor = (float)dpi / 96;
 
                 var minMaxInfo = Marshal.PtrToStructure<MINMAXINFO>(lParam);
-                minMaxInfo.ptMinTrackSize.x = (int)(MinWindowWidth * scalingFactor);
-                minMaxInfo.ptMinTrackSize.y = (int)(MinWindowHeight * scalingFactor);
+                minMaxInfo.ptMinTrackSize.x = (int)(MinWindowWidth * DpiScalingFactor);
+                minMaxInfo.ptMinTrackSize.y = (int)(MinWindowHeight * DpiScalingFactor);
 
                 Marshal.StructureToPtr(minMaxInfo, lParam, true);
                 break;

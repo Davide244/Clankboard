@@ -47,6 +47,8 @@ public sealed partial class MainWindow : Window
         m_Appwindow.TitleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
 
         acrylicController = new DesktopAcrylicController();
+
+        m_Appwindow.Resize(new Windows.Graphics.SizeInt32((int)(497 * App.DpiScalingFactor), (int)(859 + App.DpiScalingFactor)));
     }
 
     private AppWindow GetAppWindowForCurrentWindow()
