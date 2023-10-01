@@ -63,14 +63,14 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <StackPanel>
+                <StackPanel Margin="0, 0, 0, 13">
                     <TextBox Margin="2, 2, 2, 5" PlaceholderText="Search Sound" Visibility="Visible"/>
                     <StackPanel Visibility="Visible" x:Name="SoundboardNoItems">
                         <BitmapIcon UriSource="ms-appx:///Assets/NoSoundboardItems.png" ShowAsMonochrome="True" Opacity="0.8" HorizontalAlignment="Center" Width="200"/>
-                        <TextBlock Text="Soundboard empty." FontSize="30" FontWeight="Bold" Opacity="0.8" HorizontalAlignment="Center" Margin="0, 0, 0, 5"/>
+                        <TextBlock Text="Soundboard empty." FontSize="30" FontWeight="Bold" Opacity="0.8" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </StackPanel>
-                <ScrollViewer Grid.Row="1" VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Visible">
+                <ScrollViewer Grid.Row="1" VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Visible" Visibility="Collapsed" x:Name="MainSoundboardListViewScroll">
                     <ListView x:Name="MainSoundboardListview" SelectionMode="Extended" CanDragItems="True" Margin="-3, 0" CanReorderItems="True" ContainerContentChanging="MainSoundboardListview_ContainerContentChanging">
                         <ListView.ItemTemplate>
                             <DataTemplate x:DataType="local:SoundBoardItem">
@@ -82,7 +82,7 @@
                                                     <FontIcon Glyph="&#xE70F;"/>
                                                 </MenuFlyoutItem.Icon>
                                             </MenuFlyoutItem>
-                                            <MenuFlyoutItem Text="Delete" Click="Soundboard_Removeitem_Click">
+                                            <MenuFlyoutItem Text="Delete" Click="Soundboard_Removeitem_Click" IsEnabled="{x:Bind DeleteBtnEnabled, Mode=TwoWay}">
                                                 <MenuFlyoutItem.Icon>
                                                     <FontIcon Glyph="&#xE74D;"/>
                                                 </MenuFlyoutItem.Icon>

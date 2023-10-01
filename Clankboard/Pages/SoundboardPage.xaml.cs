@@ -25,6 +25,7 @@ using YoutubeExplode;
 using YoutubeExplode.Videos;
 using YoutubeExplode.Videos.Streams;
 using YoutubeExplode.Converter;
+using System.Collections.Specialized;
 
 namespace Clankboard;
 
@@ -55,11 +56,13 @@ public partial class SoundBoardItem : ObservableObject
     public int _progressRingProgress;
     [ObservableProperty]
     public bool _btnEnabled;
+    [ObservableProperty]
+    public bool _deleteBtnEnabled;
 
     // Non-Observable fields
     public string PhysicalFilePath { get; set; }
 
-    public SoundBoardItem(string soundName, string soundLocation, string soundLocationIcon, bool soundIconVisible, string soundIconTooltip, string soundKeybind, bool progressRingEnabled, bool btnEnabled, bool progressRingIntermediate = true, int progressRingProgress = 100, string soundIconColor = null, string soundKeybindForecolor = null, string physicalFilePath = null)
+    public SoundBoardItem(string soundName, string soundLocation, string soundLocationIcon, bool soundIconVisible, string soundIconTooltip, string soundKeybind, bool progressRingEnabled, bool btnEnabled, bool progressRingIntermediate = true, int progressRingProgress = 100, string soundIconColor = null, string soundKeybindForecolor = null, string physicalFilePath = null, bool deleteBtnEnabled = true)
     {
 
         SoundName = soundName;
@@ -73,6 +76,7 @@ public partial class SoundBoardItem : ObservableObject
         ProgressRingIntermediate = progressRingIntermediate;
         ProgressRingProgress = progressRingProgress;
         BtnEnabled = btnEnabled;
+        DeleteBtnEnabled = deleteBtnEnabled;
         if (soundIconVisible == true) SoundIconVisible = "Visible"; else SoundIconVisible = "Collapsed"; // ease of use
 
         PhysicalFilePath = physicalFilePath;
@@ -104,6 +108,7 @@ public sealed partial class SoundboardPage : Page
         g_SoundboardEvents.NewSoundboardItem_FILE += AddSoundFile;
         g_SoundboardEvents.NewSoundboardItem_URL += DownloadSoundFile;
         g_SoundboardEvents.DeleteAllSoundboardItems += RemoveAllSounds;
+        soundBoardItemViewmodel.SoundBoardItems.CollectionChanged += SoundBoardItemsContentChanged;
 
         MainSoundboardListview.ItemsSource = soundBoardItemViewmodel.SoundBoardItems;
     }
@@ -181,7 +186,7 @@ public sealed partial class SoundboardPage : Page
             else
                 CurrentName = VideoInfo.Title;
 
-            SoundBoardItem soundboardItem = new(CurrentName, $"Downloading {Url}", DownloadedFileIcon, false, "Downloaded File", "None", true, false, false, 0);
+            SoundBoardItem soundboardItem = new(CurrentName, $"Downloading {Url}", DownloadedFileIcon, false, "Downloaded File", "None", true, false, false, 0, null, null, null, false);
             soundBoardItemViewmodel.SoundBoardItems.Add(soundboardItem);
 
             var ProgressHandler = new Progress<double>(p => { soundboardItem.ProgressRingProgress = Convert.ToInt32(p * 100); });
@@ -195,6 +200,7 @@ public sealed partial class SoundboardPage : Page
             soundboardItem.BtnEnabled = true;
             soundboardItem.SoundIconVisible = "Visible";
             soundboardItem.SoundLocation = Url;
+            soundboardItem.DeleteBtnEnabled = true;
         }
         catch (Exception ex)
         {
@@ -225,8 +231,16 @@ public sealed partial class SoundboardPage : Page
     private void MainSoundboardListview_ContainerContentChanging(ListViewBase sender, ContainerContentChangingEventArgs args)
     {
         if (soundBoardItemViewmodel.SoundBoardItems.Count > 0)
+        {
             SoundboardNoItems.Visibility = Visibility.Collapsed;
+            MainSoundboardListViewScroll.Visibility = Visibility.Visible;
+        }
         else
+        {
             SoundboardNoItems.Visibility = Visibility.Visible;
+            MainSoundboardListViewScroll.Visibility = Visibility.Collapsed;
+        }
     }
+
+    private void SoundBoardItemsContentChanged(object sender, NotifyCollectionChangedEventArgs e) => MainSoundboardListview_ContainerContentChanging(null, null);
 }
