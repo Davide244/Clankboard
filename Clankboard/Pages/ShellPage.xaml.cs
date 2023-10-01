@@ -163,12 +163,15 @@ public sealed partial class ShellPage : Page
         switch (type)
         {
             case AppInfobar.AppInfobarType.FileDownloadInfobar:
+                if (Open) AppDownloadingFilesInfobar.Visibility = Visibility.Visible; else AppDownloadingFilesInfobar.Visibility = Visibility.Collapsed;
                 AppDownloadingFilesInfobar.IsOpen = Open;
                 break;
             case AppInfobar.AppInfobarType.FileMissingInfobar:
+                if (Open) AppMissingFilesInfobar.Visibility = Visibility.Visible; else AppMissingFilesInfobar.Visibility = Visibility.Collapsed;
                 AppMissingFilesInfobar.IsOpen = Open;
                 break;
             case AppInfobar.AppInfobarType.DriverMissingInfobar:
+                if (Open) AppMissingDriverInfobar.Visibility = Visibility.Visible; else AppMissingDriverInfobar.Visibility = Visibility.Collapsed;
                 AppMissingDriverInfobar.IsOpen = Open;
                 break;
             default:
