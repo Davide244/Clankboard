@@ -48,7 +48,7 @@ public sealed partial class MainWindow : Window
 
         acrylicController = new DesktopAcrylicController();
 
-        m_Appwindow.Resize(new Windows.Graphics.SizeInt32((int)(497 * App.DpiScalingFactor), (int)(859 + App.DpiScalingFactor)));
+        m_Appwindow.Resize(new Windows.Graphics.SizeInt32((int)(10 * App.DpiScalingFactor), (int)(10 + App.DpiScalingFactor))); // small size to make it go to min size
     }
 
     private AppWindow GetAppWindowForCurrentWindow()
