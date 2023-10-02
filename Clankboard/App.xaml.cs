@@ -71,8 +71,8 @@ public partial class App : Application
     [DllImport("user32.dll")]
     private static extern IntPtr CallWindowProc(IntPtr lpPrevWndFunc, IntPtr hWnd, WindowMessage Msg, IntPtr wParam, IntPtr lParam);
 
-    public static int MinWindowWidth { get; set; } = 497;
-    public static int MinWindowHeight { get; set; } = 685;
+    public static int MinWindowWidth { get; set; } = 380;//497;
+    public static int MinWindowHeight { get; set; } = 635;
 
     private static void RegisterWindowMinMax(Window window)
     {

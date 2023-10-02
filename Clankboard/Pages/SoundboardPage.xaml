@@ -64,7 +64,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <StackPanel Margin="0, 0, 0, 13">
-                    <TextBox Margin="2, 2, 2, 5" PlaceholderText="Search Sound" Visibility="Visible"/>
+                    <TextBox Margin="2, 2, 2, -7" PlaceholderText="Search Sound" Visibility="Visible"/>
                     <StackPanel Visibility="Visible" x:Name="SoundboardNoItems">
                         <BitmapIcon UriSource="ms-appx:///Assets/NoSoundboardItems.png" ShowAsMonochrome="True" Opacity="0.8" HorizontalAlignment="Center" Width="200"/>
                         <TextBlock Text="Soundboard empty." FontSize="30" FontWeight="Bold" Opacity="0.8" HorizontalAlignment="Center"/>
