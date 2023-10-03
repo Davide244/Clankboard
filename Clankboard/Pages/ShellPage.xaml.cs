@@ -65,6 +65,7 @@ public sealed partial class ShellPage : Page
             MainCommandBar.Visibility = Visibility.Visible;
             AppbarBackButton.Visibility = Visibility.Collapsed;
         }
+        System.GC.Collect(); // Collect old page
     }
 
     private void AppbarHomeButton_Click(object sender, RoutedEventArgs e)
@@ -72,6 +73,7 @@ public sealed partial class ShellPage : Page
         NavigationFrame.Navigate(typeof(SoundboardPage));
         MainCommandBar.Visibility = Visibility.Visible;
         AppbarBackButton.Visibility = Visibility.Collapsed;
+        System.GC.Collect(); // Collect old page
     }
     #endregion
 
