@@ -26,6 +26,7 @@ using YoutubeExplode.Videos;
 using YoutubeExplode.Videos.Streams;
 using YoutubeExplode.Converter;
 using System.Collections.Specialized;
+using System.Runtime.CompilerServices;
 
 namespace Clankboard;
 
@@ -97,6 +98,8 @@ public sealed partial class SoundboardPage : Page
     const string WarningFileIcon = "\uE783";
     const string DownloadedFileIcon = "\uE753";
     const string DownloadingFileIcon = "\uEBD3";
+
+    private bool SoundboardOptionsMinimized = false;
 
     private int OngoingDownloads = 0;
 
@@ -217,7 +220,7 @@ public sealed partial class SoundboardPage : Page
 
     // Soundboard button Events
 
-    public void Soundboard_Removeitem_Click(object sender, RoutedEventArgs e)
+    private void Soundboard_Removeitem_Click(object sender, RoutedEventArgs e)
     {
         var item = ((FrameworkElement)sender).DataContext;
         var index = MainSoundboardListview.Items.IndexOf(item);
@@ -226,6 +229,34 @@ public sealed partial class SoundboardPage : Page
             File.Delete(soundBoardItemViewmodel.SoundBoardItems[index].PhysicalFilePath);
 
         soundBoardItemViewmodel.SoundBoardItems.RemoveAt(index);
+    }
+
+    private void SoundboardOptions_Minimize(bool Minimized)
+    {
+        if (Minimized)
+        {
+            SoundboardOptions_Expanded.Visibility = Visibility.Collapsed;
+            SoundboardOptions_MinimizeBtn.Content = "\uFF0B";
+        }
+        else
+        {
+            SoundboardOptions_Expanded.Visibility = Visibility.Visible;
+            SoundboardOptions_MinimizeBtn.Content = "\u2015";
+        }
+    }
+
+    private void SoundboardOptions_MinimizeOptions_Click(object sender, RoutedEventArgs e)
+    {
+        if (SoundboardOptionsMinimized)
+        {
+            SoundboardOptions_Minimize(false);
+            SoundboardOptionsMinimized = false;
+        }
+        else
+        {
+            SoundboardOptions_Minimize(true);
+            SoundboardOptionsMinimized = true;
+        }
     }
 
     private void MainSoundboardListview_ContainerContentChanging(ListViewBase sender, ContainerContentChangingEventArgs args)
