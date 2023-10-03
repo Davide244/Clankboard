@@ -14,6 +14,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="AppContentDialogs\DownloadYoutubeVideoDialog.xaml" />
+    <None Remove="Assets\shadow.png" />
     <None Remove="Pages\SettingsPage.xaml" />
     <None Remove="ShellPage.xaml" />
     <None Remove="SoundboardPage.xaml" />

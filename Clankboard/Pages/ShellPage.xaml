@@ -29,7 +29,7 @@
             </Grid.ColumnDefinitions>
             <Image Source="/Assets/Square44x44Logo.scale-200.png" HorizontalAlignment="Left" Width="16" Height="16" Margin="0" Grid.Column="1" />
             <TextBlock x:Name="AppTitleBarText" VerticalAlignment="Center" TextWrapping="NoWrap" Style="{StaticResource CaptionTextBlockStyle}" Margin="10, 0, 0, 0" Text="Clankboard" Grid.Column="2"/>
-            <!--<TabView Margin="0, -3.75, 200, 0" Grid.Column="3" CanReorderTabs="True" TabWidthMode="Equal" HorizontalAlignment="Left" VerticalAlignment="Bottom" x:Name="MainTabView">
+            <!--<TabView Margin="0, -7.4, 200, 0" Grid.Column="3" CanReorderTabs="True" TabWidthMode="Equal" HorizontalAlignment="Left" VerticalAlignment="Bottom" x:Name="MainTabView">
                 <TabView.TabItems>
                     <TabViewItem Header="All Sounds" IsClosable="False">
                         <TabViewItem.IconSource>
@@ -145,7 +145,7 @@
                     <AppBarButton Icon="Setting" Label="Settings" HorizontalAlignment="Right" Click="SettingspageButton_Click">
                         <!-- Settings button -->
                         <AppBarButton.KeyboardAccelerators>
-                            <KeyboardAccelerator Modifiers="Control" Key="I" />
+                            <KeyboardAccelerator Modifiers="Control" Key="I"/>
                         </AppBarButton.KeyboardAccelerators>
                     </AppBarButton>
                 </CommandBar.SecondaryCommands>
@@ -158,6 +158,9 @@
                     <NavigationThemeTransition/>
                 </TransitionCollection>
             </Frame>
+            <Grid Height="20" VerticalAlignment="Top">
+                <Image Source="ms-appx:///Assets/shadow.png" Visibility="Visible" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stretch="Fill"></Image>
+            </Grid>
         </Grid>
 
         <Grid Background="{ThemeResource Clankboard_AppPageBackground}" Grid.Row="3">
