@@ -27,6 +27,7 @@ using YoutubeExplode.Videos.Streams;
 using YoutubeExplode.Converter;
 using System.Collections.Specialized;
 using System.Runtime.CompilerServices;
+using System.Threading;
 
 namespace Clankboard;
 
@@ -141,18 +142,19 @@ public sealed partial class SoundboardPage : Page
     private void RemoveAllSounds(object Sender, EventArgs e)
     {
         // loop through all items and remove them
-        // TODO: FIX THIS!!! CRASHES
-        foreach (var item in soundBoardItemViewmodel.SoundBoardItems)
+        soundBoardItemViewmodel.SoundBoardItems.ToList().ForEach(item =>
         {
-            if (item.PhysicalFilePath.Contains($"{AppDomain.CurrentDomain.BaseDirectory}DownloadedSounds\\") && File.Exists(item.PhysicalFilePath))
-                File.Delete(item.PhysicalFilePath);
-            soundBoardItemViewmodel.SoundBoardItems.Remove(item);
-        }
-
+            if (item.PhysicalFilePath != null)
+            {
+                if (item.PhysicalFilePath.Contains($"{AppDomain.CurrentDomain.BaseDirectory}DownloadedSounds\\") && File.Exists(item.PhysicalFilePath))
+                    File.Delete(item.PhysicalFilePath);
+            }
+        });
 
         soundBoardItemViewmodel.SoundBoardItems.Clear();
     }
 
+    // TODO: FIX MEMORY LEAKS IN THIS FUNCTION. MEMORY DOES NOT GET FREED AFTER FINISHING DOWNLOADS !!!! URGENT !!!!!
     private async void DownloadSoundFile(object sender, RoutedEventArgs e, string Name, string Url)
     {
         if (soundBoardItemViewmodel.SoundBoardItems.Any(x => x.SoundLocation == Url || x.SoundLocation == $"Downloading {Url}"))
@@ -166,10 +168,12 @@ public sealed partial class SoundboardPage : Page
 
         YoutubeClient youtube = new();
 
-        StreamManifest streamManifest;
+        StreamManifest streamManifest = null;
         IStreamInfo streamInfo;
-        Stream audioOnlyStreamInfo;
+        Stream audioOnlyStreamInfo = null;
         string CurrentName;
+
+        string TempDeleteFilePath = "";
 
         var FilePath = $"{AppDomain.CurrentDomain.BaseDirectory}DownloadedSounds\\";
 
@@ -189,12 +193,23 @@ public sealed partial class SoundboardPage : Page
             else
                 CurrentName = VideoInfo.Title;
 
-            SoundBoardItem soundboardItem = new(CurrentName, $"Downloading {Url}", DownloadedFileIcon, false, "Downloaded File", "None", true, false, false, 0, null, null, null, false);
+            SoundBoardItem soundboardItem = new(CurrentName, $"Downloading {Url}", DownloadedFileIcon, false, "Downloaded File", "None", true, false, false, 0);
+
+            CancellationTokenSource cts = new CancellationTokenSource();
             soundBoardItemViewmodel.SoundBoardItems.Add(soundboardItem);
 
-            var ProgressHandler = new Progress<double>(p => { soundboardItem.ProgressRingProgress = Convert.ToInt32(p * 100); });
+            var ProgressHandler = new Progress<double>(p =>
+            {
+                if (soundBoardItemViewmodel.SoundBoardItems.All(x => x.SoundLocation != Url && x.SoundLocation != $"Downloading {Url}"))
+                {
+                    TempDeleteFilePath = FilePath + $"audio_youtube.{VideoInfo.Id}.{streamInfo.Container}";
+                    cts.Cancel();
+                }
 
-            await youtube.Videos.Streams.DownloadAsync(streamInfo, FilePath + $"audio_youtube.{VideoInfo.Id}.{streamInfo.Container}", ProgressHandler);
+                soundboardItem.ProgressRingProgress = Convert.ToInt32(p * 100);
+            });
+
+            await youtube.Videos.Streams.DownloadAsync(streamInfo, FilePath + $"audio_youtube.{VideoInfo.Id}.{streamInfo.Container}", ProgressHandler, cts.Token);
             soundboardItem.ProgressRingIntermediate = true;
 
             soundboardItem.PhysicalFilePath = FilePath + $"audio_youtube.{VideoInfo.Id}.{streamInfo.Container}";
@@ -203,19 +218,31 @@ public sealed partial class SoundboardPage : Page
             soundboardItem.BtnEnabled = true;
             soundboardItem.SoundIconVisible = "Visible";
             soundboardItem.SoundLocation = Url;
-            soundboardItem.DeleteBtnEnabled = true;
         }
         catch (Exception ex)
         {
-            OngoingDownloads--;
-            if (OngoingDownloads <= 0) ShellPage.g_AppInfobar.OpenAppInfobar(AppInfobar.AppInfobarType.FileDownloadInfobar, false);
-            await ShellPage.g_AppMessageBox.ShowMessagebox("Download Error", $"An error has occured while downloading the youtube video: {Url}\n\nPlease make sure that the URL is correct and links to a valid youtube video.\nPlease note that age restricted videos are not supported.\n\nException: {ex.Message}", "", "", "Okay", ContentDialogButton.Close);
-            return;
+            if (ex is TaskCanceledException)
+            {
+                if (File.Exists(TempDeleteFilePath))
+                {
+                    File.Delete(TempDeleteFilePath);
+                }
+            }
+            else
+            {
+                OngoingDownloads--;
+                if (OngoingDownloads <= 0) ShellPage.g_AppInfobar.OpenAppInfobar(AppInfobar.AppInfobarType.FileDownloadInfobar, false);
+                await ShellPage.g_AppMessageBox.ShowMessagebox("Download Error", $"An error has occured while downloading the youtube video: {Url}\n\nPlease make sure that the URL is correct and links to a valid youtube video.\nPlease note that age restricted videos are not supported.\n\nException: {ex.Message}", "", "", "Okay", ContentDialogButton.Close);
+                return;
+            }
         }
 
         OngoingDownloads--;
         if (OngoingDownloads <= 0) ShellPage.g_AppInfobar.OpenAppInfobar(AppInfobar.AppInfobarType.FileDownloadInfobar, false);
 
+        // Cleanup
+        audioOnlyStreamInfo?.Dispose();
+        GC.Collect();
     }
 
     // Soundboard button Events
@@ -225,10 +252,12 @@ public sealed partial class SoundboardPage : Page
         var item = ((FrameworkElement)sender).DataContext;
         var index = MainSoundboardListview.Items.IndexOf(item);
         
-        if (soundBoardItemViewmodel.SoundBoardItems[index].PhysicalFilePath.Contains($"{AppDomain.CurrentDomain.BaseDirectory}DownloadedSounds\\") && File.Exists(soundBoardItemViewmodel.SoundBoardItems[index].PhysicalFilePath))
+        if (soundBoardItemViewmodel.SoundBoardItems[index].PhysicalFilePath != null && soundBoardItemViewmodel.SoundBoardItems[index].PhysicalFilePath.Contains($"{AppDomain.CurrentDomain.BaseDirectory}DownloadedSounds\\") && File.Exists(soundBoardItemViewmodel.SoundBoardItems[index].PhysicalFilePath))
             File.Delete(soundBoardItemViewmodel.SoundBoardItems[index].PhysicalFilePath);
 
         soundBoardItemViewmodel.SoundBoardItems.RemoveAt(index);
+
+        GC.Collect();
     }
 
     private void SoundboardOptions_Minimize(bool Minimized)

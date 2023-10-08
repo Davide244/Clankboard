@@ -22,13 +22,13 @@
         
         <Grid Grid.Row="0" x:Name="AppTitleBar">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition x:Name="LeftPaddingColumn" Width="12"/>
+                <ColumnDefinition x:Name="LeftPaddingColumn" Width="8"/>
                 <ColumnDefinition x:Name="IconColumn" Width="auto"/>
                 <ColumnDefinition x:Name="TitleColumn" Width="auto"/>
                 <ColumnDefinition x:Name="RightDragColumn" Width="auto"/>
             </Grid.ColumnDefinitions>
             <Image Source="/Assets/Square44x44Logo.scale-200.png" HorizontalAlignment="Left" Width="16" Height="16" Margin="0" Grid.Column="1" />
-            <TextBlock x:Name="AppTitleBarText" VerticalAlignment="Center" TextWrapping="NoWrap" Style="{StaticResource CaptionTextBlockStyle}" Margin="10, 0, 0, 0" Text="Clankboard" Grid.Column="2"/>
+            <TextBlock x:Name="AppTitleBarText" VerticalAlignment="Center" TextWrapping="NoWrap" Style="{StaticResource CaptionTextBlockStyle}" Margin="8, 0, 0, 0" Text="Clankboard" Grid.Column="2"/>
             <!--<TabView Margin="0, -7.4, 200, 0" Grid.Column="3" CanReorderTabs="True" TabWidthMode="Equal" HorizontalAlignment="Left" VerticalAlignment="Bottom" x:Name="MainTabView">
                 <TabView.TabItems>
                     <TabViewItem Header="All Sounds" IsClosable="False">
@@ -65,7 +65,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal" x:Name="AppbarBackButton" Visibility="Collapsed">
-                <Button Margin="5, 0, 0, 0" Click="AppbarBackButton_Click"> <!-- Appbar back button -->
+                <Button Margin="6, 0, 0, 0" Click="AppbarBackButton_Click"> <!-- Appbar back button -->
                     <StackPanel Orientation="Horizontal">
                         <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE72B;" Width="10" Height="10"/>
                         <TextBlock Margin="4, 0, 0, 0">Back</TextBlock>
@@ -75,7 +75,7 @@
                     <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE80F;"/>
                 </Button>
             </StackPanel>
-            <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right" Grid.Row="0" HorizontalAlignment="Left" x:Name="MainCommandBar">
+            <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right" Grid.Row="0" HorizontalAlignment="Center" x:Name="MainCommandBar">
                 <CommandBar.PrimaryCommands>
                     <AppBarButton Icon="Document" Label="File" IsCompact="True">
                         <AppBarButton.Flyout>
@@ -158,9 +158,7 @@
                     <NavigationThemeTransition/>
                 </TransitionCollection>
             </Frame>
-            <Grid Height="20" VerticalAlignment="Top">
-                <Image Source="ms-appx:///Assets/shadow.png" Visibility="Visible" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stretch="Fill"></Image>
-            </Grid>
+            <Image Source="ms-appx:///Assets/shadow.png" Visibility="Visible" VerticalAlignment="Top" HorizontalAlignment="Stretch" Stretch="Fill" Height="20" Opacity="0.5"/>
         </Grid>
 
         <Grid Background="{ThemeResource Clankboard_AppPageBackground}" Grid.Row="3">
