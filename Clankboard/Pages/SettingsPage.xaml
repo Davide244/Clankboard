@@ -38,37 +38,25 @@
                                         <TextBlock Margin="3, 0, 0, 0">Default Microphone</TextBlock>
                                     </StackPanel>
                                 </ComboBoxItem>
-                                <ComboBoxItem>Hi</ComboBoxItem>
-                                <ComboBoxItem>Hi</ComboBoxItem>
                             </ComboBox>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5, 5, 0, 0">
                             <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE7F5;" Margin="0" FontSize="13"/>
                             <TextBlock Margin="3, 0, 0, 0" Style="{StaticResource BodyStrongTextBlockStyle}" VerticalAlignment="Center">Output Device:</TextBlock>
-                            <ComboBox Margin="5, 7, 0, 0" SelectedIndex="0">
+                            <ComboBox Margin="5, 7, 0, 0" SelectedIndex="0" x:Name="OutputDeviceCombobox">
                                 <ComboBoxItem>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE767;" Margin="0" FontSize="13"/>
+                                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE7F5;" Margin="0" FontSize="13"/>
                                         <TextBlock Margin="3, 0, 0, 0">Default Speaker</TextBlock>
                                     </StackPanel>
                                 </ComboBoxItem>
-                                <ComboBoxItem>Hi</ComboBoxItem>
-                                <ComboBoxItem>Hi</ComboBoxItem>
                             </ComboBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5, 5, 0, 0">
                             <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE964;" Margin="0" FontSize="13"/>
                             <TextBlock Margin="3, 0, 0, 0" Style="{StaticResource BodyStrongTextBlockStyle}" VerticalAlignment="Center">Driver Input</TextBlock>
-                            <ComboBox Margin="5, 7, 0, 0">
-                                <ComboBoxItem>
-                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE95F;" Margin="0" FontSize="13"/>
-                                        <TextBlock Margin="3, 0, 0, 0">VB Audio Cable Input</TextBlock>
-                                    </StackPanel>
-                                </ComboBoxItem>
-                                <ComboBoxItem>Hi</ComboBoxItem>
-                                <ComboBoxItem>Hi</ComboBoxItem>
+                            <ComboBox Margin="5, 7, 0, 0" x:Name="DriverInputCombobox" PlaceholderText="None selected" PlaceholderForeground="{ThemeResource SystemFillColorCautionBrush}">
                             </ComboBox>
                         </StackPanel>
                         <NavigationViewItemSeparator Margin="0, 10, 0, 5"/>
@@ -81,7 +69,12 @@
                             </Button>
                             <Button Margin="8, 0">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE72C;" Margin="0" FontSize="13"/>
+                                    <!--<FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE72C;" Margin="0" FontSize="13"/>-->
+                                    <!--<AnimatedIcon>
+                                        <AnimatedIcon.Source>
+                                            <animatedvisuals:
+                                        </AnimatedIcon.Source>
+                                    </AnimatedIcon>-->
                                     <TextBlock Margin="6, 0, 0, 0">Use default devices</TextBlock>
                                 </StackPanel>
                             </Button>
