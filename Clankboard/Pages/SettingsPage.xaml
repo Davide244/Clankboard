@@ -6,16 +6,114 @@
     xmlns:local="using:Clankboard.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:CommunityToolkit.WinUI.Controls"
+    xmlns:ui="using:CommunityToolkit.WinUI"
+    xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     mc:Ignorable="d">
 
-    <Grid VerticalAlignment="Top">
+    <Grid VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="18, 0, 18, 0">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
+
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="auto" HorizontalScrollMode="Enabled">
-            <StackPanel Orientation="Vertical" Grid.Row="1">
+            <StackPanel MaxWidth="1000" HorizontalAlignment="Stretch" Spacing="{StaticResource SettingsCardSpacing}">
+            <!--win:StackPanel.ChildrenTransitions>
+                    <win:EntranceThemeTransition FromVerticalOffset="50" />
+                    <win:RepositionThemeTransition IsStaggeringEnabled="False" />
+                </win:StackPanel.ChildrenTransitions-->
+
+                <TextBlock Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
+                           Text="Audio Settings" />
+                <controls:SettingsExpander Description="All settings related to audio devices."
+                                           Header="Audio Devices"
+                                           HeaderIcon="{ui:FontIcon Glyph=&#xE7F5;}">
+                    <controls:SettingsExpander.Items>
+                        <controls:SettingsCard Header="Input Device"
+                                               Description="The microphone that will be used by this application."
+                                               HeaderIcon="{ui:FontIcon Glyph=&#xE720;}">
+                            
+                            <ComboBox x:Name="InputDeviceCombobox" SelectedIndex="0" MaxWidth="200" SelectionChanged="AudioDeviceCombobox_SelectionChanged">
+                                <ComboBoxItem>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE720;" Margin="0" FontSize="13"/>
+                                        <TextBlock Margin="3, 0, 0, 0">Default Microphone</TextBlock>
+                                    </StackPanel>
+                                </ComboBoxItem>
+                            </ComboBox>
+                        </controls:SettingsCard>
+                        <controls:SettingsCard Header="Output Device"
+                                               Description="The audio output that the application uses to play sounds locally to yourself."
+                                               HeaderIcon="{ui:FontIcon Glyph=&#xE7F5;}">
+
+                            <ComboBox Margin="5, 7, 0, 0" SelectedIndex="0" x:Name="OutputDeviceCombobox" MaxWidth="200" SelectionChanged="AudioDeviceCombobox_SelectionChanged">
+                                <ComboBoxItem>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE7F5;" Margin="0" FontSize="13"/>
+                                        <TextBlock Margin="3, 0, 0, 0">Default Speaker</TextBlock>
+                                    </StackPanel>
+                                </ComboBoxItem>
+                            </ComboBox>
+                        </controls:SettingsCard>
+                        <controls:SettingsCard Header="Audio Cable Input"
+                                               Description="The input of your virtual audio cable setup."
+                                               HeaderIcon="{ui:FontIcon Glyph=&#xE964;}">
+                            <ComboBox Margin="5, 7, 0, 0" x:Name="DriverInputCombobox" PlaceholderText="None selected" PlaceholderForeground="{ThemeResource SystemFillColorCautionBrush}" MaxWidth="200" SelectionChanged="AudioDeviceCombobox_SelectionChanged"/>
+                        </controls:SettingsCard>
+                    </controls:SettingsExpander.Items>
+                    
+                </controls:SettingsExpander>
+                
+                <controls:SettingsCard Header="Output Mixer"
+                       Description="If enabled, the application will mix the microphone input and soundboard output together and output it to the audio cable input. Disable this if you are already doing this yourself."
+                       HeaderIcon="{ui:FontIcon Glyph=&#xF4C3;}">
+                    <ToggleSwitch IsOn="True" x:Name="OutputMixerToggle" Toggled="SettingToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Hear Yourself"
+                                       Description="If enabled, the application will output the microphone output to the local output device."
+                                       HeaderIcon="{ui:FontIcon Glyph=&#xE7A7;}">
+                    <ToggleSwitch IsOn="False" x:Name="HearYourselfToggle" Toggled="SettingToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
+                <TextBlock Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
+                           Text="Soundboard Settings" />
+                <controls:SettingsCard Header="Compact List"
+                                       Description="A more compact version of the soundboard's audio list."
+                                       HeaderIcon="{ui:FontIcon Glyph=&#xE8FD;}"
+                                       IsEnabled="False">
+                    <ToggleSwitch IsOn="False"/>
+                </controls:SettingsCard>
+                <controls:SettingsExpander Description="Simple playback settings."
+                                           Header="Playback Options"
+                                           HeaderIcon="{ui:FontIcon Glyph=&#xE768;}">
+                    <controls:SettingsExpander.Items>
+                        <controls:SettingsCard Header="Stack Audio"
+                                               Description="Multiple audio files are able to be played at once. This makes them stack."
+                                               HeaderIcon="{ui:FontIcon Glyph=&#xE81E;}">
+                            <ToggleSwitch IsOn="False" x:Name="StackedAudioToggle" Toggled="SettingToggleSwitch_Toggled"/>
+                        </controls:SettingsCard>
+                        <controls:SettingsCard Header="Stop Keybind"
+                                               Description="Keybinds that stops all sounds."
+                                               HeaderIcon="{ui:FontIcon Glyph=&#xE73B;}">
+                            <ToggleSwitch IsOn="False" />
+                        </controls:SettingsCard>
+                        <controls:SettingsCard Header="Local Output Volume"
+                               Description="At which volume to output the soundboard audio to you locally."
+                               HeaderIcon="{ui:FontIcon Glyph=&#xF0EE;}">
+                            <Slider Minimum="0" Maximum="300" Value="100"/>
+                        </controls:SettingsCard>
+                        <controls:SettingsCard Header="Audio Cable Output Volume"
+                               Description="At which volume to output the soundboard audio to your virtual audio cable."
+                               HeaderIcon="{ui:FontIcon Glyph=&#xE767;}">
+                            <Slider Minimum="0" Maximum="300" Value="100"/>
+                        </controls:SettingsCard>
+                    </controls:SettingsExpander.Items>
+                </controls:SettingsExpander>
+            </StackPanel>
+
+            <!--StackPanel Orientation="Vertical" Grid.Row="1">
                 <Grid Margin="10, 10, 10, 0" Background="#303030" Padding="8" CornerRadius="5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -31,7 +129,7 @@
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5, 5, 0, 0">
                             <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE720;" Margin="0" FontSize="13"/>
                             <TextBlock Margin="3, 0, 0, 0" Style="{StaticResource BodyStrongTextBlockStyle}" VerticalAlignment="Center">Input Device:</TextBlock>
-                            <ComboBox Margin="5, 7, 0, 0">
+                            <ComboBox Margin="5, 7, 0, 0" x:Name="InputDeviceCombobox" SelectedIndex="0">
                                 <ComboBoxItem>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
                                         <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE720;" Margin="0" FontSize="13"/>
@@ -43,7 +141,7 @@
 
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5, 5, 0, 0">
                             <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE7F5;" Margin="0" FontSize="13"/>
-                            <TextBlock Margin="3, 0, 0, 0" Style="{StaticResource BodyStrongTextBlockStyle}" VerticalAlignment="Center">Output Device:</TextBlock>
+                            <TextBlock Margin="3, 0, 0, 0" Style="{StaticResource BodyStrongTextBlockStyle}" VerticalAlignment="Center">Local Output Device:</TextBlock>
                             <ComboBox Margin="5, 7, 0, 0" SelectedIndex="0" x:Name="OutputDeviceCombobox">
                                 <ComboBoxItem>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
@@ -61,20 +159,15 @@
                         </StackPanel>
                         <NavigationViewItemSeparator Margin="0, 10, 0, 5"/>
                         <StackPanel Orientation="Horizontal" Margin="0">
-                            <Button>
+                            <Button x:Name="ApplyAudioDeviceChangesBtn" Click="ApplyAudioDeviceChangesBtn_Click">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
                                     <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE73E;" Margin="0" FontSize="13"/>
                                     <TextBlock Margin="3, 0, 0, 0">Apply Changes</TextBlock>
                                 </StackPanel>
                             </Button>
-                            <Button Margin="8, 0">
+                            <Button Margin="8, 0" Click="UseDefaultAudioDevicesBtn_Click"  x:Name="UseDefaultAudioDevicesBtn">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                                    <!--<FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE72C;" Margin="0" FontSize="13"/>-->
-                                    <!--<AnimatedIcon>
-                                        <AnimatedIcon.Source>
-                                            <animatedvisuals:
-                                        </AnimatedIcon.Source>
-                                    </AnimatedIcon>-->
+                                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE72C;" Margin="0" FontSize="13"/>
                                     <TextBlock Margin="6, 0, 0, 0">Use default devices</TextBlock>
                                 </StackPanel>
                             </Button>
@@ -130,7 +223,7 @@
                         </StackPanel>
                     </StackPanel>
                 </Grid>
-            </StackPanel>
+            </StackPanel-->
         </ScrollViewer>
     </Grid>
 </Page>
