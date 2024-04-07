@@ -28,6 +28,9 @@ using YoutubeExplode.Converter;
 using System.Collections.Specialized;
 using System.Runtime.CompilerServices;
 using System.Threading;
+using Clankboard.Classes;
+using System.Security.Cryptography.X509Certificates;
+using Windows.System;
 
 namespace Clankboard;
 
@@ -63,8 +66,14 @@ public partial class SoundBoardItem : ObservableObject
 
     // Non-Observable fields
     public string PhysicalFilePath { get; set; }
+    [ObservableProperty]
+    private KeybindsManager.Keybind _linkedKeybind;
 
-    public SoundBoardItem(string soundName, string soundLocation, string soundLocationIcon, bool soundIconVisible, string soundIconTooltip, string soundKeybind, bool progressRingEnabled, bool btnEnabled, bool progressRingIntermediate = true, int progressRingProgress = 100, string soundIconColor = null, string soundKeybindForecolor = null, string physicalFilePath = null, bool deleteBtnEnabled = true)
+    // Global CancellationTokenSource for stopping sounds.
+    public CancellationTokenSource SoundCancellationTokenSource = new();
+    public CancellationToken s_cancellationToken => SoundCancellationTokenSource.Token;
+
+    public SoundBoardItem(string soundName, string soundLocation, string soundLocationIcon, bool soundIconVisible, string soundIconTooltip, bool progressRingEnabled, bool btnEnabled, bool progressRingIntermediate = true, int progressRingProgress = 100, string soundIconColor = null, string soundKeybindForecolor = null, string physicalFilePath = null, bool deleteBtnEnabled = true, KeybindsManager.Keybind? linkedKeybind = null)
     {
 
         SoundName = soundName;
@@ -73,7 +82,6 @@ public partial class SoundBoardItem : ObservableObject
         SoundIconColor = soundIconColor;
         SoundIconTooltip = soundIconTooltip;
         SoundKeybindForecolor = soundKeybindForecolor;
-        SoundKeybind = soundKeybind;
         ProgressRingEnabled = progressRingEnabled;
         ProgressRingIntermediate = progressRingIntermediate;
         ProgressRingProgress = progressRingProgress;
@@ -82,6 +90,59 @@ public partial class SoundBoardItem : ObservableObject
         if (soundIconVisible == true) SoundIconVisible = "Visible"; else SoundIconVisible = "Collapsed"; // ease of use
 
         PhysicalFilePath = physicalFilePath;
+        if (linkedKeybind != null) LinkedKeybind = linkedKeybind.Value;
+        if (linkedKeybind != null) SoundKeybind = KeybindsManager.GetKeybindText(linkedKeybind.Value);
+
+        PropertyChanged += SoundboardItem_PropertyChanged;
+    }
+
+    private void SoundboardItem_PropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == "LinkedKeybind")
+        {
+            if (LinkedKeybind.Equals(default(KeybindsManager.Keybind)))
+            {
+                SoundKeybind = "None";
+                SoundKeybindForecolor = Application.Current.Resources["AccentTextFillColorDisabledBrush"].ToString();
+            }
+            else
+            {
+                SoundKeybind = KeybindsManager.GetKeybindText(LinkedKeybind);
+                SoundKeybindForecolor = Application.Current.Resources["AccentTextFillColorTertiaryBrush"].ToString();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Creates a new keybind for this sound. If a keybind already exists, it will be replaced.
+    /// </summary>
+    /// <param name="keybind">The parameters of the keybind.</param>
+    public void SetKeybind(KeybindsManager.Keybind keybind)
+    {
+        // Check if a keybind already exists for this sound
+        if (LinkedKeybind.Equals(default(KeybindsManager.Keybind)))
+        {
+            // Remove the old keybind
+            KeybindsManager.RemoveKeybind(this);
+        }
+
+        // Create a new keybind globally
+        LinkedKeybind = KeybindsManager.AddKeybind(keybind.KeybindType, keybind.KeyModifiers, keybind.Key, keybind.Handler, true, this);
+    }
+
+    public void OnActivated() 
+    {
+        Debug.WriteLine("Soundboard item activated. SOUND NAME: " + SoundName);
+        AudioManager.PlaySoundboardItem(this, s_cancellationToken);
+    }
+
+    public void StopSound()
+    {
+        // Stop the sound by using the CancellationToken
+        SoundCancellationTokenSource.Cancel();
+
+        SoundCancellationTokenSource.Dispose();
+        SoundCancellationTokenSource = new();
     }
 }
 
@@ -133,7 +194,7 @@ public sealed partial class SoundboardPage : Page
                 return;
             }
 
-            soundBoardItemViewmodel.SoundBoardItems.Add(new SoundBoardItem(Name, FilePath, LocalFileIcon, true, "Local File", "None", false, true, true, 0, null, null, FilePath));
+            soundBoardItemViewmodel.SoundBoardItems.Add(new SoundBoardItem(Name, FilePath, LocalFileIcon, true, "Local File", false, true, true, 0, null, null, FilePath));
         }
         else
             ShellPage.g_AppMessageBox.ShowMessagebox("File not found", "The specified file could not be found!\nPlease check if the file exists and try again.", "", "", "Okay", ContentDialogButton.Close);
@@ -193,7 +254,7 @@ public sealed partial class SoundboardPage : Page
             else
                 CurrentName = VideoInfo.Title;
 
-            SoundBoardItem soundboardItem = new(CurrentName, $"Downloading {Url}", DownloadedFileIcon, false, "Downloaded File", "None", true, false, false, 0);
+            SoundBoardItem soundboardItem = new(CurrentName, $"Downloading {Url}", DownloadedFileIcon, false, "Downloaded File", true, false, false, 0);
 
             CancellationTokenSource cts = new CancellationTokenSource();
             soundBoardItemViewmodel.SoundBoardItems.Add(soundboardItem);
@@ -255,37 +316,59 @@ public sealed partial class SoundboardPage : Page
         if (soundBoardItemViewmodel.SoundBoardItems[index].PhysicalFilePath != null && soundBoardItemViewmodel.SoundBoardItems[index].PhysicalFilePath.Contains($"{AppDomain.CurrentDomain.BaseDirectory}DownloadedSounds\\") && File.Exists(soundBoardItemViewmodel.SoundBoardItems[index].PhysicalFilePath))
             File.Delete(soundBoardItemViewmodel.SoundBoardItems[index].PhysicalFilePath);
 
+        // remove keybind
+        //KeybindsManager.RemoveKeybind(soundBoardItemViewmodel.SoundBoardItems[index]);
+
+        // check if there is a keybind for this sound
+        if (soundBoardItemViewmodel.SoundBoardItems[index].SoundKeybind != "None")
+            KeybindsManager.RemoveKeybind(soundBoardItemViewmodel.SoundBoardItems[index]);
+
         soundBoardItemViewmodel.SoundBoardItems.RemoveAt(index);
 
         GC.Collect();
     }
 
-    private void SoundboardOptions_Minimize(bool Minimized)
+    private void Soundboard_PlayItem_Click(object sender, RoutedEventArgs e)
     {
-        if (Minimized)
+        var item = ((FrameworkElement)sender).DataContext;
+        var index = MainSoundboardListview.Items.IndexOf(item);
+
+        if (soundBoardItemViewmodel.SoundBoardItems[index].PhysicalFilePath != null && File.Exists(soundBoardItemViewmodel.SoundBoardItems[index].PhysicalFilePath))
         {
-            SoundboardOptions_Expanded.Visibility = Visibility.Collapsed;
-            SoundboardOptions_MinimizeBtn.Content = "\uFF0B";
+            SoundBoardItem soundboardItem = soundBoardItemViewmodel.SoundBoardItems[index];
+            soundboardItem.OnActivated();
         }
         else
-        {
-            SoundboardOptions_Expanded.Visibility = Visibility.Visible;
-            SoundboardOptions_MinimizeBtn.Content = "\u2015";
-        }
+            ShellPage.g_AppMessageBox.ShowMessagebox("File not found", "The specified file could not be found!\nPlease check if the file exists and try again.", "", "", "Okay", ContentDialogButton.Close);
     }
 
-    private void SoundboardOptions_MinimizeOptions_Click(object sender, RoutedEventArgs e)
+    private void Soundboard_ChangeItemKeybind_Click(object sender, RoutedEventArgs e)
     {
-        if (SoundboardOptionsMinimized)
+        var item = ((FrameworkElement)sender).DataContext;
+        var index = MainSoundboardListview.Items.IndexOf(item);
+
+        // Hardcoded keybind CRTL + ALT + A
+
+        KeybindsManager.Keybind keybind = new KeybindsManager.Keybind
         {
-            SoundboardOptions_Minimize(false);
-            SoundboardOptionsMinimized = false;
-        }
-        else
+            KeybindType = KeybindsManager.KeybindTypes.PlaySoundKeybind,
+            KeyModifiers = new List<KeybindsManager.KeyModifiers> { KeybindsManager.KeyModifiers.Control, KeybindsManager.KeyModifiers.Alt },
+            Key = VirtualKey.A,
+            Handler = () =>
+            {
+                Debug.WriteLine("Keybind activated for sound: " + soundBoardItemViewmodel.SoundBoardItems[index].SoundName);
+                soundBoardItemViewmodel.SoundBoardItems[index].OnActivated();
+            }
+        };
+        soundBoardItemViewmodel.SoundBoardItems[index].SetKeybind(keybind);
+    }
+
+    private void StopAllSounds_Click(object sender, RoutedEventArgs e)
+    {
+        soundBoardItemViewmodel.SoundBoardItems.ToList().ForEach(item =>
         {
-            SoundboardOptions_Minimize(true);
-            SoundboardOptionsMinimized = true;
-        }
+            item.StopSound();
+        });
     }
 
     private void MainSoundboardListview_ContainerContentChanging(ListViewBase sender, ContainerContentChangingEventArgs args)
