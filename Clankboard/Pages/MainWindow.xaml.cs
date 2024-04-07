@@ -21,6 +21,7 @@ using Microsoft.UI.Xaml.Documents;
 using Windows.UI.WindowManagement;
 using AppWindow = Microsoft.UI.Windowing.AppWindow;
 using AppWindowChangedEventArgs = Microsoft.UI.Windowing.AppWindowChangedEventArgs;
+using Windows.Graphics;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -33,6 +34,8 @@ public sealed partial class MainWindow : Window
 {
     private AppWindow m_Appwindow;
     DesktopAcrylicController acrylicController;
+
+    private SizeInt32 StartingWindowSize = new(Convert.ToInt32(680 * App.DpiScalingFactor), Convert.ToInt32(1000 * App.DpiScalingFactor));
 
     public MainWindow()
     {
@@ -48,7 +51,9 @@ public sealed partial class MainWindow : Window
 
         acrylicController = new DesktopAcrylicController();
 
-        m_Appwindow.Resize(new Windows.Graphics.SizeInt32((int)(10 * App.DpiScalingFactor), (int)(10 + App.DpiScalingFactor))); // small size to make it go to min size
+        //m_Appwindow.Resize(new Windows.Graphics.SizeInt32((int)(10 * App.DpiScalingFactor), (int)(10 + App.DpiScalingFactor))); // small size to make it go to min size
+        // Update the m_Appwindow.Resize call
+        m_Appwindow.Resize(StartingWindowSize);
     }
 
     private AppWindow GetAppWindowForCurrentWindow()

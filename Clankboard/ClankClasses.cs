@@ -2,6 +2,7 @@
 using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -56,5 +57,32 @@ namespace Clankboard
 
         public event EventHandler DeleteAllSoundboardItems;
         public void DeleteAllItems() => DeleteAllSoundboardItems(this, null);
+    }
+
+    public static class FileSaveHandler
+    {
+        private static string CurrentOpenFilePath;
+
+        public enum SoundboardEntryType
+        {
+            File,
+            URL
+        }
+
+        public struct SoundboardFileEntry
+        {
+            public string Name;
+            public string Path;
+            public SoundboardEntryType Type;
+        }
+
+        public static void OpenFile(string FilePath)
+        {
+            if (!File.Exists(FilePath))
+                throw new FileNotFoundException();
+
+            CurrentOpenFilePath = FilePath;
+            // TODO: Add file open handler
+        }
     }
 }
