@@ -17,6 +17,8 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Clankboard.Classes;
+using System.Diagnostics;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -29,6 +31,8 @@ public partial class App : Application
 {
     public static float DpiScalingFactor = 1;
 
+    //public AudioManager app_AudioManager = new AudioManager();
+
     public App()
     {
         this.InitializeComponent();
@@ -38,6 +42,8 @@ public partial class App : Application
 
     protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
     {
+        SettingsManager.InitializeSettings();
+
         m_window = new MainWindow();
         m_window.Activate();
         m_window.Content = new ShellPage();
@@ -53,7 +59,7 @@ public partial class App : Application
             MakeWindowAlwaysOnTop(m_window);
     }
 
-    internal Window m_window;
+    public Window m_window;
 
 
     // Override of the WndProc method to change the window's min size
@@ -71,7 +77,7 @@ public partial class App : Application
     [DllImport("user32.dll")]
     private static extern IntPtr CallWindowProc(IntPtr lpPrevWndFunc, IntPtr hWnd, WindowMessage Msg, IntPtr wParam, IntPtr lParam);
 
-    public static int MinWindowWidth { get; set; } = 380;//497;
+    public static int MinWindowWidth { get; set; } = 400;//497;  // OPTIMAL SIZE: 530!
     public static int MinWindowHeight { get; set; } = 635;
 
     private static void RegisterWindowMinMax(Window window)
@@ -101,6 +107,27 @@ public partial class App : Application
                 minMaxInfo.ptMinTrackSize.y = (int)(MinWindowHeight * DpiScalingFactor);
 
                 Marshal.StructureToPtr(minMaxInfo, lParam, true);
+                break;
+            case WindowMessage.WM_HOTKEY:
+
+                if (!KeybindsManager.KeybindsEnabled)
+                    break;
+
+                // Get hotkey ID
+                int id = wParam.ToInt32();
+                // Get the keybind from the ID (null if it does not exist)
+                KeybindsManager.Keybind? keybind = KeybindsManager.GetKeybindByGlobalID(id);
+
+                var Binds = KeybindsManager.Keybinds;
+                // List all keybinds
+                foreach (var kb in Binds)
+                {
+                    Debug.WriteLine($"Keybind: {kb.GlobalKeybindID}");
+                }
+                // Invoke the keybind's handler if it exists
+                if (keybind.HasValue && keybind.Value.Handler != null)
+                    // Invoke the keybind's handler
+                    keybind.Value.Handler.Invoke();
                 break;
 
         }
@@ -148,6 +175,7 @@ public partial class App : Application
     private enum WindowMessage : int
     {
         WM_GETMINMAXINFO = 0x0024,
+        WM_HOTKEY = 0x0312,
     }
     #endregion
 }
