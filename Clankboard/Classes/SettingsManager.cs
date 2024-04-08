@@ -70,7 +70,11 @@ namespace Clankboard.Classes
             #endregion
         }
 
-        public static readonly AudioDevice DefaultAudioDevice = new AudioDevice { DeviceID = null, DeviceName = "DEFAULT" };
+        /// <summary>
+        /// This is a readonly default audio device that is used when the audio device is not set.
+        /// </summary>
+        /// <remarks> If this is set, no parameters are passed to set the DeviceNumber while playing and relaying audio. </remarks>
+        public static readonly AudioDevice DefaultAudioDevice = new AudioDevice { DeviceGUID = Guid.Empty, DeviceName = "DEFAULT", DeviceNumber = -101 };
 
         private static Dictionary<SettingTypes, object> settings = new Dictionary<SettingTypes, object>();
         // Default values for the settings

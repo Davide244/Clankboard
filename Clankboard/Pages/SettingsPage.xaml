@@ -33,14 +33,16 @@
                         <controls:SettingsCard Header="Input Device"
                                                Description="The microphone that will be used by this application."
                                                HeaderIcon="{ui:FontIcon Glyph=&#xE720;}">
-                            
+
                             <ComboBox x:Name="InputDeviceCombobox" SelectedIndex="0" MaxWidth="200" SelectionChanged="AudioDeviceCombobox_SelectionChanged">
-                                <ComboBoxItem>
-                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE720;" Margin="0" FontSize="13"/>
-                                        <TextBlock Margin="3, 0, 0, 0">Default Microphone</TextBlock>
-                                    </StackPanel>
-                                </ComboBoxItem>
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate x:DataType="local:AudioInputDeviceComboboxItem">
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" ToolTipService.ToolTip="{x:Bind DeviceGUID, Mode=TwoWay, TargetNullValue='NO GUID DETECTED!'}">
+                                            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE720;" Margin="0" FontSize="13"/>
+                                            <TextBlock Margin="3, 0, 0, 0" Text="{x:Bind DeviceName, Mode=TwoWay, TargetNullValue='UNKNOWN INPUT DEVICE'}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
                             </ComboBox>
                         </controls:SettingsCard>
                         <controls:SettingsCard Header="Output Device"
@@ -48,18 +50,29 @@
                                                HeaderIcon="{ui:FontIcon Glyph=&#xE7F5;}">
 
                             <ComboBox Margin="5, 7, 0, 0" SelectedIndex="0" x:Name="OutputDeviceCombobox" MaxWidth="200" SelectionChanged="AudioDeviceCombobox_SelectionChanged">
-                                <ComboBoxItem>
-                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE7F5;" Margin="0" FontSize="13"/>
-                                        <TextBlock Margin="3, 0, 0, 0">Default Speaker</TextBlock>
-                                    </StackPanel>
-                                </ComboBoxItem>
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate x:DataType="local:AudioOutputDeviceComboboxItem">
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" ToolTipService.ToolTip="{x:Bind DeviceGUID, Mode=TwoWay, TargetNullValue='NO GUID DETECTED!'}">
+                                            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE7F5;" Margin="0" FontSize="13"/>
+                                            <TextBlock Margin="3, 0, 0, 0" Text="{x:Bind DeviceName, Mode=TwoWay, TargetNullValue='UNKNOWN OUTPUT DEVICE'}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
                             </ComboBox>
                         </controls:SettingsCard>
                         <controls:SettingsCard Header="Audio Cable Input"
                                                Description="The input of your virtual audio cable setup."
                                                HeaderIcon="{ui:FontIcon Glyph=&#xE964;}">
-                            <ComboBox Margin="5, 7, 0, 0" x:Name="DriverInputCombobox" PlaceholderText="None selected" PlaceholderForeground="{ThemeResource SystemFillColorCautionBrush}" MaxWidth="200" SelectionChanged="AudioDeviceCombobox_SelectionChanged"/>
+                            <ComboBox Margin="5, 7, 0, 0" x:Name="DriverInputCombobox" PlaceholderText="None selected" PlaceholderForeground="{ThemeResource SystemFillColorCautionBrush}" MaxWidth="200" SelectionChanged="AudioDeviceCombobox_SelectionChanged">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate x:DataType="local:AudioOutputDeviceComboboxItem">
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" ToolTipService.ToolTip="{x:Bind DeviceGUID, Mode=TwoWay, TargetNullValue='NO GUID DETECTED!'}">
+                                            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE7F5;" Margin="0" FontSize="13"/>
+                                            <TextBlock Margin="3, 0, 0, 0" Text="{x:Bind DeviceName, Mode=TwoWay, TargetNullValue='UNKNOWN OUTPUT DEVICE'}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
                         </controls:SettingsCard>
                     </controls:SettingsExpander.Items>
                     

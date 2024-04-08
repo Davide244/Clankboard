@@ -17,61 +17,100 @@ using static Clankboard.AudioManager;
 using Clankboard.Classes;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using CommunityToolkit.Mvvm.ComponentModel;
+using System.Collections.ObjectModel;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace Clankboard.Pages
 {
+    public partial class AudioDeviceComboboxItem : ObservableObject
+    {
+        [ObservableProperty]
+        private string _deviceName;
+        [ObservableProperty]
+        private Guid _deviceGUID;
+        [ObservableProperty]
+        private int _deviceNumber;
+
+        public AudioDeviceComboboxItem(string deviceName, Guid deviceGUID, int deviceNumber)
+        {
+            DeviceName = deviceName;
+            DeviceGUID = deviceGUID;
+            DeviceNumber = deviceNumber;
+        }
+    }
+
+    // Audio output device is just like the input device, but with a different name. So we can inherit from the input device class
+    public partial class AudioOutputDeviceComboboxItem : AudioDeviceComboboxItem
+    {
+        public AudioOutputDeviceComboboxItem(string deviceName, Guid deviceGUID, int deviceNumber) : base(deviceName, deviceGUID, deviceNumber)
+        {
+            DeviceName = deviceName;
+            DeviceGUID = deviceGUID;
+            DeviceNumber = deviceNumber;
+        }
+    }
+
+    public partial class AudioInputDeviceComboboxItem : AudioDeviceComboboxItem
+    {
+        public AudioInputDeviceComboboxItem(string deviceName, Guid deviceGUID, int deviceNumber) : base(deviceName, deviceGUID, deviceNumber)
+        {
+            DeviceName = deviceName;
+            DeviceGUID = deviceGUID;
+            DeviceNumber = deviceNumber;
+        }
+    }
+
+    public partial class AudioInputItemViewmodel : ObservableObject
+    {
+        [ObservableProperty]
+        public ObservableCollection<AudioInputDeviceComboboxItem> _audioInputDevices = new();
+    }
+
+    public partial class AudioOutputItemViewmodel : ObservableObject
+    {
+        [ObservableProperty]
+        public ObservableCollection<AudioOutputDeviceComboboxItem> _audioOutputDevices = new();
+    }
+
+
     public sealed partial class SettingsPage : Page
     {
-
-        // List of audio output devices
-        private List<AudioDevice> AudioOutputDevices { get; set; } = new List<AudioDevice> { };
-        private List<AudioDevice> AudioInputDevices { get; set; } = new List<AudioDevice> { };
-
+        public static AudioOutputItemViewmodel comboboxes_outputlist = new();
+        public static AudioInputItemViewmodel comboboxes_inputlist = new();
         private bool SettingsEnabled = false;
 
         public void UpdateComboboxes()
         {
-            AudioOutputDevices = AudioManager.GetAudioOutputDevices();
-            AudioInputDevices = AudioManager.GetAudioInputDevices();
+            UpdateAudioOutputDevices();
+            UpdateAudioInputDevices();
 
-            foreach (var device in AudioOutputDevices)
-            {
-                OutputDeviceCombobox.Items.Add(device.DeviceName);
-                DriverInputCombobox.Items.Add(device.DeviceName);
-            }
+            // Change the comboboxes to the current audio devices
 
+            // Update Input box (comboboxes_inputlist)
+            comboboxes_inputlist.AudioInputDevices.Clear();
             foreach (var device in AudioInputDevices)
             {
-                InputDeviceCombobox.Items.Add(device.DeviceName);
+                comboboxes_inputlist.AudioInputDevices.Add(new AudioInputDeviceComboboxItem(device.DeviceName, device.DeviceGUID, device.DeviceNumber));
             }
 
-            string CurrentOutputDeviceID = SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.LocalOutputDevice).DeviceID;
-            string CurrentInputDeviceID = SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.InputDevice).DeviceID;
-            string CurrentDriverInputDeviceID = SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.VACOutputDevice).DeviceID; // NOTE: This is a logical output device. Called "Input" because it is the input to the virtual audio cable.
-
-            // Set combobox indexes to the current audio devices
-            for (int i = 0; i < AudioOutputDevices.Count; i++)
+            // Update Output box (comboboxes_outputlist)
+            comboboxes_outputlist.AudioOutputDevices.Clear();
+            foreach (var device in AudioOutputDevices)
             {
-                if (AudioOutputDevices[i].DeviceID == CurrentOutputDeviceID)
-                {
-                    OutputDeviceCombobox.SelectedIndex = i + 1;
-                }
-                if (AudioInputDevices[i].DeviceID == CurrentDriverInputDeviceID)
-                {
-                    DriverInputCombobox.SelectedIndex = i;
-                }
+                comboboxes_outputlist.AudioOutputDevices.Add(new AudioOutputDeviceComboboxItem(device.DeviceName, device.DeviceGUID, device.DeviceNumber));
             }
 
-            for (int i = 0; i < AudioInputDevices.Count; i++)
-            {
-                if (AudioInputDevices[i].DeviceID == CurrentInputDeviceID)
-                {
-                    InputDeviceCombobox.SelectedIndex = i + 1;
-                }
-            }
+            AudioDevice CurrentLocalOutputDevice = SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.LocalOutputDevice);
+            AudioDevice CurrentVACOutputDevice = SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.VACOutputDevice);
+            AudioDevice CurrentInputDevice = SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.InputDevice);
+
+            // Set the selected index of the comboboxes to the current audio devices. If not found, set to default
+            InputDeviceCombobox.SelectedIndex = comboboxes_inputlist.AudioInputDevices.IndexOf(comboboxes_inputlist.AudioInputDevices.FirstOrDefault(x => x.DeviceGUID == CurrentInputDevice.DeviceGUID && x.DeviceNumber == CurrentInputDevice.DeviceNumber));
+            OutputDeviceCombobox.SelectedIndex = comboboxes_outputlist.AudioOutputDevices.IndexOf(comboboxes_outputlist.AudioOutputDevices.FirstOrDefault(x => x.DeviceGUID == CurrentLocalOutputDevice.DeviceGUID && x.DeviceNumber == CurrentLocalOutputDevice.DeviceNumber));
+            DriverInputCombobox.SelectedIndex = comboboxes_outputlist.AudioOutputDevices.IndexOf(comboboxes_outputlist.AudioOutputDevices.FirstOrDefault(x => x.DeviceGUID == CurrentVACOutputDevice.DeviceGUID && x.DeviceNumber == CurrentVACOutputDevice.DeviceNumber));
         }
 
         private void UpdateToggleSwitches()
@@ -84,6 +123,11 @@ namespace Clankboard.Pages
         public SettingsPage()
         {
             this.InitializeComponent();
+
+            InputDeviceCombobox.ItemsSource = comboboxes_inputlist.AudioInputDevices;
+            OutputDeviceCombobox.ItemsSource = comboboxes_outputlist.AudioOutputDevices;
+            DriverInputCombobox.ItemsSource = comboboxes_outputlist.AudioOutputDevices;
+
             UpdateComboboxes();
             UpdateToggleSwitches();
 
@@ -99,47 +143,21 @@ namespace Clankboard.Pages
                 return;
             }
 
-            if (combobox.Name == "OutputDeviceCombobox")
+            // Get the selected item
+            var selectedItem = combobox.SelectedItem as AudioDeviceComboboxItem;
+            if (selectedItem != null)
             {
-                // Write previous output device to the debug log
-                Debug.WriteLine($"Previous Output Device: {SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.LocalOutputDevice).DeviceName}");
-
-                if (combobox.SelectedIndex == 0)
+                   switch (combobox.Name)
                 {
-                    SettingsManager.SetSetting(SettingsManager.SettingTypes.LocalOutputDevice, SettingsManager.DefaultAudioDevice);
-                }
-
-                if (combobox.SelectedIndex - 1 >= 0 && combobox.SelectedIndex - 1 <= AudioOutputDevices.Count)
-                {
-                    SettingsManager.SetSetting(SettingsManager.SettingTypes.LocalOutputDevice, new AudioDevice { DeviceName = AudioOutputDevices[combobox.SelectedIndex - 1].DeviceName, DeviceID = AudioOutputDevices[combobox.SelectedIndex - 1].DeviceID });
-                    Debug.WriteLine($"New Output Device: {SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.LocalOutputDevice).DeviceName}");
-                }
-            }
-            else if (combobox.Name == "InputDeviceCombobox")
-            {
-                // Write previous input device to the debug log
-                Debug.WriteLine($"Previous Input Device: {SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.InputDevice).DeviceName}");
-
-                if (combobox.SelectedIndex == 0)
-                {
-                    SettingsManager.SetSetting(SettingsManager.SettingTypes.InputDevice, SettingsManager.DefaultAudioDevice);
-                }
-
-                if (combobox.SelectedIndex - 1 >= 0 && combobox.SelectedIndex - 1 <= AudioInputDevices.Count)
-                {
-                    SettingsManager.SetSetting(SettingsManager.SettingTypes.InputDevice, new AudioDevice { DeviceName = AudioInputDevices[combobox.SelectedIndex - 1].DeviceName, DeviceID = AudioInputDevices[combobox.SelectedIndex - 1].DeviceID });
-                    Debug.WriteLine($"New Input Device: {SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.InputDevice).DeviceName}");
-                }
-            }
-            else if (combobox.Name == "DriverInputCombobox")
-            {
-                // Write previous driver input device to the debug log
-                Debug.WriteLine($"Previous Driver Input Device: {SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.VACOutputDevice).DeviceName}");
-
-                if (combobox.SelectedIndex >= 0 && combobox.SelectedIndex <= AudioOutputDevices.Count)
-                {
-                    SettingsManager.SetSetting(SettingsManager.SettingTypes.VACOutputDevice, new AudioDevice { DeviceName = AudioOutputDevices[combobox.SelectedIndex].DeviceName, DeviceID = AudioOutputDevices[combobox.SelectedIndex].DeviceID });
-                    Debug.WriteLine($"New Driver Input Device: {SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.VACOutputDevice).DeviceName}");
+                    case "InputDeviceCombobox":
+                        SettingsManager.SetSetting(SettingsManager.SettingTypes.InputDevice, new AudioDevice { DeviceName = selectedItem.DeviceName, DeviceGUID = selectedItem.DeviceGUID, DeviceNumber = selectedItem.DeviceNumber});
+                        break;
+                    case "OutputDeviceCombobox":
+                        SettingsManager.SetSetting(SettingsManager.SettingTypes.LocalOutputDevice, new AudioDevice { DeviceName = selectedItem.DeviceName, DeviceGUID = selectedItem.DeviceGUID, DeviceNumber = selectedItem.DeviceNumber });
+                        break;
+                    case "DriverInputCombobox":
+                        SettingsManager.SetSetting(SettingsManager.SettingTypes.VACOutputDevice, new AudioDevice { DeviceName = selectedItem.DeviceName, DeviceGUID = selectedItem.DeviceGUID, DeviceNumber = selectedItem.DeviceNumber });
+                        break;
                 }
             }
         }

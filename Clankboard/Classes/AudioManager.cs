@@ -17,36 +17,44 @@ namespace Clankboard
         public struct AudioDevice
         {
             public string DeviceName;
-            public string DeviceID;
+            public Guid DeviceGUID;
+            public int DeviceNumber;
         }
 
         // Audio Queue list
         public static List<SoundBoardItem> AudioQueue { get; private set; } = new List<SoundBoardItem> { };
 
-        public static List<AudioDevice> GetAudioOutputDevices()
+        public static List<AudioDevice> AudioOutputDevices { get; private set; } = new List<AudioDevice> { };
+        public static List<AudioDevice> AudioInputDevices { get; private set; } = new List<AudioDevice> { };
+
+        // Default audio device
+        public readonly static AudioDevice DefaultAudioOutputDevice = new AudioDevice { DeviceName = "Default Output Device", DeviceGUID = Guid.Empty, DeviceNumber = -101 };
+        public readonly static AudioDevice DefaultAudioInputDevice = new AudioDevice { DeviceName = "Default Microphone", DeviceGUID = Guid.Empty, DeviceNumber = -101 };
+
+        public static void UpdateAudioOutputDevices()
         {
-            List<AudioDevice> audioDevices = new List<AudioDevice> { };
+            AudioOutputDevices.Clear();
+            AudioOutputDevices.Add(DefaultAudioOutputDevice);
 
-            MMDeviceEnumerator enumerator = new MMDeviceEnumerator();
-            foreach (MMDevice device in enumerator.EnumerateAudioEndPoints(DataFlow.Render, DeviceState.Active))
+            // Enumerate using DirectSound
+            for (int n = -1; n < WaveOut.DeviceCount; n++)
             {
-                audioDevices.Add(new AudioDevice { DeviceName = device.FriendlyName, DeviceID = device.ID });
+                var caps = WaveOut.GetCapabilities(n);
+                AudioOutputDevices.Add(new AudioDevice { DeviceName = caps.ProductName, DeviceGUID = caps.ProductGuid, DeviceNumber = n });
             }
-
-            return audioDevices;
         }
 
-        public static List<AudioDevice> GetAudioInputDevices()
+        public static void UpdateAudioInputDevices()
         {
-            List<AudioDevice> audioDevices = new List<AudioDevice> { };
+            AudioInputDevices.Clear();
+            AudioInputDevices.Add(DefaultAudioInputDevice);
 
-            MMDeviceEnumerator enumerator = new MMDeviceEnumerator();
-            foreach (MMDevice device in enumerator.EnumerateAudioEndPoints(DataFlow.Capture, DeviceState.Active))
+            // Enumerate using DirectSound
+            for (int n = -1; n < WaveIn.DeviceCount; n++)
             {
-                audioDevices.Add(new AudioDevice { DeviceName = device.FriendlyName, DeviceID = device.ID });
+                var caps = WaveIn.GetCapabilities(n);
+                AudioInputDevices.Add(new AudioDevice { DeviceName = caps.ProductName, DeviceGUID = caps.ProductGuid, DeviceNumber = n });
             }
-
-            return audioDevices;
         }
 
         public enum SoundboardAudioType
@@ -60,6 +68,52 @@ namespace Clankboard
         private static async void PlaySound(string filePath, SoundboardAudioType audioType, CancellationToken cancellationToken)
         {
             // Get the audio devices
+            //AudioDevice outputDevice = SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.LocalOutputDevice);
+            //AudioDevice driverOutputDevice = SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.VACOutputDevice);
+
+            //// Debug write the device names
+            //Debug.WriteLine("Output Device: " + outputDevice.DeviceName);
+            //Debug.WriteLine("Driver Output Device: " + driverOutputDevice.DeviceName);
+
+            //int outputDeviceNumber = GetDeviceNumber(outputDevice.DeviceID);
+            //int driverOutputDeviceNumber = GetDeviceNumber(driverOutputDevice.DeviceID);
+
+            //var waveOut = new WaveOut();
+
+            throw new NotImplementedException("This function is DEPRECATED/UNUSED! Function is currently only a stub.");
+
+        }
+
+        private static void PlayAudioFileInDevice(AudioDevice device, string filePath, CancellationToken cancellation)
+        {
+            // Play the audio file in the selected device
+            var waveOut = new WaveOut();
+            var audioFile = new AudioFileReader(filePath);
+            waveOut.DeviceNumber = device.DeviceNumber;
+            waveOut.Init(audioFile);
+            waveOut.Play();
+            // Loop until the audio file is finished playing OR the cancellation token is cancelled
+            while (waveOut.PlaybackState == PlaybackState.Playing && !cancellation.IsCancellationRequested)
+            {
+                Thread.Sleep(100);
+            }
+
+            // Stop and dispose of the audio file
+            waveOut.Stop();
+            waveOut.Dispose();
+            audioFile.Dispose();
+        }
+
+        /// <summary>
+        /// Play a soundboard item on the currently set output devices in <see cref="SettingsManager"/>.
+        /// </summary>
+        /// <param name="sound">The soundboardItem</param>
+        /// <param name="cancellationToken">The cancellationToken. This is required for sound cancellation.</param>
+        /// <returns></returns>
+        public static async Task PlaySoundboardItem(SoundBoardItem sound, CancellationToken cancellationToken)
+        {
+            GetDeviceNumber("");
+            // Get the audio devices
             AudioDevice outputDevice = SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.LocalOutputDevice);
             AudioDevice driverOutputDevice = SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.VACOutputDevice);
 
@@ -67,71 +121,45 @@ namespace Clankboard
             Debug.WriteLine("Output Device: " + outputDevice.DeviceName);
             Debug.WriteLine("Driver Output Device: " + driverOutputDevice.DeviceName);
 
-            // Get the device numbers
-            int outputDeviceNumber = GetDeviceNumber(outputDevice.DeviceID);
-            int driverOutputDeviceNumber = GetDeviceNumber(driverOutputDevice.DeviceID);
+            // Grab devices from SettingsManager
+            AudioDevice outputDeviceNumber = SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.LocalOutputDevice);
+            AudioDevice driverOutputDeviceNumber = SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.VACOutputDevice);
 
-            // Play the sound to both devices at the same time
-            using (var outputDeviceWaveOut = new WaveOutEvent())
-            using (var driverOutputDeviceWaveOut = new WaveOutEvent())
-            {
-                // Set the output device
-                outputDeviceWaveOut.DeviceNumber = outputDeviceNumber;
-                driverOutputDeviceWaveOut.DeviceNumber = driverOutputDeviceNumber;
-
-                // Create separate audio file readers for each device
-                using (var outputDeviceAudioFileReader = new AudioFileReader(filePath))
-                using (var driverOutputDeviceAudioFileReader = new AudioFileReader(filePath))
-                {
-                    // Set the audio file readers to the respective devices
-                    outputDeviceWaveOut.Init(outputDeviceAudioFileReader);
-                    driverOutputDeviceWaveOut.Init(driverOutputDeviceAudioFileReader);
-
-                    // Play the audio
-                    outputDeviceWaveOut.Play();
-                    driverOutputDeviceWaveOut.Play();
-
-                    // Wait for the audio to finish playing
-                    while (outputDeviceWaveOut.PlaybackState == PlaybackState.Playing && driverOutputDeviceWaveOut.PlaybackState == PlaybackState.Playing)
-                    {
-                        await Task.Delay(100);
-                        if (cancellationToken.IsCancellationRequested)
-                        {
-                            outputDeviceWaveOut.Stop();
-                            driverOutputDeviceWaveOut.Stop();
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-
-        public static async Task PlaySoundboardItem(SoundBoardItem sound, CancellationToken cancellationToken)
-        {
-            // This function plays audio over the selected output device AND the hardware output device at the same time
-
-            // Get the audio file path
-            string filePath = sound.PhysicalFilePath;
-
-            // Play the sound to both devices at the same time
-            Task outputTask = Task.Run(() => PlaySound(filePath, SoundboardAudioType.LocalFile, cancellationToken));
-            Task driverOutputTask = Task.Run(() => PlaySound(filePath, SoundboardAudioType.LocalFile, cancellationToken));
-            await driverOutputTask;
-            await outputTask;
+            // Call PlayAudioFileInDevice for each device
+            Task.Run(() => PlayAudioFileInDevice(outputDeviceNumber, sound.PhysicalFilePath, cancellationToken));
+            Task.Run(() => PlayAudioFileInDevice(driverOutputDeviceNumber, sound.PhysicalFilePath, cancellationToken));
         }
 
         private static int GetDeviceNumber(string deviceID)
         {
-            MMDeviceEnumerator enumerator = new MMDeviceEnumerator();
-            MMDeviceCollection devices = enumerator.EnumerateAudioEndPoints(DataFlow.Render, DeviceState.Active);
-            for (int i = 0; i < devices.Count; i++)
+            for (int n = -1; n < WaveOut.DeviceCount; n++)
             {
-                if (devices[i].ID == deviceID)
-                {
-                    return i;
-                }
+                var caps = WaveOut.GetCapabilities(n);
+                Debug.WriteLine($"{n}: {caps.ProductName}; GUID: {caps.ProductGuid}; GIVEN DEVICEID: {deviceID}");
+                // Debug write the device Number
             }
+
+            // Return the device number by DeviceID
+
             return -1;
+
+            //MMDeviceEnumerator enumerator = new MMDeviceEnumerator();
+            //MMDeviceCollection devices = enumerator.EnumerateAudioEndPoints(DataFlow.Render, DeviceState.Active);
+            //for (int i = 0; i < devices.Count; i++)
+            //{
+            //    if (devices[i].ID == deviceID)
+            //    {
+            //        // Debug write the device ID
+            //        Debug.WriteLine("Device ID: " + deviceID);
+            //        // Debug write the device number
+            //        Debug.WriteLine("Device Number: " + (i));
+
+            //        // Debug print the actual device name for the device number that was found
+            //        Debug.WriteLine("Real Device Name: " + devices[i].FriendlyName);
+            //        return i;
+            //    }
+            //}
+            //return -1;
         }
     }
 }
