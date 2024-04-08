@@ -40,17 +40,17 @@ namespace Clankboard.Pages
             foreach (var device in AudioOutputDevices)
             {
                 OutputDeviceCombobox.Items.Add(device.DeviceName);
+                DriverInputCombobox.Items.Add(device.DeviceName);
             }
 
             foreach (var device in AudioInputDevices)
             {
                 InputDeviceCombobox.Items.Add(device.DeviceName);
-                DriverInputCombobox.Items.Add(device.DeviceName);
             }
 
             string CurrentOutputDeviceID = SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.LocalOutputDevice).DeviceID;
             string CurrentInputDeviceID = SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.InputDevice).DeviceID;
-            string CurrentDriverInputDeviceID = SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.VACOutputDevice).DeviceID;
+            string CurrentDriverInputDeviceID = SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.VACOutputDevice).DeviceID; // NOTE: This is a logical output device. Called "Input" because it is the input to the virtual audio cable.
 
             // Set combobox indexes to the current audio devices
             for (int i = 0; i < AudioOutputDevices.Count; i++)
@@ -59,6 +59,10 @@ namespace Clankboard.Pages
                 {
                     OutputDeviceCombobox.SelectedIndex = i + 1;
                 }
+                if (AudioInputDevices[i].DeviceID == CurrentDriverInputDeviceID)
+                {
+                    DriverInputCombobox.SelectedIndex = i;
+                }
             }
 
             for (int i = 0; i < AudioInputDevices.Count; i++)
@@ -66,10 +70,6 @@ namespace Clankboard.Pages
                 if (AudioInputDevices[i].DeviceID == CurrentInputDeviceID)
                 {
                     InputDeviceCombobox.SelectedIndex = i + 1;
-                }
-                if (AudioInputDevices[i].DeviceID == CurrentDriverInputDeviceID)
-                {
-                    DriverInputCombobox.SelectedIndex = i;
                 }
             }
         }
@@ -136,9 +136,9 @@ namespace Clankboard.Pages
                 // Write previous driver input device to the debug log
                 Debug.WriteLine($"Previous Driver Input Device: {SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.VACOutputDevice).DeviceName}");
 
-                if (combobox.SelectedIndex >= 0 && combobox.SelectedIndex <= AudioInputDevices.Count)
+                if (combobox.SelectedIndex >= 0 && combobox.SelectedIndex <= AudioOutputDevices.Count)
                 {
-                    SettingsManager.SetSetting(SettingsManager.SettingTypes.VACOutputDevice, new AudioDevice { DeviceName = AudioInputDevices[combobox.SelectedIndex].DeviceName, DeviceID = AudioInputDevices[combobox.SelectedIndex].DeviceID });
+                    SettingsManager.SetSetting(SettingsManager.SettingTypes.VACOutputDevice, new AudioDevice { DeviceName = AudioOutputDevices[combobox.SelectedIndex].DeviceName, DeviceID = AudioOutputDevices[combobox.SelectedIndex].DeviceID });
                     Debug.WriteLine($"New Driver Input Device: {SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.VACOutputDevice).DeviceName}");
                 }
             }
