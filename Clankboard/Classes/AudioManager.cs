@@ -89,7 +89,14 @@ namespace Clankboard
             // Play the audio file in the selected device
             var waveOut = new WaveOut();
             var audioFile = new AudioFileReader(filePath);
-            waveOut.DeviceNumber = device.DeviceNumber;
+
+            // Check if the device is the default device. If no, set the device number. If yes, skip.
+            if (device.DeviceNumber != DefaultAudioInputDevice.DeviceNumber && device.DeviceNumber != DefaultAudioOutputDevice.DeviceNumber)
+            {
+                waveOut.DeviceNumber = device.DeviceNumber;
+            }
+
+            //waveOut.DeviceNumber = device.DeviceNumber;
             waveOut.Init(audioFile);
             waveOut.Play();
             // Loop until the audio file is finished playing OR the cancellation token is cancelled
