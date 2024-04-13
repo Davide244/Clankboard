@@ -9,6 +9,7 @@
     xmlns:controls="using:CommunityToolkit.WinUI.Controls"
     xmlns:ui="using:CommunityToolkit.WinUI"
     xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:clankControls="using:Clankboard.Controls"
     mc:Ignorable="d">
 
     <Grid VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="18, 0, 18, 0">
@@ -110,7 +111,7 @@
                         <controls:SettingsCard Header="Stop Keybind"
                                                Description="Keybinds that stops all sounds."
                                                HeaderIcon="{ui:FontIcon Glyph=&#xE73B;}">
-                            <ToggleSwitch IsOn="False" />
+                            <clankControls:KeybindChangeBtn x:Name="StopKeybindChangeBtn" KeybindType="StopAllSoundsKeybind" Content="None"/>
                         </controls:SettingsCard>
                         <controls:SettingsCard Header="Local Output Volume"
                                Description="At which volume to output the soundboard audio to you locally."

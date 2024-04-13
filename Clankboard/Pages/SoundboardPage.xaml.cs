@@ -132,7 +132,14 @@ public partial class SoundBoardItem : ObservableObject
 
     public void OnActivated() 
     {
-        Debug.WriteLine("Soundboard item activated. SOUND NAME: " + SoundName);
+        bool StackingAudioEnabled = SettingsManager.GetSetting<bool>(SettingsManager.SettingTypes.AudioStackingEnabled);
+        if (!StackingAudioEnabled)
+        {
+            for (int i = 0; i < SoundboardPage.soundBoardItemViewmodel.SoundBoardItems.Count; i++)
+            {
+                SoundboardPage.soundBoardItemViewmodel.SoundBoardItems[i].StopSound();
+            }
+        }
         AudioManager.PlaySoundboardItem(this, s_cancellationToken);
     }
 
