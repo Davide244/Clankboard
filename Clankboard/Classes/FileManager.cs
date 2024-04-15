@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Windows.Storage;
 
 namespace Clankboard.Classes.FileManagers
 {
@@ -95,49 +96,31 @@ namespace Clankboard.Classes.FileManagers
                     File.Create(Path.Combine(SettingsFile.FolderPath, SettingsFile.Name)).Close();
 
                     // Save the default settings to the file
-                    File.WriteAllText(Path.Combine(SettingsFile.FolderPath, SettingsFile.Name), JsonConvert.SerializeObject(SettingsManager.GetSettings()));
+                    File.WriteAllText(Path.Combine(SettingsFile.FolderPath, SettingsFile.Name), JsonConvert.SerializeObject(SettingsManager.GetSettings(), Formatting.Indented));
                     return;
                 }
-
-                // Deserialize the json into the settings object.
-                // JSON STRUCTURE:
-                // {
-                //     "Settings": [
-                //         {
-                //             "type": 1,
-                //             "name": "LocalOutputVolume",
-                //             "value": 100
-                //         }
-                //     ]
-                // }
 
                 // Doing this using Newtonsoft.Json
                 string json = File.ReadAllText(Path.Combine(SettingsFile.FolderPath, SettingsFile.Name));
 
-                // Open the file in notepad.exe
-                Process.Start("notepad.exe", Path.Combine(SettingsFile.FolderPath, SettingsFile.Name));
-
-                // open handle to file
-                using (FileStream fs = File.Open(Path.Combine(SettingsFile.FolderPath, SettingsFile.Name), FileMode.Open, FileAccess.ReadWrite, FileShare.None))
-                {
-                    // Lock the file
-                    fs.Lock(0, fs.Length);
-                    // Write to the file
-                    fs.Write(Encoding.UTF8.GetBytes("Hello World!"), 0, Encoding.UTF8.GetBytes("Hello World!").Length);
-                }
-
                 // Deserialize the json into the settings object.
                 List<KeyValuePair<SettingsManager.SettingTypes, object>> DeserializedSettings = JsonConvert.DeserializeObject<List<KeyValuePair<SettingsManager.SettingTypes, object>>>(json);
+
+                // Set the settings
+                foreach (KeyValuePair<SettingsManager.SettingTypes, object> setting in DeserializedSettings)
+                {
+                    SettingsManager.SetSetting(setting.Key, setting.Value);
+                }
             }
             else
             {
-                throw new NotImplementedException("Loading settings from a custom path is not supported yet. Coming soon™");
+                throw new NotImplementedException("Custom settings files are not supported yet. Coming soon™");
             }
 
             // TODO: Add loading code
         }
 
-        public void SaveFile(string path)
+        public void SaveFile(string path=null)
         {
             if (path == null)
             {
@@ -150,27 +133,12 @@ namespace Clankboard.Classes.FileManagers
                     File.Create(Path.Combine(SettingsFile.FolderPath, SettingsFile.Name)).Close();
                 }
 
-                // Deserialize the json into the settings object.
-                // JSON STRUCTURE:
-                // {
-                //     "Settings": [
-                //         {
-                //             "type": 1,
-                //             "name": "LocalOutputVolume",
-                //             "value": 100
-                //         }
-                //     ]
-                // }
-
-                // Doing this using Newtonsoft.Json
-                string json = File.ReadAllText(Path.Combine(SettingsFile.FolderPath, SettingsFile.Name));
-
-                // Deserialize the json into the settings object.
-                List<KeyValuePair<SettingsManager.SettingTypes, object>> DeserializedSettings = JsonConvert.DeserializeObject<List<KeyValuePair<SettingsManager.SettingTypes, object>>>(json);
+                // Save the settings to the file
+                File.WriteAllText(Path.Combine(SettingsFile.FolderPath, SettingsFile.Name), JsonConvert.SerializeObject(SettingsManager.GetSettings(), Formatting.Indented));
             }
             else
             {
-                throw new NotImplementedException("Loading settings from a custom path is not supported yet. Coming soon™");
+                throw new NotImplementedException("Custom settings files are not supported yet. Coming soon™");
             }
         }
 

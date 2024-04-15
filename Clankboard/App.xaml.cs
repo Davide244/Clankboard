@@ -19,6 +19,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Clankboard.Classes;
 using System.Diagnostics;
+using Clankboard.Classes.FileManagers;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -57,6 +58,8 @@ public partial class App : Application
         RegisterWindowMinMax(m_window);
         if (System.Diagnostics.Debugger.IsAttached)
             MakeWindowAlwaysOnTop(m_window);
+
+        SettingsFileManager.Instance.LoadFile();
     }
 
     public Window m_window;

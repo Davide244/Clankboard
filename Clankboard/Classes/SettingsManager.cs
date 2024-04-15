@@ -104,7 +104,10 @@ namespace Clankboard.Classes
             settings[name] = value;
 
             // Print to debug
-            Debug.WriteLine($"Setting '{name}' set to '{value}'");
+            //Debug.WriteLine($"Setting '{name}' set to '{value}'");
+
+            // Save settings to file
+            FileManagers.SettingsFileManager.Instance.SaveFile();
         }
 
         public static T GetSetting<T>(SettingTypes name)
