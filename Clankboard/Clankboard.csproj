@@ -17,6 +17,7 @@
 	<PublishAot>False</PublishAot>
 	<RuntimeIdentifier>win-x64</RuntimeIdentifier>
   </PropertyGroup>
+
   <ItemGroup>
     <None Remove="AppContentDialogs\DownloadYoutubeVideoDialog.xaml" />
     <None Remove="Assets\shadow.png" />
@@ -98,4 +99,14 @@
   <PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <HasPackageAndPublishMenu>true</HasPackageAndPublishMenu>
   </PropertyGroup>
+	<PropertyGroup Condition="'$(IsMsixRelease)' != 'true'">
+		<WindowsPackageType>None</WindowsPackageType>
+		<WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(IsMsixRelease)' == 'true'">
+		<AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+		<AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
+		<GenerateTestArtifacts>True</GenerateTestArtifacts>
+		<AppxBundle>Always</AppxBundle>
+	</PropertyGroup>
 </Project>
