@@ -31,6 +31,7 @@ using System.Threading;
 using Clankboard.Classes;
 using System.Security.Cryptography.X509Certificates;
 using Windows.System;
+using Clankboard.Classes.FileManagers;
 
 namespace Clankboard;
 
@@ -163,6 +164,7 @@ public sealed partial class SoundboardPage : Page
 {
     public static SoundboardEvents g_SoundboardEvents = new();
     public static SoundBoardItemViewmodel soundBoardItemViewmodel = new();
+    private static SettingsFileManager settingsFileManager = SettingsFileManager.Instance;
     const string LocalFileIcon = "\uE8A5";
     const string WarningFileIcon = "\uE783";
     const string DownloadedFileIcon = "\uE753";
@@ -183,6 +185,8 @@ public sealed partial class SoundboardPage : Page
         soundBoardItemViewmodel.SoundBoardItems.CollectionChanged += SoundBoardItemsContentChanged;
 
         MainSoundboardListview.ItemsSource = soundBoardItemViewmodel.SoundBoardItems;
+
+        settingsFileManager.LoadFile();
     }
 
     private void LocalSettingsButton_Click(object sender, RoutedEventArgs e)

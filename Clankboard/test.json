@@ -1,0 +1,19 @@
+{
+  "Settings": [
+    {
+      "Type": 1,
+      "Name": "TestSettingType",
+      "Value": "Test"
+    },
+    {
+      "Type": 2,
+      "Name": "TestSettingType2",
+      "Value": "Test2"
+    },
+    {
+      "Type": 3,
+      "Name": "TestSettingType3",
+      "Value": "Test3"
+    }
+  ]
+}

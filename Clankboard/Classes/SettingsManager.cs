@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Email.DataProvider;
 using Windows.Devices.Geolocation;
 using static Clankboard.AudioManager;
 
@@ -118,6 +119,12 @@ namespace Clankboard.Classes
                 // return empty value
                 return default(T);
             }
+        }
+
+        // return settings as list
+        public static List<KeyValuePair<SettingTypes, object>> GetSettings()
+        {
+            return settings.ToList();
         }
 
         public static bool SettingExists(SettingTypes name)
