@@ -18,6 +18,27 @@ namespace Clankboard.Classes.FileManagers
         public string FolderPath { get; set; }
     }
 
+    public enum SoundboardFileSoundType
+    {
+        LocalFile,
+        DownloadedFile
+    }
+
+    public struct SoundboardFileEntry
+    {
+        public SoundboardFileSoundType Type { get; set; }
+        public string Name { get; set; }
+        public bool Embedded { get; set; }
+        public string Path { get; set; }
+        public KeybindsManager.Keybind Keybind { get; set; }
+    }
+
+    public struct SoundboardFile
+    {
+        ClankFile File { get; set; }
+        List<SoundboardFileEntry> Sounds { get; set; }
+    }
+
     /// <summary>
     /// This class handles soundboard file loading and saving.
     /// </summary>
