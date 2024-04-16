@@ -44,7 +44,6 @@ namespace Clankboard.Classes
 
             [SettingType(typeof(AudioManager.AudioDevice))]
             InputDevice,
-            #endregion
 
             /// <summary>
             /// Output microphone to VAC. This is whether the microphone output is sent to the virtual audio cable.
@@ -58,6 +57,7 @@ namespace Clankboard.Classes
             /// </summary>
             [SettingType(typeof(bool))]
             HearYourselfEnabled,
+            #endregion
 
             #region Soundboard Settings
             [SettingType(typeof(bool))]
@@ -68,6 +68,13 @@ namespace Clankboard.Classes
 
             [SettingType(typeof(bool))]
             UseCompactSoundboardList,
+            #endregion
+
+            #region Misc Settings
+
+            [SettingType(typeof(bool))]
+            AlwaysOnTop,
+
             #endregion
         }
 
@@ -92,6 +99,7 @@ namespace Clankboard.Classes
             { SettingTypes.StopAllSoundsKeybind, null },
             { SettingTypes.UseCompactSoundboardList, false },
             { SettingTypes.HearYourselfEnabled, false },
+            { SettingTypes.AlwaysOnTop, false },
         };
 
         public static void SetSetting<T>(SettingTypes name, T value)

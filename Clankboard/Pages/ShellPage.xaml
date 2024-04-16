@@ -164,15 +164,18 @@
         </Grid>
 
         <Grid Background="{ThemeResource Clankboard_AppPageBackground}" Grid.Row="3">
-            <StackPanel x:Name="InfobarHolder" Spacing="0" Margin="0, 0, 0, 10">
-            <InfoBar x:Name="AppMissingDriverInfobar" Title="Missing Drivers" Message="You are missing drivers required by this app!" Severity="Error" IsOpen="False" Margin="10, 7, 10, 0" VerticalAlignment="Bottom" IsClosable="False" Visibility="Collapsed"/>
-            <InfoBar x:Name="AppMissingFilesInfobar" Title="Missing Files" Message="Some files are missing!" Severity="Warning" IsOpen="False" Margin="10, 6, 10, 0" VerticalAlignment="Bottom" Visibility="Collapsed"/>
-            <InfoBar x:Name="AppDownloadingFilesInfobar" Title="File Download" Message="Some files are currently being downloaded." Severity="Informational" IsOpen="False" Margin="10, 22, 10, 0" VerticalAlignment="Bottom" IsClosable="False" Visibility="Collapsed">
-                <InfoBar.Content>
-                    <ProgressBar IsIndeterminate="True" Margin="0,-6,50,5"/>
-                </InfoBar.Content>
-            </InfoBar>
-        </StackPanel>
+            <StackPanel x:Name="InfobarHolder" Spacing="5" Margin="0, 10, 0, 10">
+                <InfoBar x:Name="SettingsSaveFailureInfobar" Title="Settings failed to load" Message="The program's setting file cannot be loaded. This may be due to a malformed file." Severity="Warning" IsOpen="True" Margin="10, 0, 10, 0" VerticalAlignment="Bottom" IsClosable="True" Visibility="Collapsed">
+                    <InfoBar.ActionButton>
+                        <Button Content="Retry"/>
+                    </InfoBar.ActionButton>
+                </InfoBar>
+                <InfoBar x:Name="AppDownloadingFilesInfobar" Title="File Download" Message="Some files are currently being downloaded." Severity="Informational" IsOpen="False" Margin="10, 0, 10, 0" VerticalAlignment="Bottom" IsClosable="False" Visibility="Collapsed">
+                    <InfoBar.Content>
+                        <ProgressBar IsIndeterminate="True" Margin="0,-6,50,5"/>
+                    </InfoBar.Content>
+                </InfoBar>
+            </StackPanel>
         </Grid>
         
     </Grid>

@@ -125,6 +125,15 @@
                         </controls:SettingsCard>
                     </controls:SettingsExpander.Items>
                 </controls:SettingsExpander>
+
+                <TextBlock Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
+                           Text="Miscellaneous Settings" />
+
+                <controls:SettingsCard Header="Always On Top"
+                                       Description="If on, this window will always be on top of all other windows."
+                                       HeaderIcon="{ui:FontIcon Glyph=&#xE7B5;}">
+                    <ToggleSwitch IsOn="False" x:Name="AlwaysOnTopToggle" Toggled="SettingToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
             </StackPanel>
 
             <!--StackPanel Orientation="Vertical" Grid.Row="1">

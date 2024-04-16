@@ -173,12 +173,12 @@ public sealed partial class ShellPage : Page
                 AppDownloadingFilesInfobar.IsOpen = Open;
                 break;
             case AppInfobar.AppInfobarType.FileMissingInfobar:
-                if (Open) AppMissingFilesInfobar.Visibility = Visibility.Visible; else AppMissingFilesInfobar.Visibility = Visibility.Collapsed;
-                AppMissingFilesInfobar.IsOpen = Open;
+                //if (Open) AppMissingFilesInfobar.Visibility = Visibility.Visible; else AppMissingFilesInfobar.Visibility = Visibility.Collapsed;
+                //AppMissingFilesInfobar.IsOpen = Open;
                 break;
             case AppInfobar.AppInfobarType.DriverMissingInfobar:
-                if (Open) AppMissingDriverInfobar.Visibility = Visibility.Visible; else AppMissingDriverInfobar.Visibility = Visibility.Collapsed;
-                AppMissingDriverInfobar.IsOpen = Open;
+                //if (Open) AppMissingDriverInfobar.Visibility = Visibility.Visible; else AppMissingDriverInfobar.Visibility = Visibility.Collapsed;
+                //AppMissingDriverInfobar.IsOpen = Open;
                 break;
             default:
                 return;

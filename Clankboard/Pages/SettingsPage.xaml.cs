@@ -118,6 +118,7 @@ namespace Clankboard.Pages
             OutputMixerToggle.IsOn = SettingsManager.GetSetting<bool>(SettingsManager.SettingTypes.OutputMicrophoneToVAC);
             HearYourselfToggle.IsOn = SettingsManager.GetSetting<bool>(SettingsManager.SettingTypes.HearYourselfEnabled);
             StackedAudioToggle.IsOn = SettingsManager.GetSetting<bool>(SettingsManager.SettingTypes.AudioStackingEnabled);
+            AlwaysOnTopToggle.IsOn = SettingsManager.GetSetting<bool>(SettingsManager.SettingTypes.AlwaysOnTop);
         }
 
         public SettingsPage()
@@ -182,6 +183,9 @@ namespace Clankboard.Pages
                     break;
                 case "UseCompactSoundboardListToggle":
                     SettingsManager.SetSetting(SettingsManager.SettingTypes.UseCompactSoundboardList, toggleSwitch.IsOn);
+                    break;
+                case "AlwaysOnTopToggle":
+                    SettingsManager.SetSetting(SettingsManager.SettingTypes.AlwaysOnTop, toggleSwitch.IsOn);
                     break;
             }
             //if (toggleSwitch.Name == "OutputMixerToggle")
