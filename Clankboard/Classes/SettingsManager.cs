@@ -96,9 +96,21 @@ namespace Clankboard.Classes
 
         public static void SetSetting<T>(SettingTypes name, T value)
         {
+            T valueTemp;
             if (typeof(T) != GetSettingType(name))
             {
-                throw new InvalidCastException($"Setting '{name}' is not of type '{typeof(T)}'.");
+                // Change the type of the value to the type of the setting
+                if (value == null)
+                {
+                    settings[name] = null;
+                    return;
+                }
+
+                valueTemp = (T)Convert.ChangeType(value, GetSettingType(name));
+                settings[name] = valueTemp;
+                return;
+
+                //throw new InvalidCastException($"Setting '{name}' is not of type '{typeof(T)}'.");
             }
 
             settings[name] = value;
@@ -135,7 +147,7 @@ namespace Clankboard.Classes
             return settings.ContainsKey(name);
         }
 
-        private static Type GetSettingType(SettingTypes name)
+        public static Type GetSettingType(SettingTypes name)
         {
             var field = typeof(SettingTypes).GetField(name.ToString());
             var attribute = field.GetCustomAttributes(typeof(SettingTypeAttribute), false).FirstOrDefault() as SettingTypeAttribute;

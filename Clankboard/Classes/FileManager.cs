@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -7,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Windows.Storage;
+using static Clankboard.AudioManager;
 
 namespace Clankboard.Classes.FileManagers
 {
@@ -105,9 +107,51 @@ namespace Clankboard.Classes.FileManagers
 
                 // Deserialize the json into the settings object.
                 List<KeyValuePair<SettingsManager.SettingTypes, object>> DeserializedSettings = JsonConvert.DeserializeObject<List<KeyValuePair<SettingsManager.SettingTypes, object>>>(json);
+                List<KeyValuePair<SettingsManager.SettingTypes, object>> NewSettings = new List<KeyValuePair<SettingsManager.SettingTypes, object>>();
+                AudioDevice tempAudioDevice = new AudioDevice();
+
+                // Convert the settings of type AudioDevice to the correct type. Move all settings to NewSettings, modified or not.
+                foreach (KeyValuePair<SettingsManager.SettingTypes, object> setting in DeserializedSettings)
+                {
+                    switch (setting.Key)
+                    {
+                        case SettingsManager.SettingTypes.LocalOutputDevice:
+                        case SettingsManager.SettingTypes.VACOutputDevice:
+                        case SettingsManager.SettingTypes.InputDevice:
+                            tempAudioDevice = JsonConvert.DeserializeObject<AudioDevice>(setting.Value.ToString());
+                            NewSettings.Add(new KeyValuePair<SettingsManager.SettingTypes, object>(setting.Key, tempAudioDevice));
+                            break;
+                        default:
+                            // convert the setting to the correct type. If the value is null, just add it as null.
+                            //NewSettings.Add(new KeyValuePair<SettingsManager.SettingTypes, object>(setting.Key, Convert.ChangeType(setting.Value, SettingsManager.GetSettingType(setting.Key))));
+                            if (setting.Value == null)
+                            {
+                                NewSettings.Add(new KeyValuePair<SettingsManager.SettingTypes, object>(setting.Key, null));
+                            }
+                            else
+                            {
+                                // Check if type is long
+                                if (setting.Value.GetType() == typeof(long))
+                                {
+                                    NewSettings.Add(new KeyValuePair<SettingsManager.SettingTypes, object>(setting.Key, Convert.ToInt32(setting.Value)));
+                                }
+                                else
+                                {
+                                    NewSettings.Add(new KeyValuePair<SettingsManager.SettingTypes, object>(setting.Key, setting.Value));
+                                }
+
+                                //NewSettings.Add(new KeyValuePair<SettingsManager.SettingTypes, object>(setting.Key, Convert.ChangeType(setting.Value, SettingsManager.GetSettingType(setting.Key))
+
+                            }
+
+                            break;
+                    }
+                }
+
+                
 
                 // Set the settings
-                foreach (KeyValuePair<SettingsManager.SettingTypes, object> setting in DeserializedSettings)
+                foreach (KeyValuePair<SettingsManager.SettingTypes, object> setting in NewSettings)
                 {
                     SettingsManager.SetSetting(setting.Key, setting.Value);
                 }
