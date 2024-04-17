@@ -8,7 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Windows.Storage;
-using static Clankboard.AudioManager;
+using Clankboard.Classes;
+using System.IO.Compression;
 
 namespace Clankboard.Classes.FileManagers
 {
@@ -18,26 +19,7 @@ namespace Clankboard.Classes.FileManagers
         public string FolderPath { get; set; }
     }
 
-    public enum SoundboardFileSoundType
-    {
-        LocalFile,
-        DownloadedFile
-    }
-
-    public struct SoundboardFileEntry
-    {
-        public SoundboardFileSoundType Type { get; set; }
-        public string Name { get; set; }
-        public bool Embedded { get; set; }
-        public string Path { get; set; }
-        public KeybindsManager.Keybind Keybind { get; set; }
-    }
-
-    public struct SoundboardFile
-    {
-        ClankFile File { get; set; }
-        List<SoundboardFileEntry> Sounds { get; set; }
-    }
+   
 
     /// <summary>
     /// This class handles soundboard file loading and saving.
@@ -49,6 +31,30 @@ namespace Clankboard.Classes.FileManagers
         private static readonly object padlock = new object();
         #endregion
 
+        #region Soundboard File Structure (Enums and Structs)
+        public enum SoundboardFileEntryType
+        {
+            LocalFile,
+            DownloadedFile
+        }
+
+        public struct SoundboardFileEntry
+        {
+            public SoundboardFileEntryType Type { get; set; }
+            public string Name { get; set; }
+            public bool Embedded { get; set; }
+            public string Path { get; set; }
+            public KeybindsManager.Keybind Keybind { get; set; }
+        }
+
+        public struct SoundboardFile
+        {
+            public int ClankFileVersion { get; set; }
+            public string Name { get; set; }
+            List<SoundboardFileEntry> Sounds { get; set; }
+        }
+        #endregion
+
         /// <summary>
         /// Current soundboard file. This is the file that is currently loaded / used.
         /// </summary>
@@ -57,11 +63,64 @@ namespace Clankboard.Classes.FileManagers
         public void LoadFile(string path)
         {
             // Load the soundboard file
+
         }
 
-        public void SaveFile(string path)
+        public void SaveFile(string path, string name, bool EmbedOnlineFiles = false, bool EmbedLocalFiles = true)
         {
-            // Save the soundboard file (USING CURRENT SOUNDBOARD PAGE CONTENTS)
+            SoundboardFile soundboardFile = new SoundboardFile();
+
+            #region Setup Soundboard File
+            // Construct temp soundboard file folder (pre zip)
+            string tempFolder = Path.Combine(Path.GetTempPath(), "Clankboard", "TempSoundboardFiles", name + Guid.NewGuid().ToString());
+            Directory.CreateDirectory(tempFolder);
+
+            // Generate folders
+            if (EmbedOnlineFiles)
+                Directory.CreateDirectory(Path.Combine(tempFolder, "OnlineSounds"));
+            if (EmbedLocalFiles)
+                Directory.CreateDirectory(Path.Combine(tempFolder, "LocalSounds"));
+            #endregion
+
+            List<SoundBoardItem> SoundboardItems = SoundboardPage.soundBoardItemViewmodel.GetSoundboardItems();
+
+            // Convert to SoundboardFileEntry list
+            List<SoundboardFileEntry> SoundboardFileEntries = new List<SoundboardFileEntry>();
+
+            foreach (SoundBoardItem item in SoundboardItems)
+            {
+                SoundboardFileEntry entry = new SoundboardFileEntry
+                {
+                    Name = item.SoundName,
+                    Keybind = item.LinkedKeybind,
+                    Path = item.PhysicalFilePath,
+                };
+
+                SoundboardFileEntries.Add(entry);
+            }
+
+            // TODO: Add saving code
+
+            // Zip the temp folder and rename it to [name].clankboard
+            string zipPath = Path.Combine(Path.GetTempPath(), "Clankboard", "TempSoundboardFiles", name + ".clankboard");
+            ZipFile.CreateFromDirectory(tempFolder, zipPath);
+
+            // Move the all files to the appropriate folder. Also change Path to the new relative path.
+            foreach (SoundboardFileEntry entry in SoundboardFileEntries)
+            {
+                if (entry.Type == SoundboardFileEntryType.LocalFile)
+                {
+                    // Move the file to the LocalSounds folder
+                    File.Move(entry.Path, Path.Combine(Path.GetDirectoryName(zipPath), "LocalSounds", entry.Name + Path.GetExtension(entry.Path)));
+                    //entry.Path = Path.Combine("LocalSounds", entry.Name + Path.GetExtension(entry.Path));
+                }
+                else
+                {
+                    // Move the file to the OnlineSounds folder
+                    File.Move(entry.Path, Path.Combine(Path.GetDirectoryName(zipPath), "OnlineSounds", entry.Name + Path.GetExtension(entry.Path)));
+                    //entry.Path = Path.Combine("OnlineSounds", entry.Name + Path.GetExtension(entry.Path));
+                }
+            }
         }
 
 
@@ -129,7 +188,7 @@ namespace Clankboard.Classes.FileManagers
                 // Deserialize the json into the settings object.
                 List<KeyValuePair<SettingsManager.SettingTypes, object>> DeserializedSettings = JsonConvert.DeserializeObject<List<KeyValuePair<SettingsManager.SettingTypes, object>>>(json);
                 List<KeyValuePair<SettingsManager.SettingTypes, object>> NewSettings = new List<KeyValuePair<SettingsManager.SettingTypes, object>>();
-                AudioDevice tempAudioDevice = new AudioDevice();
+                AudioManager.AudioDevice tempAudioDevice = new AudioManager.AudioDevice();
 
                 // Convert the settings of type AudioDevice to the correct type. Move all settings to NewSettings, modified or not.
                 foreach (KeyValuePair<SettingsManager.SettingTypes, object> setting in DeserializedSettings)
@@ -139,7 +198,7 @@ namespace Clankboard.Classes.FileManagers
                         case SettingsManager.SettingTypes.LocalOutputDevice:
                         case SettingsManager.SettingTypes.VACOutputDevice:
                         case SettingsManager.SettingTypes.InputDevice:
-                            tempAudioDevice = JsonConvert.DeserializeObject<AudioDevice>(setting.Value.ToString());
+                            tempAudioDevice = JsonConvert.DeserializeObject<AudioManager.AudioDevice>(setting.Value.ToString());
                             NewSettings.Add(new KeyValuePair<SettingsManager.SettingTypes, object>(setting.Key, tempAudioDevice));
                             break;
                         default:

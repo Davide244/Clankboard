@@ -158,6 +158,8 @@ public partial class SoundBoardItemViewmodel : ObservableObject
 {
     [ObservableProperty]
     public ObservableCollection<SoundBoardItem> soundBoardItems = new();
+
+    public List<SoundBoardItem> GetSoundboardItems() => SoundBoardItems.ToList();
 }
 
 public sealed partial class SoundboardPage : Page
