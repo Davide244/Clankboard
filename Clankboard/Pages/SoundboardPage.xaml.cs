@@ -65,6 +65,8 @@ public partial class SoundBoardItem : ObservableObject
     [ObservableProperty]
     public bool _deleteBtnEnabled;
 
+    public SoundboardFileManager.SoundboardFileEntryType ItemType { get; set; }
+
     // Non-Observable fields
     public string PhysicalFilePath { get; set; }
     [ObservableProperty]
@@ -74,7 +76,7 @@ public partial class SoundBoardItem : ObservableObject
     public CancellationTokenSource SoundCancellationTokenSource = new();
     public CancellationToken s_cancellationToken => SoundCancellationTokenSource.Token;
 
-    public SoundBoardItem(string soundName, string soundLocation, string soundLocationIcon, bool soundIconVisible, string soundIconTooltip, bool progressRingEnabled, bool btnEnabled, bool progressRingIntermediate = true, int progressRingProgress = 100, string soundIconColor = null, string soundKeybindForecolor = null, string physicalFilePath = null, bool deleteBtnEnabled = true, KeybindsManager.Keybind? linkedKeybind = null)
+    public SoundBoardItem(string soundName, string soundLocation, string soundLocationIcon, bool soundIconVisible, string soundIconTooltip, bool progressRingEnabled, bool btnEnabled, bool progressRingIntermediate = true, int progressRingProgress = 100, string soundIconColor = null, string soundKeybindForecolor = null, string physicalFilePath = null, bool deleteBtnEnabled = true, KeybindsManager.Keybind? linkedKeybind = null, SoundboardFileManager.SoundboardFileEntryType itemType = SoundboardFileManager.SoundboardFileEntryType.LocalFile)
     {
 
         SoundName = soundName;
@@ -95,6 +97,7 @@ public partial class SoundBoardItem : ObservableObject
         if (linkedKeybind != null) SoundKeybind = KeybindsManager.GetKeybindText(linkedKeybind.Value);
 
         PropertyChanged += SoundboardItem_PropertyChanged;
+        ItemType = itemType;
     }
 
     private void SoundboardItem_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -204,7 +207,7 @@ public sealed partial class SoundboardPage : Page
                 return;
             }
 
-            soundBoardItemViewmodel.SoundBoardItems.Add(new SoundBoardItem(Name, FilePath, LocalFileIcon, true, "Local File", false, true, true, 0, null, null, FilePath));
+            soundBoardItemViewmodel.SoundBoardItems.Add(new SoundBoardItem(Name, FilePath, LocalFileIcon, true, "Local File", false, true, true, 0, null, null, FilePath, itemType:SoundboardFileManager.SoundboardFileEntryType.LocalFile));
         }
         else
             ShellPage.g_AppMessageBox.ShowMessagebox("File not found", "The specified file could not be found!\nPlease check if the file exists and try again.", "", "", "Okay", ContentDialogButton.Close);
@@ -264,7 +267,7 @@ public sealed partial class SoundboardPage : Page
             else
                 CurrentName = VideoInfo.Title;
 
-            SoundBoardItem soundboardItem = new(CurrentName, $"Downloading {Url}", DownloadedFileIcon, false, "Downloaded File", true, false, false, 0);
+            SoundBoardItem soundboardItem = new(CurrentName, $"Downloading {Url}", DownloadedFileIcon, false, "Downloaded File", true, false, false, 100, null, null, null, true, null, SoundboardFileManager.SoundboardFileEntryType.DownloadedFile);
 
             CancellationTokenSource cts = new CancellationTokenSource();
             soundBoardItemViewmodel.SoundBoardItems.Add(soundboardItem);
@@ -393,6 +396,12 @@ public sealed partial class SoundboardPage : Page
             SoundboardNoItems.Visibility = Visibility.Visible;
             MainSoundboardListViewScroll.Visibility = Visibility.Collapsed;
         }
+    }
+
+    // TEST button press
+    private void Button_Click(object sender, RoutedEventArgs e)
+    {
+        SoundboardFileManager.Instance.SaveFile("C:\\Users\\009da\\downloads", "Funny", true, true);
     }
 
     private void SoundBoardItemsContentChanged(object sender, NotifyCollectionChangedEventArgs e) => MainSoundboardListview_ContainerContentChanging(null, null);

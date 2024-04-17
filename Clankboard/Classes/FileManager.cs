@@ -26,6 +26,8 @@ namespace Clankboard.Classes.FileManagers
     /// </summary>
     public class SoundboardFileManager
     {
+        private readonly int ClankFileVersion = 1;
+
         #region Singleton vars
         private static SoundboardFileManager instance = null;
         private static readonly object padlock = new object();
@@ -51,7 +53,7 @@ namespace Clankboard.Classes.FileManagers
         {
             public int ClankFileVersion { get; set; }
             public string Name { get; set; }
-            List<SoundboardFileEntry> Sounds { get; set; }
+            public List<SoundboardFileEntry> Sounds { get; set; }
         }
         #endregion
 
@@ -62,7 +64,25 @@ namespace Clankboard.Classes.FileManagers
 
         public void LoadFile(string path)
         {
-            // Load the soundboard file
+            // Clear the soundboard
+            SoundboardPage.soundBoardItemViewmodel.SoundBoardItems.Clear();
+
+            // Extract the zip file to the temp folder and read the clankfile.json
+            string tempFolder = Path.Combine(Path.GetTempPath(), "Clankboard", "TempSoundboardFiles", Guid.NewGuid().ToString());
+            Directory.CreateDirectory(tempFolder);
+
+            // Extract the zip file
+            ZipFile.ExtractToDirectory(path, tempFolder);
+
+            // Read the clankfile.json
+            string JSONPath = Path.Combine(tempFolder, "clankfile.json");
+            string JSON = File.ReadAllText(JSONPath);
+
+            // Deserialize the JSON
+            SoundboardFile soundboardFile = JsonConvert.DeserializeObject<SoundboardFile>(JSON);
+            SoundBoardItem CurrentItem;
+
+            // Loop through all SoundboardFileEntries and add them to the soundboard
 
         }
 
@@ -80,47 +100,84 @@ namespace Clankboard.Classes.FileManagers
                 Directory.CreateDirectory(Path.Combine(tempFolder, "OnlineSounds"));
             if (EmbedLocalFiles)
                 Directory.CreateDirectory(Path.Combine(tempFolder, "LocalSounds"));
+
+            // Create empty clankfile.json
+            string JSONPath = Path.Combine(tempFolder, "clankfile.json");
             #endregion
 
             List<SoundBoardItem> SoundboardItems = SoundboardPage.soundBoardItemViewmodel.GetSoundboardItems();
 
             // Convert to SoundboardFileEntry list
             List<SoundboardFileEntry> SoundboardFileEntries = new List<SoundboardFileEntry>();
+            KeybindsManager.Keybind tempKeybind = new KeybindsManager.Keybind();
 
             foreach (SoundBoardItem item in SoundboardItems)
             {
                 SoundboardFileEntry entry = new SoundboardFileEntry
                 {
                     Name = item.SoundName,
-                    Keybind = item.LinkedKeybind,
                     Path = item.PhysicalFilePath,
+                    Type = item.ItemType,
                 };
+
+                // Recreate keybind object without handler
+                tempKeybind = new KeybindsManager.Keybind
+                {
+                    KeybindType = item.LinkedKeybind.KeybindType,
+                    GlobalKeybindID = item.LinkedKeybind.GlobalKeybindID,
+                    Handler = null,
+                    Key = item.LinkedKeybind.Key,
+                    KeyModifiers = item.LinkedKeybind.KeyModifiers
+                };
+
+                entry.Keybind = tempKeybind;
+
+                // Check if the file is embedded by checking if the file is in the OnlineSounds or LocalSounds folder
+                if (item.ItemType == SoundboardFileEntryType.LocalFile)
+                    entry.Embedded = EmbedLocalFiles;
+
+                else if (item.ItemType == SoundboardFileEntryType.DownloadedFile)
+                    entry.Embedded = EmbedOnlineFiles;
 
                 SoundboardFileEntries.Add(entry);
             }
 
-            // TODO: Add saving code
+            SoundboardFileEntry CurrentEntry = new SoundboardFileEntry();
+
+            // Loop through all SoundboardFileEntries and move the files to the appropriate folder.
+            // DO not modify the SoundboardFileEntries list while looping through it.
+            foreach (SoundboardFileEntry entry in SoundboardFileEntries.ToList())
+            {
+                CurrentEntry = entry;
+
+                if (entry.Type == SoundboardFileEntryType.LocalFile)
+                {
+                    // Move the file to the LocalSounds folder
+                    File.Move(entry.Path, Path.Combine(tempFolder, "LocalSounds", entry.Name + Path.GetExtension(entry.Path)));
+                    //CurrentEntry.Path = Path.Combine("LocalSounds", entry.Name + Path.GetExtension(entry.Path));
+                }
+                else if (entry.Type == SoundboardFileEntryType.DownloadedFile)
+                {
+                    // Move the file to the OnlineSounds folder
+                    File.Move(entry.Path, Path.Combine(tempFolder, "OnlineSounds", entry.Name + Path.GetExtension(entry.Path)));
+                    //CurrentEntry.Path = Path.Combine("OnlineSounds", entry.Name + Path.GetExtension(entry.Path));
+                }
+            }
+
+            // Construct the soundboard file object
+            soundboardFile.ClankFileVersion = ClankFileVersion;
+            soundboardFile.Name = name;
+            soundboardFile.Sounds = SoundboardFileEntries;
+
+            // Write JSON to file
+            File.WriteAllText(JSONPath, JsonConvert.SerializeObject(soundboardFile, Formatting.Indented));
 
             // Zip the temp folder and rename it to [name].clankboard
             string zipPath = Path.Combine(Path.GetTempPath(), "Clankboard", "TempSoundboardFiles", name + ".clankboard");
             ZipFile.CreateFromDirectory(tempFolder, zipPath);
 
-            // Move the all files to the appropriate folder. Also change Path to the new relative path.
-            foreach (SoundboardFileEntry entry in SoundboardFileEntries)
-            {
-                if (entry.Type == SoundboardFileEntryType.LocalFile)
-                {
-                    // Move the file to the LocalSounds folder
-                    File.Move(entry.Path, Path.Combine(Path.GetDirectoryName(zipPath), "LocalSounds", entry.Name + Path.GetExtension(entry.Path)));
-                    //entry.Path = Path.Combine("LocalSounds", entry.Name + Path.GetExtension(entry.Path));
-                }
-                else
-                {
-                    // Move the file to the OnlineSounds folder
-                    File.Move(entry.Path, Path.Combine(Path.GetDirectoryName(zipPath), "OnlineSounds", entry.Name + Path.GetExtension(entry.Path)));
-                    //entry.Path = Path.Combine("OnlineSounds", entry.Name + Path.GetExtension(entry.Path));
-                }
-            }
+            // Move the zip file to the specified path
+            File.Move(zipPath, path + "\\" + name + ".clankboard", true);
         }
 
 
@@ -130,7 +187,7 @@ namespace Clankboard.Classes.FileManagers
         }
 
         #region Singleton
-        public static SoundboardFileManager GetInstance
+        public static SoundboardFileManager Instance
         {
             get
             {

@@ -51,7 +51,6 @@ namespace Clankboard.Classes
             public List<KeyModifiers> KeyModifiers;        // Shift, Ctrl, Alt, Win, Menu, etc. (In a list of course)
             public VirtualKey Key;                         // The actual key
             public int GlobalKeybindID;                    // The global keybind ID
-            public SoundBoardItem Sound;                   // The soundboard item it is bound to (if it is a PlaySoundKeybind)
             public Action Handler;                         // The function that runs when the keybind is pressed, takes a parameter of SoundBoardItem that can be null
         }
 
@@ -94,7 +93,7 @@ namespace Clankboard.Classes
         /// <param name="Sound">What soundboard sound is this bound to?</param>
         public static Keybind AddKeybind(KeybindTypes KeybindType, List<KeyModifiers> KeyModifiers, VirtualKey Key, Action HandlerFunction, bool GlobalKeybind = true, SoundBoardItem Sound = null)
         {
-            Keybind keybind = new Keybind { KeybindType = KeybindType, KeyModifiers = KeyModifiers, Key = Key, Sound = Sound, Handler = HandlerFunction, GlobalKeybindID = Guid.NewGuid().GetHashCode() };
+            Keybind keybind = new Keybind { KeybindType = KeybindType, KeyModifiers = KeyModifiers, Key = Key, Handler = HandlerFunction, GlobalKeybindID = Guid.NewGuid().GetHashCode() };
             Keybinds.Add(keybind);
             if (GlobalKeybind)
             {
@@ -144,7 +143,7 @@ namespace Clankboard.Classes
         /// <param name="Sound">The soundboard sound element the keybind is linked to</param>
         public static void RemoveKeybind(SoundBoardItem Sound)
         {
-            Keybind keybind = Keybinds.Find(x => x.Sound == Sound);
+            Keybind keybind = Keybinds.Find(x => x.Equals(Sound.LinkedKeybind));
             if (keybind.Equals(default(Keybind)))
                 return;
 
@@ -177,7 +176,7 @@ namespace Clankboard.Classes
         /// <returns>Keybind Text</returns>
         public static string GetKeybindText(SoundBoardItem Sound)
         {
-            Keybind keybind = Keybinds.Find(x => x.Sound == Sound);
+            Keybind keybind = Keybinds.Find(x => x.Equals(Sound.LinkedKeybind));
             if (keybind.Equals(default(Keybind)))
                 return "None";
 
@@ -267,7 +266,7 @@ namespace Clankboard.Classes
 
                 await button.DispatcherQueue.EnqueueAsync(() =>
                 {
-                    tempKeybind = new Keybind { KeybindType = button.KeybindType, KeyModifiers = new List<KeyModifiers> { (ShiftPressed ? KeyModifiers.Shift : 0), (CtrlPressed ? KeyModifiers.Control : 0), (AltPressed ? KeyModifiers.Alt : 0), (WinPressed ? KeyModifiers.Win : 0) }, Key = bindKey, Sound = (button.DataContext as SoundBoardItem) };
+                    tempKeybind = new Keybind { KeybindType = button.KeybindType, KeyModifiers = new List<KeyModifiers> { (ShiftPressed ? KeyModifiers.Shift : 0), (CtrlPressed ? KeyModifiers.Control : 0), (AltPressed ? KeyModifiers.Alt : 0), (WinPressed ? KeyModifiers.Win : 0) }, Key = bindKey };
 
                     if (isKeybindSet)
                     {
@@ -278,7 +277,6 @@ namespace Clankboard.Classes
                             int index = SoundboardPage.soundBoardItemViewmodel.SoundBoardItems.IndexOf((SoundBoardItem)item);
                             SoundBoardItem soundBoardItem = SoundboardPage.soundBoardItemViewmodel.SoundBoardItems[index];
 
-                            tempKeybind.Sound = soundBoardItem;
                             tempKeybind.Handler = SoundboardPage.soundBoardItemViewmodel.SoundBoardItems[index].OnActivated;
 
                             // Remove old keybind of the same type
@@ -291,7 +289,7 @@ namespace Clankboard.Classes
                             KeybindsManager.RemoveKeybind(Keybinds.Find(x => x.KeybindType == tempKeybind.KeybindType));
 
                             // Add the keybind to the keybind list
-                            KeybindsManager.AddKeybind(tempKeybind.KeybindType, tempKeybind.KeyModifiers, tempKeybind.Key, tempKeybind.Handler, true, tempKeybind.Sound);
+                            KeybindsManager.AddKeybind(tempKeybind.KeybindType, tempKeybind.KeyModifiers, tempKeybind.Key, tempKeybind.Handler, true);
                         }
                     }
                 });
