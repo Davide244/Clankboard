@@ -33,6 +33,8 @@ public sealed partial class ShellPage : Page
     public static AppInfobar g_AppInfobar = new();
     public static ShellPageEvents g_ShellPageEvents = new();
 
+    public static AppContentDialogs.AppContentDialogProperties g_AppContentDialogProperties = new();
+
     public ShellPage()
     {
         this.InitializeComponent();
@@ -93,6 +95,12 @@ public sealed partial class ShellPage : Page
         dialog.DefaultButton = DefaultButton;
         if (content != null) dialog.Content = content;
 
+        var binding = new Binding();
+        binding.Source = g_AppContentDialogProperties; // Set the viewmodel instance as the source
+        binding.Path = new PropertyPath("IsPrimaryButtonEnabled"); // Set the path to the desired property in the viewmodel
+        dialog.SetBinding(ContentDialog.IsPrimaryButtonEnabledProperty, binding);
+        dialog.SetBinding(ContentDialog.IsSecondaryButtonEnabledProperty, binding);
+
         var DialogResult = await dialog.ShowAsync();
 
         KeybindsManager.KeybindsEnabled = true;
@@ -139,9 +147,14 @@ public sealed partial class ShellPage : Page
 
     private async void DownloadSoundFile_Click(object sender, RoutedEventArgs e)
     {
-        if ((await g_AppMessageBox.ShowMessagebox("Download Sound", "", "Download", "", "Cancel", ContentDialogButton.Primary, new AppContentDialogs.DownloadYoutubeVideoDialog())) == 1)
+        //if ((await g_AppMessageBox.ShowMessagebox("Download Sound", "", "Download", "", "Cancel", ContentDialogButton.Primary, new AppContentDialogs.DownloadYoutubeVideoDialog())) == 1)
+        //{
+        //    SoundboardPage.g_SoundboardEvents.AddFileURL(AppContentDialogs.DownloadYoutubeVideoDialog.CurrentNameOverride, AppContentDialogs.DownloadYoutubeVideoDialog.CurrentURL);
+        //}
+
+        if ((await g_AppMessageBox.ShowMessagebox("Save Soundboard", "", "Save", "", "Cancel", ContentDialogButton.Primary, new AppContentDialogs.SaveSoundboardFileDialog())) == 1)
         {
-            SoundboardPage.g_SoundboardEvents.AddFileURL(AppContentDialogs.DownloadYoutubeVideoDialog.CurrentNameOverride, AppContentDialogs.DownloadYoutubeVideoDialog.CurrentURL);
+            //SoundboardPage.g_SoundboardEvents.AddFileURL(AppContentDialogs.DownloadYoutubeVideoDialog.CurrentNameOverride, AppContentDialogs.DownloadYoutubeVideoDialog.CurrentURL);
         }
     }
     #endregion

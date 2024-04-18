@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Clankboard.AppContentDialogs.SaveSoundboardFileDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Clankboard.AppContentDialogs"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:clankControls="using:Clankboard.Controls">
+
+    <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <!-- Content body -->
+        <TextBlock Text="Save your soundboard to a .clankboard file. Enable embedding if you plan to share this soundboard with other users." TextWrapping="Wrap" />
+        <TextBlock Text="Please enter a valid file path!" Foreground="OrangeRed" Visibility="Collapsed" TextWrapping="Wrap" x:Name="InvalidURLText"/>
+        <clankControls:FilePickerTextbox Header="Pick a location:" PlaceholderText="File Path" Margin="7" x:Name="FilePathTextBox" FilePickerType="SaveFile"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <CheckBox x:Name="EmbedLocalFilesCheckBox" Content="Embed local sound files" Margin="7"/>
+            <CheckBox x:Name="EmbedDownloadedFilesCheckbox" Content="Embed downloaded files" Margin="7"/>
+        </StackPanel>
+    </StackPanel>
+</Page>
