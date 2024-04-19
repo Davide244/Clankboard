@@ -35,6 +35,8 @@ namespace Clankboard.AppContentDialogs
     /// </summary>
     public sealed partial class SaveSoundboardFileDialog : Page
     {
+        public static string FilePath { get; set; } = string.Empty;
+
 
         public SaveSoundboardFileDialog()
         {
@@ -42,6 +44,46 @@ namespace Clankboard.AppContentDialogs
 
             // Disable primary button of dialog until a file name is entered (IsPrimaryButtonEnabled)
             ShellPage.g_AppContentDialogProperties.IsPrimaryButtonEnabled = false;
+        }
+
+        /// <summary>
+        /// This function checks if the file name is valid and enables the primary button if it is. It does this by checking
+        /// if the folder the selected file is in exists and if the file name is not empty. It also checks for invalid characters.
+        /// </summary>
+        /// <param name="Path">The file path.</param>
+        private void ValidateFilePath(string path)
+        {
+            // Check if the file name is empty
+            if (string.IsNullOrEmpty(path))
+            {
+                ShellPage.g_AppContentDialogProperties.IsPrimaryButtonEnabled = false;
+                return;
+            }
+
+            // check folder path using GetInvalidPathChars
+            if (path.IndexOfAny(Path.GetInvalidPathChars()) != -1)
+            {
+                ShellPage.g_AppContentDialogProperties.IsPrimaryButtonEnabled = false;
+                return;
+            }
+
+            // Check if the file name contains invalid characters
+            string fileName = Path.GetFileName(path);
+            if (fileName.IndexOfAny(Path.GetInvalidFileNameChars()) != -1)
+            {
+                ShellPage.g_AppContentDialogProperties.IsPrimaryButtonEnabled = false;
+                return;
+            }
+
+            // Check if the folder exists
+            if (!Directory.Exists(Path.GetDirectoryName(path)))
+            {
+                ShellPage.g_AppContentDialogProperties.IsPrimaryButtonEnabled = false;
+                return;
+            }
+
+            // If all checks pass, enable the primary button
+            ShellPage.g_AppContentDialogProperties.IsPrimaryButtonEnabled = true;
         }
     }
 }
