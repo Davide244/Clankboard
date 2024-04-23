@@ -64,7 +64,7 @@ namespace Clankboard.Controls
                     Windows.Storage.Pickers.FileSavePicker savePicker = new Windows.Storage.Pickers.FileSavePicker();
                     WinRT.Interop.InitializeWithWindow.Initialize(savePicker, hwnd);
                     savePicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
-                    savePicker.FileTypeChoices.Add("Text", new List<string>() { ".txt" });
+                    savePicker.FileTypeChoices.Add("Clank Board", new List<string>() { ".clankboard" });
                     savePicker.SuggestedFileName = "New Document";
                     Windows.Storage.StorageFile saveFile = await savePicker.PickSaveFileAsync();
                     if (saveFile != null)
@@ -83,6 +83,27 @@ namespace Clankboard.Controls
 
             // Set the textbox text to the output path
             this.Text = OutputPath;
+        }
+
+        public bool isPathValid()
+        {
+            // Take the text from the textbox and:
+            // Check if the path is valid according to the file picker type. (Folder picker = Folder exists? | File Picker = File Exists? | File Saver = Folder Exists & No illegal chars?)
+
+            string FilePath = System.IO.Path.GetDirectoryName(this.Text);
+            string FileName = System.IO.Path.GetFileName(FilePath);
+
+            switch (FilePickerType)
+            {
+                case FilePickerType.OpenFile:
+                    return System.IO.File.Exists(this.Text);
+                case FilePickerType.SaveFile:
+                    return System.IO.Directory.Exists(FilePath) && !System.IO.Path.GetInvalidPathChars().Any(c => FilePath.Contains(c)) && !System.IO.Path.GetInvalidFileNameChars().Any(c => FileName.Contains(c));
+                case FilePickerType.PickFolder:
+                    return System.IO.Directory.Exists(this.Text);
+                default:
+                    return false;
+            }
         }
     }
 }

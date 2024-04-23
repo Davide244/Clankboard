@@ -150,13 +150,13 @@ namespace Clankboard.Classes.FileManagers
             {
                 CurrentEntry = entry;
 
-                if (entry.Type == SoundboardFileEntryType.LocalFile)
+                if (entry.Type == SoundboardFileEntryType.LocalFile && entry.Embedded)
                 {
                     // Move the file to the LocalSounds folder
                     File.Move(entry.Path, Path.Combine(tempFolder, "LocalSounds", entry.Name + Path.GetExtension(entry.Path)));
                     //CurrentEntry.Path = Path.Combine("LocalSounds", entry.Name + Path.GetExtension(entry.Path));
                 }
-                else if (entry.Type == SoundboardFileEntryType.DownloadedFile)
+                else if (entry.Type == SoundboardFileEntryType.DownloadedFile && entry.Embedded)
                 {
                     // Move the file to the OnlineSounds folder
                     File.Move(entry.Path, Path.Combine(tempFolder, "OnlineSounds", entry.Name + Path.GetExtension(entry.Path)));
@@ -176,8 +176,11 @@ namespace Clankboard.Classes.FileManagers
             string zipPath = Path.Combine(Path.GetTempPath(), "Clankboard", "TempSoundboardFiles", name + ".clankboard");
             ZipFile.CreateFromDirectory(tempFolder, zipPath);
 
+            // Check if rthe path is a file or a folder
+            string pathFolder = Path.GetDirectoryName(path);
+
             // Move the zip file to the specified path
-            File.Move(zipPath, path + "\\" + name + ".clankboard", true);
+            File.Move(zipPath, pathFolder + "\\" + name + ".clankboard", true);
         }
 
 

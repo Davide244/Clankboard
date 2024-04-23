@@ -147,14 +147,17 @@ public sealed partial class ShellPage : Page
 
     private async void DownloadSoundFile_Click(object sender, RoutedEventArgs e)
     {
-        //if ((await g_AppMessageBox.ShowMessagebox("Download Sound", "", "Download", "", "Cancel", ContentDialogButton.Primary, new AppContentDialogs.DownloadYoutubeVideoDialog())) == 1)
-        //{
-        //    SoundboardPage.g_SoundboardEvents.AddFileURL(AppContentDialogs.DownloadYoutubeVideoDialog.CurrentNameOverride, AppContentDialogs.DownloadYoutubeVideoDialog.CurrentURL);
-        //}
+        if ((await g_AppMessageBox.ShowMessagebox("Download Sound", "", "Download", "", "Cancel", ContentDialogButton.Primary, new AppContentDialogs.DownloadYoutubeVideoDialog())) == 1)
+        {
+            SoundboardPage.g_SoundboardEvents.AddFileURL(AppContentDialogs.DownloadYoutubeVideoDialog.CurrentNameOverride, AppContentDialogs.DownloadYoutubeVideoDialog.CurrentURL);
+        }
+    }
 
+    private async void SaveSoundboard_Click(object sender, RoutedEventArgs e)
+    {
         if ((await g_AppMessageBox.ShowMessagebox("Save Soundboard", "", "Save", "", "Cancel", ContentDialogButton.Primary, new AppContentDialogs.SaveSoundboardFileDialog())) == 1)
         {
-            //SoundboardPage.g_SoundboardEvents.AddFileURL(AppContentDialogs.DownloadYoutubeVideoDialog.CurrentNameOverride, AppContentDialogs.DownloadYoutubeVideoDialog.CurrentURL);
+            Classes.FileManagers.SoundboardFileManager.Instance.SaveFile(AppContentDialogs.SaveSoundboardFileDialog.CurrentFilePath, Path.GetFileNameWithoutExtension(AppContentDialogs.SaveSoundboardFileDialog.CurrentFilePath), AppContentDialogs.SaveSoundboardFileDialog.CurrentEmbedDownloadedFilesEnabled, AppContentDialogs.SaveSoundboardFileDialog.CurrentEmbedLocalFilesEnabled);
         }
     }
     #endregion

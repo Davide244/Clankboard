@@ -35,6 +35,9 @@ namespace Clankboard.AppContentDialogs
     /// </summary>
     public sealed partial class SaveSoundboardFileDialog : Page
     {
+        public static string CurrentFilePath = "";
+        public static bool CurrentEmbedLocalFilesEnabled = false;
+        public static bool CurrentEmbedDownloadedFilesEnabled = false;
 
         public SaveSoundboardFileDialog()
         {
@@ -42,6 +45,36 @@ namespace Clankboard.AppContentDialogs
 
             // Disable primary button of dialog until a file name is entered (IsPrimaryButtonEnabled)
             ShellPage.g_AppContentDialogProperties.IsPrimaryButtonEnabled = false;
+        }
+
+        // FilePickerTextBox TextChanged event
+        private void FilePickerTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (FilePathTextBox.Text != "" && FilePathTextBox.isPathValid())
+            {
+                ShellPage.g_AppContentDialogProperties.IsPrimaryButtonEnabled = true;
+                CurrentFilePath = FilePathTextBox.Text;
+            }
+            else
+                ShellPage.g_AppContentDialogProperties.IsPrimaryButtonEnabled = false;
+        }
+
+        // Checkbox Checked event (Change according to sender)
+        private void Checkbox_Checked(object sender, RoutedEventArgs e)
+        {
+            if ((CheckBox)sender == EmbedLocalFilesCheckBox)
+                CurrentEmbedLocalFilesEnabled = true;
+            else if ((CheckBox)sender == EmbedDownloadedFilesCheckbox)
+                CurrentEmbedDownloadedFilesEnabled = true;
+        }
+
+        // Checkbox Unchecked event (Change according to sender)
+        private void Checkbox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if ((CheckBox)sender == EmbedLocalFilesCheckBox)
+                CurrentEmbedLocalFilesEnabled = false;
+            else if ((CheckBox)sender == EmbedDownloadedFilesCheckbox)
+                CurrentEmbedDownloadedFilesEnabled = false;
         }
     }
 }

@@ -13,10 +13,10 @@
         <!-- Content body -->
         <TextBlock Text="Save your soundboard to a .clankboard file. Enable embedding if you plan to share this soundboard with other users." TextWrapping="Wrap" />
         <TextBlock Text="Please enter a valid file path!" Foreground="OrangeRed" Visibility="Collapsed" TextWrapping="Wrap" x:Name="InvalidURLText"/>
-        <clankControls:FilePickerTextbox Header="Pick a location:" PlaceholderText="File Path" Margin="7" x:Name="FilePathTextBox" FilePickerType="SaveFile"/>
+        <clankControls:FilePickerTextbox Header="Pick a location:" PlaceholderText="File Path" Margin="7" x:Name="FilePathTextBox" FilePickerType="SaveFile" TextChanged="FilePickerTextBox_TextChanged"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <CheckBox x:Name="EmbedLocalFilesCheckBox" Content="Embed local sound files" Margin="7"/>
-            <CheckBox x:Name="EmbedDownloadedFilesCheckbox" Content="Embed downloaded files" Margin="7"/>
+            <CheckBox x:Name="EmbedLocalFilesCheckBox" Content="Embed local sound files" Margin="7" Checked="Checkbox_Checked" Unchecked="Checkbox_Unchecked"/>
+            <CheckBox x:Name="EmbedDownloadedFilesCheckbox" Content="Embed downloaded files" Margin="7" Checked="Checkbox_Checked" Unchecked="Checkbox_Unchecked"/>
         </StackPanel>
     </StackPanel>
 </Page>

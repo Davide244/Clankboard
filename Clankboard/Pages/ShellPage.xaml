@@ -111,7 +111,7 @@
                                         </MenuFlyoutItem.Icon>
                                     </MenuFlyoutItem>
                                 </MenuFlyoutSubItem>
-                                <MenuFlyoutItem Text="Save As" Icon="Save"/>
+                                <MenuFlyoutItem Text="Save As" Icon="Save" Click="SaveSoundboard_Click"/>
                                 <MenuFlyoutItem Text="Share" Icon="Share"/>
                                 <MenuFlyoutSeparator/>
                                 <MenuFlyoutItem Text="Delete Sounds" Icon="Delete" Click="RemoveAllSounds_Click"/>
