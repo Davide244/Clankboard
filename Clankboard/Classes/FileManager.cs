@@ -83,7 +83,13 @@ namespace Clankboard.Classes.FileManagers
             SoundBoardItem CurrentItem;
 
             // Loop through all SoundboardFileEntries and add them to the soundboard
+            foreach (SoundboardFileEntry entry in soundboardFile.Sounds)
+            {
+                CurrentItem = new SoundBoardItem(entry.Name, entry.Path, "\uE8A5", true, "Test", false, true, false, 100, null, null, entry.Path);
 
+                // Add the item to the soundboard
+                SoundboardPage.soundBoardItemViewmodel.SoundBoardItems.Add(CurrentItem);
+            }
         }
 
         public void SaveFile(string path, string name, bool EmbedOnlineFiles = false, bool EmbedLocalFiles = true)

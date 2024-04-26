@@ -8,6 +8,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Clankboard.AppContentDialogs;
 using Clankboard.Classes;
+using Clankboard.Classes.FileManagers;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -165,6 +166,7 @@ public sealed partial class ShellPage : Page
         if ((await g_AppMessageBox.ShowMessagebox("Save Soundboard", "", "Save", "", "Cancel", ContentDialogButton.Primary, new AppContentDialogs.SaveSoundboardFileDialog())) == 1)
         {
             Classes.FileManagers.SoundboardFileManager.Instance.SaveFile(AppContentDialogs.SaveSoundboardFileDialog.CurrentFilePath, Path.GetFileNameWithoutExtension(AppContentDialogs.SaveSoundboardFileDialog.CurrentFilePath), AppContentDialogs.SaveSoundboardFileDialog.CurrentEmbedDownloadedFilesEnabled, AppContentDialogs.SaveSoundboardFileDialog.CurrentEmbedLocalFilesEnabled);
+            SoundboardFileManager.Instance.SaveFile(AppContentDialogs.SaveSoundboardFileDialog.CurrentFilePath, Path.GetFileNameWithoutExtension(AppContentDialogs.SaveSoundboardFileDialog.CurrentFilePath), AppContentDialogs.SaveSoundboardFileDialog.CurrentEmbedDownloadedFilesEnabled, AppContentDialogs.SaveSoundboardFileDialog.CurrentEmbedLocalFilesEnabled);
         }
     }
     #endregion
@@ -183,7 +185,7 @@ public sealed partial class ShellPage : Page
         var file = await picker.PickSingleFileAsync();
         if (file != null && File.Exists(file.Path))
         {
-            //TODO: Open file
+            SoundboardFileManager.Instance.LoadFile(file.Path);
         }
     }
 
