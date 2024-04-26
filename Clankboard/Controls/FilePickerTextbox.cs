@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -87,23 +88,19 @@ namespace Clankboard.Controls
 
         public bool isPathValid()
         {
-            // Take the text from the textbox and:
-            // Check if the path is valid according to the file picker type. (Folder picker = Folder exists? | File Picker = File Exists? | File Saver = Folder Exists & No illegal chars?)
+            // Check if the selected file path is valid.
+            if (string.IsNullOrEmpty(this.Text))
+                return false;
 
-            string FilePath = System.IO.Path.GetDirectoryName(this.Text);
-            string FileName = System.IO.Path.GetFileName(FilePath);
+            // check if the file name contains invalid characters. ALSO check the folder path using GetInvalidPathChars seperately
+            if (this.Text.IndexOfAny(Path.GetInvalidPathChars()) != -1 || Path.GetFileName(this.Text).IndexOfAny(Path.GetInvalidFileNameChars()) != -1)
+                return false;
 
-            switch (FilePickerType)
-            {
-                case FilePickerType.OpenFile:
-                    return System.IO.File.Exists(this.Text);
-                case FilePickerType.SaveFile:
-                    return System.IO.Directory.Exists(FilePath) && !System.IO.Path.GetInvalidPathChars().Any(c => FilePath.Contains(c)) && !System.IO.Path.GetInvalidFileNameChars().Any(c => FileName.Contains(c));
-                case FilePickerType.PickFolder:
-                    return System.IO.Directory.Exists(this.Text);
-                default:
-                    return false;
-            }
+            // Check if the folder exists
+            if (!Directory.Exists(Path.GetDirectoryName(this.Text)))
+                return false;
+
+            return true;
         }
     }
 }

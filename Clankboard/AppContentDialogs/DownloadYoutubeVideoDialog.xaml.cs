@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text.RegularExpressions;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -26,17 +27,22 @@ public sealed partial class DownloadYoutubeVideoDialog : Page
         this.InitializeComponent();
         CurrentNameOverride = "";
         CurrentURL = "";
+        ShellPage.g_AppContentDialogProperties.IsPrimaryButtonEnabled = false;
     }
 
     // TextBox TextChanged event
     private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
     {
-        if (!URLTextBox.Text.Contains("youtube.com/watch?v=") && !URLTextBox.Text.Contains("youtu.be/"))
-            InvalidURLText.Visibility = Visibility.Visible;
-        else
+        if (Regex.Match(URLTextBox.Text, "^((?:https?:)?\\/\\/)?((?:www|m)\\.)?((?:youtube(-nocookie)?\\.com|youtu.be))(\\/(?:[\\w\\-]+\\?v=|embed\\/|live\\/|v\\/)?)([\\w\\-]+)(\\S+)?$").Success)
         {
             InvalidURLText.Visibility = Visibility.Collapsed;
             CurrentURL = URLTextBox.Text;
+            ShellPage.g_AppContentDialogProperties.IsPrimaryButtonEnabled = true;
+        }
+        else
+        {
+            InvalidURLText.Visibility = Visibility.Visible;
+            ShellPage.g_AppContentDialogProperties.IsPrimaryButtonEnabled = false;
         }
     }
 

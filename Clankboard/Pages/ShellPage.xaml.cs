@@ -6,6 +6,7 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
+using Clankboard.AppContentDialogs;
 using Clankboard.Classes;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -83,6 +84,9 @@ public sealed partial class ShellPage : Page
     private async Task<int> DisplayDialog(object sender, RoutedEventArgs e, string Title, string Text, string PrimaryButtonText, string SecondaryButtonText, string CloseButtonText, ContentDialogButton DefaultButton, object content)
     {
         KeybindsManager.KeybindsEnabled = false; // Disable keybinds while dialog is open
+        g_AppContentDialogProperties.IsPrimaryButtonEnabled = false; // Disable primary button of dialog until a file name is entered
+        g_AppContentDialogProperties.IsSecondaryButtonEnabled = false; // Disable secondary button of dialog until a file name is entered
+        
         ContentDialog dialog = new ContentDialog();
         dialog.XamlRoot = this.XamlRoot;
 
@@ -104,6 +108,9 @@ public sealed partial class ShellPage : Page
         var DialogResult = await dialog.ShowAsync();
 
         KeybindsManager.KeybindsEnabled = true;
+
+        g_AppContentDialogProperties.IsPrimaryButtonEnabled = false; // Disable primary button of dialog until a file name is entered
+        g_AppContentDialogProperties.IsSecondaryButtonEnabled = false; // Disable secondary button of dialog until a file name is entered
 
         if (DialogResult == ContentDialogResult.Primary) return 1;
         else if (DialogResult == ContentDialogResult.Secondary) return 2;
