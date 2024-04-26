@@ -67,6 +67,8 @@ namespace Clankboard.Classes.FileManagers
             // Clear the soundboard
             SoundboardPage.soundBoardItemViewmodel.SoundBoardItems.Clear();
 
+            KeybindsManager.RemoveAllSoundKeybinds();
+
             // Extract the zip file to the temp folder and read the clankfile.json
             string tempFolder = Path.Combine(Path.GetTempPath(), "Clankboard", "TempSoundboardFiles", Guid.NewGuid().ToString());
             Directory.CreateDirectory(tempFolder);
@@ -81,11 +83,16 @@ namespace Clankboard.Classes.FileManagers
             // Deserialize the JSON
             SoundboardFile soundboardFile = JsonConvert.DeserializeObject<SoundboardFile>(JSON);
             SoundBoardItem CurrentItem;
+            KeybindsManager.Keybind tempKeybind = new KeybindsManager.Keybind();
 
             // Loop through all SoundboardFileEntries and add them to the soundboard
             foreach (SoundboardFileEntry entry in soundboardFile.Sounds)
             {
                 CurrentItem = new SoundBoardItem(entry.Name, entry.Path, "\uE8A5", true, "Test", false, true, false, 100, null, null, entry.Path);
+
+                tempKeybind = entry.Keybind;
+                tempKeybind.Handler = CurrentItem.OnActivated;
+                CurrentItem.SetKeybind(tempKeybind);
 
                 // Add the item to the soundboard
                 SoundboardPage.soundBoardItemViewmodel.SoundBoardItems.Add(CurrentItem);
@@ -159,13 +166,13 @@ namespace Clankboard.Classes.FileManagers
                 if (entry.Type == SoundboardFileEntryType.LocalFile && entry.Embedded)
                 {
                     // Move the file to the LocalSounds folder
-                    File.Move(entry.Path, Path.Combine(tempFolder, "LocalSounds", entry.Name + Path.GetExtension(entry.Path)));
+                    File.Copy(entry.Path, Path.Combine(tempFolder, "LocalSounds", entry.Name + Path.GetExtension(entry.Path)));
                     //CurrentEntry.Path = Path.Combine("LocalSounds", entry.Name + Path.GetExtension(entry.Path));
                 }
                 else if (entry.Type == SoundboardFileEntryType.DownloadedFile && entry.Embedded)
                 {
                     // Move the file to the OnlineSounds folder
-                    File.Move(entry.Path, Path.Combine(tempFolder, "OnlineSounds", entry.Name + Path.GetExtension(entry.Path)));
+                    File.Copy(entry.Path, Path.Combine(tempFolder, "OnlineSounds", entry.Name + Path.GetExtension(entry.Path)));
                     //CurrentEntry.Path = Path.Combine("OnlineSounds", entry.Name + Path.GetExtension(entry.Path));
                 }
             }

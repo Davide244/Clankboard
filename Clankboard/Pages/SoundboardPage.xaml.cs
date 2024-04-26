@@ -225,6 +225,7 @@ public sealed partial class SoundboardPage : Page
             }
         });
 
+        KeybindsManager.RemoveAllSoundKeybinds();
         soundBoardItemViewmodel.SoundBoardItems.Clear();
     }
 

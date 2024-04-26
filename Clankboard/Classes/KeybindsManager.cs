@@ -151,6 +151,15 @@ namespace Clankboard.Classes
             Keybinds.Remove(keybind);
         }
 
+        public static void RemoveAllSoundKeybinds()
+        {
+            foreach (var keybind in Keybinds)
+            {
+                if (keybind.KeybindType == KeybindTypes.PlaySoundKeybind)
+                    RemoveKeybind(keybind);
+            }
+        }
+
         /// <summary>
         /// Get the keybind text for a keybind
         /// </summary>
