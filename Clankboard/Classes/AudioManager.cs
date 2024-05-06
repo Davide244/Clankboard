@@ -9,11 +9,14 @@ using NAudio;
 using NAudio.Wave;
 using Clankboard.Classes;
 using System.Threading;
+using static Clankboard.AudioManager;
+using System.ComponentModel;
 
 namespace Clankboard
 {
     public static class AudioManager
     {
+        #region Audio Device & Audio Playback
         public struct AudioDevice
         {
             public string DeviceName;
@@ -137,7 +140,6 @@ namespace Clankboard
         /// <returns></returns>
         public static async Task PlaySoundboardItem(SoundBoardItem sound, CancellationToken cancellationToken)
         {
-            GetDeviceNumber("");
             // Get the audio devices
             AudioDevice outputDevice = SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.LocalOutputDevice);
             AudioDevice driverOutputDevice = SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.VACOutputDevice);
@@ -155,36 +157,98 @@ namespace Clankboard
             Task.Run(() => PlayAudioFileInDevice(driverOutputDeviceNumber, sound.PhysicalFilePath, cancellationToken));
         }
 
-        private static int GetDeviceNumber(string deviceID)
+        #endregion
+    }
+
+    /// <summary>
+    /// Concrete class that houses code for the microphone mixing functionality.
+    /// It works by getting the microphone input and outputting it to the selected audio output device.
+    /// </summary>
+    public class MicMixer
+    {
+        private WaveIn waveIn;
+        private WaveOut waveOut;
+
+        public AudioDevice InputDevice 
         {
-            for (int n = -1; n < WaveOut.DeviceCount; n++)
+            get { return AudioInputDevices.FirstOrDefault(x=>x.DeviceNumber == waveIn.DeviceNumber); }
+            set 
             {
-                var caps = WaveOut.GetCapabilities(n);
-                Debug.WriteLine($"{n}: {caps.ProductName}; GUID: {caps.ProductGuid}; GIVEN DEVICEID: {deviceID}");
-                // Debug write the device Number
+                waveIn.DeviceNumber = value.DeviceNumber;
             }
+        }
+        public AudioDevice OutputDevice
+        {
+            get { return AudioOutputDevices.FirstOrDefault(x => x.DeviceNumber == waveOut.DeviceNumber); }
+            set
+            {
+                waveOut.DeviceNumber = value.DeviceNumber;
+            }
+        }
 
-            // Return the device number by DeviceID
+        private BufferedWaveProvider bufferedWaveProvider;
 
-            return -1;
+        private bool IsEnabled = false;
 
-            //MMDeviceEnumerator enumerator = new MMDeviceEnumerator();
-            //MMDeviceCollection devices = enumerator.EnumerateAudioEndPoints(DataFlow.Render, DeviceState.Active);
-            //for (int i = 0; i < devices.Count; i++)
-            //{
-            //    if (devices[i].ID == deviceID)
-            //    {
-            //        // Debug write the device ID
-            //        Debug.WriteLine("Device ID: " + deviceID);
-            //        // Debug write the device number
-            //        Debug.WriteLine("Device Number: " + (i));
+        /// <summary>
+        /// Constructor for the MicMixer class. Calls the InitializeMicMix private method.
+        /// </summary>
+        public MicMixer(AudioDevice inputDevice, AudioDevice outputDevice)
+        {
+            // Create the waveIn and waveOut instances
+            waveIn = new WaveIn();
+            waveOut = new WaveOut();
 
-            //        // Debug print the actual device name for the device number that was found
-            //        Debug.WriteLine("Real Device Name: " + devices[i].FriendlyName);
-            //        return i;
-            //    }
-            //}
-            //return -1;
+            // Device input (Set to 0 if negative)
+            waveIn.DeviceNumber = inputDevice.DeviceNumber < 0 ? 0 : inputDevice.DeviceNumber;
+            waveOut.DeviceNumber = outputDevice.DeviceNumber < 0 ? 0 : outputDevice.DeviceNumber;
+
+            bufferedWaveProvider = new BufferedWaveProvider(waveIn.WaveFormat);
+            bufferedWaveProvider.DiscardOnBufferOverflow = true;
+
+            waveIn.DataAvailable += WaveIn_DataAvailable;
+            waveOut.PlaybackStopped += WaveOut_PlaybackStopped;
+
+            waveOut.Init(bufferedWaveProvider);
+        }
+
+        /// <summary>
+        /// Enabled the microphone mixing functionality. This will start playing the microphone audio to the selected audio output device.
+        /// </summary>
+        public void Enable()
+        {
+            if (!IsEnabled)
+            {
+                waveIn.StartRecording();
+                waveOut.Play();
+                IsEnabled = true;
+            }
+        }
+
+        /// <summary>
+        /// Disabled microphone mixing. This will stop playing the microphone audio to the selected audio output device.
+        /// </summary>
+        public void Disable()
+        {
+            if (IsEnabled)
+            {
+                waveIn.StopRecording();
+                //waveOut.Pause();
+                IsEnabled = false;
+            }
+        }
+
+        private void WaveIn_DataAvailable(object sender, WaveInEventArgs e)
+        {
+            // Play the audio data from the microphone to the WaveOut instance
+            bufferedWaveProvider.AddSamples(e.Buffer, 0, e.BytesRecorded);
+        }
+
+        private void WaveOut_PlaybackStopped(object sender, StoppedEventArgs e)
+        {
+            // Dispose the waveIn and waveOut instances when playback is stopped
+            //waveIn?.Dispose();
+            waveOut?.Dispose();
         }
     }
 }

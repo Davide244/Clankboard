@@ -16,6 +16,7 @@
 	<UseRidGraph>true</UseRidGraph>
 	<PublishAot>False</PublishAot>
 	<RuntimeIdentifier>win-x64</RuntimeIdentifier>
+	<PublishTrimmed>True</PublishTrimmed>
   </PropertyGroup>
 
   <ItemGroup>

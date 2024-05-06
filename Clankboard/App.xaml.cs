@@ -20,6 +20,7 @@ using Windows.Foundation.Collections;
 using Clankboard.Classes;
 using System.Diagnostics;
 using Clankboard.Classes.FileManagers;
+using static Clankboard.AudioManager;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -31,6 +32,9 @@ namespace Clankboard;
 public partial class App : Application
 {
     public static float DpiScalingFactor = 1;
+
+    public static MicMixer a_VAC_OutputMixer = null;
+    public static MicMixer a_Local_OutputLoopback = null;
 
     //public AudioManager app_AudioManager = new AudioManager();
 
@@ -60,6 +64,18 @@ public partial class App : Application
             MakeWindowAlwaysOnTop(m_window);
 
         SettingsFileManager.Instance.LoadFile();
+
+        AudioDevice currLocalOutputDevice = SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.LocalOutputDevice);
+        AudioDevice currVirtualOutputDevice = SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.VACOutputDevice);
+        AudioDevice currInputDevice = SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.InputDevice);
+        a_VAC_OutputMixer = new(currInputDevice, currVirtualOutputDevice);
+        a_Local_OutputLoopback = new(currInputDevice, currLocalOutputDevice);
+
+        if (SettingsManager.GetSetting<bool>(SettingsManager.SettingTypes.OutputMicrophoneToVAC))
+            a_VAC_OutputMixer.Enable();
+
+        if (SettingsManager.GetSetting<bool>(SettingsManager.SettingTypes.HearYourselfEnabled))
+            a_Local_OutputLoopback.Enable();
     }
 
     public Window m_window;
