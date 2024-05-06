@@ -128,29 +128,6 @@ namespace Clankboard.Classes
 
             // Save settings to file
             FileManagers.SettingsFileManager.Instance.SaveFile();
-
-            if (name == SettingTypes.OutputMicrophoneToVAC)
-            {
-                if (value.Equals(true))
-                {
-                    App.a_VAC_OutputMixer.Enable();
-                }
-                else
-                {
-                    App.a_VAC_OutputMixer.Disable();
-                }
-            }
-            else if (name == SettingTypes.HearYourselfEnabled)
-            {
-                if (value.Equals(true))
-                {
-                    App.a_Local_OutputLoopback.Enable();
-                }
-                else
-                {
-                    App.a_Local_OutputLoopback.Disable();
-                }
-            }
         }
 
         public static T GetSetting<T>(SettingTypes name)

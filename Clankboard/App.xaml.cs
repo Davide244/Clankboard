@@ -33,8 +33,7 @@ public partial class App : Application
 {
     public static float DpiScalingFactor = 1;
 
-    public static MicMixer a_VAC_OutputMixer = null;
-    public static MicMixer a_Local_OutputLoopback = null;
+    public static AudioManager a_AudioManager;
 
     //public AudioManager app_AudioManager = new AudioManager();
 
@@ -65,17 +64,8 @@ public partial class App : Application
 
         SettingsFileManager.Instance.LoadFile();
 
-        AudioDevice currLocalOutputDevice = SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.LocalOutputDevice);
-        AudioDevice currVirtualOutputDevice = SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.VACOutputDevice);
-        AudioDevice currInputDevice = SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.InputDevice);
-        a_VAC_OutputMixer = new(currInputDevice, currVirtualOutputDevice);
-        a_Local_OutputLoopback = new(currInputDevice, currLocalOutputDevice);
-
-        if (SettingsManager.GetSetting<bool>(SettingsManager.SettingTypes.OutputMicrophoneToVAC))
-            a_VAC_OutputMixer.Enable();
-
-        if (SettingsManager.GetSetting<bool>(SettingsManager.SettingTypes.HearYourselfEnabled))
-            a_Local_OutputLoopback.Enable();
+        a_AudioManager = new();
+        a_AudioManager.StartMicrophone();
     }
 
     public Window m_window;

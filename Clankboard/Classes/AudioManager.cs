@@ -9,13 +9,23 @@ using NAudio;
 using NAudio.Wave;
 using Clankboard.Classes;
 using System.Threading;
-using static Clankboard.AudioManager;
 using System.ComponentModel;
+using NAudio.Wave.SampleProviders;
 
 namespace Clankboard
 {
-    public static class AudioManager
+    public class AudioManager
     {
+        private WaveIn MicrophoneWaveIn;
+        private WaveOut VAC_WaveOut;
+        private WaveOut Local_WaveOut;
+
+        private BufferedWaveProvider VAC_BufferedWaveProvider;
+        private BufferedWaveProvider Local_BufferedWaveProvider;
+
+        private MixingSampleProvider VAC_Mixer;
+        private MixingSampleProvider Local_Mixer;
+
         #region Audio Device & Audio Playback
         public struct AudioDevice
         {
@@ -24,8 +34,15 @@ namespace Clankboard
             public int DeviceNumber;
         }
 
+        public enum SoundboardAudioType
+        {
+            LocalFile,
+            CloudFile,
+            EmbeddedInSoundBoardFile
+        }
+
         // Audio Queue list
-        public static List<SoundBoardItem> AudioQueue { get; private set; } = new List<SoundBoardItem> { };
+        //public static List<SoundBoardItem> AudioQueue { get; private set; } = new List<SoundBoardItem> { };
 
         public static List<AudioDevice> AudioOutputDevices { get; private set; } = new List<AudioDevice> { };
         public static List<AudioDevice> AudioInputDevices { get; private set; } = new List<AudioDevice> { };
@@ -60,39 +77,10 @@ namespace Clankboard
             }
         }
 
-        public enum SoundboardAudioType
+        private void PlayAudioFile(MixingSampleProvider audioMixer, string filePath, CancellationToken cancellation)
         {
-            LocalFile,
-            CloudFile,
-            EmbeddedInSoundBoardFile
-        }
-
-        // Play a sound from a file
-        private static async void PlaySound(string filePath, SoundboardAudioType audioType, CancellationToken cancellationToken)
-        {
-            // Get the audio devices
-            //AudioDevice outputDevice = SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.LocalOutputDevice);
-            //AudioDevice driverOutputDevice = SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.VACOutputDevice);
-
-            //// Debug write the device names
-            //Debug.WriteLine("Output Device: " + outputDevice.DeviceName);
-            //Debug.WriteLine("Driver Output Device: " + driverOutputDevice.DeviceName);
-
-            //int outputDeviceNumber = GetDeviceNumber(outputDevice.DeviceID);
-            //int driverOutputDeviceNumber = GetDeviceNumber(driverOutputDevice.DeviceID);
-
-            //var waveOut = new WaveOut();
-
-            throw new NotImplementedException("This function is DEPRECATED/UNUSED! Function is currently only a stub.");
-
-        }
-
-        private static void PlayAudioFileInDevice(AudioDevice device, string filePath, CancellationToken cancellation)
-        {
-            // Play the audio file in the selected device
-            var waveOut = new WaveOut();
-
-            AudioFileReader audioFile = null;
+            AudioFileReader audioFile;
+            MediaFoundationResampler resampledAudio;
 
             try
             {
@@ -109,26 +97,46 @@ namespace Clankboard
 
                 return;
             }
-            
 
-            // Check if the device is the default device. If no, set the device number. If yes, skip.
-            if (device.DeviceNumber != DefaultAudioInputDevice.DeviceNumber && device.DeviceNumber != DefaultAudioOutputDevice.DeviceNumber)
-            {
-                waveOut.DeviceNumber = device.DeviceNumber;
-            }
+            if (audioFile == null)
+                return;
 
-            //waveOut.DeviceNumber = device.DeviceNumber;
-            waveOut.Init(audioFile);
-            waveOut.Play();
-            // Loop until the audio file is finished playing OR the cancellation token is cancelled
-            while (waveOut.PlaybackState == PlaybackState.Playing && !cancellation.IsCancellationRequested)
-            {
-                Thread.Sleep(100);
-            }
+            // Resample the audio to the mixer's sample rate
+            //if (audioFile.WaveFormat.SampleRate != audioMixer.WaveFormat.SampleRate)
+            //{
+            //    resampledAudio = new MediaFoundationResampler(audioFile, audioMixer.WaveFormat);
 
-            // Stop and dispose of the audio file
-            waveOut.Stop();
-            waveOut.Dispose();
+            //    audioMixer.AddMixerInput(resampledAudio.ToSampleProvider());
+
+            //    int AudioLength = (int)(audioFile.TotalTime.TotalMilliseconds);
+            //    Thread.Sleep(AudioLength);
+
+            //    //audioMixer.RemoveMixerInput(resampledAudio.ToSampleProvider());
+            //    resampledAudio.Dispose();
+            //}
+            //else
+            //{
+            //    audioMixer.AddMixerInput(audioFile.ToSampleProvider());
+
+            //    // Wait for the audio to finish playing
+            //    while (audioFile.Position < audioFile.Length && !cancellation.IsCancellationRequested)
+            //    {
+            //        Thread.Sleep(50);
+            //    }
+
+            //    // Remove the audio from the mixer
+            //    //audioMixer.RemoveMixerInput(audioFile.ToSampleProvider());
+            //}
+
+            resampledAudio = new MediaFoundationResampler(audioFile, audioMixer.WaveFormat);
+
+            audioMixer.AddMixerInput(resampledAudio.ToSampleProvider());
+
+            int AudioLength = (int)(audioFile.TotalTime.TotalMilliseconds);
+            Thread.Sleep(AudioLength);
+
+            resampledAudio.Dispose();
+            //audioMixer.RemoveMixerInput(resampledAudio.ToSampleProvider());
             audioFile.Dispose();
         }
 
@@ -138,7 +146,7 @@ namespace Clankboard
         /// <param name="sound">The soundboardItem</param>
         /// <param name="cancellationToken">The cancellationToken. This is required for sound cancellation.</param>
         /// <returns></returns>
-        public static async Task PlaySoundboardItem(SoundBoardItem sound, CancellationToken cancellationToken)
+        public async Task PlaySoundboardItem(SoundBoardItem sound, CancellationToken cancellationToken)
         {
             // Get the audio devices
             AudioDevice outputDevice = SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.LocalOutputDevice);
@@ -153,102 +161,73 @@ namespace Clankboard
             AudioDevice driverOutputDeviceNumber = SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.VACOutputDevice);
 
             // Call PlayAudioFileInDevice for each device
-            Task.Run(() => PlayAudioFileInDevice(outputDeviceNumber, sound.PhysicalFilePath, cancellationToken));
-            Task.Run(() => PlayAudioFileInDevice(driverOutputDeviceNumber, sound.PhysicalFilePath, cancellationToken));
+            Task.Run(() => PlayAudioFile(Local_Mixer, sound.PhysicalFilePath, cancellationToken));
+            Task.Run(() => PlayAudioFile(VAC_Mixer, sound.PhysicalFilePath, cancellationToken));
         }
 
         #endregion
-    }
 
-    /// <summary>
-    /// Concrete class that houses code for the microphone mixing functionality.
-    /// It works by getting the microphone input and outputting it to the selected audio output device.
-    /// </summary>
-    public class MicMixer
-    {
-        private WaveIn waveIn;
-        private WaveOut waveOut;
-
-        public AudioDevice InputDevice 
-        {
-            get { return AudioInputDevices.FirstOrDefault(x=>x.DeviceNumber == waveIn.DeviceNumber); }
-            set 
-            {
-                waveIn.DeviceNumber = value.DeviceNumber;
-            }
-        }
-        public AudioDevice OutputDevice
-        {
-            get { return AudioOutputDevices.FirstOrDefault(x => x.DeviceNumber == waveOut.DeviceNumber); }
-            set
-            {
-                waveOut.DeviceNumber = value.DeviceNumber;
-            }
-        }
-
-        private BufferedWaveProvider bufferedWaveProvider;
-
-        private bool IsEnabled = false;
+        #region Microphone Mixing
 
         /// <summary>
-        /// Constructor for the MicMixer class. Calls the InitializeMicMix private method.
+        /// Constructor for the AudioManager. Initializes the audio devices for mixing.
         /// </summary>
-        public MicMixer(AudioDevice inputDevice, AudioDevice outputDevice)
+        public AudioManager()
         {
-            // Create the waveIn and waveOut instances
-            waveIn = new WaveIn();
-            waveOut = new WaveOut();
+            // Initialize the audio devices.
 
-            // Device input (Set to 0 if negative)
-            waveIn.DeviceNumber = inputDevice.DeviceNumber < 0 ? 0 : inputDevice.DeviceNumber;
-            waveOut.DeviceNumber = outputDevice.DeviceNumber < 0 ? 0 : outputDevice.DeviceNumber;
+            // The audio flow is as follows:
+            // Microphone audio:
+            //      Input Device --> BufferedWaveProvider --> MixingSampleProvider --> WaveOut
+            // Soundboard audio:                                     ↑
+            //      AudioFileReader ———————————————————————————————.⅃
 
-            bufferedWaveProvider = new BufferedWaveProvider(waveIn.WaveFormat);
-            bufferedWaveProvider.DiscardOnBufferOverflow = true;
+            MicrophoneWaveIn = new WaveIn();
+            VAC_WaveOut = new WaveOut();
+            Local_WaveOut = new WaveOut();
 
-            waveIn.DataAvailable += WaveIn_DataAvailable;
-            waveOut.PlaybackStopped += WaveOut_PlaybackStopped;
+            MicrophoneWaveIn.WaveFormat = new(44100/*Hz*/, 32/*bit*/, 2);
 
-            waveOut.Init(bufferedWaveProvider);
+            VAC_BufferedWaveProvider = new BufferedWaveProvider(MicrophoneWaveIn.WaveFormat);
+            Local_BufferedWaveProvider = new BufferedWaveProvider(MicrophoneWaveIn.WaveFormat);
+
+            VAC_BufferedWaveProvider.DiscardOnBufferOverflow = true;
+            Local_BufferedWaveProvider.DiscardOnBufferOverflow = true;
+
+            VAC_Mixer = new MixingSampleProvider(new ISampleProvider[] { VAC_BufferedWaveProvider.ToSampleProvider() });
+            Local_Mixer = new MixingSampleProvider(new ISampleProvider[] { Local_BufferedWaveProvider.ToSampleProvider() });
+
+            // Set the audio data available event
+            MicrophoneWaveIn.DataAvailable += MicrophoneWaveIn_DataAvailable;
+
+            // Set the output & input devices
+            AudioDevice LocalOutputDevice = SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.LocalOutputDevice);
+            AudioDevice VACOutputDevice = SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.VACOutputDevice);
+            AudioDevice InputDevice = SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.InputDevice);
+
+            VAC_WaveOut.DeviceNumber = VACOutputDevice.DeviceNumber;
+            Local_WaveOut.DeviceNumber = LocalOutputDevice.DeviceNumber;
+            MicrophoneWaveIn.DeviceNumber = InputDevice.DeviceNumber;
+
+            VAC_WaveOut.Init(VAC_Mixer);
+            Local_WaveOut.Init(Local_Mixer);
         }
 
-        /// <summary>
-        /// Enabled the microphone mixing functionality. This will start playing the microphone audio to the selected audio output device.
-        /// </summary>
-        public void Enable()
+        public void StartMicrophone()
         {
-            if (!IsEnabled)
-            {
-                waveIn.StartRecording();
-                waveOut.Play();
-                IsEnabled = true;
-            }
+            MicrophoneWaveIn.StartRecording();
+            VAC_WaveOut.Play();
+            Local_WaveOut.Play();
         }
 
-        /// <summary>
-        /// Disabled microphone mixing. This will stop playing the microphone audio to the selected audio output device.
-        /// </summary>
-        public void Disable()
+        // Event handler for when the microphone captures audio
+        private void MicrophoneWaveIn_DataAvailable(object sender, WaveInEventArgs e)
         {
-            if (IsEnabled)
-            {
-                waveIn.StopRecording();
-                //waveOut.Pause();
-                IsEnabled = false;
-            }
+            // Write the audio data to the BufferedWaveProvider
+            VAC_BufferedWaveProvider.AddSamples(e.Buffer, 0, e.BytesRecorded);
+            Local_BufferedWaveProvider.AddSamples(e.Buffer, 0, e.BytesRecorded);
         }
 
-        private void WaveIn_DataAvailable(object sender, WaveInEventArgs e)
-        {
-            // Play the audio data from the microphone to the WaveOut instance
-            bufferedWaveProvider.AddSamples(e.Buffer, 0, e.BytesRecorded);
-        }
-
-        private void WaveOut_PlaybackStopped(object sender, StoppedEventArgs e)
-        {
-            // Dispose the waveIn and waveOut instances when playback is stopped
-            //waveIn?.Dispose();
-            waveOut?.Dispose();
-        }
+        #endregion
     }
 }
