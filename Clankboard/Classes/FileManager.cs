@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using Windows.Storage;
 using Clankboard.Classes;
 using System.IO.Compression;
+using Windows.System;
 
 namespace Clankboard.Classes.FileManagers
 {
@@ -90,9 +91,19 @@ namespace Clankboard.Classes.FileManagers
             {
                 CurrentItem = new SoundBoardItem(entry.Name, entry.Path, "\uE8A5", true, "Test", false, true, false, 100, null, null, entry.Path);
 
+                if (entry.Embedded)
+                {
+                    CurrentItem.PhysicalFilePath = Path.Combine(tempFolder, entry.Path.TrimStart('\\'));
+                }
+
                 tempKeybind = entry.Keybind;
                 tempKeybind.Handler = CurrentItem.OnActivated;
-                CurrentItem.SetKeybind(tempKeybind);
+
+                // If the keybind equals the default of the Keybind struct, it means that the keybind is not set.
+                if (tempKeybind.Key != VirtualKey.None)
+                {
+                    CurrentItem.SetKeybind(tempKeybind);
+                }
 
                 // Add the item to the soundboard
                 SoundboardPage.soundBoardItemViewmodel.SoundBoardItems.Add(CurrentItem);
@@ -101,26 +112,17 @@ namespace Clankboard.Classes.FileManagers
 
         public void SaveFile(string path, string name, bool EmbedOnlineFiles = false, bool EmbedLocalFiles = true)
         {
-            SoundboardFile soundboardFile = new SoundboardFile();
-
-            #region Setup Soundboard File
-            // Construct temp soundboard file folder (pre zip)
             string tempFolder = Path.Combine(Path.GetTempPath(), "Clankboard", "TempSoundboardFiles", name + Guid.NewGuid().ToString());
             Directory.CreateDirectory(tempFolder);
 
-            // Generate folders
             if (EmbedOnlineFiles)
                 Directory.CreateDirectory(Path.Combine(tempFolder, "OnlineSounds"));
             if (EmbedLocalFiles)
                 Directory.CreateDirectory(Path.Combine(tempFolder, "LocalSounds"));
 
-            // Create empty clankfile.json
             string JSONPath = Path.Combine(tempFolder, "clankfile.json");
-            #endregion
 
             List<SoundBoardItem> SoundboardItems = SoundboardPage.soundBoardItemViewmodel.GetSoundboardItems();
-
-            // Convert to SoundboardFileEntry list
             List<SoundboardFileEntry> SoundboardFileEntries = new List<SoundboardFileEntry>();
             KeybindsManager.Keybind tempKeybind = new KeybindsManager.Keybind();
 
@@ -131,69 +133,44 @@ namespace Clankboard.Classes.FileManagers
                     Name = item.SoundName,
                     Path = item.PhysicalFilePath,
                     Type = item.ItemType,
+                    Embedded = (item.ItemType == SoundboardFileEntryType.LocalFile && EmbedLocalFiles) ||
+                               (item.ItemType == SoundboardFileEntryType.DownloadedFile && EmbedOnlineFiles),
+                    Keybind = new KeybindsManager.Keybind
+                    {
+                        KeybindType = item.LinkedKeybind.KeybindType,
+                        GlobalKeybindID = item.LinkedKeybind.GlobalKeybindID,
+                        Handler = null,
+                        Key = item.LinkedKeybind.Key,
+                        KeyModifiers = item.LinkedKeybind.KeyModifiers
+                    }
                 };
 
-                // Recreate keybind object without handler
-                tempKeybind = new KeybindsManager.Keybind
+                if (entry.Embedded)
                 {
-                    KeybindType = item.LinkedKeybind.KeybindType,
-                    GlobalKeybindID = item.LinkedKeybind.GlobalKeybindID,
-                    Handler = null,
-                    Key = item.LinkedKeybind.Key,
-                    KeyModifiers = item.LinkedKeybind.KeyModifiers
-                };
+                    string destinationFolder = entry.Type == SoundboardFileEntryType.LocalFile ? "LocalSounds" : "OnlineSounds";
+                    string destinationPath = Path.Combine(tempFolder, destinationFolder, entry.Name + Path.GetExtension(entry.Path));
 
-                entry.Keybind = tempKeybind;
-
-                // Check if the file is embedded by checking if the file is in the OnlineSounds or LocalSounds folder
-                if (item.ItemType == SoundboardFileEntryType.LocalFile)
-                    entry.Embedded = EmbedLocalFiles;
-
-                else if (item.ItemType == SoundboardFileEntryType.DownloadedFile)
-                    entry.Embedded = EmbedOnlineFiles;
+                    File.Copy(entry.Path, destinationPath);
+                    entry.Path = "\\" + destinationFolder + "\\" + entry.Name + Path.GetExtension(entry.Path);
+                }
 
                 SoundboardFileEntries.Add(entry);
             }
 
-            SoundboardFileEntry CurrentEntry = new SoundboardFileEntry();
-
-            // Loop through all SoundboardFileEntries and move the files to the appropriate folder.
-            // DO not modify the SoundboardFileEntries list while looping through it.
-            foreach (SoundboardFileEntry entry in SoundboardFileEntries.ToList())
+            SoundboardFile soundboardFile = new SoundboardFile
             {
-                CurrentEntry = entry;
+                ClankFileVersion = ClankFileVersion,
+                Name = name,
+                Sounds = SoundboardFileEntries
+            };
 
-                if (entry.Type == SoundboardFileEntryType.LocalFile && entry.Embedded)
-                {
-                    // Move the file to the LocalSounds folder
-                    File.Copy(entry.Path, Path.Combine(tempFolder, "LocalSounds", entry.Name + Path.GetExtension(entry.Path)));
-                    //CurrentEntry.Path = Path.Combine("LocalSounds", entry.Name + Path.GetExtension(entry.Path));
-                }
-                else if (entry.Type == SoundboardFileEntryType.DownloadedFile && entry.Embedded)
-                {
-                    // Move the file to the OnlineSounds folder
-                    File.Copy(entry.Path, Path.Combine(tempFolder, "OnlineSounds", entry.Name + Path.GetExtension(entry.Path)));
-                    //CurrentEntry.Path = Path.Combine("OnlineSounds", entry.Name + Path.GetExtension(entry.Path));
-                }
-            }
-
-            // Construct the soundboard file object
-            soundboardFile.ClankFileVersion = ClankFileVersion;
-            soundboardFile.Name = name;
-            soundboardFile.Sounds = SoundboardFileEntries;
-
-            // Write JSON to file
             File.WriteAllText(JSONPath, JsonConvert.SerializeObject(soundboardFile, Formatting.Indented));
 
-            // Zip the temp folder and rename it to [name].clankboard
             string zipPath = Path.Combine(Path.GetTempPath(), "Clankboard", "TempSoundboardFiles", name + ".clankboard");
             ZipFile.CreateFromDirectory(tempFolder, zipPath);
 
-            // Check if rthe path is a file or a folder
             string pathFolder = Path.GetDirectoryName(path);
-
-            // Move the zip file to the specified path
-            File.Move(zipPath, pathFolder + "\\" + name + ".clankboard", true);
+            File.Move(zipPath, Path.Combine(pathFolder, name + ".clankboard"), true);
         }
 
 

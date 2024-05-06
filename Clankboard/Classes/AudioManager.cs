@@ -88,7 +88,25 @@ namespace Clankboard
         {
             // Play the audio file in the selected device
             var waveOut = new WaveOut();
-            var audioFile = new AudioFileReader(filePath);
+
+            AudioFileReader audioFile = null;
+
+            try
+            {
+                audioFile = new AudioFileReader(filePath);
+            }
+            catch (Exception e)
+            {
+                // if FileNotFoundException, give error message and return
+                if (e is System.IO.FileNotFoundException)
+                {
+                    Debug.WriteLine("File not found: " + filePath);
+                    return;
+                }
+
+                return;
+            }
+            
 
             // Check if the device is the default device. If no, set the device number. If yes, skip.
             if (device.DeviceNumber != DefaultAudioInputDevice.DeviceNumber && device.DeviceNumber != DefaultAudioOutputDevice.DeviceNumber)

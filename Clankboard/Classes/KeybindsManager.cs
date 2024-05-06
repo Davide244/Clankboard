@@ -94,6 +94,10 @@ namespace Clankboard.Classes
         public static Keybind AddKeybind(KeybindTypes KeybindType, List<KeyModifiers> KeyModifiers, VirtualKey Key, Action HandlerFunction, bool GlobalKeybind = true, SoundBoardItem Sound = null)
         {
             Keybind keybind = new Keybind { KeybindType = KeybindType, KeyModifiers = KeyModifiers, Key = Key, Handler = HandlerFunction, GlobalKeybindID = Guid.NewGuid().GetHashCode() };
+            // Check if none of the keybind parameters are null
+            if (KeybindType == null || KeyModifiers == null || Key == 0 || HandlerFunction == null)
+                return keybind;
+
             Keybinds.Add(keybind);
             if (GlobalKeybind)
             {
@@ -153,11 +157,7 @@ namespace Clankboard.Classes
 
         public static void RemoveAllSoundKeybinds()
         {
-            foreach (var keybind in Keybinds)
-            {
-                if (keybind.KeybindType == KeybindTypes.PlaySoundKeybind)
-                    RemoveKeybind(keybind);
-            }
+            Keybinds.RemoveAll(x => x.KeybindType == KeybindTypes.PlaySoundKeybind);
         }
 
         /// <summary>

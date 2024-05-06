@@ -140,9 +140,13 @@ public sealed partial class ShellPage : Page
         WinRT.Interop.InitializeWithWindow.Initialize(picker, hWnd);
 
         picker.FileTypeFilter.Add(".mp3");
+        picker.FileTypeFilter.Add(".mp4");
         picker.FileTypeFilter.Add(".wav");
         picker.FileTypeFilter.Add(".ogg");
-        picker.FileTypeFilter.Add(".mp4");
+        picker.FileTypeFilter.Add(".flac");
+        picker.FileTypeFilter.Add(".m4a");
+        picker.FileTypeFilter.Add(".webm");
+        picker.FileTypeFilter.Add(".wma");
 
         var file = await picker.PickSingleFileAsync();
         if (file != null && File.Exists(file.Path))
