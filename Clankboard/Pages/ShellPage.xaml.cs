@@ -134,8 +134,7 @@ public sealed partial class ShellPage : Page
         // Show the file picker so the user can select a file
         var picker = new Windows.Storage.Pickers.FileOpenPicker();
 
-        var window = (Application.Current as App)?.m_window as MainWindow;
-        var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(window);
+        var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(App.m_window);
 
         WinRT.Interop.InitializeWithWindow.Initialize(picker, hWnd);
 
@@ -179,7 +178,7 @@ public sealed partial class ShellPage : Page
     {
         var picker = new Windows.Storage.Pickers.FileOpenPicker();
 
-        var window = (Application.Current as App)?.m_window as MainWindow;
+        var window = App.m_window;
         var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(window);
 
         WinRT.Interop.InitializeWithWindow.Initialize(picker, hWnd);

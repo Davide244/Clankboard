@@ -59,16 +59,19 @@ public partial class App : Application
         MainRoot = m_window.Content as FrameworkElement;
 
         RegisterWindowMinMax(m_window);
-        if (System.Diagnostics.Debugger.IsAttached)
-            MakeWindowAlwaysOnTop(m_window);
 
         SettingsFileManager.Instance.LoadFile();
+
+        if (SettingsManager.GetSetting<bool>(SettingsManager.SettingTypes.AlwaysOnTop) == true)
+            MakeWindowAlwaysOnTop(m_window);
+        else
+            RemoveWindowAlwaysOnTop(m_window);
 
         a_AudioManager = new();
         a_AudioManager.StartMicrophone();
     }
 
-    public Window m_window;
+    public static Window m_window;
 
 
     // Override of the WndProc method to change the window's min size
@@ -154,9 +157,14 @@ public partial class App : Application
     [return: MarshalAs(UnmanagedType.Bool)]
     static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
 
-    public void MakeWindowAlwaysOnTop(Window window)
+    public static void MakeWindowAlwaysOnTop(Window window)
     {
         SetWindowPos(GetWindowHandleForCurrentWindow(window), (IntPtr)(-1), 0, 0, 0, 0, 0x0002 | 0x0001);
+    }
+
+    public static void RemoveWindowAlwaysOnTop(Window window)
+    {
+        SetWindowPos(GetWindowHandleForCurrentWindow(window), (IntPtr)(-2), 0, 0, 0, 0, 0x0002 | 0x0001);
     }
 
     private struct POINT

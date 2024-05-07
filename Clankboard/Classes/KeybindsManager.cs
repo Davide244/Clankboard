@@ -101,7 +101,7 @@ namespace Clankboard.Classes
             Keybinds.Add(keybind);
             if (GlobalKeybind)
             {
-                Windows.Win32.Foundation.HWND hWnd = new Windows.Win32.Foundation.HWND(WinRT.Interop.WindowNative.GetWindowHandle((Application.Current as App)?.m_window as MainWindow));
+                Windows.Win32.Foundation.HWND hWnd = new Windows.Win32.Foundation.HWND(WinRT.Interop.WindowNative.GetWindowHandle(App.m_window));
 
                 // Register global hotkey using PInvoke and pass the callback function
                 var success = PInvoke.RegisterHotKey(hWnd, keybind.GlobalKeybindID, (HOT_KEY_MODIFIERS)((uint)KeyModifiers.Sum(x => (int)x)), (uint)Key);
@@ -116,7 +116,7 @@ namespace Clankboard.Classes
 
         private static void UnregisterGlobalKeybind(Keybind Keybind)
         {
-            Windows.Win32.Foundation.HWND hWnd = new Windows.Win32.Foundation.HWND(WinRT.Interop.WindowNative.GetWindowHandle((Application.Current as App)?.m_window as MainWindow));
+            Windows.Win32.Foundation.HWND hWnd = new Windows.Win32.Foundation.HWND(WinRT.Interop.WindowNative.GetWindowHandle(App.m_window));
 
             PInvoke.UnregisterHotKey(hWnd, Keybind.Key.GetHashCode());
         }

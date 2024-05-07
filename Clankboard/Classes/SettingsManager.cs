@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.UI.Xaml;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -128,6 +129,14 @@ namespace Clankboard.Classes
 
             // Save settings to file
             FileManagers.SettingsFileManager.Instance.SaveFile();
+
+            if (name == SettingTypes.AlwaysOnTop && value is bool alwaysOnTop)
+            {
+                if (alwaysOnTop)
+                    App.MakeWindowAlwaysOnTop(App.m_window);
+                else
+                    App.RemoveWindowAlwaysOnTop(App.m_window);
+            }
         }
 
         public static T GetSetting<T>(SettingTypes name)

@@ -45,7 +45,7 @@ namespace Clankboard.Controls
         {
             string OutputPath = "";
 
-            var window = (Application.Current as App)?.m_window as MainWindow;
+            var window = App.m_window;
             nint hwnd = WinRT.Interop.WindowNative.GetWindowHandle(window);
 
             // Create a new file picker with the correct type
