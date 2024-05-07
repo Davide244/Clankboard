@@ -42,7 +42,8 @@ namespace Clankboard
         }
 
         // Audio Queue list
-        //public static List<SoundBoardItem> AudioQueue { get; private set; } = new List<SoundBoardItem> { };
+        public static List<SoundBoardItem> PlayingAudios { get; private set; } = new List<SoundBoardItem> { };
+        public static readonly int MaxPlayingAudios = 20;
 
         public static List<AudioDevice> AudioOutputDevices { get; private set; } = new List<AudioDevice> { };
         public static List<AudioDevice> AudioInputDevices { get; private set; } = new List<AudioDevice> { };
@@ -148,6 +149,19 @@ namespace Clankboard
         /// <returns></returns>
         public async Task PlaySoundboardItem(SoundBoardItem sound, CancellationToken cancellationToken)
         {
+            // Check how many sounds are playing
+            if (PlayingAudios.Count >= MaxPlayingAudios && PlayingAudios.Count > 0)
+            {
+                Debug.WriteLine("Too many sounds playing. Stopping sound: " + sound.SoundName +"@" + sound.PhysicalFilePath);
+
+                // Stop the sound at the 0th element
+                PlayingAudios[0].StopSound();
+                PlayingAudios.RemoveAt(0);
+            }
+
+            // Add the sound to the end of the list
+            PlayingAudios.Add(sound);
+
             // Get the audio devices
             AudioDevice outputDevice = SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.LocalOutputDevice);
             AudioDevice driverOutputDevice = SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.VACOutputDevice);
