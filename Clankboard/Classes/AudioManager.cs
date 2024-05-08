@@ -43,7 +43,7 @@ namespace Clankboard
 
         // Audio Queue list
         public static List<SoundBoardItem> PlayingAudios { get; private set; } = new List<SoundBoardItem> { };
-        public static readonly int MaxPlayingAudios = 20;
+        public static readonly int MaxPlayingAudios = 25;
 
         public static List<AudioDevice> AudioOutputDevices { get; private set; } = new List<AudioDevice> { };
         public static List<AudioDevice> AudioInputDevices { get; private set; } = new List<AudioDevice> { };
@@ -133,6 +133,17 @@ namespace Clankboard
                 PlayingAudios.RemoveAt(0);
             }
 
+            // Check if audio stacking is enabled. If it is, play the sound and stop all other sounds.
+            if (SettingsManager.GetSetting<bool>(SettingsManager.SettingTypes.AudioStackingEnabled))
+            {
+                // Stop all sounds
+                foreach (var audio in PlayingAudios)
+                {
+                    audio.StopSound();
+                }
+                PlayingAudios.Clear();
+            }
+
             // Add the sound to the end of the list
             PlayingAudios.Add(sound);
 
@@ -144,13 +155,13 @@ namespace Clankboard
             Debug.WriteLine("Output Device: " + outputDevice.DeviceName);
             Debug.WriteLine("Driver Output Device: " + driverOutputDevice.DeviceName);
 
-            // Grab devices from SettingsManager
-            AudioDevice outputDeviceNumber = SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.LocalOutputDevice);
-            AudioDevice driverOutputDeviceNumber = SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.VACOutputDevice);
-
             // Call PlayAudioFileInDevice for each device
-            Task.Run(() => PlayAudioFile(Local_Mixer, sound.PhysicalFilePath, cancellationToken));
-            Task.Run(() => PlayAudioFile(VAC_Mixer, sound.PhysicalFilePath, cancellationToken));
+            var LocalPlay = Task.Run(() => PlayAudioFile(Local_Mixer, sound.PhysicalFilePath, cancellationToken));
+            var VACPlay = Task.Run(() => PlayAudioFile(VAC_Mixer, sound.PhysicalFilePath, cancellationToken));
+            Task.WaitAll(LocalPlay, VACPlay);
+
+            // Remove the sound from the list
+            PlayingAudios.Remove(sound);
         }
 
         #endregion
@@ -167,7 +178,7 @@ namespace Clankboard
             // The audio flow is as follows:
             // Microphone audio:
             //      Input Device --> BufferedWaveProvider --> MixingSampleProvider --> WaveOut
-            // Soundboard audio:                                     ↑
+            // Soundboard audio:                                    ↑
             //      AudioFileReader ———————————————————————————————.⅃
 
             MicrophoneWaveIn = new WaveIn();
