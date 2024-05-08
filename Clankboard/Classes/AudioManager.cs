@@ -103,34 +103,8 @@ namespace Clankboard
                 return;
 
             // Resample the audio to the mixer's sample rate
-            //if (audioFile.WaveFormat.SampleRate != audioMixer.WaveFormat.SampleRate)
-            //{
-            //    resampledAudio = new MediaFoundationResampler(audioFile, audioMixer.WaveFormat);
-
-            //    audioMixer.AddMixerInput(resampledAudio.ToSampleProvider());
-
-            //    int AudioLength = (int)(audioFile.TotalTime.TotalMilliseconds);
-            //    Thread.Sleep(AudioLength);
-
-            //    //audioMixer.RemoveMixerInput(resampledAudio.ToSampleProvider());
-            //    resampledAudio.Dispose();
-            //}
-            //else
-            //{
-            //    audioMixer.AddMixerInput(audioFile.ToSampleProvider());
-
-            //    // Wait for the audio to finish playing
-            //    while (audioFile.Position < audioFile.Length && !cancellation.IsCancellationRequested)
-            //    {
-            //        Thread.Sleep(50);
-            //    }
-
-            //    // Remove the audio from the mixer
-            //    //audioMixer.RemoveMixerInput(audioFile.ToSampleProvider());
-            //}
-
             resampledAudio = new MediaFoundationResampler(audioFile, audioMixer.WaveFormat);
-
+            resampledAudio.ResamplerQuality = 40;
             audioMixer.AddMixerInput(resampledAudio.ToSampleProvider());
 
             int AudioLength = (int)(audioFile.TotalTime.TotalMilliseconds);

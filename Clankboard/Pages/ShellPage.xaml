@@ -138,7 +138,7 @@
                         </AppBarButton.Flyout>
                     </AppBarButton>
                     <AppBarSeparator/>
-                    <AppBarButton Icon="Share" Label="Voicebox" IsEnabled="True"/>
+                    <AppBarButton Icon="Share" Label="Voicebox" IsEnabled="False"/>
                     <AppBarSeparator/>
                 </CommandBar.PrimaryCommands>
                 <CommandBar.SecondaryCommands>

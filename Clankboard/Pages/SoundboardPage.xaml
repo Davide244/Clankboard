@@ -35,7 +35,7 @@
                                                Description="Keybinds that stops all sounds."
                                                HeaderIcon="{ui:FontIcon Glyph=&#xE73B;}">
                             <!--ToggleSwitch IsOn="False" /-->
-                            <Button Content="TEST" Click="Button_Click"/>
+                            <clankControls:KeybindChangeBtn x:Name="StopKeybindChangeBtn" KeybindType="StopAllSoundsKeybind" Content="None"/>
                         </controls:SettingsCard>
                         <controls:SettingsCard Header="Local Output Volume"
                                                Description="At which volume to output the soundboard audio to you locally."
