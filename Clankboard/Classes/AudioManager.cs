@@ -174,7 +174,7 @@ namespace Clankboard
             VAC_WaveOut = new WaveOut();
             Local_WaveOut = new WaveOut();
 
-            MicrophoneWaveIn.WaveFormat = new(44100/*Hz*/, 32/*bit*/, 2);
+            MicrophoneWaveIn.WaveFormat = new(44100/*Hz*/, 32/*bit*/, 2/*Channels*/);
 
             VAC_BufferedWaveProvider = new BufferedWaveProvider(MicrophoneWaveIn.WaveFormat);
             Local_BufferedWaveProvider = new BufferedWaveProvider(MicrophoneWaveIn.WaveFormat);
@@ -199,21 +199,33 @@ namespace Clankboard
 
             VAC_WaveOut.Init(VAC_Mixer);
             Local_WaveOut.Init(Local_Mixer);
+
+            UpdateMicrophoneSettings();
         }
 
         public void StartMicrophone()
         {
             MicrophoneWaveIn.StartRecording();
-            VAC_WaveOut.Play();
             Local_WaveOut.Play();
+            VAC_WaveOut.Play();
+        }
+
+        public void UpdateMicrophoneSettings()
+        {
+            // Update waveout devices
+            Local_WaveOut.DeviceNumber = SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.LocalOutputDevice).DeviceNumber;
+            VAC_WaveOut.DeviceNumber = SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.VACOutputDevice).DeviceNumber;
         }
 
         // Event handler for when the microphone captures audio
         private void MicrophoneWaveIn_DataAvailable(object sender, WaveInEventArgs e)
         {
             // Write the audio data to the BufferedWaveProvider
-            VAC_BufferedWaveProvider.AddSamples(e.Buffer, 0, e.BytesRecorded);
-            Local_BufferedWaveProvider.AddSamples(e.Buffer, 0, e.BytesRecorded);
+            if (SettingsManager.GetSetting<bool>(SettingsManager.SettingTypes.OutputMicrophoneToVAC))
+                VAC_BufferedWaveProvider.AddSamples(e.Buffer, 0, e.BytesRecorded);
+
+            if (SettingsManager.GetSetting<bool>(SettingsManager.SettingTypes.HearYourselfEnabled))
+                Local_BufferedWaveProvider.AddSamples(e.Buffer, 0, e.BytesRecorded);
         }
 
         #endregion

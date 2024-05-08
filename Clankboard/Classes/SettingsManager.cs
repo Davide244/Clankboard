@@ -137,6 +137,8 @@ namespace Clankboard.Classes
                 else
                     App.RemoveWindowAlwaysOnTop(App.m_window);
             }
+
+            App.a_AudioManager.UpdateMicrophoneSettings();
         }
 
         public static T GetSetting<T>(SettingTypes name)
