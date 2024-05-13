@@ -27,7 +27,8 @@ namespace Clankboard
         {
             FileDownloadInfobar,
             DriverMissingInfobar,
-            FileMissingInfobar
+            FileMissingInfobar,
+            DebugModeInfobar
         }
 
         public delegate void InfobarEventHandler(object sender, RoutedEventArgs e, AppInfobarType type, bool Open);

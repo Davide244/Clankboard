@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Numerics;
@@ -45,6 +46,16 @@ public sealed partial class ShellPage : Page
         g_AppMessageBox.NewMessageBox += DisplayDialog;
         g_AppInfobar.OpenInfobar += AppInfoBar_Open;
         g_ShellPageEvents.SettingsOpenClick += SettingspageButton_Click;
+
+#if DEBUG
+        g_AppInfobar.OpenAppInfobar(AppInfobar.AppInfobarType.DebugModeInfobar);
+#elif !DEBUG
+        // Check if the app is running in a debugger
+        if (Debugger.IsAttached)
+        {
+            g_AppInfobar.OpenAppInfobar(AppInfobar.AppInfobarType.DebugModeInfobar);
+        }
+#endif
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -207,6 +218,10 @@ public sealed partial class ShellPage : Page
             case AppInfobar.AppInfobarType.DriverMissingInfobar:
                 //if (Open) AppMissingDriverInfobar.Visibility = Visibility.Visible; else AppMissingDriverInfobar.Visibility = Visibility.Collapsed;
                 //AppMissingDriverInfobar.IsOpen = Open;
+                break;
+            case AppInfobar.AppInfobarType.DebugModeInfobar:
+                if (Open) AppDebugModeInfobar.Visibility = Visibility.Visible; else AppDebugModeInfobar.Visibility = Visibility.Collapsed;
+                AppDebugModeInfobar.IsOpen = Open;
                 break;
             default:
                 return;

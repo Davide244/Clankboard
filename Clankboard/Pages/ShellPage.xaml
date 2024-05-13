@@ -170,6 +170,7 @@
                         <Button Content="Retry"/>
                     </InfoBar.ActionButton>
                 </InfoBar>
+                <InfoBar x:Name="AppDebugModeInfobar" Title="Debug Mode" Message="You are currently using a debug build. Expect worse performance." Severity="Informational" IsOpen="False" Margin="10, 0, 10, 0" VerticalAlignment="Bottom" IsClosable="False" Visibility="Collapsed"/>
                 <InfoBar x:Name="AppDownloadingFilesInfobar" Title="File Download" Message="Some files are currently being downloaded." Severity="Informational" IsOpen="False" Margin="10, 0, 10, 0" VerticalAlignment="Bottom" IsClosable="False" Visibility="Collapsed">
                     <InfoBar.Content>
                         <ProgressBar IsIndeterminate="True" Margin="0,-6,50,5"/>
