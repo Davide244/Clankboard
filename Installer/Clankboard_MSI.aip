@@ -44,18 +44,554 @@
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiDirsComponent">
     <ROW Directory="APPDIR" Directory_Parent="TARGETDIR" DefaultDir="APPDIR:." IsPseudoRoot="1"/>
+    <ROW Directory="Assets_Dir" Directory_Parent="Microsoft.UI.Xaml_Dir" DefaultDir="Assets"/>
+    <ROW Directory="DesktopFolder" Directory_Parent="TARGETDIR" DefaultDir="DESKTO~1|DesktopFolder" IsPseudoRoot="1"/>
+    <ROW Directory="Microsoft.UI.Xaml_Dir" Directory_Parent="APPDIR" DefaultDir="MICROS~1.XAM|Microsoft.UI.Xaml"/>
+    <ROW Directory="SHORTCUTDIR" Directory_Parent="TARGETDIR" DefaultDir="SHORTC~1|SHORTCUTDIR" IsPseudoRoot="1"/>
+    <ROW Directory="StartMenuFolder" Directory_Parent="TARGETDIR" DefaultDir="STARTM~1|StartMenuFolder" IsPseudoRoot="1"/>
     <ROW Directory="TARGETDIR" DefaultDir="SourceDir"/>
+    <ROW Directory="afZA_Dir" Directory_Parent="APPDIR" DefaultDir="af-ZA"/>
+    <ROW Directory="amET_Dir" Directory_Parent="APPDIR" DefaultDir="am-ET"/>
+    <ROW Directory="arSA_Dir" Directory_Parent="APPDIR" DefaultDir="ar-SA"/>
+    <ROW Directory="asIN_Dir" Directory_Parent="APPDIR" DefaultDir="as-IN"/>
+    <ROW Directory="azLatnAZ_Dir" Directory_Parent="APPDIR" DefaultDir="AZ-LAT~1|az-Latn-AZ"/>
+    <ROW Directory="bgBG_Dir" Directory_Parent="APPDIR" DefaultDir="bg-BG"/>
+    <ROW Directory="bnIN_Dir" Directory_Parent="APPDIR" DefaultDir="bn-IN"/>
+    <ROW Directory="bsLatnBA_Dir" Directory_Parent="APPDIR" DefaultDir="BS-LAT~1|bs-Latn-BA"/>
+    <ROW Directory="caES_Dir" Directory_Parent="APPDIR" DefaultDir="ca-ES"/>
+    <ROW Directory="caEsVALENCIA_Dir" Directory_Parent="APPDIR" DefaultDir="CA-ES-~1|ca-Es-VALENCIA"/>
+    <ROW Directory="csCZ_Dir" Directory_Parent="APPDIR" DefaultDir="cs-CZ"/>
+    <ROW Directory="cyGB_Dir" Directory_Parent="APPDIR" DefaultDir="cy-GB"/>
+    <ROW Directory="daDK_Dir" Directory_Parent="APPDIR" DefaultDir="da-DK"/>
+    <ROW Directory="deDE_Dir" Directory_Parent="APPDIR" DefaultDir="de-DE"/>
+    <ROW Directory="elGR_Dir" Directory_Parent="APPDIR" DefaultDir="el-GR"/>
+    <ROW Directory="enGB_Dir" Directory_Parent="APPDIR" DefaultDir="en-GB"/>
+    <ROW Directory="enus_Dir" Directory_Parent="APPDIR" DefaultDir="en-us"/>
+    <ROW Directory="esES_Dir" Directory_Parent="APPDIR" DefaultDir="es-ES"/>
+    <ROW Directory="esMX_Dir" Directory_Parent="APPDIR" DefaultDir="es-MX"/>
+    <ROW Directory="etEE_Dir" Directory_Parent="APPDIR" DefaultDir="et-EE"/>
+    <ROW Directory="euES_Dir" Directory_Parent="APPDIR" DefaultDir="eu-ES"/>
+    <ROW Directory="faIR_Dir" Directory_Parent="APPDIR" DefaultDir="fa-IR"/>
+    <ROW Directory="fiFI_Dir" Directory_Parent="APPDIR" DefaultDir="fi-FI"/>
+    <ROW Directory="filPH_Dir" Directory_Parent="APPDIR" DefaultDir="fil-PH"/>
+    <ROW Directory="frCA_Dir" Directory_Parent="APPDIR" DefaultDir="fr-CA"/>
+    <ROW Directory="frFR_Dir" Directory_Parent="APPDIR" DefaultDir="fr-FR"/>
+    <ROW Directory="gaIE_Dir" Directory_Parent="APPDIR" DefaultDir="ga-IE"/>
+    <ROW Directory="gdgb_Dir" Directory_Parent="APPDIR" DefaultDir="gd-gb"/>
+    <ROW Directory="glES_Dir" Directory_Parent="APPDIR" DefaultDir="gl-ES"/>
+    <ROW Directory="guIN_Dir" Directory_Parent="APPDIR" DefaultDir="gu-IN"/>
+    <ROW Directory="heIL_Dir" Directory_Parent="APPDIR" DefaultDir="he-IL"/>
+    <ROW Directory="hiIN_Dir" Directory_Parent="APPDIR" DefaultDir="hi-IN"/>
+    <ROW Directory="hrHR_Dir" Directory_Parent="APPDIR" DefaultDir="hr-HR"/>
+    <ROW Directory="huHU_Dir" Directory_Parent="APPDIR" DefaultDir="hu-HU"/>
+    <ROW Directory="hyAM_Dir" Directory_Parent="APPDIR" DefaultDir="hy-AM"/>
+    <ROW Directory="idID_Dir" Directory_Parent="APPDIR" DefaultDir="id-ID"/>
+    <ROW Directory="isIS_Dir" Directory_Parent="APPDIR" DefaultDir="is-IS"/>
+    <ROW Directory="itIT_Dir" Directory_Parent="APPDIR" DefaultDir="it-IT"/>
+    <ROW Directory="jaJP_Dir" Directory_Parent="APPDIR" DefaultDir="ja-JP"/>
+    <ROW Directory="kaGE_Dir" Directory_Parent="APPDIR" DefaultDir="ka-GE"/>
+    <ROW Directory="kkKZ_Dir" Directory_Parent="APPDIR" DefaultDir="kk-KZ"/>
+    <ROW Directory="kmKH_Dir" Directory_Parent="APPDIR" DefaultDir="km-KH"/>
+    <ROW Directory="knIN_Dir" Directory_Parent="APPDIR" DefaultDir="kn-IN"/>
+    <ROW Directory="koKR_Dir" Directory_Parent="APPDIR" DefaultDir="ko-KR"/>
+    <ROW Directory="kokIN_Dir" Directory_Parent="APPDIR" DefaultDir="kok-IN"/>
+    <ROW Directory="lbLU_Dir" Directory_Parent="APPDIR" DefaultDir="lb-LU"/>
+    <ROW Directory="loLA_Dir" Directory_Parent="APPDIR" DefaultDir="lo-LA"/>
+    <ROW Directory="ltLT_Dir" Directory_Parent="APPDIR" DefaultDir="lt-LT"/>
+    <ROW Directory="lvLV_Dir" Directory_Parent="APPDIR" DefaultDir="lv-LV"/>
+    <ROW Directory="miNZ_Dir" Directory_Parent="APPDIR" DefaultDir="mi-NZ"/>
+    <ROW Directory="mkMK_Dir" Directory_Parent="APPDIR" DefaultDir="mk-MK"/>
+    <ROW Directory="mlIN_Dir" Directory_Parent="APPDIR" DefaultDir="ml-IN"/>
+    <ROW Directory="mrIN_Dir" Directory_Parent="APPDIR" DefaultDir="mr-IN"/>
+    <ROW Directory="msMY_Dir" Directory_Parent="APPDIR" DefaultDir="ms-MY"/>
+    <ROW Directory="mtMT_Dir" Directory_Parent="APPDIR" DefaultDir="mt-MT"/>
+    <ROW Directory="nbNO_Dir" Directory_Parent="APPDIR" DefaultDir="nb-NO"/>
+    <ROW Directory="neNP_Dir" Directory_Parent="APPDIR" DefaultDir="ne-NP"/>
+    <ROW Directory="nlNL_Dir" Directory_Parent="APPDIR" DefaultDir="nl-NL"/>
+    <ROW Directory="nnNO_Dir" Directory_Parent="APPDIR" DefaultDir="nn-NO"/>
+    <ROW Directory="orIN_Dir" Directory_Parent="APPDIR" DefaultDir="or-IN"/>
+    <ROW Directory="paIN_Dir" Directory_Parent="APPDIR" DefaultDir="pa-IN"/>
+    <ROW Directory="plPL_Dir" Directory_Parent="APPDIR" DefaultDir="pl-PL"/>
+    <ROW Directory="ptBR_Dir" Directory_Parent="APPDIR" DefaultDir="pt-BR"/>
+    <ROW Directory="ptPT_Dir" Directory_Parent="APPDIR" DefaultDir="pt-PT"/>
+    <ROW Directory="quzPE_Dir" Directory_Parent="APPDIR" DefaultDir="quz-PE"/>
+    <ROW Directory="roRO_Dir" Directory_Parent="APPDIR" DefaultDir="ro-RO"/>
+    <ROW Directory="ruRU_Dir" Directory_Parent="APPDIR" DefaultDir="ru-RU"/>
+    <ROW Directory="skSK_Dir" Directory_Parent="APPDIR" DefaultDir="sk-SK"/>
+    <ROW Directory="slSI_Dir" Directory_Parent="APPDIR" DefaultDir="sl-SI"/>
+    <ROW Directory="sqAL_Dir" Directory_Parent="APPDIR" DefaultDir="sq-AL"/>
+    <ROW Directory="srCyrlBA_Dir" Directory_Parent="APPDIR" DefaultDir="SR-CYR~1|sr-Cyrl-BA"/>
+    <ROW Directory="srCyrlRS_Dir" Directory_Parent="APPDIR" DefaultDir="SR-CYR~2|sr-Cyrl-RS"/>
+    <ROW Directory="srLatnRS_Dir" Directory_Parent="APPDIR" DefaultDir="SR-LAT~1|sr-Latn-RS"/>
+    <ROW Directory="svSE_Dir" Directory_Parent="APPDIR" DefaultDir="sv-SE"/>
+    <ROW Directory="taIN_Dir" Directory_Parent="APPDIR" DefaultDir="ta-IN"/>
+    <ROW Directory="teIN_Dir" Directory_Parent="APPDIR" DefaultDir="te-IN"/>
+    <ROW Directory="thTH_Dir" Directory_Parent="APPDIR" DefaultDir="th-TH"/>
+    <ROW Directory="trTR_Dir" Directory_Parent="APPDIR" DefaultDir="tr-TR"/>
+    <ROW Directory="ttRU_Dir" Directory_Parent="APPDIR" DefaultDir="tt-RU"/>
+    <ROW Directory="ugCN_Dir" Directory_Parent="APPDIR" DefaultDir="ug-CN"/>
+    <ROW Directory="ukUA_Dir" Directory_Parent="APPDIR" DefaultDir="uk-UA"/>
+    <ROW Directory="urPK_Dir" Directory_Parent="APPDIR" DefaultDir="ur-PK"/>
+    <ROW Directory="uzLatnUZ_Dir" Directory_Parent="APPDIR" DefaultDir="UZ-LAT~1|uz-Latn-UZ"/>
+    <ROW Directory="viVN_Dir" Directory_Parent="APPDIR" DefaultDir="vi-VN"/>
+    <ROW Directory="zhCN_Dir" Directory_Parent="APPDIR" DefaultDir="zh-CN"/>
+    <ROW Directory="zhTW_Dir" Directory_Parent="APPDIR" DefaultDir="zh-TW"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCompsComponent">
     <ROW Component="AI_CustomARPName" ComponentId="{4E0BACC2-17BC-4D1C-8644-035CBB26E75A}" Directory_="APPDIR" Attributes="260" KeyPath="DisplayName" Options="1"/>
     <ROW Component="AI_DisableModify" ComponentId="{BF9EDC7E-4C53-4A20-91C8-38C80DAB5F5E}" Directory_="APPDIR" Attributes="260" KeyPath="NoModify" Options="1"/>
     <ROW Component="AI_INSTALLPERUSER" ComponentId="{405844B8-6DC6-4D01-9853-434A30A48F58}" Directory_="APPDIR" Attributes="260" KeyPath="AI_INSTALLPERUSER" Options="1"/>
     <ROW Component="APPDIR" ComponentId="{72C95DA9-D52D-4455-A5CF-08A183BD6232}" Directory_="APPDIR" Attributes="0"/>
+    <ROW Component="AngleSharp.dll" ComponentId="{E0EA37BB-9FED-48CF-B6BA-AAD754FC1ED9}" Directory_="APPDIR" Attributes="0" KeyPath="AngleSharp.dll"/>
+    <ROW Component="Clankboard.deps.json" ComponentId="{965A8E5F-5032-42E2-A4E4-990FEAD75D29}" Directory_="APPDIR" Attributes="0" KeyPath="Clankboard.deps.json" Type="0"/>
+    <ROW Component="Clankboard.dll" ComponentId="{9DDA330E-6172-44BB-8C4E-9788FA2FD307}" Directory_="APPDIR" Attributes="256" KeyPath="Clankboard.dll"/>
+    <ROW Component="Clankboard.exe" ComponentId="{446E4C26-82B1-4223-A2C9-FE393F09A617}" Directory_="APPDIR" Attributes="256" KeyPath="Clankboard.exe"/>
+    <ROW Component="CliWrap.dll" ComponentId="{2E334FC1-043C-4968-8CC3-A1FB5E29E31E}" Directory_="APPDIR" Attributes="0" KeyPath="CliWrap.dll"/>
+    <ROW Component="CommunityToolkit.Common.dll" ComponentId="{1316137A-A6BF-4782-AD76-0B12F1655956}" Directory_="APPDIR" Attributes="0" KeyPath="CommunityToolkit.Common.dll"/>
+    <ROW Component="CommunityToolkit.Mvvm.dll" ComponentId="{177A2861-5DC4-4A58-BB39-F62149E7DC94}" Directory_="APPDIR" Attributes="0" KeyPath="CommunityToolkit.Mvvm.dll"/>
+    <ROW Component="CommunityToolkit.WinUI.Animations.dll" ComponentId="{8DBC737A-94D6-4603-8A50-2D4F59987B36}" Directory_="APPDIR" Attributes="0" KeyPath="CommunityToolkit.WinUI.Animations.dll"/>
+    <ROW Component="CommunityToolkit.WinUI.Controls.Primitives.dll" ComponentId="{A4DC6F72-D0F1-416E-9D17-40D667C94C55}" Directory_="APPDIR" Attributes="0" KeyPath="CommunityToolkit.WinUI.Controls.Primitives.dll"/>
+    <ROW Component="CommunityToolkit.WinUI.Controls.RangeSelector.dll" ComponentId="{BC06E1F7-F70C-4706-A17D-BC3BB02E2CD7}" Directory_="APPDIR" Attributes="0" KeyPath="CommunityToolkit.WinUI.Controls.RangeSelector.dll"/>
+    <ROW Component="CommunityToolkit.WinUI.Controls.Segmented.dll" ComponentId="{36FCFD1F-6956-4DD9-B134-A05CF157B1DA}" Directory_="APPDIR" Attributes="0" KeyPath="CommunityToolkit.WinUI.Controls.Segmented.dll"/>
+    <ROW Component="CommunityToolkit.WinUI.Controls.SettingsControls.dll" ComponentId="{44B99E02-CF9A-4CC6-B0DC-C4F486446095}" Directory_="APPDIR" Attributes="0" KeyPath="CommunityToolkit.WinUI.Controls.SettingsControls.dll"/>
+    <ROW Component="CommunityToolkit.WinUI.Controls.Sizers.dll" ComponentId="{AFAEB7B3-A916-40F7-B1FB-D30593820E52}" Directory_="APPDIR" Attributes="0" KeyPath="CommunityToolkit.WinUI.Controls.Sizers.dll"/>
+    <ROW Component="CommunityToolkit.WinUI.Controls.TokenizingTextBox.dll" ComponentId="{DB9D8B40-17AB-4D18-86EA-B2678F72B31C}" Directory_="APPDIR" Attributes="0" KeyPath="CommunityToolkit.WinUI.Controls.TokenizingTextBox.dll"/>
+    <ROW Component="CommunityToolkit.WinUI.Converters.dll" ComponentId="{5D0DF635-7020-46A9-937E-D762A11F406F}" Directory_="APPDIR" Attributes="0" KeyPath="CommunityToolkit.WinUI.Converters.dll"/>
+    <ROW Component="CommunityToolkit.WinUI.Extensions.dll" ComponentId="{D36EDDD5-B96C-4C6B-82FD-F46EB21572F4}" Directory_="APPDIR" Attributes="0" KeyPath="CommunityToolkit.WinUI.Extensions.dll"/>
+    <ROW Component="CommunityToolkit.WinUI.Helpers.dll" ComponentId="{5C2A1A9D-5CC1-4D92-BE33-6541BCCA9D42}" Directory_="APPDIR" Attributes="0" KeyPath="CommunityToolkit.WinUI.Helpers.dll"/>
+    <ROW Component="CommunityToolkit.WinUI.Triggers.dll" ComponentId="{D61ABC6F-3409-41CA-9363-5CDF817B326F}" Directory_="APPDIR" Attributes="0" KeyPath="CommunityToolkit.WinUI.Triggers.dll"/>
+    <ROW Component="CoreMessagingXP.dll" ComponentId="{162E69FD-726E-4F4C-B90C-654026BD7CE1}" Directory_="APPDIR" Attributes="256" KeyPath="CoreMessagingXP.dll"/>
+    <ROW Component="DWriteCore.dll" ComponentId="{E81B2926-0278-4C08-8379-363CDBB5F1D9}" Directory_="APPDIR" Attributes="256" KeyPath="DWriteCore.dll"/>
+    <ROW Component="DwmSceneI.dll" ComponentId="{9772B830-9A54-4DD3-8DE3-5B7E0DCABB56}" Directory_="APPDIR" Attributes="256" KeyPath="DwmSceneI.dll"/>
+    <ROW Component="MRM.dll" ComponentId="{2C6896F6-A80D-434A-9EC9-B8FA400ECAA0}" Directory_="APPDIR" Attributes="256" KeyPath="MRM.dll"/>
+    <ROW Component="Microsoft.DirectManipulation.dll" ComponentId="{6637B884-8706-49B2-A9B4-49BFC77ADE1E}" Directory_="APPDIR" Attributes="256" KeyPath="Microsoft.DirectManipulation.dll"/>
+    <ROW Component="Microsoft.Graphics.Display.dll" ComponentId="{19C0BF2C-5191-4EB7-B2AC-FB570CCBBB53}" Directory_="APPDIR" Attributes="256" KeyPath="Microsoft.Graphics.Display.dll"/>
+    <ROW Component="Microsoft.InputStateManager.dll" ComponentId="{9A126EEF-1950-4FA6-8E25-9B6D0407127F}" Directory_="APPDIR" Attributes="256" KeyPath="Microsoft.InputStateManager.dll"/>
+    <ROW Component="Microsoft.InteractiveExperiences.Projection.dll" ComponentId="{78EB4C57-EC1C-4CDA-A6D3-F7F196FB9B3A}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.InteractiveExperiences.Projection.dll"/>
+    <ROW Component="Microsoft.Internal.FrameworkUdk.dll" ComponentId="{D8C205B2-9B8E-43E5-84F0-A34D3D9080D6}" Directory_="APPDIR" Attributes="256" KeyPath="Microsoft.Internal.FrameworkUdk.dll"/>
+    <ROW Component="Microsoft.UI.Composition.OSSupport.dll" ComponentId="{3F9CFEF8-7653-40A7-BAFC-A317A1F07F55}" Directory_="APPDIR" Attributes="256" KeyPath="Microsoft.UI.Composition.OSSupport.dll"/>
+    <ROW Component="Microsoft.UI.Input.dll" ComponentId="{EA8582B0-93E3-4B61-9DDA-E650AEB4E624}" Directory_="APPDIR" Attributes="256" KeyPath="Microsoft.UI.Input.dll"/>
+    <ROW Component="Microsoft.UI.Windowing.Core.dll" ComponentId="{7A80A5CE-F21D-4C58-8D08-90734695ED4A}" Directory_="APPDIR" Attributes="256" KeyPath="Microsoft.UI.Windowing.Core.dll"/>
+    <ROW Component="Microsoft.UI.Windowing.dll" ComponentId="{DF1AD45B-6483-4FF8-826A-2BEAAFA02FD4}" Directory_="APPDIR" Attributes="256" KeyPath="Microsoft.UI.Windowing.dll"/>
+    <ROW Component="Microsoft.UI.Xaml.Controls.dll" ComponentId="{00636C37-5FD0-4305-9CA3-493F2DC09A19}" Directory_="APPDIR" Attributes="256" KeyPath="Microsoft.UI.Xaml.Controls.dll"/>
+    <ROW Component="Microsoft.UI.Xaml.Internal.dll" ComponentId="{16D36031-4CAF-4DD8-816B-C4B6A0590C4E}" Directory_="APPDIR" Attributes="256" KeyPath="Microsoft.UI.Xaml.Internal.dll"/>
+    <ROW Component="Microsoft.UI.Xaml.Phone.dll" ComponentId="{C1D5C4E8-C9E3-45A0-BA6A-9E62334C2A78}" Directory_="APPDIR" Attributes="256" KeyPath="Microsoft.UI.Xaml.Phone.dll"/>
+    <ROW Component="Microsoft.UI.dll" ComponentId="{5FCAF720-A7FA-4EF8-9AF9-428E603AAC80}" Directory_="APPDIR" Attributes="256" KeyPath="Microsoft.UI.dll"/>
+    <ROW Component="Microsoft.Web.WebView2.Core.dll" ComponentId="{7E923C5A-DB35-44B2-A6FE-1709A7E3E650}" Directory_="APPDIR" Attributes="256" KeyPath="Microsoft.Web.WebView2.Core.dll"/>
+    <ROW Component="Microsoft.WinUI.dll" ComponentId="{0F06CF2A-4B4B-4D81-A587-04784F554B32}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.WinUI.dll"/>
+    <ROW Component="Microsoft.Windows.AppLifecycle.Projection.dll" ComponentId="{CAC57EF2-C9C4-4BB2-90FA-3149F550CE2E}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.Windows.AppLifecycle.Projection.dll"/>
+    <ROW Component="Microsoft.Windows.AppNotifications.Builder.Projection.dll" ComponentId="{A125A65A-EC8F-4182-9E61-B3CC89005AAD}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.Windows.AppNotifications.Builder.Projection.dll"/>
+    <ROW Component="Microsoft.Windows.AppNotifications.Projection.dll" ComponentId="{D57679D2-9972-4435-8948-D5870FB1AC7A}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.Windows.AppNotifications.Projection.dll"/>
+    <ROW Component="Microsoft.Windows.ApplicationModel.DynamicDependency.Projection.dll" ComponentId="{BD00B49B-6729-4A47-9BC9-425AC9374147}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.Windows.ApplicationModel.DynamicDependency.Projection.dll"/>
+    <ROW Component="Microsoft.Windows.ApplicationModel.R_2_esources.Projection.dll" ComponentId="{852FF8BA-868D-493F-94B2-FE7B0204DDE7}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.Windows.ApplicationModel.Resources.Projection.dll"/>
+    <ROW Component="Microsoft.Windows.ApplicationModel.Resources.dll" ComponentId="{59C84EC8-D600-4BD7-914F-25532D4CF80B}" Directory_="APPDIR" Attributes="256" KeyPath="Microsoft.Windows.ApplicationModel.Resources.dll"/>
+    <ROW Component="Microsoft.Windows.ApplicationModel.WindowsAppRuntime.Projection.dll" ComponentId="{9EA766E2-56C2-463A-9F31-4EEB8E531B96}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.Windows.ApplicationModel.WindowsAppRuntime.Projection.dll"/>
+    <ROW Component="Microsoft.Windows.Management.Deployment.Projection.dll" ComponentId="{EDC01E33-65E0-4116-AF94-9E132D871DAF}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.Windows.Management.Deployment.Projection.dll"/>
+    <ROW Component="Microsoft.Windows.PushNotifications.Projection.dll" ComponentId="{617F9B0F-FDFF-42F1-9C98-550E602BE22E}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.Windows.PushNotifications.Projection.dll"/>
+    <ROW Component="Microsoft.Windows.SDK.NET.dll" ComponentId="{659ED211-5C17-4E31-A7F3-98D5920A9A76}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.Windows.SDK.NET.dll"/>
+    <ROW Component="Microsoft.Windows.Security.AccessControl.Projection.dll" ComponentId="{9B175A26-A46D-4B70-975F-9650ED444EF5}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.Windows.Security.AccessControl.Projection.dll"/>
+    <ROW Component="Microsoft.Windows.System.Power.Projection.dll" ComponentId="{27BFFA50-DCD6-4B77-B9C2-ABC68188AFBB}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.Windows.System.Power.Projection.dll"/>
+    <ROW Component="Microsoft.Windows.System.Projection.dll" ComponentId="{C7E4F9AC-7DCB-4F67-B8B2-06184C8A142A}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.Windows.System.Projection.dll"/>
+    <ROW Component="Microsoft.Windows.Widgets.Projection.dll" ComponentId="{93B9FE0C-A2ED-4FA4-B68C-5D85DB91A213}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.Windows.Widgets.Projection.dll"/>
+    <ROW Component="Microsoft.Windows.Widgets.dll" ComponentId="{D8228D32-EA7E-4113-953F-305501FC4603}" Directory_="APPDIR" Attributes="256" KeyPath="Microsoft.Windows.Widgets.dll"/>
+    <ROW Component="Microsoft.WindowsAppRuntime.Bootstrap.Net.dll" ComponentId="{F906F03F-E9E9-4672-87FC-BA0477A33F73}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.WindowsAppRuntime.Bootstrap.Net.dll"/>
+    <ROW Component="Microsoft.WindowsAppRuntime.Bootstrap.dll" ComponentId="{1F852F8D-1857-4052-8734-978A3AA59BA9}" Directory_="APPDIR" Attributes="256" KeyPath="Microsoft.WindowsAppRuntime.Bootstrap.dll"/>
+    <ROW Component="Microsoft.WindowsAppRuntime.Insights.Resource.dll" ComponentId="{E10EA9D2-1066-427C-B186-621C3393AF25}" Directory_="APPDIR" Attributes="256" KeyPath="Microsoft.WindowsAppRuntime.Insights.Resource.dll"/>
+    <ROW Component="Microsoft.WindowsAppRuntime.dll" ComponentId="{18CF763A-6376-4BD9-AC69-29E26697CE5F}" Directory_="APPDIR" Attributes="256" KeyPath="Microsoft.WindowsAppRuntime.dll"/>
+    <ROW Component="Microsoft.ui.xaml.dll" ComponentId="{FA3204AF-71FD-4700-A396-174B81360CEE}" Directory_="APPDIR" Attributes="256" KeyPath="Microsoft.ui.xaml.dll"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui" ComponentId="{38A499FF-6620-43E2-BB29-FDD32CE097FA}" Directory_="amET_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_100" ComponentId="{2570D96B-5DE4-4E2D-A730-40EF43A5003E}" Directory_="enus_Dir" Attributes="256" KeyPath="Microsoft.ui.xaml.dll.mui_100" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_101" ComponentId="{54BC2823-72DB-477E-9D77-54BE673DCDA0}" Directory_="esES_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_101" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_102" ComponentId="{3A25B742-8F41-4CAB-A62C-7B1C47947541}" Directory_="esMX_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_102" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_103" ComponentId="{34430BFE-5A37-4125-9C37-68ACC8DC1A95}" Directory_="etEE_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_103" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_104" ComponentId="{DD2427D7-9E66-4388-9787-71FF27B21204}" Directory_="euES_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_104" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_105" ComponentId="{4C609174-F7A6-4104-9177-19D6113624B4}" Directory_="faIR_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_105" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_106" ComponentId="{8FF67F71-5A24-4FEF-A701-034D43476F85}" Directory_="fiFI_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_106" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_107" ComponentId="{865CFA98-825F-4488-A438-ED8B7FB97BB3}" Directory_="filPH_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_107" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_108" ComponentId="{E5DB2BA6-1E1B-408E-8CF5-09F4D8A6147D}" Directory_="frCA_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_108" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_109" ComponentId="{AA210DD5-B199-465E-BC47-791A72508D4C}" Directory_="frFR_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_109" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_110" ComponentId="{91DCD3F9-A9BD-4924-8298-54D402B39809}" Directory_="gaIE_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_110" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_111" ComponentId="{89CC9BF1-51FC-4409-8669-06334972A105}" Directory_="gdgb_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_111" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_112" ComponentId="{BCC670ED-05AF-4623-B6E2-BFDB70D908B9}" Directory_="glES_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_112" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_113" ComponentId="{327133DE-C290-4F22-9519-9A4B364CDE2C}" Directory_="guIN_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_113" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_114" ComponentId="{36292338-897C-49A3-887C-9C75E93011BB}" Directory_="heIL_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_114" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_115" ComponentId="{24070B0A-834D-4C0B-B631-024E22455565}" Directory_="hiIN_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_115" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_116" ComponentId="{80847720-2E7D-4F26-9B0F-53F768E4DEFB}" Directory_="hrHR_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_116" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_117" ComponentId="{9FF013E2-9DBA-4A7F-9205-17E6502376B1}" Directory_="huHU_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_117" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_118" ComponentId="{43FEF096-B178-4C3E-8A09-4CF4FE815D76}" Directory_="hyAM_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_118" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_119" ComponentId="{A42B1404-D541-4B25-8CAE-8E038BA8E9EA}" Directory_="idID_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_119" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_120" ComponentId="{4BF5D73F-CBF7-4754-A760-8B69CC952E2D}" Directory_="isIS_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_120" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_121" ComponentId="{BCFA7D91-4176-41A1-8639-D7140E93FCD8}" Directory_="itIT_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_121" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_122" ComponentId="{51900442-2083-4708-82AF-83D88118306C}" Directory_="jaJP_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_122" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_123" ComponentId="{9182C880-4883-495C-B902-9BF932D9F329}" Directory_="kaGE_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_123" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_124" ComponentId="{92909910-DE8A-4FF7-9513-75A2B9B490B0}" Directory_="kkKZ_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_124" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_125" ComponentId="{0FC707AD-DA4E-4A56-ACED-1BD933C7B8DA}" Directory_="kmKH_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_125" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_126" ComponentId="{48E30766-6E85-4544-8CE0-9505144E38C3}" Directory_="knIN_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_126" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_127" ComponentId="{28152192-116D-4315-9D38-DC3FE22ABDCE}" Directory_="kokIN_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_127" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_128" ComponentId="{C817644B-5B6A-4C27-83C3-68D7148EB0B4}" Directory_="koKR_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_128" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_129" ComponentId="{36587C3A-53A8-4A76-9C1E-AE0C1A424CAB}" Directory_="lbLU_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_129" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_130" ComponentId="{03326252-38A9-4C2F-BCF4-A2FE31DDC6DD}" Directory_="loLA_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_130" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_131" ComponentId="{11B85C8E-A39A-4699-9757-A5D1D94C8B5D}" Directory_="ltLT_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_131" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_132" ComponentId="{8DAA7037-1119-40ED-8406-D8D9991C0973}" Directory_="lvLV_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_132" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_133" ComponentId="{A2E08FD1-3721-40DF-BAFD-505D967E54F5}" Directory_="miNZ_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_133" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_134" ComponentId="{0EBCB83C-19E7-42AA-84C1-7E0390FA98DD}" Directory_="mkMK_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_134" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_135" ComponentId="{A2E4D9E2-E641-441B-AFF0-E49BE0924B6C}" Directory_="mlIN_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_135" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_136" ComponentId="{FB323B19-342A-472C-8F3C-371F26E453EC}" Directory_="mrIN_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_136" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_137" ComponentId="{DD8A2967-6196-47B4-9A7D-7BB3FF1355CA}" Directory_="msMY_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_137" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_138" ComponentId="{D145AD58-18B6-449C-83C9-6581F13B86C7}" Directory_="mtMT_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_138" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_139" ComponentId="{642ABF93-9CCA-491C-BDE5-79DAFA418D81}" Directory_="nbNO_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_139" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_140" ComponentId="{58ECB17E-4CFF-435C-B2DF-4BEEEFC9F63B}" Directory_="neNP_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_140" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_141" ComponentId="{BC5094F9-2552-4014-BE90-19377E7EB4E9}" Directory_="nlNL_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_141" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_142" ComponentId="{249E63CA-205B-4EA2-88C8-3F87361411FA}" Directory_="nnNO_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_142" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_143" ComponentId="{1E27324F-3924-4CFA-9374-B6524F53CD00}" Directory_="orIN_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_143" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_144" ComponentId="{4A674B09-AB4F-4EE2-B414-1DBA9805B1A1}" Directory_="paIN_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_144" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_145" ComponentId="{55C20C5B-8343-4917-B828-52BB7B7BBBC2}" Directory_="plPL_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_145" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_146" ComponentId="{D6C31BE7-16F3-4294-B005-D49526115FB3}" Directory_="ptBR_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_146" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_147" ComponentId="{EE347031-F360-4F40-BBD7-6958EE57C8C9}" Directory_="ptPT_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_147" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_148" ComponentId="{BDDAB4D6-31A9-4007-B33A-E0E85A21019B}" Directory_="quzPE_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_148" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_149" ComponentId="{94756A57-0CA1-4AD1-BD31-1BC7634B450D}" Directory_="roRO_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_149" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_150" ComponentId="{F872E603-074F-4D82-B973-C47C0E975387}" Directory_="ruRU_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_150" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_151" ComponentId="{B599F4CE-0C13-42D5-879D-A012628FC010}" Directory_="skSK_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_151" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_152" ComponentId="{5899C53F-9978-4E14-A3F3-F355A592E501}" Directory_="slSI_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_152" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_153" ComponentId="{C127BE8B-95D6-4484-B082-2814D87349CB}" Directory_="sqAL_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_153" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_154" ComponentId="{25990595-6275-4D45-975E-49F2DBEA0149}" Directory_="srCyrlBA_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_154" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_155" ComponentId="{1CA8278F-9D35-49C6-B99A-0CB9F127624B}" Directory_="srCyrlRS_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_155" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_156" ComponentId="{52C36A58-704B-4DA1-AE92-9FB426E7A95B}" Directory_="srLatnRS_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_156" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_157" ComponentId="{BF57F97F-E085-4D29-AF70-9AB4C4E8500E}" Directory_="svSE_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_157" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_158" ComponentId="{8DAEAD0F-6193-4605-BF84-2A10BD14EC70}" Directory_="taIN_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_158" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_159" ComponentId="{C1F12893-0DF7-4C5B-B625-75E523DBF06A}" Directory_="teIN_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_159" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_160" ComponentId="{33B13A24-A622-46DC-9E62-B7B6E9824F7D}" Directory_="thTH_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_160" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_161" ComponentId="{0B40ACB3-06B6-4257-9F04-129AC2E0BF27}" Directory_="trTR_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_161" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_162" ComponentId="{B8C39D65-91CC-4F0E-81BC-7E89F8DB7224}" Directory_="ttRU_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_162" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_163" ComponentId="{468DB038-706B-437B-8401-46892A366A54}" Directory_="ugCN_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_163" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_164" ComponentId="{9678621F-BBC4-49B3-8B08-BDB296B277A5}" Directory_="ukUA_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_164" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_165" ComponentId="{2BD73CF6-0DE5-47F6-8052-91FB374F7BEB}" Directory_="urPK_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_165" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_166" ComponentId="{67E72697-0B6B-4B0F-823F-B2ADC864F522}" Directory_="uzLatnUZ_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_166" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_167" ComponentId="{524B34FF-4013-4019-905F-82CA59D0881D}" Directory_="viVN_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_167" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_168" ComponentId="{7E476642-494D-4EA9-BC11-F7DC48D173BC}" Directory_="zhCN_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_168" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_169" ComponentId="{6B7B3817-0DDF-481D-9CB4-54206BC3FDCD}" Directory_="zhTW_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_169" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_170" ComponentId="{6C8F3166-5868-4057-81E8-67A3C6C908A7}" Directory_="afZA_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_170" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_86" ComponentId="{E84E0344-3A76-4FDE-A4B1-8E174CD9F88B}" Directory_="arSA_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_86" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_87" ComponentId="{5B4C4D38-4956-45F2-8BAF-2E9170F2CADC}" Directory_="asIN_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_87" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_88" ComponentId="{4FA03CBB-8591-4BA6-87E2-FF02DA8E73A4}" Directory_="azLatnAZ_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_88" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_89" ComponentId="{D179FBA6-CA02-4E5B-8348-0B0B856C800B}" Directory_="bgBG_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_89" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_90" ComponentId="{7FE2F07A-2B41-4D4D-8602-2BC44B583A28}" Directory_="bnIN_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_90" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_91" ComponentId="{BE931956-DE53-4F4A-B714-85BC1A993283}" Directory_="bsLatnBA_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_91" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_92" ComponentId="{313499C6-99A5-4854-885E-C6A764C351E3}" Directory_="caES_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_92" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_93" ComponentId="{0EC1178D-B859-45BF-B592-81FEBF52DC39}" Directory_="caEsVALENCIA_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_93" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_94" ComponentId="{068C8328-70A3-401D-8996-ECD3058EFDDE}" Directory_="csCZ_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_94" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_95" ComponentId="{17C4144B-9340-4AD0-8C95-C0A76E083587}" Directory_="cyGB_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_95" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_96" ComponentId="{07297DEB-95C4-4E66-8BB4-7BDD60F98B97}" Directory_="daDK_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_96" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_97" ComponentId="{9BA9B696-5F8E-4234-8AC5-885C1EF6A4F3}" Directory_="deDE_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_97" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_98" ComponentId="{27D134BD-A35A-4CB4-AAD3-3AA3CE2E4065}" Directory_="elGR_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_98" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.dll.mui_99" ComponentId="{B9492466-431B-4981-AA69-C112DA7ABDEA}" Directory_="enGB_Dir" Attributes="0" KeyPath="Microsoft.ui.xaml.dll.mui_99" Type="0"/>
+    <ROW Component="Microsoft.ui.xaml.resources.19h1.dll" ComponentId="{81C80D6A-D8D5-40E7-B3DD-935A4D8C506A}" Directory_="APPDIR" Attributes="256" KeyPath="Microsoft.ui.xaml.resources.19h1.dll"/>
+    <ROW Component="Microsoft.ui.xaml.resources.common.dll" ComponentId="{9ACD1693-C7ED-4F4C-88DB-10EDAED6FF76}" Directory_="APPDIR" Attributes="256" KeyPath="Microsoft.ui.xaml.resources.common.dll"/>
+    <ROW Component="NAudio.Asio.dll" ComponentId="{D363ECBB-E8E2-4ED5-B117-737785FFC015}" Directory_="APPDIR" Attributes="0" KeyPath="NAudio.Asio.dll"/>
+    <ROW Component="NAudio.Core.dll" ComponentId="{01C83A09-41BF-48DF-B0AD-D8CC791F2FE9}" Directory_="APPDIR" Attributes="0" KeyPath="NAudio.Core.dll"/>
+    <ROW Component="NAudio.Midi.dll" ComponentId="{DA2E0A7B-EE16-4489-974A-B25A429C91F5}" Directory_="APPDIR" Attributes="0" KeyPath="NAudio.Midi.dll"/>
+    <ROW Component="NAudio.Wasapi.dll" ComponentId="{95F67C54-3AD1-414A-B4DD-913D141AC1A4}" Directory_="APPDIR" Attributes="0" KeyPath="NAudio.Wasapi.dll"/>
+    <ROW Component="NAudio.WinForms.dll" ComponentId="{97170EE7-B9FB-4C53-8624-217E4C87F8C8}" Directory_="APPDIR" Attributes="0" KeyPath="NAudio.WinForms.dll"/>
+    <ROW Component="NAudio.WinMM.dll" ComponentId="{74C678B9-00B7-4773-8B4A-9A334A4CFF53}" Directory_="APPDIR" Attributes="0" KeyPath="NAudio.WinMM.dll"/>
+    <ROW Component="NAudio.dll" ComponentId="{F45C8DCA-3BA4-47BA-BCFA-0E356F279FB0}" Directory_="APPDIR" Attributes="0" KeyPath="NAudio.dll"/>
+    <ROW Component="Newtonsoft.Json.dll" ComponentId="{C29B4BD2-69F4-46C3-821B-12497F490475}" Directory_="APPDIR" Attributes="0" KeyPath="Newtonsoft.Json.dll"/>
     <ROW Component="ProductInformation" ComponentId="{8A3E65D0-EEAE-4819-9840-B86014B9A5BB}" Directory_="APPDIR" Attributes="260" KeyPath="Version"/>
+    <ROW Component="PushNotificationsLongRunningTask.ProxyStub.dll" ComponentId="{10AC186D-5019-49B9-8729-027E8CADE3B1}" Directory_="APPDIR" Attributes="256" KeyPath="PushNotificationsLongRunningTask.ProxyStub.dll"/>
+    <ROW Component="RestartAgent.exe" ComponentId="{0BEA11AA-09D6-40E0-AFB6-2CB0CA46C3E1}" Directory_="APPDIR" Attributes="256" KeyPath="RestartAgent.exe"/>
+    <ROW Component="SHORTCUTDIR" ComponentId="{774542E2-9A46-4188-AAFE-34F8CBEC069E}" Directory_="SHORTCUTDIR" Attributes="0"/>
+    <ROW Component="WinRT.Runtime.dll" ComponentId="{76424890-5546-4C04-AA16-42BC0D4E5CB1}" Directory_="APPDIR" Attributes="0" KeyPath="WinRT.Runtime.dll"/>
+    <ROW Component="WinUIEdit.dll" ComponentId="{47DAE4C2-942D-4B2A-A4A5-B79D5A148FF9}" Directory_="APPDIR" Attributes="256" KeyPath="WinUIEdit.dll"/>
+    <ROW Component="WindowsAppSdk.AppxDeploymentExtensio_1_ns.DesktopEventLogInstrumentation." ComponentId="{5A987900-CCB4-47DA-96AA-60C6CB5A4BE5}" Directory_="APPDIR" Attributes="256" KeyPath="WindowsAppSdk.AppxDeploymentExtensions.DesktopEventLogInstrumentation"/>
+    <ROW Component="WindowsAppSdk.AppxDeploymentExtensions.Desktop.dll" ComponentId="{1E3F0EAB-CB05-4600-845C-985A324C2699}" Directory_="APPDIR" Attributes="256" KeyPath="WindowsAppSdk.AppxDeploymentExtensions.Desktop.dll"/>
+    <ROW Component="YoutubeExplode.Converter.dll" ComponentId="{02BFAC9E-F667-4D4D-B754-D6C7930E7076}" Directory_="APPDIR" Attributes="0" KeyPath="YoutubeExplode.Converter.dll"/>
+    <ROW Component="YoutubeExplode.dll" ComponentId="{A4E45FA8-F0FD-41CE-93C0-8DBE9118161E}" Directory_="APPDIR" Attributes="0" KeyPath="YoutubeExplode.dll"/>
+    <ROW Component="dcompi.dll" ComponentId="{C65A0F78-EDDF-4066-998E-6A6438D1B317}" Directory_="APPDIR" Attributes="256" KeyPath="dcompi.dll"/>
+    <ROW Component="dwmcorei.dll" ComponentId="{12D120B6-C39F-490A-869B-E013DFC5D400}" Directory_="APPDIR" Attributes="256" KeyPath="dwmcorei.dll"/>
+    <ROW Component="map.html" ComponentId="{066D371A-FAB6-4EE0-A9EE-835C2D27429B}" Directory_="Assets_Dir" Attributes="0" KeyPath="map.html" Type="0"/>
+    <ROW Component="marshal.dll" ComponentId="{587162A7-71E9-4450-BD2A-95C918A85555}" Directory_="APPDIR" Attributes="256" KeyPath="marshal.dll"/>
+    <ROW Component="wuceffectsi.dll" ComponentId="{7CFB86A3-18F6-45F3-9D68-B5DB3B9B92FF}" Directory_="APPDIR" Attributes="256" KeyPath="wuceffectsi.dll"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFeatsComponent">
     <ROW Feature="MainFeature" Title="MainFeature" Description="Description" Display="1" Level="1" Directory_="APPDIR" Attributes="0"/>
     <ATTRIBUTE name="CurrentFeature" value="MainFeature"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiFilesComponent">
+    <ROW File="Microsoft.ui.xaml.dll.mui" Component_="Microsoft.ui.xaml.dll.mui" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\am-ET\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui" Component_="Microsoft.ui.xaml.dll.mui" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\am-ET\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_86" Component_="Microsoft.ui.xaml.dll.mui_86" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\ar-SA\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_86" Component_="Microsoft.ui.xaml.dll.mui_86" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\ar-SA\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_87" Component_="Microsoft.ui.xaml.dll.mui_87" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\as-IN\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_87" Component_="Microsoft.ui.xaml.dll.mui_87" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\as-IN\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_88" Component_="Microsoft.ui.xaml.dll.mui_88" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\az-Latn-AZ\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_88" Component_="Microsoft.ui.xaml.dll.mui_88" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\az-Latn-AZ\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_89" Component_="Microsoft.ui.xaml.dll.mui_89" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\bg-BG\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_89" Component_="Microsoft.ui.xaml.dll.mui_89" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\bg-BG\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_90" Component_="Microsoft.ui.xaml.dll.mui_90" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\bn-IN\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_90" Component_="Microsoft.ui.xaml.dll.mui_90" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\bn-IN\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_91" Component_="Microsoft.ui.xaml.dll.mui_91" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\bs-Latn-BA\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_91" Component_="Microsoft.ui.xaml.dll.mui_91" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\bs-Latn-BA\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_92" Component_="Microsoft.ui.xaml.dll.mui_92" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\ca-ES\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_92" Component_="Microsoft.ui.xaml.dll.mui_92" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\ca-ES\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_93" Component_="Microsoft.ui.xaml.dll.mui_93" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\ca-Es-VALENCIA\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_93" Component_="Microsoft.ui.xaml.dll.mui_93" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\ca-Es-VALENCIA\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_94" Component_="Microsoft.ui.xaml.dll.mui_94" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\cs-CZ\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_94" Component_="Microsoft.ui.xaml.dll.mui_94" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\cs-CZ\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_95" Component_="Microsoft.ui.xaml.dll.mui_95" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\cy-GB\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_95" Component_="Microsoft.ui.xaml.dll.mui_95" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\cy-GB\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_96" Component_="Microsoft.ui.xaml.dll.mui_96" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\da-DK\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_96" Component_="Microsoft.ui.xaml.dll.mui_96" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\da-DK\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_97" Component_="Microsoft.ui.xaml.dll.mui_97" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\de-DE\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_97" Component_="Microsoft.ui.xaml.dll.mui_97" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\de-DE\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_98" Component_="Microsoft.ui.xaml.dll.mui_98" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\el-GR\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_98" Component_="Microsoft.ui.xaml.dll.mui_98" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\el-GR\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_99" Component_="Microsoft.ui.xaml.dll.mui_99" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\en-GB\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_99" Component_="Microsoft.ui.xaml.dll.mui_99" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\en-GB\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_100" Component_="Microsoft.ui.xaml.dll.mui_100" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\en-us\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_100" Component_="Microsoft.ui.xaml.dll.mui_100" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\en-us\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_101" Component_="Microsoft.ui.xaml.dll.mui_101" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\es-ES\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_101" Component_="Microsoft.ui.xaml.dll.mui_101" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\es-ES\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_102" Component_="Microsoft.ui.xaml.dll.mui_102" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\es-MX\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_102" Component_="Microsoft.ui.xaml.dll.mui_102" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\es-MX\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_103" Component_="Microsoft.ui.xaml.dll.mui_103" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\et-EE\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_103" Component_="Microsoft.ui.xaml.dll.mui_103" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\et-EE\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_104" Component_="Microsoft.ui.xaml.dll.mui_104" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\eu-ES\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_104" Component_="Microsoft.ui.xaml.dll.mui_104" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\eu-ES\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_105" Component_="Microsoft.ui.xaml.dll.mui_105" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\fa-IR\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_105" Component_="Microsoft.ui.xaml.dll.mui_105" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\fa-IR\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_106" Component_="Microsoft.ui.xaml.dll.mui_106" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\fi-FI\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_106" Component_="Microsoft.ui.xaml.dll.mui_106" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\fi-FI\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_107" Component_="Microsoft.ui.xaml.dll.mui_107" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\fil-PH\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_107" Component_="Microsoft.ui.xaml.dll.mui_107" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\fil-PH\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_108" Component_="Microsoft.ui.xaml.dll.mui_108" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\fr-CA\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_108" Component_="Microsoft.ui.xaml.dll.mui_108" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\fr-CA\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_109" Component_="Microsoft.ui.xaml.dll.mui_109" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\fr-FR\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_109" Component_="Microsoft.ui.xaml.dll.mui_109" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\fr-FR\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_110" Component_="Microsoft.ui.xaml.dll.mui_110" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\ga-IE\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_110" Component_="Microsoft.ui.xaml.dll.mui_110" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\ga-IE\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_111" Component_="Microsoft.ui.xaml.dll.mui_111" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\gd-gb\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_111" Component_="Microsoft.ui.xaml.dll.mui_111" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\gd-gb\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_112" Component_="Microsoft.ui.xaml.dll.mui_112" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\gl-ES\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_112" Component_="Microsoft.ui.xaml.dll.mui_112" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\gl-ES\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_113" Component_="Microsoft.ui.xaml.dll.mui_113" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\gu-IN\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_113" Component_="Microsoft.ui.xaml.dll.mui_113" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\gu-IN\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_114" Component_="Microsoft.ui.xaml.dll.mui_114" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\he-IL\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_114" Component_="Microsoft.ui.xaml.dll.mui_114" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\he-IL\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_115" Component_="Microsoft.ui.xaml.dll.mui_115" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\hi-IN\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_115" Component_="Microsoft.ui.xaml.dll.mui_115" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\hi-IN\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_116" Component_="Microsoft.ui.xaml.dll.mui_116" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\hr-HR\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_116" Component_="Microsoft.ui.xaml.dll.mui_116" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\hr-HR\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_117" Component_="Microsoft.ui.xaml.dll.mui_117" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\hu-HU\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_117" Component_="Microsoft.ui.xaml.dll.mui_117" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\hu-HU\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_118" Component_="Microsoft.ui.xaml.dll.mui_118" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\hy-AM\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_118" Component_="Microsoft.ui.xaml.dll.mui_118" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\hy-AM\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_119" Component_="Microsoft.ui.xaml.dll.mui_119" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\id-ID\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_119" Component_="Microsoft.ui.xaml.dll.mui_119" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\id-ID\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_120" Component_="Microsoft.ui.xaml.dll.mui_120" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\is-IS\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_120" Component_="Microsoft.ui.xaml.dll.mui_120" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\is-IS\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_121" Component_="Microsoft.ui.xaml.dll.mui_121" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\it-IT\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_121" Component_="Microsoft.ui.xaml.dll.mui_121" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\it-IT\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_122" Component_="Microsoft.ui.xaml.dll.mui_122" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\ja-JP\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_122" Component_="Microsoft.ui.xaml.dll.mui_122" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\ja-JP\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_123" Component_="Microsoft.ui.xaml.dll.mui_123" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\ka-GE\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_123" Component_="Microsoft.ui.xaml.dll.mui_123" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\ka-GE\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_124" Component_="Microsoft.ui.xaml.dll.mui_124" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\kk-KZ\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_124" Component_="Microsoft.ui.xaml.dll.mui_124" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\kk-KZ\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_125" Component_="Microsoft.ui.xaml.dll.mui_125" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\km-KH\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_125" Component_="Microsoft.ui.xaml.dll.mui_125" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\km-KH\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_126" Component_="Microsoft.ui.xaml.dll.mui_126" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\kn-IN\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_126" Component_="Microsoft.ui.xaml.dll.mui_126" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\kn-IN\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_127" Component_="Microsoft.ui.xaml.dll.mui_127" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\kok-IN\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_127" Component_="Microsoft.ui.xaml.dll.mui_127" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\kok-IN\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_128" Component_="Microsoft.ui.xaml.dll.mui_128" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\ko-KR\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_128" Component_="Microsoft.ui.xaml.dll.mui_128" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\ko-KR\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_129" Component_="Microsoft.ui.xaml.dll.mui_129" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\lb-LU\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_129" Component_="Microsoft.ui.xaml.dll.mui_129" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\lb-LU\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_130" Component_="Microsoft.ui.xaml.dll.mui_130" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\lo-LA\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_130" Component_="Microsoft.ui.xaml.dll.mui_130" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\lo-LA\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_131" Component_="Microsoft.ui.xaml.dll.mui_131" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\lt-LT\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_131" Component_="Microsoft.ui.xaml.dll.mui_131" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\lt-LT\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_132" Component_="Microsoft.ui.xaml.dll.mui_132" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\lv-LV\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_132" Component_="Microsoft.ui.xaml.dll.mui_132" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\lv-LV\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="map.html" Component_="map.html" FileName="MAP~1.HTM|map.html" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.UI.Xaml\Assets\map.html" SelfReg="false"/>
+    <ROW File="NoiseAsset_256x256_PNG.png" Component_="map.html" FileName="NOISEA~1.PNG|NoiseAsset_256x256_PNG.png" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.UI.Xaml\Assets\NoiseAsset_256x256_PNG.png" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_133" Component_="Microsoft.ui.xaml.dll.mui_133" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\mi-NZ\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_133" Component_="Microsoft.ui.xaml.dll.mui_133" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\mi-NZ\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_134" Component_="Microsoft.ui.xaml.dll.mui_134" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\mk-MK\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_134" Component_="Microsoft.ui.xaml.dll.mui_134" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\mk-MK\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_135" Component_="Microsoft.ui.xaml.dll.mui_135" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\ml-IN\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_135" Component_="Microsoft.ui.xaml.dll.mui_135" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\ml-IN\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_136" Component_="Microsoft.ui.xaml.dll.mui_136" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\mr-IN\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_136" Component_="Microsoft.ui.xaml.dll.mui_136" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\mr-IN\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_137" Component_="Microsoft.ui.xaml.dll.mui_137" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\ms-MY\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_137" Component_="Microsoft.ui.xaml.dll.mui_137" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\ms-MY\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_138" Component_="Microsoft.ui.xaml.dll.mui_138" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\mt-MT\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_138" Component_="Microsoft.ui.xaml.dll.mui_138" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\mt-MT\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_139" Component_="Microsoft.ui.xaml.dll.mui_139" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\nb-NO\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_139" Component_="Microsoft.ui.xaml.dll.mui_139" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\nb-NO\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_140" Component_="Microsoft.ui.xaml.dll.mui_140" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\ne-NP\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_140" Component_="Microsoft.ui.xaml.dll.mui_140" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\ne-NP\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_141" Component_="Microsoft.ui.xaml.dll.mui_141" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\nl-NL\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_141" Component_="Microsoft.ui.xaml.dll.mui_141" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\nl-NL\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_142" Component_="Microsoft.ui.xaml.dll.mui_142" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\nn-NO\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_142" Component_="Microsoft.ui.xaml.dll.mui_142" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\nn-NO\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_143" Component_="Microsoft.ui.xaml.dll.mui_143" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\or-IN\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_143" Component_="Microsoft.ui.xaml.dll.mui_143" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\or-IN\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_144" Component_="Microsoft.ui.xaml.dll.mui_144" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\pa-IN\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_144" Component_="Microsoft.ui.xaml.dll.mui_144" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\pa-IN\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_145" Component_="Microsoft.ui.xaml.dll.mui_145" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\pl-PL\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_145" Component_="Microsoft.ui.xaml.dll.mui_145" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\pl-PL\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_146" Component_="Microsoft.ui.xaml.dll.mui_146" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\pt-BR\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_146" Component_="Microsoft.ui.xaml.dll.mui_146" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\pt-BR\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_147" Component_="Microsoft.ui.xaml.dll.mui_147" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\pt-PT\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_147" Component_="Microsoft.ui.xaml.dll.mui_147" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\pt-PT\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_148" Component_="Microsoft.ui.xaml.dll.mui_148" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\quz-PE\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_148" Component_="Microsoft.ui.xaml.dll.mui_148" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\quz-PE\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_149" Component_="Microsoft.ui.xaml.dll.mui_149" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\ro-RO\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_149" Component_="Microsoft.ui.xaml.dll.mui_149" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\ro-RO\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_150" Component_="Microsoft.ui.xaml.dll.mui_150" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\ru-RU\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_150" Component_="Microsoft.ui.xaml.dll.mui_150" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\ru-RU\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_151" Component_="Microsoft.ui.xaml.dll.mui_151" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\sk-SK\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_151" Component_="Microsoft.ui.xaml.dll.mui_151" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\sk-SK\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_152" Component_="Microsoft.ui.xaml.dll.mui_152" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\sl-SI\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_152" Component_="Microsoft.ui.xaml.dll.mui_152" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\sl-SI\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_153" Component_="Microsoft.ui.xaml.dll.mui_153" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\sq-AL\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_153" Component_="Microsoft.ui.xaml.dll.mui_153" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\sq-AL\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_154" Component_="Microsoft.ui.xaml.dll.mui_154" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\sr-Cyrl-BA\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_154" Component_="Microsoft.ui.xaml.dll.mui_154" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\sr-Cyrl-BA\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_155" Component_="Microsoft.ui.xaml.dll.mui_155" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\sr-Cyrl-RS\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_155" Component_="Microsoft.ui.xaml.dll.mui_155" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\sr-Cyrl-RS\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_156" Component_="Microsoft.ui.xaml.dll.mui_156" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\sr-Latn-RS\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_156" Component_="Microsoft.ui.xaml.dll.mui_156" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\sr-Latn-RS\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_157" Component_="Microsoft.ui.xaml.dll.mui_157" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\sv-SE\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_157" Component_="Microsoft.ui.xaml.dll.mui_157" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\sv-SE\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_158" Component_="Microsoft.ui.xaml.dll.mui_158" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\ta-IN\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_158" Component_="Microsoft.ui.xaml.dll.mui_158" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\ta-IN\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_159" Component_="Microsoft.ui.xaml.dll.mui_159" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\te-IN\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_159" Component_="Microsoft.ui.xaml.dll.mui_159" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\te-IN\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_160" Component_="Microsoft.ui.xaml.dll.mui_160" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\th-TH\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_160" Component_="Microsoft.ui.xaml.dll.mui_160" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\th-TH\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_161" Component_="Microsoft.ui.xaml.dll.mui_161" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\tr-TR\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_161" Component_="Microsoft.ui.xaml.dll.mui_161" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\tr-TR\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_162" Component_="Microsoft.ui.xaml.dll.mui_162" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\tt-RU\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_162" Component_="Microsoft.ui.xaml.dll.mui_162" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\tt-RU\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_163" Component_="Microsoft.ui.xaml.dll.mui_163" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\ug-CN\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_163" Component_="Microsoft.ui.xaml.dll.mui_163" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\ug-CN\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_164" Component_="Microsoft.ui.xaml.dll.mui_164" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\uk-UA\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_164" Component_="Microsoft.ui.xaml.dll.mui_164" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\uk-UA\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_165" Component_="Microsoft.ui.xaml.dll.mui_165" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\ur-PK\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_165" Component_="Microsoft.ui.xaml.dll.mui_165" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\ur-PK\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_166" Component_="Microsoft.ui.xaml.dll.mui_166" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\uz-Latn-UZ\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_166" Component_="Microsoft.ui.xaml.dll.mui_166" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\uz-Latn-UZ\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_167" Component_="Microsoft.ui.xaml.dll.mui_167" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\vi-VN\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_167" Component_="Microsoft.ui.xaml.dll.mui_167" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\vi-VN\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_168" Component_="Microsoft.ui.xaml.dll.mui_168" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\zh-CN\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_168" Component_="Microsoft.ui.xaml.dll.mui_168" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\zh-CN\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_169" Component_="Microsoft.ui.xaml.dll.mui_169" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\zh-TW\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_169" Component_="Microsoft.ui.xaml.dll.mui_169" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\zh-TW\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
+    <ROW File="AngleSharp.dll" Component_="AngleSharp.dll" FileName="ANGLES~1.DLL|AngleSharp.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\AngleSharp.dll" SelfReg="false"/>
+    <ROW File="Clankboard.deps.json" Component_="Clankboard.deps.json" FileName="CLANKB~1.JSO|Clankboard.deps.json" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Clankboard.deps.json" SelfReg="false"/>
+    <ROW File="Clankboard.dll" Component_="Clankboard.dll" FileName="CLANKB~1.DLL|Clankboard.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Clankboard.dll" SelfReg="false"/>
+    <ROW File="Clankboard.exe" Component_="Clankboard.exe" FileName="CLANKB~1.EXE|Clankboard.exe" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Clankboard.exe" SelfReg="false" DigSign="true"/>
+    <ROW File="Clankboard.pdb" Component_="Clankboard.exe" FileName="CLANKB~1.PDB|Clankboard.pdb" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Clankboard.pdb" SelfReg="false"/>
+    <ROW File="Clankboard.runtimeconfig.json" Component_="Clankboard.deps.json" FileName="CLANKB~2.JSO|Clankboard.runtimeconfig.json" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Clankboard.runtimeconfig.json" SelfReg="false"/>
+    <ROW File="CliWrap.dll" Component_="CliWrap.dll" FileName="CliWrap.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\CliWrap.dll" SelfReg="false"/>
+    <ROW File="CommunityToolkit.Common.dll" Component_="CommunityToolkit.Common.dll" FileName="COMMUN~1.DLL|CommunityToolkit.Common.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\CommunityToolkit.Common.dll" SelfReg="false"/>
+    <ROW File="CommunityToolkit.Mvvm.dll" Component_="CommunityToolkit.Mvvm.dll" FileName="COMMUN~2.DLL|CommunityToolkit.Mvvm.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\CommunityToolkit.Mvvm.dll" SelfReg="false"/>
+    <ROW File="CommunityToolkit.WinUI.Animations.dll" Component_="CommunityToolkit.WinUI.Animations.dll" FileName="COMMUN~3.DLL|CommunityToolkit.WinUI.Animations.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\CommunityToolkit.WinUI.Animations.dll" SelfReg="false"/>
+    <ROW File="CommunityToolkit.WinUI.Controls.Primitives.dll" Component_="CommunityToolkit.WinUI.Controls.Primitives.dll" FileName="COMMUN~4.DLL|CommunityToolkit.WinUI.Controls.Primitives.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\CommunityToolkit.WinUI.Controls.Primitives.dll" SelfReg="false"/>
+    <ROW File="CommunityToolkit.WinUI.Controls.RangeSelector.dll" Component_="CommunityToolkit.WinUI.Controls.RangeSelector.dll" FileName="COMMUN~5.DLL|CommunityToolkit.WinUI.Controls.RangeSelector.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\CommunityToolkit.WinUI.Controls.RangeSelector.dll" SelfReg="false"/>
+    <ROW File="CommunityToolkit.WinUI.Controls.Segmented.dll" Component_="CommunityToolkit.WinUI.Controls.Segmented.dll" FileName="COMMUN~6.DLL|CommunityToolkit.WinUI.Controls.Segmented.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\CommunityToolkit.WinUI.Controls.Segmented.dll" SelfReg="false"/>
+    <ROW File="CommunityToolkit.WinUI.Controls.SettingsControls.dll" Component_="CommunityToolkit.WinUI.Controls.SettingsControls.dll" FileName="COMMUN~7.DLL|CommunityToolkit.WinUI.Controls.SettingsControls.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\CommunityToolkit.WinUI.Controls.SettingsControls.dll" SelfReg="false"/>
+    <ROW File="CommunityToolkit.WinUI.Controls.Sizers.dll" Component_="CommunityToolkit.WinUI.Controls.Sizers.dll" FileName="COMMUN~8.DLL|CommunityToolkit.WinUI.Controls.Sizers.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\CommunityToolkit.WinUI.Controls.Sizers.dll" SelfReg="false"/>
+    <ROW File="CommunityToolkit.WinUI.Controls.TokenizingTextBox.dll" Component_="CommunityToolkit.WinUI.Controls.TokenizingTextBox.dll" FileName="COMMUN~9.DLL|CommunityToolkit.WinUI.Controls.TokenizingTextBox.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\CommunityToolkit.WinUI.Controls.TokenizingTextBox.dll" SelfReg="false"/>
+    <ROW File="CommunityToolkit.WinUI.Converters.dll" Component_="CommunityToolkit.WinUI.Converters.dll" FileName="COMMU~10.DLL|CommunityToolkit.WinUI.Converters.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\CommunityToolkit.WinUI.Converters.dll" SelfReg="false"/>
+    <ROW File="CommunityToolkit.WinUI.Extensions.dll" Component_="CommunityToolkit.WinUI.Extensions.dll" FileName="COMMU~11.DLL|CommunityToolkit.WinUI.Extensions.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\CommunityToolkit.WinUI.Extensions.dll" SelfReg="false"/>
+    <ROW File="CommunityToolkit.WinUI.Helpers.dll" Component_="CommunityToolkit.WinUI.Helpers.dll" FileName="COMMU~12.DLL|CommunityToolkit.WinUI.Helpers.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\CommunityToolkit.WinUI.Helpers.dll" SelfReg="false"/>
+    <ROW File="CommunityToolkit.WinUI.Triggers.dll" Component_="CommunityToolkit.WinUI.Triggers.dll" FileName="COMMU~13.DLL|CommunityToolkit.WinUI.Triggers.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\CommunityToolkit.WinUI.Triggers.dll" SelfReg="false"/>
+    <ROW File="CoreMessagingXP.dll" Component_="CoreMessagingXP.dll" FileName="COREME~1.DLL|CoreMessagingXP.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\CoreMessagingXP.dll" SelfReg="false"/>
+    <ROW File="dcompi.dll" Component_="dcompi.dll" FileName="dcompi.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\dcompi.dll" SelfReg="false"/>
+    <ROW File="dwmcorei.dll" Component_="dwmcorei.dll" FileName="dwmcorei.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\dwmcorei.dll" SelfReg="false"/>
+    <ROW File="DwmSceneI.dll" Component_="DwmSceneI.dll" FileName="DWMSCE~1.DLL|DwmSceneI.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\DwmSceneI.dll" SelfReg="false"/>
+    <ROW File="DWriteCore.dll" Component_="DWriteCore.dll" FileName="DWRITE~1.DLL|DWriteCore.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\DWriteCore.dll" SelfReg="false"/>
+    <ROW File="marshal.dll" Component_="marshal.dll" FileName="marshal.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\marshal.dll" SelfReg="false"/>
+    <ROW File="Microsoft.DirectManipulation.dll" Component_="Microsoft.DirectManipulation.dll" FileName="MICROS~1.DLL|Microsoft.DirectManipulation.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.DirectManipulation.dll" SelfReg="false"/>
+    <ROW File="Microsoft.Foundation.winmd" Component_="Clankboard.deps.json" FileName="MICROS~1.WIN|Microsoft.Foundation.winmd" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.Foundation.winmd" SelfReg="false"/>
+    <ROW File="Microsoft.Graphics.Display.dll" Component_="Microsoft.Graphics.Display.dll" FileName="MICROS~2.DLL|Microsoft.Graphics.Display.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.Graphics.Display.dll" SelfReg="false"/>
+    <ROW File="Microsoft.Graphics.winmd" Component_="Clankboard.deps.json" FileName="MICROS~2.WIN|Microsoft.Graphics.winmd" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.Graphics.winmd" SelfReg="false"/>
+    <ROW File="Microsoft.InputStateManager.dll" Component_="Microsoft.InputStateManager.dll" FileName="MICROS~3.DLL|Microsoft.InputStateManager.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.InputStateManager.dll" SelfReg="false"/>
+    <ROW File="Microsoft.InteractiveExperiences.Projection.dll" Component_="Microsoft.InteractiveExperiences.Projection.dll" FileName="MICROS~4.DLL|Microsoft.InteractiveExperiences.Projection.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.InteractiveExperiences.Projection.dll" SelfReg="false"/>
+    <ROW File="Microsoft.Internal.FrameworkUdk.dll" Component_="Microsoft.Internal.FrameworkUdk.dll" FileName="MICROS~5.DLL|Microsoft.Internal.FrameworkUdk.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.Internal.FrameworkUdk.dll" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Composition.OSSupport.dll" Component_="Microsoft.UI.Composition.OSSupport.dll" FileName="MICROS~6.DLL|Microsoft.UI.Composition.OSSupport.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.UI.Composition.OSSupport.dll" SelfReg="false"/>
+    <ROW File="Microsoft.UI.dll" Component_="Microsoft.UI.dll" FileName="MICROS~7.DLL|Microsoft.UI.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.UI.dll" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Input.dll" Component_="Microsoft.UI.Input.dll" FileName="MICROS~8.DLL|Microsoft.UI.Input.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.UI.Input.dll" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Text.winmd" Component_="Clankboard.deps.json" FileName="MICROS~3.WIN|Microsoft.UI.Text.winmd" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.UI.Text.winmd" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Windowing.Core.dll" Component_="Microsoft.UI.Windowing.Core.dll" FileName="MICROS~9.DLL|Microsoft.UI.Windowing.Core.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.UI.Windowing.Core.dll" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Windowing.dll" Component_="Microsoft.UI.Windowing.dll" FileName="MICRO~10.DLL|Microsoft.UI.Windowing.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.UI.Windowing.dll" SelfReg="false"/>
+    <ROW File="Microsoft.UI.winmd" Component_="Clankboard.deps.json" FileName="MICROS~4.WIN|Microsoft.UI.winmd" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.UI.winmd" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Controls.dll" Component_="Microsoft.UI.Xaml.Controls.dll" FileName="MICRO~11.DLL|Microsoft.UI.Xaml.Controls.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.UI.Xaml.Controls.dll" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Controls.pri" Component_="Clankboard.deps.json" FileName="MICROS~1.PRI|Microsoft.UI.Xaml.Controls.pri" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.UI.Xaml.Controls.pri" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll" Component_="Microsoft.ui.xaml.dll" FileName="MICRO~12.DLL|Microsoft.ui.xaml.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.ui.xaml.dll" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Internal.dll" Component_="Microsoft.UI.Xaml.Internal.dll" FileName="MICRO~13.DLL|Microsoft.UI.Xaml.Internal.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.UI.Xaml.Internal.dll" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll" Component_="Microsoft.UI.Xaml.Phone.dll" FileName="MICRO~14.DLL|Microsoft.UI.Xaml.Phone.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.UI.Xaml.Phone.dll" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.resources.19h1.dll" Component_="Microsoft.ui.xaml.resources.19h1.dll" FileName="MICRO~15.DLL|Microsoft.ui.xaml.resources.19h1.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.ui.xaml.resources.19h1.dll" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.resources.common.dll" Component_="Microsoft.ui.xaml.resources.common.dll" FileName="MICRO~16.DLL|Microsoft.ui.xaml.resources.common.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.ui.xaml.resources.common.dll" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.winmd" Component_="Clankboard.deps.json" FileName="MICROS~5.WIN|Microsoft.UI.Xaml.winmd" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.UI.Xaml.winmd" SelfReg="false"/>
+    <ROW File="Microsoft.Web.WebView2.Core.dll" Component_="Microsoft.Web.WebView2.Core.dll" FileName="MICRO~17.DLL|Microsoft.Web.WebView2.Core.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.Web.WebView2.Core.dll" SelfReg="false"/>
+    <ROW File="Microsoft.Web.WebView2.Core.winmd" Component_="Clankboard.deps.json" FileName="MICROS~6.WIN|Microsoft.Web.WebView2.Core.winmd" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.Web.WebView2.Core.winmd" SelfReg="false"/>
+    <ROW File="Microsoft.Windows.ApplicationModel.DynamicDependency.Projection.dll" Component_="Microsoft.Windows.ApplicationModel.DynamicDependency.Projection.dll" FileName="MICRO~18.DLL|Microsoft.Windows.ApplicationModel.DynamicDependency.Projection.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.Windows.ApplicationModel.DynamicDependency.Projection.dll" SelfReg="false"/>
+    <ROW File="Microsoft.Windows.ApplicationModel.DynamicDependency.winmd" Component_="Clankboard.deps.json" FileName="MICROS~7.WIN|Microsoft.Windows.ApplicationModel.DynamicDependency.winmd" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.Windows.ApplicationModel.DynamicDependency.winmd" SelfReg="false"/>
+    <ROW File="Microsoft.Windows.ApplicationModel.Resources.dll" Component_="Microsoft.Windows.ApplicationModel.Resources.dll" FileName="MICRO~19.DLL|Microsoft.Windows.ApplicationModel.Resources.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.Windows.ApplicationModel.Resources.dll" SelfReg="false"/>
+    <ROW File="Microsoft.Windows.ApplicationModel.Resources.Projection.dll" Component_="Microsoft.Windows.ApplicationModel.R_2_esources.Projection.dll" FileName="MICRO~20.DLL|Microsoft.Windows.ApplicationModel.Resources.Projection.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.Windows.ApplicationModel.Resources.Projection.dll" SelfReg="false"/>
+    <ROW File="Microsoft.Windows.ApplicationModel.Resources.winmd" Component_="Clankboard.deps.json" FileName="MICROS~8.WIN|Microsoft.Windows.ApplicationModel.Resources.winmd" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.Windows.ApplicationModel.Resources.winmd" SelfReg="false"/>
+    <ROW File="Microsoft.Windows.ApplicationModel.WindowsAppRuntime.Projection.dll" Component_="Microsoft.Windows.ApplicationModel.WindowsAppRuntime.Projection.dll" FileName="MICRO~21.DLL|Microsoft.Windows.ApplicationModel.WindowsAppRuntime.Projection.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.Windows.ApplicationModel.WindowsAppRuntime.Projection.dll" SelfReg="false"/>
+    <ROW File="Microsoft.Windows.ApplicationModel.WindowsAppRuntime.winmd" Component_="Clankboard.deps.json" FileName="MICROS~9.WIN|Microsoft.Windows.ApplicationModel.WindowsAppRuntime.winmd" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.Windows.ApplicationModel.WindowsAppRuntime.winmd" SelfReg="false"/>
+    <ROW File="Microsoft.Windows.AppLifecycle.Projection.dll" Component_="Microsoft.Windows.AppLifecycle.Projection.dll" FileName="MICRO~22.DLL|Microsoft.Windows.AppLifecycle.Projection.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.Windows.AppLifecycle.Projection.dll" SelfReg="false"/>
+    <ROW File="Microsoft.Windows.AppLifecycle.winmd" Component_="Clankboard.deps.json" FileName="MICRO~10.WIN|Microsoft.Windows.AppLifecycle.winmd" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.Windows.AppLifecycle.winmd" SelfReg="false"/>
+    <ROW File="Microsoft.Windows.AppNotifications.Builder.Projection.dll" Component_="Microsoft.Windows.AppNotifications.Builder.Projection.dll" FileName="MICRO~23.DLL|Microsoft.Windows.AppNotifications.Builder.Projection.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.Windows.AppNotifications.Builder.Projection.dll" SelfReg="false"/>
+    <ROW File="Microsoft.Windows.AppNotifications.Builder.winmd" Component_="Clankboard.deps.json" FileName="MICRO~11.WIN|Microsoft.Windows.AppNotifications.Builder.winmd" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.Windows.AppNotifications.Builder.winmd" SelfReg="false"/>
+    <ROW File="Microsoft.Windows.AppNotifications.Projection.dll" Component_="Microsoft.Windows.AppNotifications.Projection.dll" FileName="MICRO~24.DLL|Microsoft.Windows.AppNotifications.Projection.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.Windows.AppNotifications.Projection.dll" SelfReg="false"/>
+    <ROW File="Microsoft.Windows.AppNotifications.winmd" Component_="Clankboard.deps.json" FileName="MICRO~12.WIN|Microsoft.Windows.AppNotifications.winmd" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.Windows.AppNotifications.winmd" SelfReg="false"/>
+    <ROW File="Microsoft.Windows.Management.Deployment.Projection.dll" Component_="Microsoft.Windows.Management.Deployment.Projection.dll" FileName="MICRO~25.DLL|Microsoft.Windows.Management.Deployment.Projection.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.Windows.Management.Deployment.Projection.dll" SelfReg="false"/>
+    <ROW File="Microsoft.Windows.Management.Deployment.winmd" Component_="Clankboard.deps.json" FileName="MICRO~13.WIN|Microsoft.Windows.Management.Deployment.winmd" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.Windows.Management.Deployment.winmd" SelfReg="false"/>
+    <ROW File="Microsoft.Windows.PushNotifications.Projection.dll" Component_="Microsoft.Windows.PushNotifications.Projection.dll" FileName="MICRO~26.DLL|Microsoft.Windows.PushNotifications.Projection.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.Windows.PushNotifications.Projection.dll" SelfReg="false"/>
+    <ROW File="Microsoft.Windows.PushNotifications.winmd" Component_="Clankboard.deps.json" FileName="MICRO~14.WIN|Microsoft.Windows.PushNotifications.winmd" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.Windows.PushNotifications.winmd" SelfReg="false"/>
+    <ROW File="Microsoft.Windows.SDK.NET.dll" Component_="Microsoft.Windows.SDK.NET.dll" FileName="MICRO~27.DLL|Microsoft.Windows.SDK.NET.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.Windows.SDK.NET.dll" SelfReg="false"/>
+    <ROW File="Microsoft.Windows.Security.AccessControl.Projection.dll" Component_="Microsoft.Windows.Security.AccessControl.Projection.dll" FileName="MICRO~28.DLL|Microsoft.Windows.Security.AccessControl.Projection.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.Windows.Security.AccessControl.Projection.dll" SelfReg="false"/>
+    <ROW File="Microsoft.Windows.Security.AccessControl.winmd" Component_="Clankboard.deps.json" FileName="MICRO~15.WIN|Microsoft.Windows.Security.AccessControl.winmd" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.Windows.Security.AccessControl.winmd" SelfReg="false"/>
+    <ROW File="Microsoft.Windows.System.Power.Projection.dll" Component_="Microsoft.Windows.System.Power.Projection.dll" FileName="MICRO~29.DLL|Microsoft.Windows.System.Power.Projection.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.Windows.System.Power.Projection.dll" SelfReg="false"/>
+    <ROW File="Microsoft.Windows.System.Power.winmd" Component_="Clankboard.deps.json" FileName="MICRO~16.WIN|Microsoft.Windows.System.Power.winmd" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.Windows.System.Power.winmd" SelfReg="false"/>
+    <ROW File="Microsoft.Windows.System.Projection.dll" Component_="Microsoft.Windows.System.Projection.dll" FileName="MICRO~30.DLL|Microsoft.Windows.System.Projection.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.Windows.System.Projection.dll" SelfReg="false"/>
+    <ROW File="Microsoft.Windows.System.winmd" Component_="Clankboard.deps.json" FileName="MICRO~17.WIN|Microsoft.Windows.System.winmd" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.Windows.System.winmd" SelfReg="false"/>
+    <ROW File="Microsoft.Windows.Widgets.dll" Component_="Microsoft.Windows.Widgets.dll" FileName="MICRO~31.DLL|Microsoft.Windows.Widgets.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.Windows.Widgets.dll" SelfReg="false"/>
+    <ROW File="Microsoft.Windows.Widgets.Projection.dll" Component_="Microsoft.Windows.Widgets.Projection.dll" FileName="MICRO~32.DLL|Microsoft.Windows.Widgets.Projection.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.Windows.Widgets.Projection.dll" SelfReg="false"/>
+    <ROW File="Microsoft.Windows.Widgets.winmd" Component_="Clankboard.deps.json" FileName="MICRO~18.WIN|Microsoft.Windows.Widgets.winmd" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.Windows.Widgets.winmd" SelfReg="false"/>
+    <ROW File="Microsoft.WindowsAppRuntime.Bootstrap.dll" Component_="Microsoft.WindowsAppRuntime.Bootstrap.dll" FileName="MICRO~33.DLL|Microsoft.WindowsAppRuntime.Bootstrap.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.WindowsAppRuntime.Bootstrap.dll" SelfReg="false"/>
+    <ROW File="Microsoft.WindowsAppRuntime.Bootstrap.Net.dll" Component_="Microsoft.WindowsAppRuntime.Bootstrap.Net.dll" FileName="MICRO~34.DLL|Microsoft.WindowsAppRuntime.Bootstrap.Net.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.WindowsAppRuntime.Bootstrap.Net.dll" SelfReg="false"/>
+    <ROW File="Microsoft.WindowsAppRuntime.dll" Component_="Microsoft.WindowsAppRuntime.dll" FileName="MICRO~35.DLL|Microsoft.WindowsAppRuntime.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.WindowsAppRuntime.dll" SelfReg="false"/>
+    <ROW File="Microsoft.WindowsAppRuntime.Insights.Resource.dll" Component_="Microsoft.WindowsAppRuntime.Insights.Resource.dll" FileName="MICRO~36.DLL|Microsoft.WindowsAppRuntime.Insights.Resource.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.WindowsAppRuntime.Insights.Resource.dll" SelfReg="false"/>
+    <ROW File="Microsoft.WinUI.dll" Component_="Microsoft.WinUI.dll" FileName="MICRO~37.DLL|Microsoft.WinUI.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Microsoft.WinUI.dll" SelfReg="false"/>
+    <ROW File="MRM.dll" Component_="MRM.dll" FileName="MRM.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\MRM.dll" SelfReg="false"/>
+    <ROW File="NAudio.Asio.dll" Component_="NAudio.Asio.dll" FileName="NAUDIO~1.DLL|NAudio.Asio.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\NAudio.Asio.dll" SelfReg="false"/>
+    <ROW File="NAudio.Core.dll" Component_="NAudio.Core.dll" FileName="NAUDIO~2.DLL|NAudio.Core.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\NAudio.Core.dll" SelfReg="false"/>
+    <ROW File="NAudio.dll" Component_="NAudio.dll" FileName="NAudio.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\NAudio.dll" SelfReg="false"/>
+    <ROW File="NAudio.Midi.dll" Component_="NAudio.Midi.dll" FileName="NAUDIO~3.DLL|NAudio.Midi.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\NAudio.Midi.dll" SelfReg="false"/>
+    <ROW File="NAudio.Wasapi.dll" Component_="NAudio.Wasapi.dll" FileName="NAUDIO~4.DLL|NAudio.Wasapi.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\NAudio.Wasapi.dll" SelfReg="false"/>
+    <ROW File="NAudio.WinForms.dll" Component_="NAudio.WinForms.dll" FileName="NAUDIO~5.DLL|NAudio.WinForms.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\NAudio.WinForms.dll" SelfReg="false"/>
+    <ROW File="NAudio.WinMM.dll" Component_="NAudio.WinMM.dll" FileName="NAUDIO~6.DLL|NAudio.WinMM.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\NAudio.WinMM.dll" SelfReg="false"/>
+    <ROW File="Newtonsoft.Json.dll" Component_="Newtonsoft.Json.dll" FileName="NEWTON~1.DLL|Newtonsoft.Json.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\Newtonsoft.Json.dll" SelfReg="false"/>
+    <ROW File="PushNotificationsLongRunningTask.ProxyStub.dll" Component_="PushNotificationsLongRunningTask.ProxyStub.dll" FileName="PUSHNO~1.DLL|PushNotificationsLongRunningTask.ProxyStub.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\PushNotificationsLongRunningTask.ProxyStub.dll" SelfReg="false"/>
+    <ROW File="resources.pri" Component_="Clankboard.deps.json" FileName="RESOUR~1.PRI|resources.pri" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\resources.pri" SelfReg="false"/>
+    <ROW File="RestartAgent.exe" Component_="RestartAgent.exe" FileName="RESTAR~1.EXE|RestartAgent.exe" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\RestartAgent.exe" SelfReg="false"/>
+    <ROW File="WindowsAppRuntime.png" Component_="Clankboard.deps.json" FileName="WINDOW~1.PNG|WindowsAppRuntime.png" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\WindowsAppRuntime.png" SelfReg="false"/>
+    <ROW File="WindowsAppSdk.AppxDeploymentExtensions.Desktop.dll" Component_="WindowsAppSdk.AppxDeploymentExtensions.Desktop.dll" FileName="WINDOW~1.DLL|WindowsAppSdk.AppxDeploymentExtensions.Desktop.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\WindowsAppSdk.AppxDeploymentExtensions.Desktop.dll" SelfReg="false"/>
+    <ROW File="WindowsAppSdk.AppxDeploymentExtensions.DesktopEventLogInstrumentation" Component_="WindowsAppSdk.AppxDeploymentExtensio_1_ns.DesktopEventLogInstrumentation." FileName="WINDOW~2.DLL|WindowsAppSdk.AppxDeploymentExtensions.Desktop-EventLog-Instrumentation.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\WindowsAppSdk.AppxDeploymentExtensions.Desktop-EventLog-Instrumentation.dll" SelfReg="false"/>
+    <ROW File="WinRT.Runtime.dll" Component_="WinRT.Runtime.dll" FileName="WINRTR~1.DLL|WinRT.Runtime.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\WinRT.Runtime.dll" SelfReg="false"/>
+    <ROW File="WinUIEdit.dll" Component_="WinUIEdit.dll" FileName="WINUIE~1.DLL|WinUIEdit.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\WinUIEdit.dll" SelfReg="false"/>
+    <ROW File="wuceffectsi.dll" Component_="wuceffectsi.dll" FileName="WUCEFF~1.DLL|wuceffectsi.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\wuceffectsi.dll" SelfReg="false"/>
+    <ROW File="YoutubeExplode.Converter.dll" Component_="YoutubeExplode.Converter.dll" FileName="YOUTUB~1.DLL|YoutubeExplode.Converter.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\YoutubeExplode.Converter.dll" SelfReg="false"/>
+    <ROW File="YoutubeExplode.dll" Component_="YoutubeExplode.dll" FileName="YOUTUB~2.DLL|YoutubeExplode.dll" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\YoutubeExplode.dll" SelfReg="false"/>
+    <ROW File="Microsoft.ui.xaml.dll.mui_170" Component_="Microsoft.ui.xaml.dll.mui_170" FileName="MICROS~1.MUI|Microsoft.ui.xaml.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\af-ZA\Microsoft.ui.xaml.dll.mui" SelfReg="false"/>
+    <ROW File="Microsoft.UI.Xaml.Phone.dll.mui_170" Component_="Microsoft.ui.xaml.dll.mui_170" FileName="MICROS~2.MUI|Microsoft.UI.Xaml.Phone.dll.mui" Attributes="0" SourcePath="..\Clankboard\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64\publish\win10-x64\af-ZA\Microsoft.UI.Xaml.Phone.dll.mui" SelfReg="false"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.AiPersistentPropComponent">
     <ROW Property="AI_INSTALLPERUSER" Registry="AI_INSTALLPERUSER" HklmSearch="AI_INSTALLPERUSER" HkcuSearch="AI_INSTALLPERUSER_1" Hklm64Search="AI_INSTALLPERUSER_2" Hkcu64Search="AI_INSTALLPERUSER_3"/>
@@ -115,7 +651,7 @@
     <ROW Dialog_="FilesInUse" Control="BottomLine" Type="Line" X="4" Y="234" Width="368" Height="1" Attributes="1" Order="500" MsiKey="FilesInUse#BottomLine"/>
     <ROW Dialog_="FolderDlg" Control="BottomLine" Type="Line" X="4" Y="234" Width="368" Height="1" Attributes="1" Order="500" MsiKey="FolderDlg#BottomLine"/>
     <ROW Dialog_="InstallTypeDlg" Control="BottomLine" Type="Line" X="4" Y="234" Width="368" Height="1" Attributes="1" Order="600" MsiKey="InstallTypeDlg#BottomLine"/>
-    <ROW Dialog_="LicenseAgreementDlg" Control="AgreementText" Type="ScrollableText" X="20" Y="60" Width="330" Height="120" Attributes="7" Text="C:\Users\009da\Downloads\desktop_eula.rtf" Order="400" TextLocId="Control.Text.LicenseAgreementDlg#AgreementText" MsiKey="LicenseAgreementDlg#AgreementText"/>
+    <ROW Dialog_="LicenseAgreementDlg" Control="AgreementText" Type="ScrollableText" X="20" Y="60" Width="330" Height="120" Attributes="7" Text="..\..\..\..\Downloads\desktop_eula.rtf" Order="400" TextLocId="Control.Text.LicenseAgreementDlg#AgreementText" MsiKey="LicenseAgreementDlg#AgreementText"/>
     <ROW Dialog_="LicenseAgreementDlg" Control="BottomLine" Type="Line" X="4" Y="234" Width="368" Height="1" Attributes="1" Order="600" MsiKey="LicenseAgreementDlg#BottomLine"/>
     <ROW Dialog_="MaintenanceTypeDlg" Control="BottomLine" Type="Line" X="4" Y="234" Width="368" Height="1" Attributes="1" Order="1100" MsiKey="MaintenanceTypeDlg#BottomLine"/>
     <ROW Dialog_="MsiRMFilesInUse" Control="BottomLine" Type="Line" X="4" Y="234" Width="368" Height="1" Attributes="1" Order="1000" MsiKey="MsiRMFilesInUse#BottomLine"/>
@@ -156,6 +692,7 @@
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCreateFolderComponent">
     <ROW Directory_="APPDIR" Component_="APPDIR" ManualDelete="true"/>
+    <ROW Directory_="SHORTCUTDIR" Component_="SHORTCUTDIR" ManualDelete="false"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCustActComponent">
     <ROW Action="AI_AuthorSinglePackage" Type="1" Source="aicustact.dll" Target="AI_AuthorSinglePackage" WithoutSeq="true"/>
@@ -186,6 +723,173 @@
     <ROW Feature_="MainFeature" Component_="AI_CustomARPName"/>
     <ROW Feature_="MainFeature" Component_="AI_DisableModify"/>
     <ROW Feature_="MainFeature" Component_="AI_INSTALLPERUSER"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_86"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_87"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_88"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_89"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_90"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_91"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_92"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_93"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_94"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_95"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_96"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_97"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_98"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_99"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_100"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_101"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_102"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_103"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_104"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_105"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_106"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_107"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_108"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_109"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_110"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_111"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_112"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_113"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_114"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_115"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_116"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_117"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_118"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_119"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_120"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_121"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_122"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_123"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_124"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_125"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_126"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_127"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_128"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_129"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_130"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_131"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_132"/>
+    <ROW Feature_="MainFeature" Component_="map.html"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_133"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_134"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_135"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_136"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_137"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_138"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_139"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_140"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_141"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_142"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_143"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_144"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_145"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_146"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_147"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_148"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_149"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_150"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_151"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_152"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_153"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_154"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_155"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_156"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_157"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_158"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_159"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_160"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_161"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_162"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_163"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_164"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_165"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_166"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_167"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_168"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_169"/>
+    <ROW Feature_="MainFeature" Component_="AngleSharp.dll"/>
+    <ROW Feature_="MainFeature" Component_="Clankboard.deps.json"/>
+    <ROW Feature_="MainFeature" Component_="Clankboard.dll"/>
+    <ROW Feature_="MainFeature" Component_="Clankboard.exe"/>
+    <ROW Feature_="MainFeature" Component_="CliWrap.dll"/>
+    <ROW Feature_="MainFeature" Component_="CommunityToolkit.Common.dll"/>
+    <ROW Feature_="MainFeature" Component_="CommunityToolkit.Mvvm.dll"/>
+    <ROW Feature_="MainFeature" Component_="CommunityToolkit.WinUI.Animations.dll"/>
+    <ROW Feature_="MainFeature" Component_="CommunityToolkit.WinUI.Controls.Primitives.dll"/>
+    <ROW Feature_="MainFeature" Component_="CommunityToolkit.WinUI.Controls.RangeSelector.dll"/>
+    <ROW Feature_="MainFeature" Component_="CommunityToolkit.WinUI.Controls.Segmented.dll"/>
+    <ROW Feature_="MainFeature" Component_="CommunityToolkit.WinUI.Controls.SettingsControls.dll"/>
+    <ROW Feature_="MainFeature" Component_="CommunityToolkit.WinUI.Controls.Sizers.dll"/>
+    <ROW Feature_="MainFeature" Component_="CommunityToolkit.WinUI.Controls.TokenizingTextBox.dll"/>
+    <ROW Feature_="MainFeature" Component_="CommunityToolkit.WinUI.Converters.dll"/>
+    <ROW Feature_="MainFeature" Component_="CommunityToolkit.WinUI.Extensions.dll"/>
+    <ROW Feature_="MainFeature" Component_="CommunityToolkit.WinUI.Helpers.dll"/>
+    <ROW Feature_="MainFeature" Component_="CommunityToolkit.WinUI.Triggers.dll"/>
+    <ROW Feature_="MainFeature" Component_="CoreMessagingXP.dll"/>
+    <ROW Feature_="MainFeature" Component_="dcompi.dll"/>
+    <ROW Feature_="MainFeature" Component_="dwmcorei.dll"/>
+    <ROW Feature_="MainFeature" Component_="DwmSceneI.dll"/>
+    <ROW Feature_="MainFeature" Component_="DWriteCore.dll"/>
+    <ROW Feature_="MainFeature" Component_="marshal.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.DirectManipulation.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.Graphics.Display.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.InputStateManager.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.InteractiveExperiences.Projection.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.Internal.FrameworkUdk.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.UI.Composition.OSSupport.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.UI.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.UI.Input.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.UI.Windowing.Core.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.UI.Windowing.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.UI.Xaml.Controls.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.UI.Xaml.Internal.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.UI.Xaml.Phone.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.resources.19h1.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.resources.common.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.Web.WebView2.Core.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.Windows.ApplicationModel.DynamicDependency.Projection.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.Windows.ApplicationModel.Resources.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.Windows.ApplicationModel.R_2_esources.Projection.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.Windows.ApplicationModel.WindowsAppRuntime.Projection.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.Windows.AppLifecycle.Projection.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.Windows.AppNotifications.Builder.Projection.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.Windows.AppNotifications.Projection.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.Windows.Management.Deployment.Projection.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.Windows.PushNotifications.Projection.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.Windows.SDK.NET.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.Windows.Security.AccessControl.Projection.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.Windows.System.Power.Projection.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.Windows.System.Projection.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.Windows.Widgets.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.Windows.Widgets.Projection.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.WindowsAppRuntime.Bootstrap.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.WindowsAppRuntime.Bootstrap.Net.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.WindowsAppRuntime.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.WindowsAppRuntime.Insights.Resource.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.WinUI.dll"/>
+    <ROW Feature_="MainFeature" Component_="MRM.dll"/>
+    <ROW Feature_="MainFeature" Component_="NAudio.Asio.dll"/>
+    <ROW Feature_="MainFeature" Component_="NAudio.Core.dll"/>
+    <ROW Feature_="MainFeature" Component_="NAudio.dll"/>
+    <ROW Feature_="MainFeature" Component_="NAudio.Midi.dll"/>
+    <ROW Feature_="MainFeature" Component_="NAudio.Wasapi.dll"/>
+    <ROW Feature_="MainFeature" Component_="NAudio.WinForms.dll"/>
+    <ROW Feature_="MainFeature" Component_="NAudio.WinMM.dll"/>
+    <ROW Feature_="MainFeature" Component_="Newtonsoft.Json.dll"/>
+    <ROW Feature_="MainFeature" Component_="PushNotificationsLongRunningTask.ProxyStub.dll"/>
+    <ROW Feature_="MainFeature" Component_="RestartAgent.exe"/>
+    <ROW Feature_="MainFeature" Component_="WindowsAppSdk.AppxDeploymentExtensions.Desktop.dll"/>
+    <ROW Feature_="MainFeature" Component_="WindowsAppSdk.AppxDeploymentExtensio_1_ns.DesktopEventLogInstrumentation."/>
+    <ROW Feature_="MainFeature" Component_="WinRT.Runtime.dll"/>
+    <ROW Feature_="MainFeature" Component_="WinUIEdit.dll"/>
+    <ROW Feature_="MainFeature" Component_="wuceffectsi.dll"/>
+    <ROW Feature_="MainFeature" Component_="YoutubeExplode.Converter.dll"/>
+    <ROW Feature_="MainFeature" Component_="YoutubeExplode.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ui.xaml.dll.mui_170"/>
+    <ROW Feature_="MainFeature" Component_="SHORTCUTDIR"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiInstExSeqComponent">
     <ROW Action="AI_DOWNGRADE" Condition="AI_NEWERPRODUCTFOUND AND (UILevel &lt;&gt; 5)" Sequence="210"/>
@@ -259,6 +963,11 @@
     <ROW Registry="VersionMajor" Root="-1" Key="Software\Microsoft\Windows\CurrentVersion\Uninstall\[ProductName] [ProductVersion]" Name="VersionMajor" Value="#1" Component_="AI_CustomARPName" VirtualValue="#"/>
     <ROW Registry="VersionMinor" Root="-1" Key="Software\Microsoft\Windows\CurrentVersion\Uninstall\[ProductName] [ProductVersion]" Name="VersionMinor" Value="#0" Component_="AI_CustomARPName" VirtualValue="#"/>
     <ROW Registry="Windows" Root="-1" Key="Software\Microsoft\Windows" Name="\"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiShortsComponent">
+    <ROW Shortcut="ClankboardBETA" Directory_="SHORTCUTDIR" Name="CLANKB~1|Clankboard (BETA)" Component_="Clankboard.exe" Target="[#Clankboard.exe]" Description="A soundboard app focused on ease of use and customizability." Hotkey="0" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
+    <ROW Shortcut="ClankboardBETA_1" Directory_="DesktopFolder" Name="CLANKB~1|Clankboard (BETA)" Component_="Clankboard.exe" Target="[#Clankboard.exe]" Description="A soundboard app focused on ease of use and customizability." Hotkey="0" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
+    <ROW Shortcut="ClankboardBETA_2" Directory_="StartMenuFolder" Name="CLANKB~1|Clankboard (BETA)" Component_="Clankboard.exe" Target="[#Clankboard.exe]" Description="A soundboard app focused on ease of use and customizability." Hotkey="0" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiThemeComponent">
     <ATTRIBUTE name="UsedTheme" value="classic"/>
