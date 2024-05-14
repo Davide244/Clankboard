@@ -1,5 +1,5 @@
 <Project>
  <PropertyGroup>
-    <IsMsixRelease>false</IsMsixRelease>
+    <IsMsixRelease>true</IsMsixRelease>
  </PropertyGroup>
 </Project>

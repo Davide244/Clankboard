@@ -17,6 +17,15 @@
 	<PublishAot>False</PublishAot>
 	<RuntimeIdentifier>win-x64</RuntimeIdentifier>
 	<PublishTrimmed>False</PublishTrimmed>
+	<WindowsPackageType>MSIX</WindowsPackageType>
+	<GenerateAppInstallerFile>True</GenerateAppInstallerFile>
+	<AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
+	<AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
+	<AppxBundlePlatforms>x64</AppxBundlePlatforms>
+	<AppInstallerUri>C:\Users\009da\Documents\Projekte\Clankboard_CS\Installer\MSIX_VS</AppInstallerUri>
+	<HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
+	<PackageCertificateThumbprint>B7B00588EC1F9298A052ADEFFF62E8EF6942D0F6</PackageCertificateThumbprint>
+	<AppxSymbolPackageEnabled>True</AppxSymbolPackageEnabled>
   </PropertyGroup>
 
   <ItemGroup>
@@ -55,7 +64,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.5.240404000" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.4.230913002" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.3233" />
     <PackageReference Include="NAudio" Version="2.2.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />

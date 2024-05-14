@@ -5,18 +5,20 @@
   xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
   xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
-  IgnorableNamespaces="uap rescap">
+  xmlns:iot="http://schemas.microsoft.com/appx/manifest/iot/windows10"
+  xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
+  IgnorableNamespaces="uap rescap iot uap3">
 
   <Identity
     Name="502fb0cc-0cea-479d-9cbf-b98895700fd0"
-    Publisher="CN=HP Omen X 900-155ng"
-    Version="1.0.0.0" />
+    Publisher="CN=David Jonjic, O=David Jonjic, L=Eugendorf, S=Salzburg, C=AT"
+    Version="0.1.6.0" />
 
   <mp:PhoneIdentity PhoneProductId="502fb0cc-0cea-479d-9cbf-b98895700fd0" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>Clankboard</DisplayName>
-    <PublisherDisplayName>HP Omen X 900-155ng</PublisherDisplayName>
+    <PublisherDisplayName>David Jonjic</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
@@ -47,5 +49,8 @@
 
   <Capabilities>
     <rescap:Capability Name="runFullTrust" />
+    <Capability Name="internetClient"/>
+    <uap3:Capability Name="backgroundMediaPlayback"/>
+    <DeviceCapability Name="microphone"/>
   </Capabilities>
 </Package>
