@@ -204,9 +204,9 @@ namespace Clankboard
             AudioDevice VACOutputDevice = SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.VACOutputDevice);
             AudioDevice InputDevice = SettingsManager.GetSetting<AudioDevice>(SettingsManager.SettingTypes.InputDevice);
 
-            VAC_WaveOut.DeviceNumber = VACOutputDevice.DeviceNumber;
-            Local_WaveOut.DeviceNumber = LocalOutputDevice.DeviceNumber;
-            MicrophoneWaveIn.DeviceNumber = InputDevice.DeviceNumber;
+            VAC_WaveOut.DeviceNumber = Math.Max(0, VACOutputDevice.DeviceNumber);
+            Local_WaveOut.DeviceNumber = Math.Max(0, LocalOutputDevice.DeviceNumber);
+            MicrophoneWaveIn.DeviceNumber = Math.Max(0, InputDevice.DeviceNumber);
 
             VAC_WaveOut.Init(VAC_Mixer);
             Local_WaveOut.Init(Local_Mixer);

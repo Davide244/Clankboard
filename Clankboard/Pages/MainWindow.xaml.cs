@@ -22,6 +22,7 @@ using Windows.UI.WindowManagement;
 using AppWindow = Microsoft.UI.Windowing.AppWindow;
 using AppWindowChangedEventArgs = Microsoft.UI.Windowing.AppWindowChangedEventArgs;
 using Windows.Graphics;
+using Microsoft.UI.Xaml.Hosting;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -33,7 +34,7 @@ namespace Clankboard;
 public sealed partial class MainWindow : Window
 {
     private AppWindow m_Appwindow;
-    DesktopAcrylicController acrylicController;
+    //DesktopAcrylicController acrylicController;
 
     private SizeInt32 StartingWindowSize = new(Convert.ToInt32(680 * App.DpiScalingFactor), Convert.ToInt32(1000 * App.DpiScalingFactor));
 
@@ -49,8 +50,10 @@ public sealed partial class MainWindow : Window
         m_Appwindow.TitleBar.ButtonBackgroundColor = Colors.Transparent;
         m_Appwindow.TitleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
 
-        acrylicController = new DesktopAcrylicController();
-
+        //if (DesktopAcrylicController.IsSupported())
+        //{
+        //    //acrylicController = new DesktopAcrylicController();
+        //}
         //m_Appwindow.Resize(new Windows.Graphics.SizeInt32((int)(10 * App.DpiScalingFactor), (int)(10 + App.DpiScalingFactor))); // small size to make it go to min size
         // Update the m_Appwindow.Resize call
         m_Appwindow.Resize(StartingWindowSize);
