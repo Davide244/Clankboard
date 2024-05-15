@@ -158,7 +158,6 @@ namespace Clankboard
             // Call PlayAudioFileInDevice for each device
             var LocalPlay = Task.Run(() => PlayAudioFile(Local_Mixer, sound.PhysicalFilePath, cancellationToken));
             var VACPlay = Task.Run(() => PlayAudioFile(VAC_Mixer, sound.PhysicalFilePath, cancellationToken));
-            Task.WaitAll(LocalPlay, VACPlay);
 
             // Remove the sound from the list
             PlayingAudios.Remove(sound);
