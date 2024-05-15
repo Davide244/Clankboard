@@ -1,6 +1,6 @@
 ![Release Status](https://img.shields.io/badge/Release%20Status-BETA-orange?style=flat) ![Current Build](https://img.shields.io/badge/Current%20Build-0.1.8.0-darkgreen?style=flat)
 # Clankboard
-Clankboard is an open source soundboard app for windows made using C# and WINUI3. It is also available on the Microsoft Store.
+Clankboard is an open source soundboard app for windows made using C# and WINUI3. Releases on app stores for windows is planned.
 
 ###### Supported OS
 Currently, clankboard is supported on both Windows 10 and 11. <br>
