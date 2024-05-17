@@ -12,7 +12,7 @@
   <Identity
     Name="502fb0cc-0cea-479d-9cbf-b98895700fd0"
     Publisher="CN=David Jonjic, O=David Jonjic, L=Eugendorf, S=Salzburg, C=AT"
-    Version="0.1.8.0" />
+    Version="0.1.9.0" />
 
   <mp:PhoneIdentity PhoneProductId="502fb0cc-0cea-479d-9cbf-b98895700fd0" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 

@@ -144,7 +144,8 @@ public partial class SoundBoardItem : ObservableObject
                 SoundboardPage.soundBoardItemViewmodel.SoundBoardItems[i].StopSound();
             }
         }
-        App.a_AudioManager.PlaySoundboardItem(this, s_cancellationToken);
+        Task.Run(() => App.a_AudioManager.PlaySoundboardItem(this, s_cancellationToken));
+        //App.a_AudioManager.PlaySoundboardItem(this, s_cancellationToken);
     }
 
     public void StopSound()

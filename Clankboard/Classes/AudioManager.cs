@@ -78,7 +78,7 @@ namespace Clankboard
             }
         }
 
-        private void PlayAudioFile(MixingSampleProvider audioMixer, string filePath, CancellationToken cancellation)
+        private async Task PlayAudioFile(MixingSampleProvider audioMixer, string filePath, CancellationToken cancellation)
         {
             AudioFileReader audioFile;
             MediaFoundationResampler resampledAudio;
@@ -107,8 +107,8 @@ namespace Clankboard
             resampledAudio.ResamplerQuality = 40;
             audioMixer.AddMixerInput(resampledAudio.ToSampleProvider());
 
-            int AudioLength = (int)(audioFile.TotalTime.TotalMilliseconds);
-            Thread.Sleep(AudioLength);
+            int audioLength = (int)(audioFile.TotalTime.TotalMilliseconds);
+            await Task.Delay(audioLength, cancellation); // Delay for the audio length or until cancellation token is triggered
 
             resampledAudio.Dispose();
             //audioMixer.RemoveMixerInput(resampledAudio.ToSampleProvider());
@@ -156,8 +156,9 @@ namespace Clankboard
             Debug.WriteLine("Driver Output Device: " + driverOutputDevice.DeviceName);
 
             // Call PlayAudioFileInDevice for each device
-            var LocalPlay = Task.Run(() => PlayAudioFile(Local_Mixer, sound.PhysicalFilePath, cancellationToken));
-            var VACPlay = Task.Run(() => PlayAudioFile(VAC_Mixer, sound.PhysicalFilePath, cancellationToken));
+            var LocalPlay = Task.Run(() => PlayAudioFile(Local_Mixer, sound.PhysicalFilePath, cancellationToken), cancellationToken);
+            var VACPlay = Task.Run(() => PlayAudioFile(VAC_Mixer, sound.PhysicalFilePath, cancellationToken), cancellationToken);
+            Task.WaitAll(LocalPlay, VACPlay);
 
             // Remove the sound from the list
             PlayingAudios.Remove(sound);
