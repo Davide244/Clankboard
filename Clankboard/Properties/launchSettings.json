@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Clankboard (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Clankboard (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

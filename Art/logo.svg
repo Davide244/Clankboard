@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 27.3.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+<style type="text/css">
+	.st0{clip-path:url(#SVGID_00000102517298014588654360000005577913105969880497_);}
+	.st1{fill:#5BC09B;}
+	.st2{fill:none;}
+	
+		.st3{clip-path:url(#SVGID_00000102517298014588654360000005577913105969880497_);fill:none;stroke:#5AC09B;stroke-width:18;stroke-miterlimit:10;}
+	
+		.st4{clip-path:url(#SVGID_00000102517298014588654360000005577913105969880497_);fill:none;stroke:#5AC09B;stroke-width:26;stroke-miterlimit:10;}
+	.st5{fill:none;stroke:#5AC09B;stroke-width:18;stroke-miterlimit:10;}
+</style>
+<g>
+	<defs>
+		<path id="SVGID_1_" d="M424.75,463.75H87.25c-21.54,0-39-17.46-39-39V87.25c0-21.54,17.46-39,39-39h337.5c21.54,0,39,17.46,39,39
+			v337.5C463.75,446.29,446.29,463.75,424.75,463.75z"/>
+	</defs>
+	<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+	<clipPath id="SVGID_00000141413903219601295300000008027009381016415919_">
+		<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+	</clipPath>
+	<g style="clip-path:url(#SVGID_00000141413903219601295300000008027009381016415919_);">
+		<g>
+			<path class="st1" d="M254.07,173c-44.4,0-80.36,34.38-83.65,77.99l89.97,89.97c43.61-3.29,77.99-39.25,77.99-83.65
+				C338.38,210.73,300.64,173,254.07,173L254.07,173z M150.85,279.11L21.83,436.85c-5.48,6.73-5.01,16.47,1.11,22.59l28.99,28.99
+				c6.12,6.12,15.93,6.59,22.59,1.11l157.74-129.03L150.85,279.11z M147.95,387.26c-6.59,6.59-17.25,6.59-23.84,0
+				s-6.59-17.25,0-23.84c3.29-3.29,13.57-13.57,16.86-16.86c6.59-6.59,17.25-6.59,23.84,0c6.59,6.59,6.59,17.25,0,23.84
+				C161.53,373.69,151.24,383.97,147.95,387.26L147.95,387.26z"/>
+			<rect x="18" y="173" class="st2" width="320.38" height="320.38"/>
+		</g>
+	</g>
+	
+		<path style="clip-path:url(#SVGID_00000141413903219601295300000008027009381016415919_);fill:none;stroke:#5AC09B;stroke-width:18;stroke-miterlimit:10;" d="
+		M256,256"/>
+	
+		<path style="clip-path:url(#SVGID_00000141413903219601295300000008027009381016415919_);fill:none;stroke:#5AC09B;stroke-width:26;stroke-miterlimit:10;" d="
+		M229.39,399.01c53.36,9.93,108.01-10.79,141.37-53.61c49.05-62.95,37.61-155.11-25.35-204.16s-155.11-37.61-204.16,25.35
+		c-23.7,30.42-34.36,69.06-29.61,107.33"/>
+	
+		<path style="clip-path:url(#SVGID_00000141413903219601295300000008027009381016415919_);fill:none;stroke:#5AC09B;stroke-width:26;stroke-miterlimit:10;" d="
+		M218.66,457.44c75.23,14,152.28-15.22,199.31-75.58c69.15-88.75,53.02-218.68-35.73-287.83S163.55,41.01,94.4,129.76
+		c-33.42,42.89-48.44,97.36-41.75,151.32"/>
+</g>
+<path class="st5" d="M256.18,255.81"/>
+</svg>
