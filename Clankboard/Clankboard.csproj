@@ -25,6 +25,7 @@
     <Content Remove="Assets\AppIcons\StoreLogo.scale-400.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Assets\icon.ico" />
     <None Remove="Assets\Square150x150Logo.scale-400.png" />
     <None Remove="Assets\Square44x44Logo.targetsize-256.png" />
     <None Remove="Pages\SoundboardPage.xaml" />

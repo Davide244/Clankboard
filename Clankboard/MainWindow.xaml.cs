@@ -32,13 +32,14 @@ namespace Clankboard
             this.InitializeComponent();
             NavigationFrame.Navigate(typeof(Pages.SoundboardPage));
 
-            this.PersistenceId = "ClankMainWindow";
+            //this.PersistenceId = "ClankMainWindow";
 
             AppWindow appWindow = this.AppWindow;
             appWindow.Title = "Clankboard";
             appWindow.TitleBar.ExtendsContentIntoTitleBar = true;
             appWindow.TitleBar.ButtonBackgroundColor = Colors.Transparent;
             appWindow.TitleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
+            appWindow.TitleBar.PreferredHeightOption = TitleBarHeightOption.Tall;
         }
     }
 }
