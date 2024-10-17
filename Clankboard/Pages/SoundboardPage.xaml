@@ -76,7 +76,7 @@
                     </Grid>
                 </Grid>
 
-                <StackPanel Padding="10, 0, 10, 10" CornerRadius="5" Margin="5, 0, 0, 0" BorderBrush="#404040" BorderThickness="1" Background="#3d3d3d" Grid.Column="1">
+                <StackPanel Padding="10, 0, 10, 10" CornerRadius="5" Margin="5, 0, 0, 0" BorderBrush="#414141" BorderThickness="1" Background="#3d3d3d" Grid.Column="1">
 
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -97,11 +97,31 @@
         </Grid>
 
         <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
             <ScrollViewer>
-                <ListView x:Name="SoundboardListView" SelectionMode="Extended" CanDragItems="True" CanReorderItems="True">
-                    
+                <ListView x:Name="SoundboardListView" SelectionMode="Extended" CanDragItems="True" CanReorderItems="True" Margin="20">
+                    <ListViewItem Background="#303030" CornerRadius="5" Height="50" BorderBrush="#414141" BorderThickness="1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <FontIcon Glyph="&#xE753;" HorizontalAlignment="Center"/>
+                            
+                            
+                        </Grid>
+                    </ListViewItem>
                 </ListView>
             </ScrollViewer>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="1">
+                <AppBarSeparator/>
+                <Grid Width="250"/>
+            </StackPanel>
         </Grid>
     </Grid>
 </Page>
