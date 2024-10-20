@@ -114,6 +114,10 @@
                                 </Grid.ColumnDefinitions>
                                 <FontIcon Glyph="&#xE753;" HorizontalAlignment="Center"/>
 
+                                <StackPanel Grid.Column="1" Margin="10, 0, 0, 0">
+                                    <TextBlock Text="Hi"/>
+                                    <TextBlock Text="C:\Windows\System32\mewhen.mp3" FontSize="10"/>
+                                </StackPanel>
 
                             </Grid>
                         </ListViewItem>
