@@ -91,6 +91,24 @@
 
                     <MenuFlyoutSeparator/>
 
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                    <StackPanel Orientation="Horizontal">
+                        <Button MaxHeight="25" Margin="0, 6.5, 0, -3">
+                            <FontIcon Glyph="&#xE768;" FontSize="9" />
+                        </Button>
+                        <Button MaxHeight="25" Margin="10, 6.5, 0, -3">
+                            <FontIcon Glyph="&#xE71A;" FontSize="9" />
+                        </Button>
+                    </StackPanel>
+
+                    <TextBlock Text="Playing C:\Windows\Ferdi.mp3"/>
+
+
                 </StackPanel>
 
             </Grid>
