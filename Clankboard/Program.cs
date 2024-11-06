@@ -36,7 +36,7 @@ public class Program
         bool isRedirect = false;
         AppActivationArguments args = AppInstance.GetCurrent().GetActivatedEventArgs();
         ExtendedActivationKind kind = args.Kind;
-        AppInstance keyInstance = AppInstance.FindOrRegisterForKey("MySingleInstanceApp");
+        AppInstance keyInstance = AppInstance.FindOrRegisterForKey("ClankboardSingleInstanceApp");
 
         if (keyInstance.IsCurrent)
         {

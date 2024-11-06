@@ -45,27 +45,14 @@
 
         <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right" Grid.Row="0" HorizontalAlignment="Center" x:Name="MainCommandBar">
             <CommandBar.PrimaryCommands>
-                <AppBarButton Label="Add Sound" IsCompact="True">
-                    <AppBarButton.Icon>
-                        <FontIcon Glyph="&#xECC8;"/>
-                    </AppBarButton.Icon>
-                    <AppBarButton.Flyout>
-                        <MenuFlyout>
-                            <MenuFlyoutItem Text="Add Sound File">
-                                <MenuFlyoutItem.Icon>
-                                    <FontIcon Glyph="&#xE8E5;"/>
-                                </MenuFlyoutItem.Icon>
-                            </MenuFlyoutItem>
-                            <MenuFlyoutItem Text="Download Sound File">
-                                <MenuFlyoutItem.Icon>
-                                    <FontIcon Glyph="&#xEBD3;"/>
-                                </MenuFlyoutItem.Icon>
-                            </MenuFlyoutItem>
-                        </MenuFlyout>
-                    </AppBarButton.Flyout>
-                </AppBarButton>
+                <AppBarButton Icon="Setting" Label="Settings"/>
                 <AppBarSeparator/>
                 <AppBarButton Icon="Share" Label="Voicebox" IsEnabled="False"/>
+                <AppBarToggleButton  Label="Mute">
+                    <AppBarToggleButton.Icon>
+                        <FontIcon Glyph="&#xF781;" />
+                    </AppBarToggleButton.Icon>
+                </AppBarToggleButton>
                 <AppBarSeparator/>
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
@@ -81,7 +68,7 @@
         </CommandBar>
 
         <Grid Grid.Row="2" Margin="0" x:Name="NavFrameParent">
-            <Frame x:Name="NavigationFrame" Background="#202020" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Frame x:Name="NavigationFrame" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <TransitionCollection>
                     <NavigationThemeTransition/>
                 </TransitionCollection>

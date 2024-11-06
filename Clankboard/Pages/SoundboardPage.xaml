@@ -11,108 +11,70 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid Background="#202020">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid Background="#303030">
-            <Grid Padding="10,10,10,10" MaxWidth="1400">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" MaxWidth="950"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                </Grid.RowDefinitions>
-                <Grid MaxWidth="950">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
+        <Grid Background="#303030" Margin="10, 10, 10, 0" CornerRadius="4" BorderBrush="#353535" BorderThickness="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
+            <CommandBar OverflowButtonVisibility="Collapsed" DefaultLabelPosition="Right">
+                <AppBarButton Label="Add" IsCompact="True">
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="&#xECC8;"/>
+                    </AppBarButton.Icon>
+                    <AppBarButton.Flyout>
+                        <MenuFlyout>
+                            <MenuFlyoutItem Text="Add Sound File">
+                                <MenuFlyoutItem.Icon>
+                                    <FontIcon Glyph="&#xE8E5;"/>
+                                </MenuFlyoutItem.Icon>
+                            </MenuFlyoutItem>
+                            <MenuFlyoutItem Text="Download Sound File">
+                                <MenuFlyoutItem.Icon>
+                                    <FontIcon Glyph="&#xEBD3;"/>
+                                </MenuFlyoutItem.Icon>
+                            </MenuFlyoutItem>
+                            <MenuFlyoutSeparator/>
+                            <MenuFlyoutItem Text="Add TTS Audio">
+                                <MenuFlyoutItem.Icon>
+                                    <FontIcon Glyph="&#xF2B7;" />
+                                </MenuFlyoutItem.Icon>
+                            </MenuFlyoutItem>
+                        </MenuFlyout>
+                    </AppBarButton.Flyout>
+                </AppBarButton>
+                <AppBarButton Icon="Document" Label="File"/>
+                <AppBarSeparator/>
+                <AppBarToggleButton Label="Stacking">
+                    <AppBarToggleButton.Icon>
+                        <FontIcon Glyph="&#xE81E;" />
+                    </AppBarToggleButton.Icon>
+                </AppBarToggleButton>
+                <AppBarToggleButton Label="Grid View">
+                    <AppBarToggleButton.Icon>
+                        <FontIcon Glyph="&#xF0E2;" />
+                    </AppBarToggleButton.Icon>
+                </AppBarToggleButton>
+                <AppBarSeparator/>
+                <AppBarButton Icon="Stop" Label="Stop All"/>
+            </CommandBar>
 
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Orientation="Horizontal">
-                            <Button HorizontalAlignment="Center">
-                                <FontIcon Glyph="&#xE713;" />
-                            </Button>
-
-                            <Button HorizontalAlignment="Center" Grid.Column="1" Margin="10, 0, 0, 0">
-                                <StackPanel Orientation="Horizontal">
-                                    <FontIcon Glyph="&#xE73B;" />
-                                    <TextBlock Text="Stop all" Margin="5, 0, 0, 0"/>
-                                </StackPanel>
-
-
-                            </Button>
-                        </StackPanel>
-
-                        <AutoSuggestBox Grid.Column="1" Margin="10, 0, 0, 0" PlaceholderText="Search Sound" MaxWidth="800">
-
-                        </AutoSuggestBox>
-                    </Grid>
-
-                    <Grid Grid.Row="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="auto"/>
-                        </Grid.ColumnDefinitions>
-                        <controls:Segmented SelectedIndex="0" Grid.Row="1" HorizontalAlignment="Left" Margin="0, 10, 0, 0">
-                            <controls:SegmentedItem Icon="List"/>
-                            <controls:SegmentedItem Icon="{ui:FontIcon Glyph=&#xF0E2;}"/>
-                        </controls:Segmented>
-
-                        <controls:Segmented SelectedIndex="0" Grid.Column="1" HorizontalAlignment="Right" Margin="10, 10, 0, 0">
-                            <controls:SegmentedItem Content="Single" Icon="{ui:FontIcon Glyph=&#xE71A;}"/>
-                            <controls:SegmentedItem Content="Stacked" Icon="{ui:FontIcon Glyph=&#xE81E;}"/>
-                        </controls:Segmented>
-                    </Grid>
-                </Grid>
-
-                <StackPanel Padding="10, 0, 10, 10" CornerRadius="5" Margin="10, 0, 0, 0" BorderBrush="#414141" BorderThickness="1" Background="#3d3d3d" Grid.Column="1">
-
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="auto"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="00:00:00" Style="{StaticResource CaptionTextBlockStyle}" VerticalAlignment="Center"/>
-                        <Slider Grid.Column="1" Margin="5, 0, 5, 0" VerticalAlignment="Center"/>
-                        <TextBlock Grid.Column="2" Text="24:59:59" Style="{StaticResource CaptionTextBlockStyle}" VerticalAlignment="Center"/>
-                    </Grid>
-
-                    <MenuFlyoutSeparator/>
-
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                    </Grid>
-                    <StackPanel Orientation="Horizontal">
-                        <Button MaxHeight="25" Margin="0, 6.5, 0, -3">
-                            <FontIcon Glyph="&#xE768;" FontSize="9" />
-                        </Button>
-                        <Button MaxHeight="25" Margin="10, 6.5, 0, -3">
-                            <FontIcon Glyph="&#xE71A;" FontSize="9" />
-                        </Button>
-                    </StackPanel>
-
-                    <TextBlock Text="Playing C:\Windows\Ferdi.mp3"/>
-
-
-                </StackPanel>
-
+            <Grid Grid.Column="1" Margin="5" MaxWidth="450">
+                <ProgressBar Value="60" VerticalAlignment="Bottom" Margin="10, 0, 10, 5"/>
+                <TextBlock Text="13:57:18" Style="{StaticResource BodyStrongTextBlockStyle}" FontSize="8" Margin="5, 0, 0, 10" VerticalAlignment="Bottom"/>
+                <TextBlock Text="23:22:55" Style="{StaticResource BodyStrongTextBlockStyle}" FontSize="8" Margin="0, 0, 5, 10" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                <Button MaxWidth="50">
+                    <FontIcon Glyph="&#xE769;" FontSize="8" />
+                </Button>
             </Grid>
         </Grid>
+
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
