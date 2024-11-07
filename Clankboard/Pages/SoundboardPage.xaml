@@ -65,18 +65,155 @@
                 <AppBarButton Icon="Stop" Label="Stop All"/>
             </CommandBar>
 
-            <Grid Grid.Column="1" Margin="5" MaxWidth="450">
+            <Grid Grid.Column="1" Margin="0, 5, 5, 5" MaxWidth="450">
                 <ProgressBar Value="60" VerticalAlignment="Bottom" Margin="10, 0, 10, 5"/>
                 <TextBlock Text="13:57:18" Style="{StaticResource BodyStrongTextBlockStyle}" FontSize="8" Margin="5, 0, 0, 10" VerticalAlignment="Bottom"/>
                 <TextBlock Text="23:22:55" Style="{StaticResource BodyStrongTextBlockStyle}" FontSize="8" Margin="0, 0, 5, 10" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
-                <Button MaxWidth="50">
+                <Button MaxWidth="50" HorizontalAlignment="Center" Margin="0, 0, 0, 13">
                     <FontIcon Glyph="&#xE769;" FontSize="8" />
                 </Button>
             </Grid>
         </Grid>
 
-
         <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto" MaxHeight="250"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Soundboard" Margin="10, 2, 0, 0" Style="{StaticResource BodyStrongTextBlockStyle}" Foreground="#707070"/>
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" Grid.RowSpan="2">
+                <ListView x:Name="SoundboardListView" SelectionMode="Extended" CanDragItems="True" CanReorderItems="True" Margin="20, 6, 10, 0">
+                    <ListViewItem Background="#303030" CornerRadius="5" Height="50" BorderBrush="#414141" BorderThickness="1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <FontIcon Glyph="&#xE753;" HorizontalAlignment="Center"/>
+
+                            <StackPanel Grid.Column="1" Margin="10, 0, 0, 0">
+                                <TextBlock Text="Hi"/>
+                                <TextBlock Text="C:\Windows\System32\mewhen.mp3" FontSize="10"/>
+                            </StackPanel>
+
+                        </Grid>
+                    </ListViewItem>
+                    <ListViewItem Background="#303030" CornerRadius="5" Height="50" BorderBrush="#414141" BorderThickness="1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <FontIcon Glyph="&#xE753;" HorizontalAlignment="Center"/>
+
+
+                        </Grid>
+                    </ListViewItem>
+                    <ListViewItem Background="#303030" CornerRadius="5" Height="50" BorderBrush="#414141" BorderThickness="1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <FontIcon Glyph="&#xE753;" HorizontalAlignment="Center"/>
+
+
+                        </Grid>
+                    </ListViewItem>
+                    <ListViewItem Background="#303030" CornerRadius="5" Height="50" BorderBrush="#414141" BorderThickness="1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <FontIcon Glyph="&#xE753;" HorizontalAlignment="Center"/>
+
+
+                        </Grid>
+                    </ListViewItem>
+                    <ListViewItem Background="#303030" CornerRadius="5" Height="50" BorderBrush="#414141" BorderThickness="1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <FontIcon Glyph="&#xE753;" HorizontalAlignment="Center"/>
+
+
+                        </Grid>
+                    </ListViewItem>
+                    <ListViewItem Background="#303030" CornerRadius="5" Height="50" BorderBrush="#414141" BorderThickness="1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <FontIcon Glyph="&#xE753;" HorizontalAlignment="Center"/>
+
+
+                        </Grid>
+                    </ListViewItem>
+                    <ListViewItem Background="#303030" CornerRadius="5" Height="50" BorderBrush="#414141" BorderThickness="1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <FontIcon Glyph="&#xE753;" HorizontalAlignment="Center"/>
+
+
+                        </Grid>
+                    </ListViewItem>
+                    <ListViewItem Background="#303030" CornerRadius="5" Height="50" BorderBrush="#414141" BorderThickness="1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <FontIcon Glyph="&#xE753;" HorizontalAlignment="Center"/>
+
+
+                        </Grid>
+                    </ListViewItem>
+                </ListView>
+            </ScrollViewer>
+
+            <AppBarSeparator Grid.Column="1" Grid.RowSpan="3"/>
+            <TextBlock Text="Currently Playing" Margin="10, 2, 0, 0" Style="{StaticResource BodyStrongTextBlockStyle}" Foreground="#707070" Grid.Column="2"/>
+
+            <ScrollViewer Grid.Row="2" Grid.Column="2" MinWidth="200" Margin="10, 5, 10, 0">
+                <ListView x:Name="CurrentlyPlayingListView" SelectionMode="Extended" CanReorderItems="False" CanDragItems="False">
+                    <ListViewItem Background="#303030" CornerRadius="5" Height="50" BorderBrush="#414141" BorderThickness="1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <FontIcon Glyph="&#xE753;" HorizontalAlignment="Center"/>
+                        </Grid>
+                    </ListViewItem>
+                </ListView>
+            </ScrollViewer>
+        </Grid>
+
+        <!--Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="auto"/>
@@ -257,6 +394,6 @@
                     </StackPanel>
                 </Grid>
             </StackPanel>
-        </Grid>
+        </Grid-->
     </Grid>
 </Page>
