@@ -7,9 +7,13 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:CommunityToolkit.WinUI.Controls"
-    xmlns:ui="using:CommunityToolkit.WinUI"
+    xmlns:ui="using:CommunityToolkit.WinUI" xmlns:media="using:ABI.Microsoft.UI.Xaml.Media"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        
+    </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
@@ -40,10 +44,15 @@
                                     <FontIcon Glyph="&#xEBD3;"/>
                                 </MenuFlyoutItem.Icon>
                             </MenuFlyoutItem>
-                            <MenuFlyoutSeparator/>
                             <MenuFlyoutItem Text="Add TTS Audio">
                                 <MenuFlyoutItem.Icon>
                                     <FontIcon Glyph="&#xF2B7;" />
+                                </MenuFlyoutItem.Icon>
+                            </MenuFlyoutItem>
+                            <MenuFlyoutSeparator/>
+                            <MenuFlyoutItem Text="Merge Soundboard">
+                                <MenuFlyoutItem.Icon>
+                                    <ImageIcon Source="Assets/logo.png" Width="16" Height="16"/>
                                 </MenuFlyoutItem.Icon>
                             </MenuFlyoutItem>
                         </MenuFlyout>
@@ -93,42 +102,149 @@
                 <ListView x:Name="SoundboardListView" SelectionMode="Extended" CanDragItems="True" CanReorderItems="True" Margin="20, 6, 10, 0">
                     <ListViewItem Background="#303030" CornerRadius="5" Height="50" BorderBrush="#414141" BorderThickness="1">
                         <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="20"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="auto"/>
-                            </Grid.ColumnDefinitions>
-                            <FontIcon Glyph="&#xE753;" HorizontalAlignment="Center"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
 
-                            <StackPanel Grid.Column="1" Margin="10, 0, 0, 0">
-                                <TextBlock Text="Hi"/>
-                                <TextBlock Text="C:\Windows\System32\mewhen.mp3" FontSize="10"/>
-                            </StackPanel>
+                                <Grid.ContextFlyout>
+                                    <MenuFlyout>
+                                        <MenuFlyoutItem Icon="Folder" Text="Show in Explorer"/>
+                                        <MenuFlyoutItem Icon="Save"  Text="Export to"/>
+                                        <MenuFlyoutItem Icon="Setting"  Text="Configure"/>
+                                    </MenuFlyout>
+                                </Grid.ContextFlyout>
 
+                                <FontIcon Glyph="&#xE753;" HorizontalAlignment="Center" Visibility="Collapsed"/>
+                                <ProgressRing Width="20" Height="20" IsIndeterminate="False" Value="74"/>
+
+                                <StackPanel Grid.Column="1" Margin="10, 0, 0, 0">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <Grid Margin="0, 0, 5, 0" CornerRadius="5" Background="{ThemeResource LayerFillColorAlt}" BorderThickness="1" BorderBrush="#4a4a4a" Padding="4, 0, 4, 0">
+                                            <TextBlock Text="Downloading" FontSize="10" VerticalAlignment="Center"/>
+                                        </Grid>
+                                        <TextBlock Text="SGFUAVSDUFSAZUDFSAZUFAUZDFAOUZDFDAUOZGF" TextTrimming="CharacterEllipsis"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <Grid Margin="0, 0, 5, 0" CornerRadius="5" Background="{ThemeResource LayerFillColorAlt}" BorderThickness="1" BorderBrush="#4a4a4a" Padding="4, 0, 4, 0">
+                                            <StackPanel Orientation="Horizontal">
+                                                <FontIcon Glyph="&#xE896;" FontSize="8" Margin="0, 0, 2, 0"/>
+                                                <TextBlock Text="74%" FontSize="8" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                        </Grid>
+                                        <TextBlock Text="https://www.youtube.com/watch?v=gz2n879A6n4" FontSize="10" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Right">
+                                    <HyperlinkButton Content="Ctrl + Alt + E"  Margin="0, 0, 5, 0" MaxHeight="25" FontSize="10"/>
+                                    <Button Foreground="LightGreen" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                        <FontIcon Glyph="&#xF5B0;" />
+                                    </Button>
+                                </StackPanel>
+
+                                <ProgressBar Grid.ColumnSpan="3" VerticalAlignment="Bottom" Margin="0, 0, 0, -7" IsIndeterminate="True"/>
+                            </Grid>
                         </Grid>
                     </ListViewItem>
                     <ListViewItem Background="#303030" CornerRadius="5" Height="50" BorderBrush="#414141" BorderThickness="1">
                         <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="20"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="auto"/>
-                            </Grid.ColumnDefinitions>
-                            <FontIcon Glyph="&#xE753;" HorizontalAlignment="Center"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
 
+                                <Grid.ContextFlyout>
+                                    <MenuFlyout>
+                                        <MenuFlyoutItem Icon="Folder" Text="Show in Explorer"/>
+                                        <MenuFlyoutItem Icon="Save"  Text="Export to"/>
+                                        <MenuFlyoutItem Icon="Setting"  Text="Configure"/>
+                                    </MenuFlyout>
+                                </Grid.ContextFlyout>
 
+                                <FontIcon Glyph="&#xE753;" HorizontalAlignment="Center" Visibility="Collapsed"/>
+                                <ProgressRing Width="20" Height="20" IsIndeterminate="False" Value="80"/>
+
+                                <StackPanel Grid.Column="1" Margin="10, 0, 0, 0">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <Grid Margin="0, 0, 5, 0" CornerRadius="5" Background="{ThemeResource LayerFillColorAlt}" BorderThickness="1" BorderBrush="#4a4a4a" Padding="4, 0, 4, 0">
+                                            <TextBlock Text="Downloading" FontSize="10" VerticalAlignment="Center"/>
+                                        </Grid>
+                                        <TextBlock Text="SGFUAVSDUFSAZUDFSAZUFAUZDFAOUZDFDAUOZGF" TextTrimming="CharacterEllipsis"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <Grid Margin="0, 0, 5, 0" CornerRadius="5" Background="{ThemeResource LayerFillColorAlt}" BorderThickness="1" BorderBrush="#4a4a4a" Padding="4, 0, 4, 0">
+                                            <StackPanel Orientation="Horizontal">
+                                                <FontIcon Glyph="&#xE896;" FontSize="8" Margin="0, 0, 2, 0"/>
+                                                <TextBlock Text="74%" FontSize="8" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                        </Grid>
+                                        <TextBlock Text="https://www.youtube.com/watch?v=gz2n879A6n4" FontSize="10" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Right">
+                                    <HyperlinkButton Content="Ctrl + Alt + E"  Margin="0, 0, 5, 0" MaxHeight="25" FontSize="10"/>
+                                    <Button Foreground="LightGreen" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                        <FontIcon Glyph="&#xF5B0;" />
+                                    </Button>
+                                </StackPanel>
+
+                                <ProgressBar Grid.ColumnSpan="3" VerticalAlignment="Bottom" Margin="0, 0, 0, -7" IsIndeterminate="True"/>
+                            </Grid>
                         </Grid>
                     </ListViewItem>
                     <ListViewItem Background="#303030" CornerRadius="5" Height="50" BorderBrush="#414141" BorderThickness="1">
                         <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="20"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="auto"/>
-                            </Grid.ColumnDefinitions>
-                            <FontIcon Glyph="&#xE753;" HorizontalAlignment="Center"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
 
+                                <Grid.ContextFlyout>
+                                    <MenuFlyout>
+                                        <MenuFlyoutItem Icon="Folder" Text="Show in Explorer"/>
+                                        <MenuFlyoutItem Icon="Save"  Text="Export to"/>
+                                        <MenuFlyoutItem Icon="Setting"  Text="Configure"/>
+                                    </MenuFlyout>
+                                </Grid.ContextFlyout>
 
+                                <FontIcon Glyph="&#xE8A5;" HorizontalAlignment="Center" Visibility="Visible" Foreground="{ThemeResource SystemFillColorCautionBrush}"/>
+                                <ProgressRing Width="20" Height="20" IsIndeterminate="False" Value="74" Visibility="Collapsed"/>
+
+                                <StackPanel Grid.Column="1" Margin="10, 0, 0, 0">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <Grid Margin="0, 0, 5, 0" CornerRadius="5" Background="{ThemeResource LayerFillColorAlt}" BorderThickness="1" BorderBrush="#4a4a4a" Padding="4, 0, 4, 0" Visibility="Collapsed">
+                                            <TextBlock Text="Downloading" FontSize="10" VerticalAlignment="Center"/>
+                                        </Grid>
+                                        <TextBlock Text="Der lustige Audio" TextTrimming="CharacterEllipsis"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <Grid Margin="0, 0, 5, 0" CornerRadius="5" Background="{ThemeResource SystemFillColorCautionBackgroundBrush}" BorderThickness="1" BorderBrush="#4a4a4a" Padding="4, 0, 4, 0">
+                                            <StackPanel Orientation="Horizontal">
+                                                <FontIcon Glyph="&#xE7BA;" FontSize="8" Margin="0, 0, 2, 0"/>
+                                                <TextBlock Text="Not Found" FontSize="8" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                        </Grid>
+                                        <TextBlock Text="C:\Uers\009da\test.wav" FontSize="10" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Right">
+                                    <HyperlinkButton Content="Ctrl + Alt + E"  Margin="0, 0, 5, 0" MaxHeight="25" FontSize="10"/>
+                                    <Button Foreground="LightGreen" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                        <FontIcon Glyph="&#xF5B0;" />
+                                    </Button>
+                                </StackPanel>
+
+                                <ProgressBar Grid.ColumnSpan="3" VerticalAlignment="Bottom" Margin="0, 0, 0, -7" IsIndeterminate="True" IsEnabled="False" Visibility="Collapsed"/>
+                            </Grid>
                         </Grid>
                     </ListViewItem>
                     <ListViewItem Background="#303030" CornerRadius="5" Height="50" BorderBrush="#414141" BorderThickness="1">

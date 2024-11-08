@@ -56,12 +56,6 @@
                 <AppBarSeparator/>
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
-                <AppBarButton Icon="Setting" Label="Settings">
-                    <!-- Settings button -->
-                    <AppBarButton.KeyboardAccelerators>
-                        <KeyboardAccelerator Modifiers="Control" Key="I"/>
-                    </AppBarButton.KeyboardAccelerators>
-                </AppBarButton>
                 <AppBarButton Icon="Help" Label="About Clankboard"/>
                 <AppBarButton Icon="Share" Label="Share Soundboard"/>
             </CommandBar.SecondaryCommands>
