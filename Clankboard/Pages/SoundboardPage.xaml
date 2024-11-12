@@ -9,7 +9,8 @@
     xmlns:controls="using:CommunityToolkit.WinUI.Controls"
     xmlns:ui="using:CommunityToolkit.WinUI" xmlns:media="using:ABI.Microsoft.UI.Xaml.Media"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    SizeChanged="Page_SizeChanged">
 
     <Page.Resources>
         
@@ -34,7 +35,7 @@
                     </AppBarButton.Icon>
                     <AppBarButton.Flyout>
                         <MenuFlyout>
-                            <MenuFlyoutItem Text="Add Sound File">
+                            <MenuFlyoutItem Text="Add Sound File" Click="AddLocalSoundFile_Click">
                                 <MenuFlyoutItem.Icon>
                                     <FontIcon Glyph="&#xE8E5;"/>
                                 </MenuFlyoutItem.Icon>
@@ -52,13 +53,34 @@
                             <MenuFlyoutSeparator/>
                             <MenuFlyoutItem Text="Merge Soundboard">
                                 <MenuFlyoutItem.Icon>
-                                    <ImageIcon Source="Assets/logo.png" Width="16" Height="16"/>
+                                    <ImageIcon Source="/Assets/logo.png" Width="16" Height="16"/>
                                 </MenuFlyoutItem.Icon>
                             </MenuFlyoutItem>
                         </MenuFlyout>
                     </AppBarButton.Flyout>
                 </AppBarButton>
-                <AppBarButton Icon="Document" Label="File"/>
+                <AppBarButton Icon="Document" Label="File">
+                    <AppBarButton.Flyout>
+                        <MenuFlyout>
+                            <MenuFlyoutItem Icon="Save" Text="Save">
+                                <MenuFlyoutItem.KeyboardAccelerators>
+                                    <KeyboardAccelerator Key="S" Modifiers="Control"/>
+                                </MenuFlyoutItem.KeyboardAccelerators>
+                            </MenuFlyoutItem>
+                            <MenuFlyoutItem Text="Save As">
+                                <MenuFlyoutItem.Icon>
+                                    <FontIcon Glyph="&#xE792;" />
+                                </MenuFlyoutItem.Icon>
+                                <MenuFlyoutItem.KeyboardAccelerators>
+                                    <KeyboardAccelerator Key="S" Modifiers="Control, Shift"/>
+                                </MenuFlyoutItem.KeyboardAccelerators>
+                            </MenuFlyoutItem>
+                            <MenuFlyoutItem Icon="Document" Text="Open Soundboard"/>
+                            <MenuFlyoutSeparator/>
+                            <MenuFlyoutItem Icon="Delete" Text="Clear"/>
+                        </MenuFlyout>
+                    </AppBarButton.Flyout>
+                </AppBarButton>
                 <AppBarSeparator/>
                 <AppBarToggleButton Label="Stacking">
                     <AppBarToggleButton.Icon>
@@ -74,7 +96,7 @@
                 <AppBarButton Icon="Stop" Label="Stop All"/>
             </CommandBar>
 
-            <Grid Grid.Column="1" Margin="0, 5, 5, 5" MaxWidth="450">
+            <Grid Grid.Column="1" Margin="0, 5, 5, 5" MaxWidth="450" Visibility="Visible" x:Name="MediaControlsElement">
                 <ProgressBar Value="60" VerticalAlignment="Bottom" Margin="10, 0, 10, 5"/>
                 <TextBlock Text="13:57:18" Style="{StaticResource BodyStrongTextBlockStyle}" FontSize="8" Margin="5, 0, 0, 10" VerticalAlignment="Bottom"/>
                 <TextBlock Text="23:22:55" Style="{StaticResource BodyStrongTextBlockStyle}" FontSize="8" Margin="0, 0, 5, 10" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
@@ -99,8 +121,15 @@
 
             <TextBlock Text="Soundboard" Margin="10, 2, 0, 0" Style="{StaticResource BodyStrongTextBlockStyle}" Foreground="#707070"/>
             <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" Grid.RowSpan="2">
-                <ListView x:Name="SoundboardListView" SelectionMode="Extended" CanDragItems="True" CanReorderItems="True" Margin="20, 6, 10, 0">
+                <ListView x:Name="SoundboardListView" SelectionMode="Extended" CanDragItems="True" CanReorderItems="True" Margin="10, 6, 10, 0">
                     <ListViewItem Background="#303030" CornerRadius="5" Height="50" BorderBrush="#414141" BorderThickness="1">
+                        <ListViewItem.ContextFlyout>
+                            <MenuFlyout>
+                                <MenuFlyoutItem Icon="Folder" Text="Show in Explorer"/>
+                                <MenuFlyoutItem Icon="Save"  Text="Export to"/>
+                                <MenuFlyoutItem Icon="Setting"  Text="Configure"/>
+                            </MenuFlyout>
+                        </ListViewItem.ContextFlyout>
                         <Grid>
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -108,14 +137,6 @@
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="auto"/>
                                 </Grid.ColumnDefinitions>
-
-                                <Grid.ContextFlyout>
-                                    <MenuFlyout>
-                                        <MenuFlyoutItem Icon="Folder" Text="Show in Explorer"/>
-                                        <MenuFlyoutItem Icon="Save"  Text="Export to"/>
-                                        <MenuFlyoutItem Icon="Setting"  Text="Configure"/>
-                                    </MenuFlyout>
-                                </Grid.ContextFlyout>
 
                                 <FontIcon Glyph="&#xE753;" HorizontalAlignment="Center" Visibility="Collapsed"/>
                                 <ProgressRing Width="20" Height="20" IsIndeterminate="False" Value="74"/>
@@ -150,6 +171,13 @@
                         </Grid>
                     </ListViewItem>
                     <ListViewItem Background="#303030" CornerRadius="5" Height="50" BorderBrush="#414141" BorderThickness="1">
+                        <ListViewItem.ContextFlyout>
+                            <MenuFlyout>
+                                <MenuFlyoutItem Icon="Folder" Text="Show in Explorer"/>
+                                <MenuFlyoutItem Icon="Save"  Text="Export to"/>
+                                <MenuFlyoutItem Icon="Setting"  Text="Configure"/>
+                            </MenuFlyout>
+                        </ListViewItem.ContextFlyout>
                         <Grid>
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -157,14 +185,6 @@
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="auto"/>
                                 </Grid.ColumnDefinitions>
-
-                                <Grid.ContextFlyout>
-                                    <MenuFlyout>
-                                        <MenuFlyoutItem Icon="Folder" Text="Show in Explorer"/>
-                                        <MenuFlyoutItem Icon="Save"  Text="Export to"/>
-                                        <MenuFlyoutItem Icon="Setting"  Text="Configure"/>
-                                    </MenuFlyout>
-                                </Grid.ContextFlyout>
 
                                 <FontIcon Glyph="&#xE753;" HorizontalAlignment="Center" Visibility="Collapsed"/>
                                 <ProgressRing Width="20" Height="20" IsIndeterminate="False" Value="80"/>
@@ -199,6 +219,13 @@
                         </Grid>
                     </ListViewItem>
                     <ListViewItem Background="#303030" CornerRadius="5" Height="50" BorderBrush="#414141" BorderThickness="1">
+                        <ListViewItem.ContextFlyout>
+                            <MenuFlyout>
+                                <MenuFlyoutItem Icon="Folder" Text="Show in Explorer"/>
+                                <MenuFlyoutItem Icon="Save"  Text="Export to"/>
+                                <MenuFlyoutItem Icon="Setting"  Text="Configure"/>
+                            </MenuFlyout>
+                        </ListViewItem.ContextFlyout>
                         <Grid>
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -206,14 +233,6 @@
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="auto"/>
                                 </Grid.ColumnDefinitions>
-
-                                <Grid.ContextFlyout>
-                                    <MenuFlyout>
-                                        <MenuFlyoutItem Icon="Folder" Text="Show in Explorer"/>
-                                        <MenuFlyoutItem Icon="Save"  Text="Export to"/>
-                                        <MenuFlyoutItem Icon="Setting"  Text="Configure"/>
-                                    </MenuFlyout>
-                                </Grid.ContextFlyout>
 
                                 <FontIcon Glyph="&#xE8A5;" HorizontalAlignment="Center" Visibility="Visible" Foreground="{ThemeResource SystemFillColorCautionBrush}"/>
                                 <ProgressRing Width="20" Height="20" IsIndeterminate="False" Value="74" Visibility="Collapsed"/>
@@ -247,73 +266,13 @@
                             </Grid>
                         </Grid>
                     </ListViewItem>
-                    <ListViewItem Background="#303030" CornerRadius="5" Height="50" BorderBrush="#414141" BorderThickness="1">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="20"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="auto"/>
-                            </Grid.ColumnDefinitions>
-                            <FontIcon Glyph="&#xE753;" HorizontalAlignment="Center"/>
-
-
-                        </Grid>
-                    </ListViewItem>
-                    <ListViewItem Background="#303030" CornerRadius="5" Height="50" BorderBrush="#414141" BorderThickness="1">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="20"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="auto"/>
-                            </Grid.ColumnDefinitions>
-                            <FontIcon Glyph="&#xE753;" HorizontalAlignment="Center"/>
-
-
-                        </Grid>
-                    </ListViewItem>
-                    <ListViewItem Background="#303030" CornerRadius="5" Height="50" BorderBrush="#414141" BorderThickness="1">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="20"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="auto"/>
-                            </Grid.ColumnDefinitions>
-                            <FontIcon Glyph="&#xE753;" HorizontalAlignment="Center"/>
-
-
-                        </Grid>
-                    </ListViewItem>
-                    <ListViewItem Background="#303030" CornerRadius="5" Height="50" BorderBrush="#414141" BorderThickness="1">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="20"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="auto"/>
-                            </Grid.ColumnDefinitions>
-                            <FontIcon Glyph="&#xE753;" HorizontalAlignment="Center"/>
-
-
-                        </Grid>
-                    </ListViewItem>
-                    <ListViewItem Background="#303030" CornerRadius="5" Height="50" BorderBrush="#414141" BorderThickness="1">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="20"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="auto"/>
-                            </Grid.ColumnDefinitions>
-                            <FontIcon Glyph="&#xE753;" HorizontalAlignment="Center"/>
-
-
-                        </Grid>
-                    </ListViewItem>
                 </ListView>
             </ScrollViewer>
 
-            <AppBarSeparator Grid.Column="1" Grid.RowSpan="3"/>
-            <TextBlock Text="Currently Playing" Margin="10, 2, 0, 0" Style="{StaticResource BodyStrongTextBlockStyle}" Foreground="#707070" Grid.Column="2"/>
+            <AppBarSeparator Grid.Column="1" Grid.RowSpan="3" Visibility="Visible"/>
+            <TextBlock Text="Currently Playing" Margin="10, 2, 0, 0" Style="{StaticResource BodyStrongTextBlockStyle}" Foreground="#707070" Grid.Column="2" Visibility="Visible"/>
 
-            <ScrollViewer Grid.Row="2" Grid.Column="2" MinWidth="200" Margin="10, 5, 10, 0">
+            <ScrollViewer Grid.Row="2" Grid.Column="2" MinWidth="200" Margin="10, 5, 10, 0" Visibility="Visible">
                 <ListView x:Name="CurrentlyPlayingListView" SelectionMode="Extended" CanReorderItems="False" CanDragItems="False">
                     <ListViewItem Background="#303030" CornerRadius="5" Height="50" BorderBrush="#414141" BorderThickness="1">
                         <Grid>

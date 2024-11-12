@@ -48,7 +48,7 @@ namespace Clankboard
             m_window.Activate();
         }
 
-        private Window m_window;
+        public static Window m_window;
         public NativeInterop.SplashScreen m_splashScreen;
 
         private async void LaunchTask()
