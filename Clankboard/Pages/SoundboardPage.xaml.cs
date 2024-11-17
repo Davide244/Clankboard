@@ -54,6 +54,7 @@ namespace Clankboard.Pages
 
             fileOpenPicker.ViewMode = PickerViewMode.Thumbnail;
             fileOpenPicker.SuggestedStartLocation = PickerLocationId.Downloads;
+            fileOpenPicker.CommitButtonText = "Add to Soundboard";
             fileOpenPicker.FileTypeFilter.Add(".mp3");
             fileOpenPicker.FileTypeFilter.Add(".wav");
             fileOpenPicker.FileTypeFilter.Add(".wma");
