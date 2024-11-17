@@ -122,6 +122,66 @@
             <TextBlock Text="Soundboard" Margin="10, 2, 0, 0" Style="{StaticResource BodyStrongTextBlockStyle}" Foreground="#707070"/>
             <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" Grid.RowSpan="2">
                 <ListView x:Name="SoundboardListView" SelectionMode="Extended" CanDragItems="True" CanReorderItems="True" Margin="10, 6, 10, 0">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ListViewItem Background="#303030" CornerRadius="5" Height="50" BorderBrush="#414141" BorderThickness="1">
+                                <ListViewItem.ContextFlyout>
+                                    <MenuFlyout>
+                                        <MenuFlyoutItem Icon="Folder" Text="Show in Explorer" IsEnabled="{x:Bind CanClickViewInExplorer, Mode=OneWay}"/>
+                                        <MenuFlyoutItem Icon="Save"  Text="Export to" IsEnabled="{x:Bind CanClickExport, Mode=OneWay}"/>
+                                        <MenuFlyoutItem Icon="Setting"  Text="Configure" IsEnabled="{x:Bind CanClickConfigure, Mode=OneWay}"/>
+                                        <MenuFlyoutItem Icon="Play" Text="Play" IsEnabled="{x:Bind IsPlayButtonEnabled, Mode=OneWay}"/>
+                                    </MenuFlyout>
+                                </ListViewItem.ContextFlyout>
+                                <Grid>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="20"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <FontIcon Glyph="{x:Bind ItemIcon, Mode=OneTime}" HorizontalAlignment="Center" Visibility="{x:Bind ItemIconVisible, Mode=OneWay}" Foreground="{x:Bind ItemIconColor, Mode=OneWay}"/>
+                                        <ProgressRing Width="20" Height="20" IsIndeterminate="False" Value="{x:Bind ItemProgressRingProgress}" Visibility="{x:Bind ItemLoadingIndicatorsVisibility, Mode=OneWay}"/>
+
+                                        <StackPanel Grid.Column="1" Margin="10, 0, 0, 0">
+                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                <Grid Margin="0, 0, 5, 0" CornerRadius="5" Background="{ThemeResource LayerFillColorAlt}" BorderThickness="1" BorderBrush="#4a4a4a" Padding="4, 0, 4, 0">
+                                                    <TextBlock Text="Downloading" FontSize="10" VerticalAlignment="Center" Visibility="{x:Bind ItemLoadingIndicatorsVisibility, Mode=OneWay}"/>
+                                                </Grid>
+                                                <TextBlock Text="{x:Bind ItemName, Mode=OneWay}" TextTrimming="CharacterEllipsis"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                <Grid Margin="0, 0, 5, 0" CornerRadius="5" Background="{ThemeResource LayerFillColorAlt}" BorderThickness="1" BorderBrush="#4a4a4a" Padding="4, 0, 4, 0">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <FontIcon Glyph="&#xE896;" FontSize="8" Margin="0, 0, 2, 0"/>
+                                                        <TextBlock Text="{x:Bind ItemProgressRingProgress, Mode=OneWay}" FontSize="8" VerticalAlignment="Center"/>
+                                                        <TextBlock Text="%" FontSize="8" VerticalAlignment="Center"/>
+                                                    </StackPanel>
+                                                </Grid>
+                                                <Grid Margin="0, 0, 5, 0" CornerRadius="5" Background="{ThemeResource SystemFillColorCautionBackgroundBrush}" BorderThickness="1" BorderBrush="#4a4a4a" Padding="4, 0, 4, 0">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <FontIcon Glyph="&#xE7BA;" FontSize="8" Margin="0, 0, 2, 0"/>
+                                                        <TextBlock Text="Not Found" FontSize="8" VerticalAlignment="Center"/>
+                                                    </StackPanel>
+                                                </Grid>
+                                                <TextBlock Text="https://www.youtube.com/watch?v=gz2n879A6n4" FontSize="10" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                        </StackPanel>
+
+                                        <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Right">
+                                            <HyperlinkButton Content="Ctrl + Alt + E"  Margin="0, 0, 5, 0" MaxHeight="25" FontSize="10"/>
+                                            <Button Foreground="LightGreen" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                                <FontIcon Glyph="&#xF5B0;" />
+                                            </Button>
+                                        </StackPanel>
+
+                                        <ProgressBar Grid.ColumnSpan="3" VerticalAlignment="Bottom" Margin="0, 0, 0, -7" IsIndeterminate="True"/>
+                                    </Grid>
+                                </Grid>
+                            </ListViewItem>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
                     <ListViewItem Background="#303030" CornerRadius="5" Height="50" BorderBrush="#414141" BorderThickness="1">
                         <ListViewItem.ContextFlyout>
                             <MenuFlyout>
