@@ -11,9 +11,13 @@ namespace Clankboard.AudioSystem
     public partial class SoundboardItem : ObservableObject
     {
         [ObservableProperty]
-        public string _name;
+        public string _itemName;
         [ObservableProperty]
-        public string _locationText;
+        public string _itemLocationText;
+        [ObservableProperty]
+        public string _itemIcon;
+        [ObservableProperty]
+
 
         public string PhysicalFilePath;
     }
