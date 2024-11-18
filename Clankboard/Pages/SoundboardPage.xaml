@@ -165,18 +165,18 @@
                                                         <TextBlock Text="Not Found" FontSize="8" VerticalAlignment="Center"/>
                                                     </StackPanel>
                                                 </Grid>
-                                                <TextBlock Text="https://www.youtube.com/watch?v=gz2n879A6n4" FontSize="10" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
+                                                <TextBlock Text="{x:Bind ItemLocationText, Mode=OneWay}" FontSize="10" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
                                             </StackPanel>
                                         </StackPanel>
 
                                         <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Right">
-                                            <HyperlinkButton Content="Ctrl + Alt + E"  Margin="0, 0, 5, 0" MaxHeight="25" FontSize="10"/>
-                                            <Button Foreground="LightGreen" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                            <HyperlinkButton Content="{x:Bind ItemKeybindText, Mode=OneWay}"  Margin="0, 0, 5, 0" MaxHeight="25" FontSize="10"/>
+                                            <Button Foreground="LightGreen" HorizontalAlignment="Right" VerticalAlignment="Center" IsEnabled="{x:Bind IsPlayButtonEnabled, Mode=OneWay}">
                                                 <FontIcon Glyph="&#xF5B0;" />
                                             </Button>
                                         </StackPanel>
 
-                                        <ProgressBar Grid.ColumnSpan="3" VerticalAlignment="Bottom" Margin="0, 0, 0, -7" IsIndeterminate="True"/>
+                                        <ProgressBar Grid.ColumnSpan="3" VerticalAlignment="Bottom" Margin="0, 0, 0, -7" IsIndeterminate="True" IsEnabled="{x:Bind ItemLoadingIndicatorsVisibility, Mode=OneWay}"/>
                                     </Grid>
                                 </Grid>
                             </ListViewItem>
