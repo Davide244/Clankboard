@@ -1,3 +1,4 @@
+using Clankboard.AudioSystem;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -24,22 +25,19 @@ namespace Clankboard.Pages
     /// </summary>
     public sealed partial class SoundboardPage : Page
     {
+        private Soundboard soundBoard = new Soundboard();
+
         public SoundboardPage()
         {
             this.InitializeComponent();
-        }
 
-        // Handles elements that need to be hidden when the page is too small to show them (eg.: Media player control elements & queue/playing list)
-        private void Page_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            //if (e.NewSize.Width < 590)
-            //{
-            //    MediaControlsElement.Visibility = Visibility.Collapsed;
-            //}
-            //else
-            //{
-            //    MediaControlsElement.Visibility = Visibility.Visible;
-            //}
+            // Set data source for the soundboard list view
+            SoundboardListView.ItemsSource = soundBoard.soundboardViewmodel.SoundboardItems;
+
+            // Add random soundboard items for testing
+            soundBoard.Add("Test 1", "C:\\Users\\Public\\Music\\Sample Music\\Kalimba.mp3");
+            soundBoard.Add("Test 2", "C:\\Users\\Public\\Music\\Sample Music\\Kalimba.mp3");
+            soundBoard.Add("Test 3", "C:\\Users\\Public\\Music\\Sample Music\\Kalimba.mp3");
         }
 
         private async void AddLocalSoundFile_Click(object sender, RoutedEventArgs e)
@@ -72,13 +70,13 @@ namespace Clankboard.Pages
             var files = await fileOpenPicker.PickMultipleFilesAsync();
             if (files.Count > 0)
             {
-                // Add selected files to the soundboard
-                foreach (var file in files)
-                {
-                    // write to debug output
-                    System.Diagnostics.Debug.WriteLine("Selected file: " + file.Path);
-                }
+                soundBoard.AddLocalAudio(files.ToList());
             }
+        }
+
+        private void DownloadSoundFile_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
