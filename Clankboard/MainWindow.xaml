@@ -22,7 +22,7 @@
     </winuiex:WindowEx.SystemBackdrop>
 
 
-    <Grid>
+    <Grid x:Name="rootGrid" Loaded="rootGrid_Loaded">
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
             <!--Title bar-->
@@ -69,5 +69,7 @@
             </Frame>
             <Image Source="ms-appx:///Assets/shadow.png" Visibility="Visible" VerticalAlignment="Top" HorizontalAlignment="Stretch" Stretch="Fill" Height="20" Opacity="0.5"/>
         </Grid>
+        
+        
     </Grid>
 </winuiex:WindowEx>

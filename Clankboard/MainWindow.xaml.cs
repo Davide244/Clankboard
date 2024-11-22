@@ -41,5 +41,21 @@ namespace Clankboard
             appWindow.TitleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
             appWindow.TitleBar.PreferredHeightOption = TitleBarHeightOption.Tall;
         }
+
+        private async void rootGrid_Loaded(object sender, RoutedEventArgs e)
+        {
+            ContentDialog dialog = new ContentDialog();
+
+            // XamlRoot must be set in the case of a ContentDialog running in a Desktop app
+            dialog.XamlRoot = rootGrid.XamlRoot;
+            dialog.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
+            dialog.Title = "Download Audio File";
+            dialog.PrimaryButtonText = "Download";
+            dialog.CloseButtonText = "Cancel";
+            dialog.DefaultButton = ContentDialogButton.Primary;
+            dialog.Content = new Dialogs.DownloadFileDialog();
+
+            var result = await dialog.ShowAsync();
+        }
     }
 }
