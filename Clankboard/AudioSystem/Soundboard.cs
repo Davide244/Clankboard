@@ -121,7 +121,7 @@ namespace Clankboard.AudioSystem
 
         private static int activeDownloads = 0;
 
-        public void AddLocalAudio(List<Windows.Storage.StorageFile> files)
+        public void Add(List<Windows.Storage.StorageFile> files)
         {
             foreach (var file in files)
             {
@@ -130,16 +130,18 @@ namespace Clankboard.AudioSystem
             }
         }
 
-        public void AddLocalAudio(string filePath)
+        public void Add(string filePath)
         {
             SoundboardItem soundboardItem = new SoundboardItem("Test", "Test", SoundboardItemType.LocalFile, filePath);
             soundboardViewmodel.SoundboardItems.Add(soundboardItem);
         }
 
-        public void Add(string name, string pathText)
+        public void Add(SoundboardItem item) => soundboardViewmodel.SoundboardItems.Add(item);
+
+
+        public void AddInternetAudio(string fileUrl, string customSoundName = null, bool embedInFile = false) 
         {
-            SoundboardItem item = new SoundboardItem(name, pathText, SoundboardItemType.LocalFile, pathText);
-            soundboardViewmodel.SoundboardItems.Add(item);
+
         }
     }
 }

@@ -1,4 +1,5 @@
 using Clankboard.AudioSystem;
+using Clankboard.Utils;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -11,6 +12,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage.Pickers;
@@ -35,9 +37,9 @@ namespace Clankboard.Pages
             SoundboardListView.ItemsSource = soundBoard.soundboardViewmodel.SoundboardItems;
 
             // Add random soundboard items for testing
-            soundBoard.Add("Test 1", "C:\\Users\\Public\\Music\\Sample Music\\Kalimba.mp3");
-            soundBoard.Add("Test 2", "C:\\Users\\Public\\Music\\Sample Music\\Kalimba.mp3");
-            soundBoard.Add("Test 3", "C:\\Users\\Public\\Music\\Sample Music\\Kalimba.mp3");
+            //soundBoard.Add("Test 1", "C:\\Users\\Public\\Music\\Sample Music\\Kalimba.mp3");
+            //soundBoard.Add("Test 2", "C:\\Users\\Public\\Music\\Sample Music\\Kalimba.mp3");
+            //soundBoard.Add("Test 3", "C:\\Users\\Public\\Music\\Sample Music\\Kalimba.mp3");
         }
 
         private async void AddLocalSoundFile_Click(object sender, RoutedEventArgs e)
@@ -70,13 +72,19 @@ namespace Clankboard.Pages
             var files = await fileOpenPicker.PickMultipleFilesAsync();
             if (files.Count > 0)
             {
-                soundBoard.AddLocalAudio(files.ToList());
+                soundBoard.Add(files.ToList());
             }
         }
 
-        private void DownloadSoundFile_Click(object sender, RoutedEventArgs e)
+        private async void DownloadSoundFile_Click(object sender, RoutedEventArgs e)
         {
+            // Check if yt-dlp.exe exists inside of ClankboardAppdata\AuxSoftware
+            var checkYTDLPTask = AuxSoftwareMgmt.CheckYTDLP();
+            var checkFFMpegTask = AuxSoftwareMgmt.CheckFFMpeg();
 
+            await Task.WhenAll(checkYTDLPTask, checkFFMpegTask);
+
+            // TODO: Add download dialog
         }
     }
 }

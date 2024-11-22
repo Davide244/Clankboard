@@ -17,6 +17,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using System.Threading;
 using System.Threading.Tasks;
+using Clankboard.Utils;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -28,6 +29,9 @@ namespace Clankboard
     /// </summary>
     public partial class App : Application
     {
+        public static string AppDataPath;
+
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -35,7 +39,33 @@ namespace Clankboard
         public App()
         {
             this.InitializeComponent();
+            setupAppData();
+
+            setupAuxSoftware();
+
             LaunchTask();
+        }
+
+        private async void setupAuxSoftware() 
+        {
+            var checkYTDLPTask = AuxSoftwareMgmt.CheckYTDLP();
+            var checkFFMpegTask = AuxSoftwareMgmt.CheckFFMpeg();
+
+            await Task.WhenAll(checkYTDLPTask, checkFFMpegTask);
+        }
+
+        private void setupAppData() 
+        {
+            string AppData = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Clankboard");
+
+            // Check if the directory exists
+            if (!Directory.Exists(AppData))
+            {
+                // Create the directory
+                Directory.CreateDirectory(AppData);
+            }
+
+            AppDataPath = AppData;
         }
 
         /// <summary>
