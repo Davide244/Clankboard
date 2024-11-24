@@ -23,7 +23,7 @@ namespace Clankboard.Utils
             if (!File.Exists(YTDLPPath))
             {
                 // Download ytdlp.exe
-                await YoutubeDLSharp.Utils.DownloadYtDlp(AuxSoftwareFolder);
+                //await YoutubeDLSharp.Utils.DownloadYtDlp(AuxSoftwareFolder);
             }
             else 
             {
