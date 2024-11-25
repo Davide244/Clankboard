@@ -6,6 +6,7 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 
@@ -18,42 +19,16 @@ namespace Clankboard.Controls
     {
         public bool hasErrors = false;
 
-        //public string RegexPattern
-        //{
-        //    get { return (string)GetValue(RegexPatternProperty); }
-        //    set { SetValue(RegexPatternProperty, value); }
-        //}
-
-        //// Dependency property containing the regex pattern to validate the input
-        //public static DependencyProperty RegexPatternProperty = DependencyProperty.Register(
-        //    "RegexPattern",
-        //    typeof(string),
-        //    typeof(RegexTextbox),
-        //    new PropertyMetadata(null)
-        //);
-
-
-        public Brush FocusedBorderBrush
+        public string RegexPattern
         {
-            get { return (Brush)GetValue(FocusedBorderBrushProperty); }
-            set { SetValue(FocusedBorderBrushProperty, value); }
-        }
-        public Brush UnFocusedBorderBrush
-        {
-            get { return (Brush)GetValue(UnFocusedBorderBrushProperty); }
-            set { SetValue(UnFocusedBorderBrushProperty, value); }
+            get { return (string)GetValue(RegexPatternProperty); }
+            set { SetValue(RegexPatternProperty, value); }
         }
 
-        // Dependency property containing the brush to use when the textbox has focus and the input is invalid
-        public static readonly DependencyProperty FocusedBorderBrushProperty = DependencyProperty.Register(
-            "FocusedErrorBorderBrush",
-            typeof(Brush),
-            typeof(RegexTextbox),
-            new PropertyMetadata(null)
-        );
-        public static readonly DependencyProperty UnFocusedBorderBrushProperty = DependencyProperty.Register(
-            "UnFocusedErrorBorderBrush",
-            typeof(Brush),
+        // Dependency property containing the regex pattern to validate the input
+        public static DependencyProperty RegexPatternProperty = DependencyProperty.Register(
+            "RegexPattern",
+            typeof(string),
             typeof(RegexTextbox),
             new PropertyMetadata(null)
         );
@@ -62,7 +37,7 @@ namespace Clankboard.Controls
         {
             this.DefaultStyleKey = typeof(RegexTextbox);
 
-            //this.KeyDown += RegexTextbox_KeyDown;
+            this.KeyDown += RegexTextbox_KeyDown;
         }
 
         private void RegexTextbox_KeyDown(object sender, KeyRoutedEventArgs e)
@@ -83,6 +58,8 @@ namespace Clankboard.Controls
             //        UnFocusedBorderBrush = Application.Current.Resources["RegexTextBoxBorderUnFocusedNoError"] as Brush;
             //    }
             //}
+
+            Debug.WriteLine("Key down event");
 
         }
 
