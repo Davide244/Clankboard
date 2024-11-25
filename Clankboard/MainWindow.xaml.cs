@@ -1,3 +1,4 @@
+using Clankboard.Utils.Events;
 using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
@@ -12,6 +13,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using WinRT.Interop;
@@ -27,6 +29,11 @@ namespace Clankboard
     public sealed partial class MainWindow : WinUIEx.WindowEx
     {
 
+        public static AppMessagingEvents g_appMessagingEvents = new();
+        public static AppContentDialogProperties g_appContentDialogProperties = new();
+
+        private ContentDialog dialog;
+
         public MainWindow()
         {
             this.InitializeComponent();
@@ -40,22 +47,48 @@ namespace Clankboard
             appWindow.TitleBar.ButtonBackgroundColor = Colors.Transparent;
             appWindow.TitleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
             appWindow.TitleBar.PreferredHeightOption = TitleBarHeightOption.Tall;
+
+            g_appMessagingEvents.AppShowMessageBox += AppMessagingEvents_AppShowMessageBox;
         }
 
-        private async void rootGrid_Loaded(object sender, RoutedEventArgs e)
+        private async Task<ContentDialogResult> AppMessagingEvents_AppShowMessageBox(object sender, RoutedEventArgs e, string Title, string Text, string CloseButtonText, string PrimaryButtonText, string SecondaryButtonText, ContentDialogButton DefaultButton = ContentDialogButton.None, object content = null)
         {
-            ContentDialog dialog = new ContentDialog();
+            // Disable all buttons
+            g_appContentDialogProperties.IsPrimaryButtonEnabled = false;
+            g_appContentDialogProperties.IsSecondaryButtonEnabled = false;
 
-            // XamlRoot must be set in the case of a ContentDialog running in a Desktop app
+            System.Diagnostics.Debug.WriteLine("AppMessagingEvents_AppShowMessageBox");
+
+            dialog = new ContentDialog();
+
             dialog.XamlRoot = rootGrid.XamlRoot;
             dialog.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-            dialog.Title = "Download Audio File";
-            dialog.PrimaryButtonText = "Download";
-            dialog.CloseButtonText = "Cancel";
-            dialog.DefaultButton = ContentDialogButton.Primary;
-            dialog.Content = new Dialogs.DownloadFileDialog();
+            dialog.Title = Title;
+            if (PrimaryButtonText != null) dialog.PrimaryButtonText = PrimaryButtonText;
+            if (SecondaryButtonText != null) dialog.SecondaryButtonText = SecondaryButtonText;
+            dialog.CloseButtonText = CloseButtonText;
+            dialog.DefaultButton = DefaultButton;
+            if (content != null) dialog.Content = content;
 
-            var result = await dialog.ShowAsync();
+            var bindingPrimaryButtonEnabled = new Binding();
+            bindingPrimaryButtonEnabled.Source = g_appContentDialogProperties;
+            bindingPrimaryButtonEnabled.Path = new PropertyPath("IsPrimaryButtonEnabled");
+            bindingPrimaryButtonEnabled.Mode = BindingMode.OneWay;
+            dialog.SetBinding(ContentDialog.IsPrimaryButtonEnabledProperty, bindingPrimaryButtonEnabled);
+
+            var bindingSecondaryButtonEnabled = new Binding();
+            bindingSecondaryButtonEnabled.Source = g_appContentDialogProperties;
+            bindingSecondaryButtonEnabled.Path = new PropertyPath("IsSecondaryButtonEnabled");
+            bindingSecondaryButtonEnabled.Mode = BindingMode.OneWay;
+            dialog.SetBinding(ContentDialog.IsSecondaryButtonEnabledProperty, bindingSecondaryButtonEnabled);
+
+            return await dialog.ShowAsync();
+        }
+
+        private void rootGrid_Loaded(object sender, RoutedEventArgs e)
+        {
+            // For testing: Display the download file dialog
+            g_appMessagingEvents.ShowMessageBox("Download File", "", "Cancel", "Download File", "", ContentDialogButton.Primary, new Dialogs.DownloadFileDialog());
         }
     }
 }

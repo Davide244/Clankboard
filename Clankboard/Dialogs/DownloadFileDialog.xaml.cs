@@ -17,6 +17,7 @@ using System.ComponentModel.DataAnnotations;
 using CommunityToolkit.Mvvm.Input;
 using System.ComponentModel;
 using Windows.UI;
+using Clankboard.Controls;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -73,7 +74,20 @@ namespace Clankboard.Dialogs
         {
             this.InitializeComponent();
 
-            //urlTextBox.RegexPattern = @"^((https|http|ftp)://)?(?:([A-z0-9])([A-z0-9-]{1,61})?([A-z0-9])\.)?(([A-z0-9])([A-z0-9\-]{1,61})?(?:[A-z,0-9]))\.([A-z]{2,63})(?:\/[A-z0-9$-_.+!*'(),äÄöÖüÜ""<>#%{}|\^~[\]`]{1,2048})?";
+            urlTextBox.RegexPattern = @"^((https|http|ftp)://)?(?:([A-z0-9])([A-z0-9-]{1,61})?([A-z0-9])\.)?(([A-z0-9])([A-z0-9\-]{1,61})?(?:[A-z,0-9]))\.([A-z]{2,63})(?:\/[A-z0-9$-_.+!*'(),äÄöÖüÜ""<>#%{}|\^~[\]`]{1,2048})?";
+            urlTextBox.validityChanged += urlTextBox_validityChanged;
+        }
+
+        private void urlTextBox_validityChanged(object sender, EventArgs e)
+        {
+            if (urlTextBox.hasErrors) 
+            {
+                MainWindow.g_appContentDialogProperties.IsPrimaryButtonEnabled = false;
+            }
+            else
+            {
+                MainWindow.g_appContentDialogProperties.IsPrimaryButtonEnabled = true;
+            }
         }
 
         private void TextBox_KeyDown(object sender, KeyRoutedEventArgs e)

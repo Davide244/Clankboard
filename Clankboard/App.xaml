@@ -9,6 +9,48 @@
             <ResourceDictionary.MergedDictionaries>
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
             </ResourceDictionary.MergedDictionaries>
+
+            <LinearGradientBrush x:Key="RegexTextBoxBorderFocusedError" MappingMode="Absolute" StartPoint="0,0" EndPoint="0,2">
+                <LinearGradientBrush.RelativeTransform>
+                    <ScaleTransform ScaleY="-1" CenterY="0.5" />
+                </LinearGradientBrush.RelativeTransform>
+                <LinearGradientBrush.GradientStops>
+                    <GradientStop Offset="1.0" Color="{ThemeResource SystemFillColorCritical}" />
+                    <GradientStop Offset="1.0" Color="{StaticResource ControlStrokeColorDefault}" />
+                </LinearGradientBrush.GradientStops>
+            </LinearGradientBrush>
+
+            <LinearGradientBrush x:Key="RegexTextBoxBorderUnFocusedError" MappingMode="Absolute" StartPoint="0,0" EndPoint="0,2">
+                <LinearGradientBrush.RelativeTransform>
+                    <ScaleTransform ScaleY="-1" CenterY="0.5" />
+                </LinearGradientBrush.RelativeTransform>
+                <LinearGradientBrush.GradientStops>
+                    <GradientStop Offset="0.5" Color="{ThemeResource SystemFillColorCritical}" />
+                    <GradientStop Offset="1.0" Color="{StaticResource ControlStrokeColorDefault}" />
+                </LinearGradientBrush.GradientStops>
+            </LinearGradientBrush>
+
+            <LinearGradientBrush x:Key="RegexTextBoxBorderFocusedNoError" MappingMode="Absolute" StartPoint="0,0" EndPoint="0,2">
+                <LinearGradientBrush.RelativeTransform>
+                    <ScaleTransform ScaleY="-1" CenterY="0.5" />
+                </LinearGradientBrush.RelativeTransform>
+                <LinearGradientBrush.GradientStops>
+                    <GradientStop Offset="1.0" Color="{ThemeResource SystemFillColorSuccess}" />
+                    <GradientStop Offset="1.0" Color="{StaticResource ControlStrokeColorDefault}" />
+                </LinearGradientBrush.GradientStops>
+            </LinearGradientBrush>
+
+            <LinearGradientBrush x:Key="RegexTextBoxBorderUnFocusedNoError" MappingMode="Absolute" StartPoint="0,0" EndPoint="0,2">
+                <LinearGradientBrush.RelativeTransform>
+                    <ScaleTransform ScaleY="-1" CenterY="0.5" />
+                </LinearGradientBrush.RelativeTransform>
+                <LinearGradientBrush.GradientStops>
+                    <GradientStop Offset="0.5" Color="{ThemeResource SystemFillColorSuccess}" />
+                    <GradientStop Offset="1.0" Color="{StaticResource ControlStrokeColorDefault}" />
+                </LinearGradientBrush.GradientStops>
+            </LinearGradientBrush>
+            
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

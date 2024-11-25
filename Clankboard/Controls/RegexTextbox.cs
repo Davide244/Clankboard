@@ -24,7 +24,6 @@ namespace Clankboard.Controls
             get { return (string)GetValue(RegexPatternProperty); }
             set { SetValue(RegexPatternProperty, value); }
         }
-
         // Dependency property containing the regex pattern to validate the input
         public static DependencyProperty RegexPatternProperty = DependencyProperty.Register(
             "RegexPattern",
@@ -33,34 +32,132 @@ namespace Clankboard.Controls
             new PropertyMetadata(null)
         );
 
+        // Foreground color of the description text
+        public Brush DescriptionForeground
+        {
+            get { return (Brush)GetValue(DescriptionForegroundProperty); }
+            set { SetValue(DescriptionForegroundProperty, value); }
+        }
+
+        public static readonly DependencyProperty DescriptionForegroundProperty = DependencyProperty.Register(
+            "DescriptionForeground",
+            typeof(Brush),
+            typeof(RegexTextbox),
+            new PropertyMetadata(null)
+        );
+
+        // EventHandler for the validityStatusChanged event
+        public EventHandler validityChanged 
+        {
+            get { return (EventHandler)GetValue(validityChangedProperty); }
+            set { SetValue(validityChangedProperty, value); }
+        }
+
+        public static readonly DependencyProperty validityChangedProperty = DependencyProperty.Register(
+            "validityChanged",
+            typeof(EventHandler),
+            typeof(RegexTextbox),
+            new PropertyMetadata(null)
+        );
+
+
+        // Brush for the border of the textbox when focused
+        public Brush FocusedBorderBrush
+        {
+            get { return (Brush)GetValue(FocusedBorderBrushProperty); }
+            set { SetValue(FocusedBorderBrushProperty, value); }
+        }
+
+        public static readonly DependencyProperty FocusedBorderBrushProperty = DependencyProperty.Register(
+            "FocusedBorderBrush",
+            typeof(Brush),
+            typeof(RegexTextbox),
+            new PropertyMetadata(Application.Current.Resources["RegexTextBoxBorderFocusedError"] as Brush)
+        );
+
+        // Brush for the border of the textbox when not focused
+        public Brush UnFocusedBorderBrush
+        {
+            get { return (Brush)GetValue(UnFocusedBorderBrushProperty); }
+            set { SetValue(UnFocusedBorderBrushProperty, value); }
+        }
+
+        public static readonly DependencyProperty UnFocusedBorderBrushProperty = DependencyProperty.Register(
+            "UnFocusedBorderBrush",
+            typeof(Brush),
+            typeof(RegexTextbox),
+            new PropertyMetadata(Application.Current.Resources["RegexTextBoxBorderUnFocusedError"] as Brush)
+        );
+
+
         public RegexTextbox()
         {
             this.DefaultStyleKey = typeof(RegexTextbox);
 
-            this.KeyDown += RegexTextbox_KeyDown;
+            this.TextChanged += RegexTextbox_TextChanged;
+            this.validityChanged += RegexTextbox_validityChanged;
+
+            // Set the default border brush to RegexTextBoxBorderFocusedError
+            //this.FocusedBorderBrush = Application.Current.Resources["RegexTextBoxBorderFocusedError"] as Brush;
+            //this.UnFocusedBorderBrush = Application.Current.Resources["RegexTextBoxBorderUnFocusedError"] as Brush;
+
+            this.BorderBrush = this.UnFocusedBorderBrush;
         }
 
-        private void RegexTextbox_KeyDown(object sender, KeyRoutedEventArgs e)
+        bool previousHasErrors = false; // Little hack because im too lazy to implement a proper event handler
+        private void RegexTextbox_TextChanged(object sender, TextChangedEventArgs e)
         {
             // Validate the input on every keydown event by checking the regex pattern
-            //if (RegexPattern != null)
-            //{
-            //    if (!System.Text.RegularExpressions.Regex.IsMatch(this.Text, RegexPattern))
-            //    {
-            //        hasErrors = true;
-            //        FocusedBorderBrush = Application.Current.Resources["RegexTextBoxBorderFocusedError"] as Brush;
-            //        UnFocusedBorderBrush = Application.Current.Resources["RegexTextBoxBorderUnFocusedError"] as Brush;
-            //    }
-            //    else
-            //    {
-            //        hasErrors = false;
-            //        FocusedBorderBrush = Application.Current.Resources["RegexTextBoxBorderFocusedNoError"] as Brush;
-            //        UnFocusedBorderBrush = Application.Current.Resources["RegexTextBoxBorderUnFocusedNoError"] as Brush;
-            //    }
-            //}
+            if (RegexPattern != null)
+            {
+                if (!System.Text.RegularExpressions.Regex.IsMatch(this.Text, RegexPattern))
+                {
+                    previousHasErrors = hasErrors;
+                    hasErrors = true;
+                    this.DescriptionForeground = /*Change to SystemFillColorCritical*/ Application.Current.Resources["SystemFillColorCriticalBrush"] as Brush;
+                    this.Description = "Please enter a valid URL.";
 
-            Debug.WriteLine("Key down event");
+                    this.FocusedBorderBrush = Application.Current.Resources["RegexTextBoxBorderFocusedError"] as Brush;
+                    this.UnFocusedBorderBrush = Application.Current.Resources["RegexTextBoxBorderUnFocusedError"] as Brush;
+                    this.BorderBrush = this.UnFocusedBorderBrush;
 
+                    if (previousHasErrors != hasErrors)
+                        validityChanged?.Invoke(this, EventArgs.Empty);
+                }
+                else
+                {
+                    previousHasErrors = hasErrors;
+                    hasErrors = false;
+                    this.DescriptionForeground = /*Change to SystemFillColorCritical*/ Application.Current.Resources["SystemFillColorSuccessBrush"] as Brush;
+                    this.Description = "URL is valid.";
+
+                    this.FocusedBorderBrush = Application.Current.Resources["RegexTextBoxBorderFocusedNoError"] as Brush;
+                    this.UnFocusedBorderBrush = Application.Current.Resources["RegexTextBoxBorderUnFocusedNoError"] as Brush;
+                    this.BorderBrush = this.UnFocusedBorderBrush;
+
+                    if (previousHasErrors != hasErrors)
+                        validityChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+
+        }
+
+        private void RegexTextbox_validityChanged(object sender, EventArgs e)
+        {
+            if (hasErrors)
+            {
+                this.FocusedBorderBrush = Application.Current.Resources["RegexTextBoxBorderFocusedError"] as Brush;
+                this.UnFocusedBorderBrush = Application.Current.Resources["RegexTextBoxBorderUnFocusedError"] as Brush;
+                this.BorderBrush = this.UnFocusedBorderBrush;
+            }
+            else
+            {
+                this.FocusedBorderBrush = Application.Current.Resources["RegexTextBoxBorderFocusedNoError"] as Brush;
+                this.UnFocusedBorderBrush = Application.Current.Resources["RegexTextBoxBorderUnFocusedNoError"] as Brush;
+                this.BorderBrush = this.UnFocusedBorderBrush;
+            }
+
+            // What do I do here?
         }
 
         //private static void OnPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

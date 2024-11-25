@@ -11,9 +11,7 @@
 
     <Grid>
         <StackPanel>
-            <clankControls:RegexTextbox PlaceholderText="URL" Description="Please enter a valid URL"/>
-            <TextBox PlaceholderText="URL" Description="Please enter a valid URL"/>
-            
+            <clankControls:RegexTextbox x:Name="urlTextBox" PlaceholderText="URL"/>
         </StackPanel>
         <!--clankControls:InputValidatedTextBox x:Name="urlTextBox" Text="{x:Bind downloadFileDialogViewmodel.UserInputUrl, Mode=TwoWay}" KeyDown="TextBox_KeyDown" BorderBrush="Red"/-->
     </Grid>
