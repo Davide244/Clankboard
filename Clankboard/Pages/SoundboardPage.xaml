@@ -41,7 +41,7 @@
                                     <FontIcon Glyph="&#xEBD3;"/>
                                 </MenuFlyoutItem.Icon>
                             </MenuFlyoutItem>
-                            <MenuFlyoutItem Text="Add TTS Audio">
+                            <MenuFlyoutItem Text="Add TTS Audio" Click="AddTTSAudio_Click">
                                 <MenuFlyoutItem.Icon>
                                     <FontIcon Glyph="&#xF2B7;" />
                                 </MenuFlyoutItem.Icon>
@@ -123,7 +123,7 @@
                             <ListViewItem Background="#303030" CornerRadius="5" Height="50" BorderBrush="#414141" BorderThickness="1">
                                 <ListViewItem.ContextFlyout>
                                     <MenuFlyout>
-                                        <MenuFlyoutItem Icon="Folder" Text="Show in Explorer" IsEnabled="{x:Bind CanClickViewInExplorer, Mode=OneWay}"/>
+                                        <MenuFlyoutItem x:Name="SoundboardContextFlyoutViewInExplorerBtn" Icon="Folder" Text="Show in Explorer" IsEnabled="{x:Bind CanClickViewInExplorer, Mode=OneWay}" Click="SoundboardContextFlyoutViewInExplorerBtn_Click"/>
                                         <MenuFlyoutItem Icon="Save"  Text="Export to" IsEnabled="{x:Bind CanClickExport, Mode=OneWay}"/>
                                         <MenuFlyoutItem Icon="Setting"  Text="Configure" IsEnabled="{x:Bind CanClickConfigure, Mode=OneWay}"/>
                                         <MenuFlyoutItem Icon="Play" Text="Play" IsEnabled="{x:Bind IsPlayButtonEnabled, Mode=OneWay}"/>
@@ -138,7 +138,7 @@
                                         </Grid.ColumnDefinitions>
 
                                         <FontIcon Glyph="{x:Bind ItemIcon, Mode=OneTime}" HorizontalAlignment="Center" Visibility="{x:Bind ItemIconVisibility, Mode=OneWay}" Foreground="{x:Bind ItemIconColor, Mode=OneWay}"/>
-                                        <ProgressRing Width="20" Height="20" IsIndeterminate="False" Value="{x:Bind ItemProgressRingProgress}" Visibility="{x:Bind ItemLoadingIndicatorsVisibility, Mode=OneWay}"/>
+                                        <ProgressRing Width="20" Height="20" IsIndeterminate="False" Value="{x:Bind ItemProgressRingProgress, Mode=OneWay}" Visibility="{x:Bind ItemLoadingIndicatorsVisibility, Mode=OneWay}"/>
 
                                         <StackPanel Grid.Column="1" Margin="10, 0, 0, 0">
                                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">

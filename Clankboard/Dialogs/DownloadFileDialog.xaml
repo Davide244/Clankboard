@@ -11,7 +11,19 @@
 
     <Grid>
         <StackPanel>
-            <clankControls:RegexTextbox x:Name="urlTextBox" PlaceholderText="URL"/>
+            <TextBlock Text="Please enter a URL and set the options below accordingly. URLs directly containing media files is supported. URLs from social media sites are also supported with the help of ytdlp." Style="{StaticResource BodyTextBlockStyle}"/>
+            
+            <clankControls:RegexTextbox x:Name="urlTextBox" PlaceholderText="URL" Header="Media URL" Margin="0, 20, 0, 0" TextChanged="urlTextBox_TextChanged" Description="Please enter a valid URL."/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <CheckBox x:Name="overrideFileNameCheckBox" Content="Override file name" Checked="overrideFileNameCheckBox_Checked" Unchecked="overrideFileNameCheckBox_Checked"/>
+                <CheckBox x:Name="embedIntoFileCheckBox" Content="Embed into soundboard" Grid.Column="1"/>
+            </Grid>
+            <TextBox x:Name="fileNameTextBox" PlaceholderText="Item Name" Header="Custom soundboard item name" Margin="0, 20, 0, 0" IsEnabled="False" TextChanged="fileNameTextBox_TextChanged"/>
         </StackPanel>
         <!--clankControls:InputValidatedTextBox x:Name="urlTextBox" Text="{x:Bind downloadFileDialogViewmodel.UserInputUrl, Mode=TwoWay}" KeyDown="TextBox_KeyDown" BorderBrush="Red"/-->
     </Grid>

@@ -12,13 +12,15 @@ namespace Clankboard.Utils
     static class AuxSoftwareMgmt
     {
 
-        private static string AuxSoftwareFolder;
+        public static string AuxSoftwareFolder { get; private set; }
+        public static string YTDLPPath { get; private set; }
+        public static string FFMpegPath { get; private set; }
 
         public static async Task<bool> CheckYTDLP()
         {
             CheckAuxSoftwareFolder();
 
-            string YTDLPPath = System.IO.Path.Combine(AuxSoftwareFolder, "ytdlp.exe");
+            YTDLPPath = System.IO.Path.Combine(AuxSoftwareFolder, "yt-dlp.exe");
 
             if (!File.Exists(YTDLPPath))
             {
@@ -40,7 +42,7 @@ namespace Clankboard.Utils
         {
             CheckAuxSoftwareFolder();
 
-            string FFMpegPath = System.IO.Path.Combine(AuxSoftwareFolder, "ffmpeg.exe");
+            FFMpegPath = System.IO.Path.Combine(AuxSoftwareFolder, "ffmpeg.exe");
 
             if (!File.Exists(FFMpegPath))
             {

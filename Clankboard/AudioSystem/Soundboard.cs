@@ -1,11 +1,17 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Clankboard.Utils;
+using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Media.SpeechSynthesis;
+using YoutubeDLSharp;
+using YoutubeDLSharp.Metadata;
 
 namespace Clankboard.AudioSystem
 {
@@ -101,6 +107,15 @@ namespace Clankboard.AudioSystem
         {
             ItemErrorIndicatorVisibility = visible ? "Visible" : "Collapsed";
         }
+
+        public void SetInteractionEnabled(bool enabled)
+        {
+            IsPlayButtonEnabled = enabled;
+            UserDeletionEnabled = enabled;
+            CanClickViewInExplorer = enabled;
+            CanClickConfigure = enabled;
+            CanClickExport = enabled;
+        }
     }
 
     // Viewmodel
@@ -139,9 +154,96 @@ namespace Clankboard.AudioSystem
         public void Add(SoundboardItem item) => soundboardViewmodel.SoundboardItems.Add(item);
 
 
-        public void AddInternetAudio(string fileUrl, string customSoundName = null, bool embedInFile = false) 
+        public async void AddInternetAudio(string fileUrl, string customSoundName = null, bool embedInFile = false) 
         {
+            // Check if the file leads to media directly (Aka not a youtube link for example). Check this by seeing if the server prompts a download
+            // If it does, download the file to the downloads folder and add it to the soundboard
+            // Otherwise, use ytdlp to attempt the download.
 
+            // Add the file to the soundboard
+            SoundboardItem item = new SoundboardItem(customSoundName != null ? customSoundName : fileUrl, fileUrl, SoundboardItemType.DownloadedFile, null, false, true);
+            soundboardViewmodel.SoundboardItems.Add(item);
+
+            // Check if link exists:
+            if (Utils.InetHelper.ValidateUrlWithHttp(fileUrl).Result == false) 
+            {
+                soundboardViewmodel.SoundboardItems.Remove(item);
+                return;
+            }
+
+            // Download the file
+            var ytdlp = new YoutubeDL();
+            ytdlp.YoutubeDLPath = AuxSoftwareMgmt.YTDLPPath;
+            ytdlp.FFmpegPath = AuxSoftwareMgmt.FFMpegPath;
+            ytdlp.OutputFolder = Path.Combine(App.AppDataPath, "Downloads");
+
+            var fetchResult = await ytdlp.RunVideoDataFetch(fileUrl);
+            VideoData videoData = fetchResult.Data;
+            if (customSoundName == null) item.ItemName = videoData.Title;
+
+            // Check if (ID).wav exists in the downloads folder
+            string fileExtension = ".wav";
+            string fileName = videoData.DisplayID + fileExtension;
+            string filePath = Path.Combine(App.AppDataPath, "Downloads", fileName);
+
+            if (File.Exists(filePath))
+            {
+                // File exists, add it to the soundboard
+                item.PhysicalFilePath = filePath;
+                item.SetProgressIndicatorVisibility(false);
+                item.SetInteractionEnabled(true);
+                return;
+            }
+
+            // Set OutputFileTemplate to ID.EXT
+            ytdlp.OutputFileTemplate = "%(id)s.%(ext)s";
+
+            var progress = new Progress<DownloadProgress>(p => item.ItemProgressRingProgress = (int)p.Progress*100);
+
+            var result = await ytdlp.RunAudioDownload(fileUrl, YoutubeDLSharp.Options.AudioConversionFormat.Wav, progress: progress);
+
+            string path = result.Data.ToString();
+            if (result.Success)
+            {
+                item.PhysicalFilePath = path;
+                item.SetProgressIndicatorVisibility(false);
+                item.SetInteractionEnabled(true);
+            }
+            else
+            {
+                // Remove the item from the soundboard
+                soundboardViewmodel.SoundboardItems.Remove(item);
+                Debug.WriteLine("DOWNLOAD FAILED! : " + result.ErrorOutput);
+            }
+        }
+
+        public void Add(string TTSText, int speed, int volume, bool embedded) 
+        {
+            // If file is embedded, bake the TTS audio into a .wav file.
+            // Otherwise we will just save the TTS without a file path.
+
+            // Add the file to the soundboard
+            SoundboardItem item = new SoundboardItem("TTS", TTSText, SoundboardItemType.TTSFile, null, false, false);
+
+            SpeechSynthesizer synthesizer = new SpeechSynthesizer();
+            // Generate the TTS audio file
+            // Save the file: [SHA1 of text].wav
+            string fileName = Convert.ToHexString(SHA1.HashData(Encoding.UTF8.GetBytes(TTSText))) + ".wav";
+
+            MemoryStream stream = new MemoryStream();
+
+            synthesizer.Options.SpeakingRate = 1;
+            // Set the stream to stream and speak asynchronously instantly
+            synthesizer.SynthesizeTextToStreamAsync(TTSText);
+
+
+            // Generate the TTS audio
+
+
+            item.SetInteractionEnabled(true);
+
+
+            soundboardViewmodel.SoundboardItems.Add(item);
         }
     }
 }

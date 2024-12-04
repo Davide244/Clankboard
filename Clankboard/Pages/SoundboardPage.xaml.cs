@@ -1,4 +1,5 @@
 using Clankboard.AudioSystem;
+using Clankboard.Dialogs;
 using Clankboard.Utils;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -78,13 +79,38 @@ namespace Clankboard.Pages
 
         private async void DownloadSoundFile_Click(object sender, RoutedEventArgs e)
         {
-            // Check if yt-dlp.exe exists inside of ClankboardAppdata\AuxSoftware
-            var checkYTDLPTask = AuxSoftwareMgmt.CheckYTDLP();
-            var checkFFMpegTask = AuxSoftwareMgmt.CheckFFMpeg();
+            // Make download file dialog appear
+            // Add downloaded file to the soundboard
 
-            await Task.WhenAll(checkYTDLPTask, checkFFMpegTask);
+            // Open download file dialog code
+            DownloadFileDialog downloadFileDialog = new DownloadFileDialog();
+            ContentDialogResult result = await MainWindow.g_appMessagingEvents.ShowMessageBox("Download File", "", "Cancel", "Download File", null, ContentDialogButton.Primary, downloadFileDialog);
 
-            // TODO: Add download dialog
+            if (result == ContentDialogResult.Primary)
+            {
+                soundBoard.AddInternetAudio(DownloadFileDialog.userSelectedFileUrl, (DownloadFileDialog.overrideFileName && DownloadFileDialog.userSelectedFileName != "") ? DownloadFileDialog.userSelectedFileName : null);
+
+                // TODO: Add download logic.
+            }
+        }
+
+        private void SoundboardContextFlyoutViewInExplorerBtn_Click(object sender, RoutedEventArgs e)
+        {
+            // Get the soundboard Item that was right clicked
+            SoundboardItem item = (SoundboardItem)((FrameworkElement)sender).DataContext;
+            if (item != null) {
+                System.Diagnostics.Process.Start("explorer.exe", "/select, \"" + item.PhysicalFilePath + "\"");
+            }
+        }
+
+        private async void AddTTSAudio_Click(object sender, RoutedEventArgs e)
+        {
+            ContentDialogResult result = await MainWindow.g_appMessagingEvents.ShowMessageBox("Add Text to Speech Audio", "", "Cancel", "Add", null, ContentDialogButton.Primary, new Dialogs.AddTTSAudioDialog());
+
+            if (result == ContentDialogResult.Primary)
+            {
+                soundBoard.Add("Test TTS", 1, 100, false);
+            }
         }
     }
 }

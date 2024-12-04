@@ -25,74 +25,46 @@ using Clankboard.Controls;
 namespace Clankboard.Dialogs
 {
 
-    public partial class DownloadFileDialogViewmodel : ObservableValidator, INotifyPropertyChanged
-    {
-        // Viewmodel to validate Textbox input for the download file dialog
-
-        [ObservableProperty]
-        [NotifyDataErrorInfo]
-        [StringLength(2048, ErrorMessage = "URL is too long.")]
-        [RegularExpression(@"^((https|http|ftp)://)?(?:([A-z0-9])([A-z0-9-]{1,61})?([A-z0-9])\.)?(([A-z0-9])([A-z0-9\-]{1,61})?(?:[A-z,0-9]))\.([A-z]{2,63})(?:\/[A-z0-9$-_.+!*'(),äÄöÖüÜ""<>#%{}|\^~[\]`]{1,2048})?", ErrorMessage = "URL is invalid.")]
-        public string _userInputUrl;
-
-        [RelayCommand]
-        public void DownloadFile()
-        {
-            ValidateAllProperties();
-
-            // Validate URL
-            if (HasErrors)
-            {
-                return;
-            }
-        }
-
-        public void TextBoxTextChangedHandler() // Gets called every time the textBox's keydown event gets called.
-        {
-            System.Diagnostics.Debug.WriteLine(UserInputUrl); // This is always empty for some reason
-            ValidateAllProperties();
-            System.Diagnostics.Debug.WriteLine("Validated"); // This appears in the output
-            if (HasErrors)
-            {
-                System.Diagnostics.Debug.WriteLine("Errors found!"); // This does not.. Even with wrong data inside of UserInputUrl
-            }
-        }
-    }
-
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class DownloadFileDialog : Page
     {
-        public DownloadFileDialogViewmodel downloadFileDialogViewmodel = new DownloadFileDialogViewmodel();
-
         // Using public static as WinUI 3 only allows for one instance of a dialog to be created.. Basically a singleton (Cheating :p)
         public static string userSelectedFileUrl;
         public static string userSelectedFileName;
+        public static bool overrideFileName;
 
         public DownloadFileDialog()
         {
             this.InitializeComponent();
 
-            urlTextBox.RegexPattern = @"^((https|http|ftp)://)?(?:([A-z0-9])([A-z0-9-]{1,61})?([A-z0-9])\.)?(([A-z0-9])([A-z0-9\-]{1,61})?(?:[A-z,0-9]))\.([A-z]{2,63})(?:\/[A-z0-9$-_.+!*'(),äÄöÖüÜ""<>#%{}|\^~[\]`]{1,2048})?";
+            urlTextBox.RegexPattern = @"^((https|http|ftp)://)?(?:([A-z0-9])([A-z0-9-]{1,61})?([A-z0-9])?\.)?(([A-z0-9])([A-z0-9\-]{1,61})?(?:[A-z,0-9]))\.([A-z]{2,63})(?:\/[A-z0-9$-_.+!*'(),äÄöÖüÜ""<>#%{}|\^~[\]`]{1,2048})?";
             urlTextBox.validityChanged += urlTextBox_validityChanged;
         }
 
         private void urlTextBox_validityChanged(object sender, EventArgs e)
         {
             if (urlTextBox.hasErrors) 
-            {
                 MainWindow.g_appContentDialogProperties.IsPrimaryButtonEnabled = false;
-            }
             else
-            {
                 MainWindow.g_appContentDialogProperties.IsPrimaryButtonEnabled = true;
-            }
         }
 
-        private void TextBox_KeyDown(object sender, KeyRoutedEventArgs e)
+        private void urlTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //Text.BorderBrush = new SolidColorBrush(Color.FromArgb(0, 255, 0, 0));
+            userSelectedFileUrl = urlTextBox.Text;
+        }
+
+        private void overrideFileNameCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            fileNameTextBox.IsEnabled = overrideFileNameCheckBox.IsChecked.Value;
+            overrideFileName = overrideFileNameCheckBox.IsChecked.Value;
+        }
+
+        private void fileNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            userSelectedFileName = fileNameTextBox.Text;
         }
     }
 }
