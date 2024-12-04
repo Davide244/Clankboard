@@ -7,6 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:winuiex="using:WinUIEx"
+    xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals"
     mc:Ignorable="d"
     TaskBarIcon="Assets\icon.ico"
     Title="Clankboard"
@@ -22,7 +23,7 @@
     </winuiex:WindowEx.SystemBackdrop>
 
 
-    <Grid x:Name="rootGrid" Loaded="rootGrid_Loaded">
+    <Grid x:Name="rootGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
             <!--Title bar-->
@@ -30,6 +31,8 @@
             <!--Command bar-->
             <RowDefinition Height="*"/>
             <!--Content-->
+            <RowDefinition Height="auto"/>
+            <!--Messages-->
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" x:Name="AppTitleBar">
@@ -44,7 +47,7 @@
             <TextBlock x:Name="AppTitleBarText" VerticalAlignment="Center" TextWrapping="NoWrap" Style="{StaticResource CaptionTextBlockStyle}" Margin="8, 0, 0, 0" Text="Clankboard" Grid.Column="2"/>
             <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right" Grid.Row="0" HorizontalAlignment="Center" x:Name="MainCommandBar" Grid.Column="3">
                 <CommandBar.PrimaryCommands>
-                    <AppBarButton Icon="Setting" Label="Settings"/>
+                    <AppBarButton Icon="Setting" Label="Settings" Click="SettingsButton_Click"/>
                     <AppBarSeparator/>
                     <AppBarButton Icon="Share" Label="Voicebox" IsEnabled="False"/>
                     <AppBarToggleButton  Label="Mute">
@@ -69,7 +72,11 @@
             </Frame>
             <Image Source="ms-appx:///Assets/shadow.png" Visibility="Visible" VerticalAlignment="Top" HorizontalAlignment="Stretch" Stretch="Fill" Height="20" Opacity="0.5"/>
         </Grid>
-        
+
+        <StackPanel Grid.Row="3" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="20, 5, 20, 10">
+            <InfoBar Title="Ongoing Downloads" Message="Files are currently being downloaded." Severity="Informational" IsOpen="True" Margin="0, 0, 0, 5"/>
+            <InfoBar Title="Debug Mode" Message="You are running an unoptimized debug version of Clankboard." Severity="Informational" IsOpen="True" Margin="0, 0, 0, 5"/>
+        </StackPanel>
         
     </Grid>
 </winuiex:WindowEx>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Clankboard.Pages.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Clankboard.Pages"
+    xmlns:controls="using:CommunityToolkit.WinUI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="using:CommunityToolkit.WinUI"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Padding="20, 10, 20, 0">
+        <SelectorBar x:Name="SettingsSelectorBar" HorizontalAlignment="Stretch">
+            <SelectorBarItem x:Name="SettingsSelectorBarGeneralSettingsPage" Text="General Settings" IsSelected="True"/>
+            <SelectorBarItem x:Name="SettingsSelectorBarSoundboardSettingsPage" Text="Soundboard Settings"/>
+        </SelectorBar>
+
+        <ScrollView>
+            <StackPanel Margin="0, 50, 0, 0">
+                <TextBlock Text="Audio Settings" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}" Margin="0, 0, 0, 5"/>
+                <controls:SettingsExpander Header="Audio I / O" HeaderIcon="Audio" Margin="0, 0, 0, 5" Description="Set the input device, local output device, and virtual audio cable output device.">
+                    <controls:SettingsExpander.Items>
+                        <controls:SettingsCard Header="Input Device" HeaderIcon="Microphone" Description="Usually the microphone that records your voice. Can also be the output of a mixer setup for example." IsEnabled="{x:Bind settingsViewmodel.AudioMixingEnabled, Mode=OneWay}">
+                            <ComboBox PlaceholderText="Not selected"/>
+                        </controls:SettingsCard>
+                        <controls:SettingsCard Header="Output Device" Description="All audio mixed and played in this app gets sent to this output. This is usually set to a virtual audio cable.">
+                            <controls:SettingsCard.HeaderIcon>
+                                <FontIcon Glyph="&#xE964;" />
+                            </controls:SettingsCard.HeaderIcon>
+                            <ComboBox PlaceholderText="Not selected"/>
+                        </controls:SettingsCard>
+                        <controls:SettingsCard Header="Local Output Device" Description="The audio output device where audio gets looped back to you, so you can hear what you played, or are saying.">
+                            <controls:SettingsCard.HeaderIcon>
+                                <FontIcon Glyph="&#xE7F5;" />
+                            </controls:SettingsCard.HeaderIcon>
+                            <ComboBox PlaceholderText="Not selected"/>
+                        </controls:SettingsCard>
+                    </controls:SettingsExpander.Items>
+                </controls:SettingsExpander>
+
+                <controls:SettingsCard Header="Enable Audio Mixing" HeaderIcon="{ui:FontIcon Glyph=&#xF4C3;}" Description="This setting allows you to disable the app mixing your microphone. The microphpone audio will not be captured when recorded." Margin="0, 0, 0, 5">
+                    <ToggleSwitch IsOn="{x:Bind settingsViewmodel.AudioMixingEnabled, Mode=TwoWay}"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Enable Microphone Loopback" HeaderIcon="{ui:FontIcon Glyph=&#xEFA9;}" Description="If microphone mixing is enabled, this will let you hear yourself on the local output device." Margin="0, 0, 0, 15" IsEnabled="{x:Bind settingsViewmodel.AudioMixingEnabled, Mode=OneWay}">
+                    <ToggleSwitch IsOn="False"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Input Volume" HeaderIcon="{ui:FontIcon Glyph=&#xF12E;}" Description="The volume of your microphone." Margin="0, 0, 0, 5" IsEnabled="{x:Bind settingsViewmodel.AudioMixingEnabled, Mode=OneWay}">
+                    <Slider Minimum="0" Maximum="100" Value="{x:Bind settingsViewmodel.InputVolume, Mode=TwoWay}"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Output Volume" HeaderIcon="{ui:FontIcon Glyph=&#xE767;}" Description="The volume of the main mixer output." Margin="0, 0, 0, 5">
+                    <Slider Minimum="0" Maximum="100" Value="{x:Bind settingsViewmodel.OutputVolume, Mode=TwoWay}"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Local Output Volume" HeaderIcon="{ui:FontIcon Glyph=&#xF0EE;}" Description="The volume of the local audio output. Your loopback device." Margin="0, 0, 0, 5">
+                    <Slider Minimum="0" Maximum="100" Value="{x:Bind settingsViewmodel.LocalOutputVolume, Mode=TwoWay}"/>
+                </controls:SettingsCard>
+            </StackPanel>
+        </ScrollView>
+    </Grid>
+</Page>

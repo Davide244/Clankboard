@@ -30,7 +30,9 @@
     <None Remove="Assets\icon.ico" />
     <None Remove="Assets\Square150x150Logo.scale-400.png" />
     <None Remove="Assets\Square44x44Logo.targetsize-256.png" />
+    <None Remove="Dialogs\AddTTSAudioDialog.xaml" />
     <None Remove="Dialogs\DownloadFileDialog.xaml" />
+    <None Remove="Pages\SettingsPage.xaml" />
     <None Remove="Pages\SoundboardPage.xaml" />
   </ItemGroup>
 
@@ -59,6 +61,16 @@
   -->
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\SettingsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Dialogs\AddTTSAudioDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Pages\SoundboardPage.xaml">

@@ -85,10 +85,9 @@ namespace Clankboard
             return await dialog.ShowAsync();
         }
 
-        private void rootGrid_Loaded(object sender, RoutedEventArgs e)
+        private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
-            // For testing: Display the download file dialog
-            g_appMessagingEvents.ShowMessageBox("Download File", "", "Cancel", "Download File", "", ContentDialogButton.Primary, new Dialogs.DownloadFileDialog());
+            NavigationFrame.Navigate(typeof(Pages.SettingsPage));
         }
     }
 }
