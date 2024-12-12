@@ -12,13 +12,20 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid Padding="20, 10, 20, 0">
-        <SelectorBar x:Name="SettingsSelectorBar" HorizontalAlignment="Stretch">
-            <SelectorBarItem x:Name="SettingsSelectorBarGeneralSettingsPage" Text="General Settings" IsSelected="True"/>
-            <SelectorBarItem x:Name="SettingsSelectorBarSoundboardSettingsPage" Text="Soundboard Settings"/>
-        </SelectorBar>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Grid Background="#303030" Margin="10, 10, 10, 0" CornerRadius="4" BorderBrush="#353535" BorderThickness="1">
+            <SelectorBar x:Name="SettingsSelectorBar" HorizontalAlignment="Center">
+                <SelectorBarItem x:Name="SettingsSelectorBarGeneralSettingsPage" Text="General Settings" IsSelected="True"/>
+                <SelectorBarItem x:Name="SettingsSelectorBarSoundboardSettingsPage" Text="Soundboard Settings"/>
+            </SelectorBar>
+        </Grid>
 
-        <ScrollView>
-            <StackPanel Margin="0, 50, 0, 0">
+        <ScrollView Grid.Row="1" Margin="0, 20, 0, 0">
+            <StackPanel>
                 <TextBlock Text="Audio Settings" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}" Margin="0, 0, 0, 5"/>
                 <controls:SettingsExpander Header="Audio I / O" HeaderIcon="Audio" Margin="0, 0, 0, 5" Description="Set the input device, local output device, and virtual audio cable output device.">
                     <controls:SettingsExpander.Items>
@@ -29,7 +36,24 @@
                             <controls:SettingsCard.HeaderIcon>
                                 <FontIcon Glyph="&#xE964;" />
                             </controls:SettingsCard.HeaderIcon>
-                            <ComboBox PlaceholderText="Not selected"/>
+                            <ComboBox PlaceholderText="Not selected">
+                                <ComboBox.Items>
+                                    <ComboBoxItem>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            
+                                            <FontIcon Glyph="&#xe95f;" FontSize="13"/>
+                                            <StackPanel Orientation="Vertical" Grid.Column="1">
+                                                <TextBlock Text="Remote Audio"/>
+                                                <TextBlock FontSize="8" Margin="0, -2, 0, 0" Text="0000-0000-00000"/>
+                                            </StackPanel>
+                                        </Grid>
+                                    </ComboBoxItem>
+                                </ComboBox.Items>
+                            </ComboBox>
                         </controls:SettingsCard>
                         <controls:SettingsCard Header="Local Output Device" Description="The audio output device where audio gets looped back to you, so you can hear what you played, or are saying.">
                             <controls:SettingsCard.HeaderIcon>

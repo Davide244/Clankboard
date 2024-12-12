@@ -32,6 +32,9 @@ namespace Clankboard
         public static AppMessagingEvents g_appMessagingEvents = new();
         public static AppContentDialogProperties g_appContentDialogProperties = new();
 
+        private const string settingIcon = "\uE713";
+        private const string backIcon = "\uE72B";
+
         private ContentDialog dialog;
 
         public MainWindow()
@@ -87,7 +90,20 @@ namespace Clankboard
 
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationFrame.Navigate(typeof(Pages.SettingsPage));
+            //NavigationFrame.Navigate(typeof(Pages.SettingsPage));
+
+            if (NavigationFrame.Content is Pages.SettingsPage)
+            {
+                NavigationFrame.GoBack();
+                TitlebarSettingsButton.Label = "Settings";
+                TitlebarSettingsButtonIcon.Glyph = settingIcon;
+            }
+            else
+            {
+                NavigationFrame.Navigate(typeof(Pages.SettingsPage));
+                TitlebarSettingsButton.Label = "Back    ";
+                TitlebarSettingsButtonIcon.Glyph = backIcon;
+            }
         }
     }
 }

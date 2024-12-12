@@ -47,7 +47,11 @@
             <TextBlock x:Name="AppTitleBarText" VerticalAlignment="Center" TextWrapping="NoWrap" Style="{StaticResource CaptionTextBlockStyle}" Margin="8, 0, 0, 0" Text="Clankboard" Grid.Column="2"/>
             <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right" Grid.Row="0" HorizontalAlignment="Center" x:Name="MainCommandBar" Grid.Column="3">
                 <CommandBar.PrimaryCommands>
-                    <AppBarButton Icon="Setting" Label="Settings" Click="SettingsButton_Click"/>
+                    <AppBarButton x:Name="TitlebarSettingsButton" Label="Settings" Click="SettingsButton_Click">
+                        <AppBarButton.Icon>
+                            <FontIcon Glyph="&#xE713;" x:Name="TitlebarSettingsButtonIcon"/>
+                        </AppBarButton.Icon>
+                    </AppBarButton>
                     <AppBarSeparator/>
                     <AppBarButton Icon="Share" Label="Voicebox" IsEnabled="False"/>
                     <AppBarToggleButton  Label="Mute">

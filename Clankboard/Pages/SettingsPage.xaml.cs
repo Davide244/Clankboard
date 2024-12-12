@@ -29,6 +29,8 @@ namespace Clankboard.Pages
         public SettingsPage()
         {
             this.InitializeComponent();
+
+            
         }
     }
 }
