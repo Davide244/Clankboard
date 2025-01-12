@@ -16,8 +16,8 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
-        <Grid Background="#303030" Margin="10, 10, 10, 0" CornerRadius="4" BorderBrush="#353535" BorderThickness="1">
+
+        <Grid Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="10, 10, 10, 0" CornerRadius="4" BorderBrush="{ThemeResource SurfaceStrokeColorFlyoutBrush}" BorderThickness="1">
             <SelectorBar x:Name="SettingsSelectorBar" HorizontalAlignment="Center">
                 <SelectorBarItem x:Name="SettingsSelectorBarGeneralSettingsPage" Text="General Settings" IsSelected="True"/>
                 <SelectorBarItem x:Name="SettingsSelectorBarSoundboardSettingsPage" Text="Soundboard Settings"/>
