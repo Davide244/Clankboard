@@ -12,13 +12,13 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid Background="#303030" Margin="10, 10, 10, 0" CornerRadius="4" BorderBrush="#353535" BorderThickness="1">
+        <Grid Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="10, 10, 10, 0" CornerRadius="4" BorderBrush="{ThemeResource SurfaceStrokeColorFlyoutBrush}" BorderThickness="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="*"/>
@@ -115,218 +115,118 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Text="Soundboard" Margin="10, 2, 0, 0" Style="{StaticResource BodyStrongTextBlockStyle}" Foreground="#707070"/>
+            <TextBlock Text="Soundboard" Margin="10, 2, 0, 0" Style="{StaticResource BodyStrongTextBlockStyle}" Foreground="{ThemeResource TextFillColorTertiaryBrush}"/>
             <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" Grid.RowSpan="2">
-                <ListView x:Name="SoundboardListView" SelectionMode="Extended" CanDragItems="True" CanReorderItems="True" Margin="10, 6, 10, 0">
-                    <ListView.ItemTemplate>
+                <!--<ItemsView x:Name="SoundboardListView" CanDrag="True" SelectionMode="Extended" Margin="10, 0, 10, 0" IsItemInvokedEnabled="True">
+                    <ItemsView.Layout>
+                        <StackLayout Spacing="5"/>
+                    </ItemsView.Layout>
+                    <ItemsView.ItemTemplate>
                         <DataTemplate x:DataType="audioSystem:SoundboardItem">
-                            <ListViewItem Background="#303030" CornerRadius="5" Height="50" BorderBrush="#414141" BorderThickness="1">
-                                <ListViewItem.ContextFlyout>
+                            <ItemContainer Height="40">
+                                <ItemContainer.ContextFlyout>
                                     <MenuFlyout>
                                         <MenuFlyoutItem x:Name="SoundboardContextFlyoutViewInExplorerBtn" Icon="Folder" Text="Show in Explorer" IsEnabled="{x:Bind CanClickViewInExplorer, Mode=OneWay}" Click="SoundboardContextFlyoutViewInExplorerBtn_Click"/>
                                         <MenuFlyoutItem Icon="Save"  Text="Export to" IsEnabled="{x:Bind CanClickExport, Mode=OneWay}"/>
                                         <MenuFlyoutItem Icon="Setting"  Text="Configure" IsEnabled="{x:Bind CanClickConfigure, Mode=OneWay}"/>
                                         <MenuFlyoutItem Icon="Play" Text="Play" IsEnabled="{x:Bind IsPlayButtonEnabled, Mode=OneWay}"/>
                                     </MenuFlyout>
-                                </ListViewItem.ContextFlyout>
-                                <Grid>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="20"/>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="auto"/>
-                                        </Grid.ColumnDefinitions>
+                                </ItemContainer.ContextFlyout>
+                                <Grid Background="{ThemeResource CardBackgroundFillColorSecondary}" BorderBrush="{ThemeResource CardStrokeColorDefault}" Padding="5">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="auto"/>
+                                    </Grid.ColumnDefinitions>
 
+                                    <Grid Grid.RowSpan="2" Grid.Row="0" Grid.Column="0">
                                         <FontIcon Glyph="{x:Bind ItemIcon, Mode=OneTime}" HorizontalAlignment="Center" Visibility="{x:Bind ItemIconVisibility, Mode=OneWay}" Foreground="{x:Bind ItemIconColor, Mode=OneWay}"/>
-                                        <ProgressRing Width="20" Height="20" IsIndeterminate="False" Value="{x:Bind ItemProgressRingProgress, Mode=OneWay}" Visibility="{x:Bind ItemLoadingIndicatorsVisibility, Mode=OneWay}"/>
-
-                                        <StackPanel Grid.Column="1" Margin="10, 0, 0, 0">
-                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                                <Grid Margin="0, 0, 5, 0" CornerRadius="5" Background="{ThemeResource LayerFillColorAlt}" BorderThickness="1" BorderBrush="#4a4a4a" Padding="4, 0, 4, 0" Visibility="{x:Bind ItemLoadingIndicatorsVisibility, Mode=OneWay}">
-                                                    <TextBlock Text="Downloading" FontSize="10" VerticalAlignment="Center"/>
-                                                </Grid>
-                                                <TextBlock Text="{x:Bind ItemName, Mode=OneWay}" TextTrimming="CharacterEllipsis"/>
-                                            </StackPanel>
-                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                                <Grid Margin="0, 0, 5, 0" CornerRadius="5" Background="{ThemeResource LayerFillColorAlt}" BorderThickness="1" BorderBrush="#4a4a4a" Padding="4, 0, 4, 0" Visibility="{x:Bind ItemLoadingIndicatorsVisibility, Mode=OneWay}">
-                                                    <StackPanel Orientation="Horizontal">
-                                                        <FontIcon Glyph="&#xE896;" FontSize="8" Margin="0, 0, 2, 0"/>
-                                                        <TextBlock Text="{x:Bind ItemProgressRingProgress, Mode=OneWay}" FontSize="8" VerticalAlignment="Center"/>
-                                                        <TextBlock Text="%" FontSize="8" VerticalAlignment="Center"/>
-                                                    </StackPanel>
-                                                </Grid>
-                                                <Grid Margin="0, 0, 5, 0" CornerRadius="5" Background="{ThemeResource SystemFillColorCautionBackgroundBrush}" BorderThickness="1" BorderBrush="#4a4a4a" Padding="4, 0, 4, 0" Visibility="{x:Bind ItemErrorIndicatorVisibility, Mode=OneWay}">
-                                                    <StackPanel Orientation="Horizontal">
-                                                        <FontIcon Glyph="&#xE7BA;" FontSize="8" Margin="0, 0, 2, 0"/>
-                                                        <TextBlock Text="Not Found" FontSize="8" VerticalAlignment="Center"/>
-                                                    </StackPanel>
-                                                </Grid>
-                                                <TextBlock Text="{x:Bind ItemLocationText, Mode=OneWay}" FontSize="10" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
-                                            </StackPanel>
-                                        </StackPanel>
-
-                                        <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Right">
-                                            <HyperlinkButton Content="{x:Bind ItemKeybindText, Mode=OneWay}"  Margin="0, 0, 5, 0" MaxHeight="25" FontSize="10"/>
-                                            <Button Foreground="LightGreen" HorizontalAlignment="Right" VerticalAlignment="Center" IsEnabled="{x:Bind IsPlayButtonEnabled, Mode=OneWay}">
-                                                <FontIcon Glyph="&#xF5B0;" />
-                                            </Button>
-                                        </StackPanel>
-
-                                        <ProgressBar Grid.ColumnSpan="3" VerticalAlignment="Bottom" Margin="0, 0, 0, -7" IsIndeterminate="True" Visibility="{x:Bind ItemLoadingIndicatorsVisibility, Mode=OneWay}"/>
+                                        <InfoBadge IconSource="{ui:FontIconSource Glyph=&#xEDAE;, FontSize=30}" Width="15" Height="15" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0, 0, -5, 0" Style="{StaticResource CautionIconInfoBadgeStyle}"/>
                                     </Grid>
                                 </Grid>
-                            </ListViewItem>
+                            </ItemContainer>
                         </DataTemplate>
-                    </ListView.ItemTemplate>
-                    <ListViewItem Background="#303030" CornerRadius="5" Height="50" BorderBrush="#414141" BorderThickness="1">
-                        <ListViewItem.ContextFlyout>
-                            <MenuFlyout>
-                                <MenuFlyoutItem Icon="Folder" Text="Show in Explorer"/>
-                                <MenuFlyoutItem Icon="Save"  Text="Export to"/>
-                                <MenuFlyoutItem Icon="Setting"  Text="Configure"/>
-                            </MenuFlyout>
-                        </ListViewItem.ContextFlyout>
-                        <Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="20"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="auto"/>
-                                </Grid.ColumnDefinitions>
+                    </ItemsView.ItemTemplate>
+                </ItemsView>-->
+                <StackPanel>
+                    <ItemsView x:Name="SoundboardListView" SelectionMode="Extended" Margin="15, 0, 15, 0">
+                        <ItemsView.Layout>
+                            <!--StackLayout Spacing="4"/-->
+                            <UniformGridLayout Orientation="Horizontal" MinItemWidth="250" MinItemHeight="40" MinColumnSpacing="4" MinRowSpacing="4"/>
+                        </ItemsView.Layout>
 
-                                <FontIcon Glyph="&#xE753;" HorizontalAlignment="Center" Visibility="Collapsed"/>
-                                <ProgressRing Width="20" Height="20" IsIndeterminate="False" Value="74"/>
+                        <ItemsView.ItemTemplate>
+                            <DataTemplate x:DataType="audioSystem:SoundboardItem">
+                                <ItemContainer Height="40">
+                                    <ItemContainer.ContextFlyout>
+                                        <MenuFlyout>
+                                            <MenuFlyoutItem x:Name="SoundboardContextFlyoutViewInExplorerBtn" Icon="Folder" Text="Show in Explorer" IsEnabled="{x:Bind CanClickViewInExplorer, Mode=OneWay}" Click="SoundboardContextFlyoutViewInExplorerBtn_Click"/>
+                                            <MenuFlyoutItem Icon="Save"  Text="Export to" IsEnabled="{x:Bind CanClickExport, Mode=OneWay}"/>
+                                            <MenuFlyoutItem Icon="Setting"  Text="Configure" IsEnabled="{x:Bind CanClickConfigure, Mode=OneWay}"/>
+                                            <MenuFlyoutItem Icon="Play" Text="Play" IsEnabled="{x:Bind IsPlayButtonEnabled, Mode=OneWay}"/>
+                                        </MenuFlyout>
+                                    </ItemContainer.ContextFlyout>
+                                    <StackPanel>
+                                        <Grid Background="{ThemeResource LayerOnAcrylicFillColorDefaultBrush}" BorderBrush="{ThemeResource ControlStrokeColorSecondaryBrush}" BorderThickness="1" Padding="5" Margin="0, 0, 0, 0" Height="40" CornerRadius="5">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="25"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="auto"/>
+                                            </Grid.ColumnDefinitions>
 
-                                <StackPanel Grid.Column="1" Margin="10, 0, 0, 0">
-                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                        <Grid Margin="0, 0, 5, 0" CornerRadius="5" Background="{ThemeResource LayerFillColorAlt}" BorderThickness="1" BorderBrush="#4a4a4a" Padding="4, 0, 4, 0">
-                                            <TextBlock Text="Downloading" FontSize="10" VerticalAlignment="Center"/>
-                                        </Grid>
-                                        <TextBlock Text="SGFUAVSDUFSAZUDFSAZUFAUZDFAOUZDFDAUOZGF" TextTrimming="CharacterEllipsis"/>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                        <Grid Margin="0, 0, 5, 0" CornerRadius="5" Background="{ThemeResource LayerFillColorAlt}" BorderThickness="1" BorderBrush="#4a4a4a" Padding="4, 0, 4, 0">
-                                            <StackPanel Orientation="Horizontal">
-                                                <FontIcon Glyph="&#xE896;" FontSize="8" Margin="0, 0, 2, 0"/>
-                                                <TextBlock Text="74%" FontSize="8" VerticalAlignment="Center"/>
+                                            <Grid>
+                                                <FontIcon Glyph="{x:Bind ItemIcon, Mode=OneTime}"/>
+                                                <InfoBadge Style="{ThemeResource CriticalIconInfoBadgeStyle}" IconSource="{ui:FontIconSource Glyph=&#xEDAE;}" Height="15" Width="15" Visibility="{x:Bind ItemErrorIndicatorVisibility, Mode=OneWay}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0, 0, -3, -3"/>
+                                            </Grid>
+                                            <ProgressBar IsIndeterminate="True" Grid.ColumnSpan="3" Margin="-5, -7" VerticalAlignment="Bottom" Visibility="{x:Bind ItemLoadingIndicatorsVisibility, Mode=OneWay}"/>
+                                            <Grid Grid.ColumnSpan="3" Background="{ThemeResource ControlStrokeColorSecondary}" Margin="-5, -6" Height="2" VerticalAlignment="Bottom"/>
+
+                                            <Grid Grid.Column="1" Margin="5, 0, 4, 0">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="15"/>
+                                                    <RowDefinition Height="*"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="auto"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="0, 0, 0, 0" Height="15">
+                                                        <StackPanel Orientation="Horizontal" Background="{ThemeResource SystemFillColorAttentionBackgroundBrush}" CornerRadius="3" BorderBrush="{ThemeResource SurfaceStrokeColorDefaultBrush}" BorderThickness="1" Visibility="{x:Bind ItemLoadingIndicatorsVisibility, Mode=OneWay}" Margin="0, 0, 3, 0">
+                                                            <TextBlock Text="Downloading · " Style="{StaticResource CaptionTextBlockStyle}" FontSize="10" VerticalAlignment="Center" Margin="4, 0"/>
+                                                            <TextBlock Text="72%" Style="{StaticResource CaptionTextBlockStyle}" FontSize="10" VerticalAlignment="Center" Margin="0, 0, 4, 0"/>
+                                                        </StackPanel>
+                                                        <StackPanel Orientation="Horizontal" Background="{ThemeResource SystemFillColorCautionBackgroundBrush}" CornerRadius="3" BorderBrush="{ThemeResource SurfaceStrokeColorDefaultBrush}" BorderThickness="1" Visibility="{x:Bind ItemErrorIndicatorVisibility, Mode=OneWay}" Margin="0, 0, 3, 0">
+                                                            <FontIcon Glyph="&#xE7BA;" FontSize="8" Margin="0, 0, 2, 0"/>
+                                                            <TextBlock Text="Not Found" FontSize="8" VerticalAlignment="Center"/>
+                                                        </StackPanel>
+                                                    </StackPanel>
+                                                    <TextBlock Grid.Column="1" Text="{x:Bind ItemName, Mode=OneWay}" VerticalAlignment="Center" Style="{ThemeResource BodyStrongTextBlockStyle}" TextTrimming="CharacterEllipsis"/>
+                                                </Grid>
+                                                <TextBlock Grid.Row="1" Text="{x:Bind ItemLocationText}" FontSize="11" TextTrimming="CharacterEllipsis"/>
+                                            </Grid>
+                                            <StackPanel Spacing="5" Orientation="Horizontal" Grid.Column="3">
+                                                <HyperlinkButton Content="Ctrl + Alt + E" Padding="3" FontSize="10"/>
+                                                <Button Foreground="LightGreen" HorizontalAlignment="Right" VerticalAlignment="Center" IsEnabled="{x:Bind IsPlayButtonEnabled, Mode=OneWay}" Width="30" Height="30" Padding="0">
+                                                    <FontIcon Glyph="&#xF5B0;" FontSize="15"/>
+                                                </Button>
                                             </StackPanel>
                                         </Grid>
-                                        <TextBlock Text="https://www.youtube.com/watch?v=gz2n879A6n4" FontSize="10" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
                                     </StackPanel>
-                                </StackPanel>
-
-                                <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Right">
-                                    <HyperlinkButton Content="Ctrl + Alt + E"  Margin="0, 0, 5, 0" MaxHeight="25" FontSize="10"/>
-                                    <Button Foreground="LightGreen" HorizontalAlignment="Right" VerticalAlignment="Center">
-                                        <FontIcon Glyph="&#xF5B0;" />
-                                    </Button>
-                                </StackPanel>
-
-                                <ProgressBar Grid.ColumnSpan="3" VerticalAlignment="Bottom" Margin="0, 0, 0, -7" IsIndeterminate="True"/>
-                            </Grid>
-                        </Grid>
-                    </ListViewItem>
-                    <ListViewItem Background="#303030" CornerRadius="5" Height="50" BorderBrush="#414141" BorderThickness="1">
-                        <ListViewItem.ContextFlyout>
-                            <MenuFlyout>
-                                <MenuFlyoutItem Icon="Folder" Text="Show in Explorer"/>
-                                <MenuFlyoutItem Icon="Save"  Text="Export to"/>
-                                <MenuFlyoutItem Icon="Setting"  Text="Configure"/>
-                            </MenuFlyout>
-                        </ListViewItem.ContextFlyout>
-                        <Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="20"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="auto"/>
-                                </Grid.ColumnDefinitions>
-
-                                <FontIcon Glyph="&#xE753;" HorizontalAlignment="Center" Visibility="Collapsed"/>
-                                <ProgressRing Width="20" Height="20" IsIndeterminate="False" Value="80"/>
-
-                                <StackPanel Grid.Column="1" Margin="10, 0, 0, 0">
-                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                        <Grid Margin="0, 0, 5, 0" CornerRadius="5" Background="{ThemeResource LayerFillColorAlt}" BorderThickness="1" BorderBrush="#4a4a4a" Padding="4, 0, 4, 0">
-                                            <TextBlock Text="Downloading" FontSize="10" VerticalAlignment="Center"/>
-                                        </Grid>
-                                        <TextBlock Text="SGFUAVSDUFSAZUDFSAZUFAUZDFAOUZDFDAUOZGF" TextTrimming="CharacterEllipsis"/>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                        <Grid Margin="0, 0, 5, 0" CornerRadius="5" Background="{ThemeResource LayerFillColorAlt}" BorderThickness="1" BorderBrush="#4a4a4a" Padding="4, 0, 4, 0">
-                                            <StackPanel Orientation="Horizontal">
-                                                <FontIcon Glyph="&#xE896;" FontSize="8" Margin="0, 0, 2, 0"/>
-                                                <TextBlock Text="74%" FontSize="8" VerticalAlignment="Center"/>
-                                            </StackPanel>
-                                        </Grid>
-                                        <TextBlock Text="https://www.youtube.com/watch?v=gz2n879A6n4" FontSize="10" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
-                                    </StackPanel>
-                                </StackPanel>
-
-                                <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Right">
-                                    <HyperlinkButton Content="Ctrl + Alt + E"  Margin="0, 0, 5, 0" MaxHeight="25" FontSize="10"/>
-                                    <Button Foreground="LightGreen" HorizontalAlignment="Right" VerticalAlignment="Center">
-                                        <FontIcon Glyph="&#xF5B0;" />
-                                    </Button>
-                                </StackPanel>
-
-                                <ProgressBar Grid.ColumnSpan="3" VerticalAlignment="Bottom" Margin="0, 0, 0, -7" IsIndeterminate="True"/>
-                            </Grid>
-                        </Grid>
-                    </ListViewItem>
-                    <ListViewItem Background="#303030" CornerRadius="5" Height="50" BorderBrush="#414141" BorderThickness="1">
-                        <ListViewItem.ContextFlyout>
-                            <MenuFlyout>
-                                <MenuFlyoutItem Icon="Folder" Text="Show in Explorer"/>
-                                <MenuFlyoutItem Icon="Save"  Text="Export to"/>
-                                <MenuFlyoutItem Icon="Setting"  Text="Configure"/>
-                            </MenuFlyout>
-                        </ListViewItem.ContextFlyout>
-                        <Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="20"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="auto"/>
-                                </Grid.ColumnDefinitions>
-
-                                <FontIcon Glyph="&#xE8A5;" HorizontalAlignment="Center" Visibility="Visible" Foreground="{ThemeResource SystemFillColorCautionBrush}"/>
-                                <ProgressRing Width="20" Height="20" IsIndeterminate="False" Value="74" Visibility="Collapsed"/>
-
-                                <StackPanel Grid.Column="1" Margin="10, 0, 0, 0">
-                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                        <Grid Margin="0, 0, 5, 0" CornerRadius="5" Background="{ThemeResource LayerFillColorAlt}" BorderThickness="1" BorderBrush="#4a4a4a" Padding="4, 0, 4, 0" Visibility="Collapsed">
-                                            <TextBlock Text="Downloading" FontSize="10" VerticalAlignment="Center"/>
-                                        </Grid>
-                                        <TextBlock Text="Der lustige Audio" TextTrimming="CharacterEllipsis"/>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                        <Grid Margin="0, 0, 5, 0" CornerRadius="5" Background="{ThemeResource SystemFillColorCautionBackgroundBrush}" BorderThickness="1" BorderBrush="#4a4a4a" Padding="4, 0, 4, 0">
-                                            <StackPanel Orientation="Horizontal">
-                                                <FontIcon Glyph="&#xE7BA;" FontSize="8" Margin="0, 0, 2, 0"/>
-                                                <TextBlock Text="Not Found" FontSize="8" VerticalAlignment="Center"/>
-                                            </StackPanel>
-                                        </Grid>
-                                        <TextBlock Text="C:\Uers\009da\test.wav" FontSize="10" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
-                                    </StackPanel>
-                                </StackPanel>
-
-                                <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Right">
-                                    <HyperlinkButton Content="Ctrl + Alt + E"  Margin="0, 0, 5, 0" MaxHeight="25" FontSize="10"/>
-                                    <Button Foreground="LightGreen" HorizontalAlignment="Right" VerticalAlignment="Center">
-                                        <FontIcon Glyph="&#xF5B0;" />
-                                    </Button>
-                                </StackPanel>
-
-                                <ProgressBar Grid.ColumnSpan="3" VerticalAlignment="Bottom" Margin="0, 0, 0, -7" IsIndeterminate="True" IsEnabled="False" Visibility="Collapsed"/>
-                            </Grid>
-                        </Grid>
-                    </ListViewItem>
-                </ListView>
+                                </ItemContainer>
+                            </DataTemplate>
+                        </ItemsView.ItemTemplate>
+                    </ItemsView>
+                </StackPanel>
+                
             </ScrollViewer>
 
             <AppBarSeparator Grid.Column="1" Grid.RowSpan="3" Visibility="Visible"/>
-            <TextBlock Text="Currently Playing" Margin="10, 2, 0, 0" Style="{StaticResource BodyStrongTextBlockStyle}" Foreground="#707070" Grid.Column="2" Visibility="Visible"/>
+            <TextBlock Text="Currently Playing" Margin="10, 2, 0, 0" Style="{StaticResource BodyStrongTextBlockStyle}" Foreground="{ThemeResource TextFillColorTertiaryBrush}" Grid.Column="2" Visibility="Visible"/>
 
             <ScrollViewer Grid.Row="2" Grid.Column="2" MinWidth="200" Margin="10, 5, 10, 0" Visibility="Visible">
                 <ListView x:Name="CurrentlyPlayingListView" SelectionMode="Extended" CanReorderItems="False" CanDragItems="False">
