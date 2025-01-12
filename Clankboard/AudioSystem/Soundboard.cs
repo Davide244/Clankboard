@@ -59,7 +59,7 @@ namespace Clankboard.AudioSystem
 
         public string PhysicalFilePath;
 
-        public SoundboardItem(string itemName, string itemLocation, SoundboardItemType itemType, string physicalFilePath, bool interactionEnabled = true, bool itemLoadingIndicatorsVisible = false)
+        public SoundboardItem(string itemName, string itemLocation, SoundboardItemType itemType, string physicalFilePath, bool interactionEnabled = true, bool itemLoadingIndicatorsVisible = false, bool itemErrorIndicatorsVisible = false)
         {
             ItemName = itemName;
             ItemLocationText = itemLocation;
@@ -87,7 +87,7 @@ namespace Clankboard.AudioSystem
             CanClickConfigure = interactionEnabled;
             CanClickExport = interactionEnabled;
 
-            ItemErrorIndicatorVisibility = "Collapsed";
+            ItemErrorIndicatorVisibility = itemErrorIndicatorsVisible ? "Visible" : "Collapsed";
 
             ItemIconColor = "White";
 
