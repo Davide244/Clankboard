@@ -27,11 +27,20 @@ namespace Clankboard.Utils
                 // Download ytdlp.exe
                 //await YoutubeDLSharp.Utils.DownloadYtDlp(AuxSoftwareFolder);
             }
-            else 
+            else
             {
                 // Run yt-dlp.exe -U (YT-DLP Path)
                 // Library does not support this yet, so just run the exe with the -U flag
-                Process process = System.Diagnostics.Process.Start(YTDLPPath, "-U");
+                ProcessStartInfo startInfo = new ProcessStartInfo
+                {
+                    FileName = YTDLPPath,
+                    Arguments = "-U -loglevel 0",
+                    CreateNoWindow = true,
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true
+                };
+                Process process = Process.Start(startInfo);
                 process.WaitForExit(); // Wait for the process to finish
             }
 
@@ -64,5 +73,40 @@ namespace Clankboard.Utils
                 Directory.CreateDirectory(AuxSoftwareFolder);
             }
         }
+    }
+
+    public enum DownloadResult
+    {
+        Success,                // The download has succeeded. The file is now in the file system.
+        NoInternet,             // The OS reports no internet connectivity. Happens when not being connected to any network.
+        ServerNotReached,       // The webserver could not be reached.
+        InvalidData,            // Data is invalid. Happens when media fails to download for example. (Broken file)
+        CertificateInvalid,     // HTTPS Certificate of the webserver is invalid.
+    }
+
+    /// <summary>
+    /// Represents auxiliary software used by ClankBoard.
+    /// </summary>
+    public class AuxSoftware 
+    {
+        public string currentVersion { get; private set; }
+        public string filePath { get; private set; }
+        private string latestVersionDownloadLink;
+
+        public static List<AuxSoftware> auxSoftwares { get; private set; }
+
+        public AuxSoftware(string path, string latestVersionDownloadLink)
+        {
+            // Check if the file exists:
+            if (!File.Exists(path)) 
+            {
+                // Download and install the file.
+            }
+        }
+
+        public DownloadResult DownloadLatestVersion() 
+        {
+            return DownloadResult.Success;
+        } 
     }
 }
