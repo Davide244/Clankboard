@@ -28,4 +28,6 @@ namespace Clankboard.Dialogs
             this.InitializeComponent();
         }
     }
+
+    //public partial class AuxSoftwareUpdatingDialogViewmodel
 }
