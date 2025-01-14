@@ -84,6 +84,16 @@ namespace Clankboard.Utils
         CertificateInvalid,     // HTTPS Certificate of the webserver is invalid.
     }
 
+    public enum UpdateCheckResult
+    {
+        UpToDate,               // The software is up to date.
+        UpdateAvailable,        // An update is available.
+        NotInstalled,           // The software is not installed.
+        NoInternet,             // The OS reports no internet connectivity. Happens when not being connected to any network.
+        ServerNotReached,       // The webserver could not be reached.
+        CertificateInvalid,     // HTTPS Certificate of the webserver is invalid.
+    }
+
     /// <summary>
     /// Represents auxiliary software used by ClankBoard.
     /// </summary>
@@ -91,17 +101,24 @@ namespace Clankboard.Utils
     {
         public string currentVersion { get; private set; }
         public string filePath { get; private set; }
-        private string latestVersionDownloadLink;
+        private readonly string latestVersionDownloadLink;
 
         public static List<AuxSoftware> auxSoftwares { get; private set; }
 
-        public AuxSoftware(string path, string latestVersionDownloadLink)
+        public AuxSoftware(string filePath, string latestVersionDownloadLink)
         {
-            // Check if the file exists:
-            if (!File.Exists(path)) 
-            {
-                // Download and install the file.
-            }
+            this.filePath = filePath;
+            this.latestVersionDownloadLink = latestVersionDownloadLink;
+        }
+
+        public UpdateCheckResult CheckForUpdates()
+        {
+            if (!File.Exists(filePath)) 
+                return UpdateCheckResult.NotInstalled;
+
+
+
+            return UpdateCheckResult.UpToDate;
         }
 
         public DownloadResult DownloadLatestVersion() 

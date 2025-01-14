@@ -12,6 +12,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -23,11 +24,24 @@ namespace Clankboard.Dialogs
     /// </summary>
     public sealed partial class AuxSoftwareUpdatingDialog : Page
     {
+        private AuxSoftwareUpdatingDialogViewmodel viewmodel = new();
+
         public AuxSoftwareUpdatingDialog()
         {
             this.InitializeComponent();
+
+
         }
     }
 
-    //public partial class AuxSoftwareUpdatingDialogViewmodel
+    public partial class AuxSoftwareUpdatingDialogViewmodel : ObservableObject 
+    {
+        [ObservableProperty]
+        private string _updateStatusText;
+
+        public AuxSoftwareUpdatingDialogViewmodel() 
+        {
+            UpdateStatusText = "Initializing...";
+        }
+    }
 }

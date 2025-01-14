@@ -20,7 +20,7 @@
         </StackPanel>
 
         <Grid Grid.Row="1" Background="{ThemeResource SolidBackgroundFillColorBaseBrush}" BorderBrush="{ThemeResource SurfaceStrokeColorFlyoutBrush}" BorderThickness="1" Margin="-25" VerticalAlignment="Bottom">
-            <TextBlock Text="Checking for YT-DLP Updates..." HorizontalAlignment="Center" Margin="0, 10"/>
+            <TextBlock Text="{x:Bind viewmodel.UpdateStatusText}" HorizontalAlignment="Center" Margin="0, 10"/>
         </Grid>
     </Grid>
 </Page>
