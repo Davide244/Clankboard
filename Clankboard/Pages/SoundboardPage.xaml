@@ -155,8 +155,8 @@
                 <StackPanel>
                     <ItemsView x:Name="SoundboardListView" SelectionMode="Extended" Margin="15, 0, 15, 0">
                         <ItemsView.Layout>
-                            <!--StackLayout Spacing="4"/-->
-                            <UniformGridLayout Orientation="Horizontal" MinItemWidth="250" MinItemHeight="40" MinColumnSpacing="4" MinRowSpacing="4"/>
+                            <StackLayout Spacing="4"/>
+                            <!--UniformGridLayout Orientation="Horizontal" MinItemWidth="250" MinItemHeight="40" MinColumnSpacing="4" MinRowSpacing="4"/-->
                         </ItemsView.Layout>
 
                         <ItemsView.ItemTemplate>

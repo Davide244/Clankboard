@@ -19,7 +19,7 @@
             <ProgressRing IsActive="True" Margin="0, 20"/>
         </StackPanel>
 
-        <Grid Grid.Row="1" Background="{ThemeResource ControlSolidFillColorDefaultBrush}" BorderBrush="{ThemeResource ControlStrongStrokeColorDisabledBrush}" BorderThickness="1" Margin="-25" VerticalAlignment="Bottom">
+        <Grid Grid.Row="1" Background="{ThemeResource SolidBackgroundFillColorBaseBrush}" BorderBrush="{ThemeResource ControlStrongStrokeColorDisabledBrush}" BorderThickness="1" Margin="-25" VerticalAlignment="Bottom">
             <TextBlock Text="Checking for YT-DLP Updates..." HorizontalAlignment="Center" Margin="0, 10"/>
         </Grid>
     </Grid>
