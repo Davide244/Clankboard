@@ -41,8 +41,18 @@ namespace Clankboard.Utils
             if (YTDLPPath == null || !File.Exists(YTDLPPath)) 
             {
                 // Download yt-dlp.exe from the official GitHub repository.
-                DownloadResult downloadResult = await InetHelper.DownloadFile(YTDLPLatestVersionDownloadLink, YTDLPPath);
-                return downloadResult;
+                System.Diagnostics.Debug.WriteLine("Re-downloading yt-dlp.exe");
+                try 
+                {
+                    await YoutubeDLSharp.Utils.DownloadYtDlp(AuxSoftwareFolder);
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine(e.Message);
+                    return DownloadResult.ServerNotReached;
+                }
+
+                return DownloadResult.Success;
             }
 
             // Run yt-dlp.exe -U to check for updates and update YT-DLP. Run with no visible console.
@@ -50,10 +60,10 @@ namespace Clankboard.Utils
             {
                 FileName = YTDLPPath,
                 Arguments = "-U",
-                CreateNoWindow = true,
+                CreateNoWindow = false,
                 UseShellExecute = false,
-                RedirectStandardOutput = true,
-                RedirectStandardError = true
+                RedirectStandardOutput = false,
+                RedirectStandardError = false
             };
 
             return DownloadResult.Success;

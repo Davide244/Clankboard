@@ -41,6 +41,9 @@ namespace Clankboard.Dialogs
             {
                 viewmodel.UpdateStatusText = "YTDLP update failed.";
             }
+
+            // Close this dialog.
+            MainWindow.dialog.Hide();
         }
     }
 

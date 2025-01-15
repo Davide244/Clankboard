@@ -40,18 +40,7 @@ namespace Clankboard
         {
             this.InitializeComponent();
             setupAppData();
-
-            setupAuxSoftware();
-
             LaunchTask();
-        }
-
-        private async void setupAuxSoftware() 
-        {
-            //var checkYTDLPTask = AuxSoftwareMgmt.CheckYTDLP();
-            //var checkFFMpegTask = AuxSoftwareMgmt.CheckFFMpeg();
-
-            //await Task.WhenAll(checkYTDLPTask, checkFFMpegTask);
         }
 
         private void setupAppData() 

@@ -37,7 +37,7 @@ namespace Clankboard
         private const string settingIcon = "\uE713";
         private const string backIcon = "\uE72B";
 
-        private ContentDialog dialog;
+        public static ContentDialog dialog { get; private set; }
 
         public MainWindow()
         {
@@ -54,8 +54,6 @@ namespace Clankboard
             appWindow.TitleBar.PreferredHeightOption = TitleBarHeightOption.Tall;
 
             g_appMessagingEvents.AppShowMessageBox += AppMessagingEvents_AppShowMessageBox;
-
-            g_appMessagingEvents.ShowMessageBox("", "", "", null, null, ContentDialogButton.None, new Dialogs.AuxSoftwareUpdatingDialog());
         }
 
         private async Task<ContentDialogResult> AppMessagingEvents_AppShowMessageBox(object sender, RoutedEventArgs e, string Title, string Text, string CloseButtonText, string PrimaryButtonText, string SecondaryButtonText, ContentDialogButton DefaultButton = ContentDialogButton.None, object content = null)
@@ -110,6 +108,11 @@ namespace Clankboard
                 TitlebarSettingsButton.Label = "Back    ";
                 TitlebarSettingsButtonIcon.Glyph = backIcon;
             }
+        }
+
+        private async void rootGrid_Loaded(object sender, RoutedEventArgs e)
+        {
+            await g_appMessagingEvents.ShowMessageBox("", "", "", null, null, ContentDialogButton.None, new Dialogs.AuxSoftwareUpdatingDialog());
         }
     }
 }

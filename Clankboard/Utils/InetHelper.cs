@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Media.Protection.PlayReady;
 
 namespace Clankboard.Utils
 {
@@ -20,6 +21,8 @@ namespace Clankboard.Utils
 
     static class InetHelper
     {
+        private static readonly HttpClient _client = new HttpClient();
+
         public static async Task<bool> ValidateUrlWithHttp(string url) 
         {
             using var client = new HttpClient();
@@ -39,6 +42,16 @@ namespace Clankboard.Utils
             {
                 return true;
             }
+        }
+
+        public static async Task<byte[]> DownloadFileBytesAsync(string uri)
+        {
+            if (!Uri.TryCreate(uri, UriKind.Absolute, out Uri _))
+            {
+                throw new InvalidOperationException("URI is invalid.");
+            }
+
+            return await _client.GetByteArrayAsync(uri);
         }
 
         public static bool IsInternetAvailable()
