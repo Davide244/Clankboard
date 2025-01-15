@@ -13,6 +13,7 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Clankboard.Utils;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -30,7 +31,16 @@ namespace Clankboard.Dialogs
         {
             this.InitializeComponent();
 
-
+            DownloadResult result;
+            result = MainWindow.g_auxSoftwareMgr.UpdateYTDLP().Result;
+            if (result == DownloadResult.Success)
+            {
+                viewmodel.UpdateStatusText = "YTDLP updated successfully.";
+            }
+            else
+            {
+                viewmodel.UpdateStatusText = "YTDLP update failed.";
+            }
         }
     }
 

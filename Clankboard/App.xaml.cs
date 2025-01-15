@@ -48,10 +48,10 @@ namespace Clankboard
 
         private async void setupAuxSoftware() 
         {
-            var checkYTDLPTask = AuxSoftwareMgmt.CheckYTDLP();
-            var checkFFMpegTask = AuxSoftwareMgmt.CheckFFMpeg();
+            //var checkYTDLPTask = AuxSoftwareMgmt.CheckYTDLP();
+            //var checkFFMpegTask = AuxSoftwareMgmt.CheckFFMpeg();
 
-            await Task.WhenAll(checkYTDLPTask, checkFFMpegTask);
+            //await Task.WhenAll(checkYTDLPTask, checkFFMpegTask);
         }
 
         private void setupAppData() 

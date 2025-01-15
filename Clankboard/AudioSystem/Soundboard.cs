@@ -173,8 +173,8 @@ namespace Clankboard.AudioSystem
 
             // Download the file
             var ytdlp = new YoutubeDL();
-            ytdlp.YoutubeDLPath = AuxSoftwareMgmt.YTDLPPath;
-            ytdlp.FFmpegPath = AuxSoftwareMgmt.FFMpegPath;
+            //ytdlp.YoutubeDLPath = AuxSoftwareMgmt.YTDLPPath;
+            //ytdlp.FFmpegPath = AuxSoftwareMgmt.FFMpegPath;
             ytdlp.OutputFolder = Path.Combine(App.AppDataPath, "Downloads");
 
             var fetchResult = await ytdlp.RunVideoDataFetch(fileUrl);

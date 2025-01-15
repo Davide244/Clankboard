@@ -1,3 +1,4 @@
+using Clankboard.Utils;
 using Clankboard.Utils.Events;
 using Microsoft.UI;
 using Microsoft.UI.Windowing;
@@ -31,6 +32,7 @@ namespace Clankboard
 
         public static AppMessagingEvents g_appMessagingEvents = new();
         public static AppContentDialogProperties g_appContentDialogProperties = new();
+        public static AuxSoftwareMgr g_auxSoftwareMgr = new();
 
         private const string settingIcon = "\uE713";
         private const string backIcon = "\uE72B";
@@ -52,6 +54,8 @@ namespace Clankboard
             appWindow.TitleBar.PreferredHeightOption = TitleBarHeightOption.Tall;
 
             g_appMessagingEvents.AppShowMessageBox += AppMessagingEvents_AppShowMessageBox;
+
+            g_appMessagingEvents.ShowMessageBox("", "", "", null, null, ContentDialogButton.None, new Dialogs.AuxSoftwareUpdatingDialog());
         }
 
         private async Task<ContentDialogResult> AppMessagingEvents_AppShowMessageBox(object sender, RoutedEventArgs e, string Title, string Text, string CloseButtonText, string PrimaryButtonText, string SecondaryButtonText, ContentDialogButton DefaultButton = ContentDialogButton.None, object content = null)
