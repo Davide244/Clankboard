@@ -44,15 +44,15 @@ namespace Clankboard.Utils
             }
         }
 
-        public static async Task<byte[]> DownloadFileBytesAsync(string uri)
-        {
-            if (!Uri.TryCreate(uri, UriKind.Absolute, out Uri _))
-            {
-                throw new InvalidOperationException("URI is invalid.");
-            }
+        //public static async Task<byte[]> DownloadFileBytesAsync(string uri)
+        //{
+        //    if (!Uri.TryCreate(uri, UriKind.Absolute, out Uri _))
+        //    {
+        //        throw new InvalidOperationException("URI is invalid.");
+        //    }
 
-            return await _client.GetByteArrayAsync(uri);
-        }
+        //    return await _client.GetByteArrayAsync(uri);
+        //}
 
         public static bool IsInternetAvailable()
         {

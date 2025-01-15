@@ -10,14 +10,45 @@ using System.Threading.Tasks;
 
 namespace Clankboard.Utils
 {
+    public static class AppDataFolderHelper
+    {
+        public static string ClankAppDataFolder { get; private set; }
+        public static string AuxSoftwareFolder { get; private set; }
+
+        public static readonly string appDataDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+
+        public static void CheckAndCreateAppDataFolders() 
+        {
+            ClankAppDataFolder = Path.Combine(appDataDir, "Clankboard");
+            AuxSoftwareFolder = Path.Combine(ClankAppDataFolder, "AuxSoftware");
+
+            // FOLDER STRUCTURE IN APPDATA\ROAMING:
+            // Clankboard
+            //    |
+            //    |--- AuxSoftware
+
+            try 
+            {
+                if (!Directory.Exists(ClankAppDataFolder))
+                    Directory.CreateDirectory(ClankAppDataFolder);
+
+                if (!Directory.Exists(Path.Combine(ClankAppDataFolder, "AuxSoftware")))
+                    Directory.CreateDirectory(Path.Combine(ClankAppDataFolder, "AuxSoftware"));
+
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("******** FAILED TO CREATE APP DATA DIR STRUCTURE ********\n*\n* " + e.Message);
+            }
+        }
+    }
+
     /// <summary>
     /// Manages auxiliary software used by ClankBoard.
     /// Currently, the only auxiliary software used by ClankBoard is yt-dlp and ffmpeg.
     /// </summary>
     public sealed class AuxSoftwareMgr
     {
-        private readonly string AuxSoftwareFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"\Clankboard\AuxSoftware\");
-
         public string YTDLPPath { get; private set; }
         public string FFmpegPath { get; private set; }
         public string FFProbePath { get; private set; }
@@ -27,28 +58,30 @@ namespace Clankboard.Utils
 
         public AuxSoftwareMgr() 
         {
-            if (!Directory.Exists(AuxSoftwareFolder)) 
-                Directory.CreateDirectory(AuxSoftwareFolder);
+            AppDataFolderHelper.CheckAndCreateAppDataFolders();
 
-            YTDLPPath = Path.Combine(AuxSoftwareFolder, "yt-dlp.exe");
+            YTDLPPath = Path.Combine(AppDataFolderHelper.AuxSoftwareFolder, "yt-dlp.exe");
         }
 
         public async Task<DownloadResult> UpdateYTDLP() 
         {
+            System.Diagnostics.Debug.WriteLine("APPDATA: " + Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
+
             if (!InetHelper.IsInternetAvailable())
                 return DownloadResult.NoInternet;
 
             if (YTDLPPath == null || !File.Exists(YTDLPPath)) 
             {
                 // Download yt-dlp.exe from the official GitHub repository.
-                System.Diagnostics.Debug.WriteLine("Re-downloading yt-dlp.exe");
+                System.Diagnostics.Debug.WriteLine("Re-downloading yt-dlp.exe. \"" + YTDLPPath + "\" does not exist.");
+
                 try 
                 {
-                    await YoutubeDLSharp.Utils.DownloadYtDlp(AuxSoftwareFolder);
+                    //await YoutubeDLSharp.Utils.DownloadYtDlp(AppDataFolderHelper.AuxSoftwareFolder);
                 }
                 catch (Exception e)
                 {
-                    System.Diagnostics.Debug.WriteLine(e.Message);
+                    System.Diagnostics.Debug.WriteLine("Failed to download yt-dlp.exe: " + e.Message);
                     return DownloadResult.ServerNotReached;
                 }
 
@@ -60,10 +93,10 @@ namespace Clankboard.Utils
             {
                 FileName = YTDLPPath,
                 Arguments = "-U",
-                CreateNoWindow = false,
+                CreateNoWindow = true,
                 UseShellExecute = false,
-                RedirectStandardOutput = false,
-                RedirectStandardError = false
+                RedirectStandardOutput = true,
+                RedirectStandardError = true
             };
 
             return DownloadResult.Success;
@@ -77,7 +110,7 @@ namespace Clankboard.Utils
             if (!CheckFFMpeg() || FFmpegPath.Contains(@"\Clankboard\AuxSoftware\")) // If ffmpeg is not installed OR if FFMPEG is installed by clankboard, download it.
             {
                 // Download ffmpeg from the official website.
-                DownloadResult downloadResult = await InetHelper.DownloadFile(FFmpegLatestVersionDownloadLink, Path.Combine(AuxSoftwareFolder, "ffmpeg.7z"));
+                DownloadResult downloadResult = await InetHelper.DownloadFile(FFmpegLatestVersionDownloadLink, Path.Combine(AppDataFolderHelper.AuxSoftwareFolder, "ffmpeg.7z"));
                 return downloadResult;
             }
 
@@ -92,8 +125,8 @@ namespace Clankboard.Utils
 
             if (!File.Exists(FFmpegPath) || !File.Exists(FFProbePath))
             {
-                FFmpegPath = Path.Combine(AuxSoftwareFolder, "ffmpeg.exe");
-                FFProbePath = Path.Combine(AuxSoftwareFolder, "ffprobe.exe");
+                FFmpegPath = Path.Combine(AppDataFolderHelper.AuxSoftwareFolder, "ffmpeg.exe");
+                FFProbePath = Path.Combine(AppDataFolderHelper.AuxSoftwareFolder, "ffprobe.exe");
             }
 
             if (!File.Exists(FFmpegPath) || !File.Exists(FFProbePath))

@@ -43,7 +43,7 @@ namespace Clankboard.Dialogs
             }
 
             // Close this dialog.
-            MainWindow.dialog.Hide();
+            //MainWindow.dialog.Hide();
         }
     }
 
