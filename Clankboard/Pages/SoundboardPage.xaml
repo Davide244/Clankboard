@@ -161,7 +161,7 @@
 
                         <ItemsView.ItemTemplate>
                             <DataTemplate x:DataType="audioSystem:SoundboardItem">
-                                <ItemContainer Height="40">
+                                <ItemContainer Height="40" CanDrag="True">
                                     <ItemContainer.ContextFlyout>
                                         <MenuFlyout>
                                             <MenuFlyoutItem x:Name="SoundboardContextFlyoutViewInExplorerBtn" Icon="Folder" Text="Show in Explorer" IsEnabled="{x:Bind CanClickViewInExplorer, Mode=OneWay}" Click="SoundboardContextFlyoutViewInExplorerBtn_Click"/>

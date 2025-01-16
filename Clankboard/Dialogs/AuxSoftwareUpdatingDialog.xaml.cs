@@ -32,15 +32,15 @@ namespace Clankboard.Dialogs
             this.InitializeComponent();
 
             DownloadResult result;
-            result = MainWindow.g_auxSoftwareMgr.UpdateYTDLP().Result;
-            if (result == DownloadResult.Success)
-            {
-                viewmodel.UpdateStatusText = "YTDLP updated successfully.";
-            }
-            else
-            {
-                viewmodel.UpdateStatusText = "YTDLP update failed.";
-            }
+            //result = MainWindow.g_auxSoftwareMgr.UpdateYTDLP().Result;
+            //if (result == DownloadResult.Success)
+            //{
+            //    viewmodel.UpdateStatusText = "YTDLP updated successfully.";
+            //}
+            //else
+            //{
+            //    viewmodel.UpdateStatusText = "YTDLP update failed.";
+            //}
 
             // Close this dialog.
             //MainWindow.dialog.Hide();

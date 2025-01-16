@@ -1,5 +1,6 @@
 using Clankboard.Utils;
 using Clankboard.Utils.Events;
+using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
@@ -11,6 +12,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -32,7 +34,9 @@ namespace Clankboard
 
         public static AppMessagingEvents g_appMessagingEvents = new();
         public static AppContentDialogProperties g_appContentDialogProperties = new();
-        public static AuxSoftwareMgr g_auxSoftwareMgr = new();
+        //public static AuxSoftwareMgr g_auxSoftwareMgr = new();
+
+        public static MainWindowInfobarViewmodel infobarViewmodel = new();
 
         private const string settingIcon = "\uE713";
         private const string backIcon = "\uE72B";
@@ -54,6 +58,9 @@ namespace Clankboard
             appWindow.TitleBar.PreferredHeightOption = TitleBarHeightOption.Tall;
 
             g_appMessagingEvents.AppShowMessageBox += AppMessagingEvents_AppShowMessageBox;
+
+            // Set data source for the infobar list view
+            InfobarList.ItemsSource = infobarViewmodel.MainWindowInfobars;
         }
 
         private async Task<ContentDialogResult> AppMessagingEvents_AppShowMessageBox(object sender, RoutedEventArgs e, string Title, string Text, string CloseButtonText, string PrimaryButtonText, string SecondaryButtonText, ContentDialogButton DefaultButton = ContentDialogButton.None, object content = null)
@@ -112,7 +119,43 @@ namespace Clankboard
 
         private async void rootGrid_Loaded(object sender, RoutedEventArgs e)
         {
-            await g_appMessagingEvents.ShowMessageBox("", "", "", null, null, ContentDialogButton.None, new Dialogs.AuxSoftwareUpdatingDialog());
+            // Add random infobars for testing
+            infobarViewmodel.MainWindowInfobars.Add(new MainWindowInfobar("Test Infobar", "This is a test infobar message.", InfoBarSeverity.Informational, false, true));
+            infobarViewmodel.MainWindowInfobars.Add(new MainWindowInfobar("Test Infobar 2", "This is a test infobar message.", InfoBarSeverity.Error, false, false));
+            infobarViewmodel.MainWindowInfobars.Add(new MainWindowInfobar("Test Infobar 3", "This is a test infobar message.", InfoBarSeverity.Success, true, false));
+
+            //await g_appMessagingEvents.ShowMessageBox("", "", "", null, null, ContentDialogButton.None, new Dialogs.AuxSoftwareUpdatingDialog());
         }
+    }
+
+    public partial class MainWindowInfobar : ObservableObject
+    {
+        [ObservableProperty]
+        private string _title;
+        [ObservableProperty]
+        private string _text;
+        [ObservableProperty]
+        private InfoBarSeverity _severity;
+
+        [ObservableProperty]
+        private bool _isCloseable;
+        [ObservableProperty]
+        private string _bottomScrollBarVisibity;
+
+        public MainWindowInfobar(string title, string text, InfoBarSeverity severity, bool isCloseable = true, bool scrollBarVisible = false)
+        {
+            Title = title;
+            Text = text;
+            IsCloseable = isCloseable;
+            Severity = severity;
+
+            BottomScrollBarVisibity = scrollBarVisible ? "Visible" : "Collapsed";
+        }
+    }
+
+    public partial class MainWindowInfobarViewmodel : ObservableObject
+    {
+        [ObservableProperty]
+        public ObservableCollection<MainWindowInfobar> _mainWindowInfobars = new();
     }
 }

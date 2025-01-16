@@ -15,18 +15,27 @@ namespace Clankboard.Utils
         public AuxSoftwareHelper auxSoftwareHelper { get; private set; }
         private string clankAppDataFolder;
 
-        public string GetAppDataFolder() 
+        public string GetAppDataFolder(bool checkAppdataFolders = true) 
         {
-            CheckAndCreateAppDataFolders();
+            if (checkAppdataFolders) CheckAndCreateAppDataFolders();
             return clankAppDataFolder;
         }
 
         public AppDataFolderManager() 
         {
             clankAppDataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Clankboard");
+
+            if (!Directory.Exists(clankAppDataFolder))
+            {
+                Directory.CreateDirectory(clankAppDataFolder);
+            }
+
+            auxSoftwareHelper = new AuxSoftwareHelper(clankAppDataFolder);
+
+
         }
 
-        public void CheckAndCreateAppDataFolders()
+        private void CheckAndCreateAppDataFolders()
         {
             if (!Directory.Exists(clankAppDataFolder))
             {
@@ -37,6 +46,7 @@ namespace Clankboard.Utils
 
     public sealed class AuxSoftwareHelper 
     {
+        public string auxSoftwareFolder { get; private set; }
         private string ytDlpPath;
         private string ffmpegPath;
         private string ffprobePath;
@@ -47,7 +57,11 @@ namespace Clankboard.Utils
 
         public AuxSoftwareHelper(string appDataFolder) 
         {
-
+            auxSoftwareFolder = Path.Combine(appDataFolder, "AuxSoftware");
+            if (!Directory.Exists(auxSoftwareFolder))
+            {
+                Directory.CreateDirectory(auxSoftwareFolder);
+            }
         }
     }
 }
