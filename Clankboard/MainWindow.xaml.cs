@@ -117,12 +117,12 @@ namespace Clankboard
             }
         }
 
-        private async void rootGrid_Loaded(object sender, RoutedEventArgs e)
+        private void rootGrid_Loaded(object sender, RoutedEventArgs e)
         {
             // Add random infobars for testing
-            infobarViewmodel.MainWindowInfobars.Add(new MainWindowInfobar("Test Infobar", "This is a test infobar message.", InfoBarSeverity.Informational, false, true));
-            infobarViewmodel.MainWindowInfobars.Add(new MainWindowInfobar("Test Infobar 2", "This is a test infobar message.", InfoBarSeverity.Error, false, false));
-            infobarViewmodel.MainWindowInfobars.Add(new MainWindowInfobar("Test Infobar 3", "This is a test infobar message.", InfoBarSeverity.Success, true, false));
+            infobarViewmodel.MainWindowInfobars.Add(new MainWindowInfobar("Test Infobar", "This is a test infobar message.", InfoBarSeverity.Informational, true, true));
+            infobarViewmodel.MainWindowInfobars.Add(new MainWindowInfobar("Test Infobar 2", "This is a test infobar message.", InfoBarSeverity.Error, true, false, "Test Button"));
+            infobarViewmodel.MainWindowInfobars.Add(new MainWindowInfobar("Test Infobar 3", "This is a long message that could be potentially found in infobars.. This is filler text This is filler text", InfoBarSeverity.Success, true, true));
 
             //await g_appMessagingEvents.ShowMessageBox("", "", "", null, null, ContentDialogButton.None, new Dialogs.AuxSoftwareUpdatingDialog());
         }
@@ -142,7 +142,12 @@ namespace Clankboard
         [ObservableProperty]
         private string _bottomScrollBarVisibity;
 
-        public MainWindowInfobar(string title, string text, InfoBarSeverity severity, bool isCloseable = true, bool scrollBarVisible = false)
+        [ObservableProperty]
+        private string _actionButtonVisibility;
+        [ObservableProperty]
+        private string _actionButtonText;
+
+        public MainWindowInfobar(string title, string text, InfoBarSeverity severity, bool isCloseable = true, bool scrollBarVisible = false, string actionButtonText = "")
         {
             Title = title;
             Text = text;
@@ -150,12 +155,17 @@ namespace Clankboard
             Severity = severity;
 
             BottomScrollBarVisibity = scrollBarVisible ? "Visible" : "Collapsed";
+
+            ActionButtonText = actionButtonText;
+
+            // Action button visibility is collapsed if text is ""
+            ActionButtonVisibility = actionButtonText == "" ? "Collapsed" : "Visible";
         }
     }
 
     public partial class MainWindowInfobarViewmodel : ObservableObject
     {
         [ObservableProperty]
-        public ObservableCollection<MainWindowInfobar> _mainWindowInfobars = new();
+        public ObservableCollection<MainWindowInfobar> _mainWindowInfobars = new ObservableCollection<MainWindowInfobar>();
     }
 }
