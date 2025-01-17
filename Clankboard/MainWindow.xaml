@@ -88,11 +88,11 @@
             <InfoBar Title="Debug Mode" Message="You are running an unoptimized debug version of Clankboard." Severity="Informational" IsOpen="True" Margin="0, 0, 0, 5"/>
         </StackPanel>
         <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Grid.Row="3">
-            <ListView SelectionMode="None" x:Name="InfobarList" Margin="0, 0, 0, 10">
+            <ListView SelectionMode="None" x:Name="InfobarList" Margin="-5, 0, 0, 10">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="local:MainWindowInfobar">
                         <Grid>
-                            <InfoBar Title="{x:Bind Title, Mode=OneTime}" Message="{x:Bind Text, Mode=OneTime}" IsClosable="{x:Bind IsCloseable, Mode=OneWay}" Severity="{x:Bind Severity, Mode=OneTime}" IsOpen="True" Margin="0, 0, 0, 4">
+                            <InfoBar Title="{x:Bind Title, Mode=OneTime}" Message="{x:Bind Text, Mode=OneTime}" IsClosable="{x:Bind IsCloseable, Mode=OneWay}" Severity="{x:Bind Severity, Mode=OneTime}" IsOpen="True" Margin="0, 0, 0, 4" CloseButtonClick="InfoBar_CloseButtonClick">
                                 <InfoBar.ActionButton>
                                     <HyperlinkButton Content="{x:Bind ActionButtonText, Mode=OneTime}" Visibility="{x:Bind ActionButtonVisibility, Mode=OneTime}"/>
                                 </InfoBar.ActionButton>

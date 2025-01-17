@@ -61,6 +61,11 @@ namespace Clankboard
 
             // Set data source for the infobar list view
             InfobarList.ItemsSource = infobarViewmodel.MainWindowInfobars;
+
+
+#if DEBUG
+            infobarViewmodel.MainWindowInfobars.Add(new MainWindowInfobar("Debug Mode", "You are running a debug build of Clankboard. Expect worse performance and bugs.", InfoBarSeverity.Warning));
+#endif
         }
 
         private async Task<ContentDialogResult> AppMessagingEvents_AppShowMessageBox(object sender, RoutedEventArgs e, string Title, string Text, string CloseButtonText, string PrimaryButtonText, string SecondaryButtonText, ContentDialogButton DefaultButton = ContentDialogButton.None, object content = null)
@@ -117,13 +122,17 @@ namespace Clankboard
             }
         }
 
+        private void InfoBar_CloseButtonClick(InfoBar sender, object args)
+        {
+            // Turn sender into a MainWindowInfobar
+            MainWindowInfobar infobar = (MainWindowInfobar)sender.DataContext;
+
+            // Remove the infobar from the list
+            infobarViewmodel.MainWindowInfobars.Remove(infobar);
+        }
+
         private void rootGrid_Loaded(object sender, RoutedEventArgs e)
         {
-            // Add random infobars for testing
-            infobarViewmodel.MainWindowInfobars.Add(new MainWindowInfobar("Test Infobar", "This is a test infobar message.", InfoBarSeverity.Informational, true, true));
-            infobarViewmodel.MainWindowInfobars.Add(new MainWindowInfobar("Test Infobar 2", "This is a test infobar message.", InfoBarSeverity.Error, true, false, "Test Button"));
-            infobarViewmodel.MainWindowInfobars.Add(new MainWindowInfobar("Test Infobar 3", "This is a long message that could be potentially found in infobars.. This is filler text This is filler text", InfoBarSeverity.Success, true, true));
-
             //await g_appMessagingEvents.ShowMessageBox("", "", "", null, null, ContentDialogButton.None, new Dialogs.AuxSoftwareUpdatingDialog());
         }
     }
