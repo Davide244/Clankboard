@@ -198,7 +198,8 @@
                                                     <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="0, 0, 0, 0" Height="15">
                                                         <StackPanel Orientation="Horizontal" Background="{ThemeResource SystemFillColorAttentionBackgroundBrush}" CornerRadius="3" BorderBrush="{ThemeResource SurfaceStrokeColorDefaultBrush}" BorderThickness="1" Visibility="{x:Bind ItemLoadingIndicatorsVisibility, Mode=OneWay}" Margin="0, 0, 3, 0">
                                                             <TextBlock Text="Downloading · " Style="{StaticResource CaptionTextBlockStyle}" FontSize="10" VerticalAlignment="Center" Margin="4, 0"/>
-                                                            <TextBlock Text="72%" Style="{StaticResource CaptionTextBlockStyle}" FontSize="10" VerticalAlignment="Center" Margin="0, 0, 4, 0"/>
+                                                            <TextBlock Text="{x:Bind ItemProgressRingProgress, Mode=OneWay}" Style="{StaticResource CaptionTextBlockStyle}" FontSize="10" VerticalAlignment="Center" Margin="0, 0, 0, 0"/>
+                                                            <TextBlock Text="%" Style="{StaticResource CaptionTextBlockStyle}" FontSize="10" VerticalAlignment="Center" Margin="0, 0, 4, 0"/>
                                                         </StackPanel>
                                                         <StackPanel Orientation="Horizontal" Background="{ThemeResource SystemFillColorCautionBackgroundBrush}" CornerRadius="3" BorderBrush="{ThemeResource SurfaceStrokeColorDefaultBrush}" BorderThickness="1" Visibility="{x:Bind ItemErrorIndicatorVisibility, Mode=OneWay}" Margin="0, 0, 3, 0">
                                                             <FontIcon Glyph="&#xE7BA;" FontSize="8" Margin="0, 0, 2, 0"/>
