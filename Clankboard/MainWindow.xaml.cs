@@ -106,7 +106,7 @@ namespace Clankboard
         {
             //NavigationFrame.Navigate(typeof(Pages.SettingsPage));
 
-            g_appMessagingEvents.ShowMessageBox("", "", "", null, null, ContentDialogButton.None, new Dialogs.AuxSoftwareUpdatingDialog());
+            //g_appMessagingEvents.ShowMessageBox("", "", "", null, null, ContentDialogButton.None, new Dialogs.AuxSoftwareUpdatingDialog());
 
             if (NavigationFrame.Content is Pages.SettingsPage)
             {
