@@ -9,6 +9,22 @@ namespace Clankboard.Systems
 {
     public partial class SettingsSystemViewmodel : ObservableObject
     {
+        #region Singleton
+        private static readonly SettingsSystemViewmodel instance = new SettingsSystemViewmodel();
+
+        static SettingsSystemViewmodel() 
+        {
+        }
+
+        public static SettingsSystemViewmodel Instance
+        {
+            get
+            {
+                return instance;
+            }
+        }
+        #endregion
+
         [ObservableProperty]
         private bool _audioMixingEnabled;
         [ObservableProperty]

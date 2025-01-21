@@ -24,13 +24,27 @@ namespace Clankboard.Pages
     /// </summary>
     public sealed partial class SettingsPage : Page
     {
-        private SettingsSystemViewmodel settingsViewmodel = new SettingsSystemViewmodel();
+        private SettingsSystemViewmodel settingsViewmodel = SettingsSystemViewmodel.Instance;
+
 
         public SettingsPage()
         {
             this.InitializeComponent();
 
-            
+            SettingsNavigationFrame.Navigate(typeof(SettingsPages.GeneralSettingsPage));
+        }
+
+        private void SettingsSelectorBar_SelectionChanged(SelectorBar sender, SelectorBarSelectionChangedEventArgs args)
+        {
+            // Go to the selected settings page
+            if (SettingsSelectorBar.SelectedItem.Name == "SettingsSelectorBarGeneralSettingsPage") 
+            {
+                SettingsNavigationFrame.Navigate(typeof(SettingsPages.GeneralSettingsPage));
+            }
+            else 
+            {
+                SettingsNavigationFrame.Navigate(typeof(SettingsPages.SoundboardSettingsPage));
+            }
         }
     }
 }
