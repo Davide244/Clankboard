@@ -31,6 +31,9 @@ namespace Clankboard.Systems
         private bool _inputLoopbackEnabled;
 
         [ObservableProperty]
+        private bool _microphoneMuted;
+
+        [ObservableProperty]
         private int _inputVolume;
         [ObservableProperty]
         private int _outputVolume;
@@ -41,6 +44,7 @@ namespace Clankboard.Systems
         {
             AudioMixingEnabled = true;
             InputLoopbackEnabled = false;
+            MicrophoneMuted = false;
 
             InputVolume = 100;
             OutputVolume = 100;

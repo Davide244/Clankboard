@@ -8,12 +8,19 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="using:CommunityToolkit.WinUI"
+    xmlns:icons="using:FluentIcon.WinUI"
     mc:Ignorable="d">
 
     <ScrollView>
         <StackPanel Margin="0, 20, 0, 0">
             <TextBlock Text="Soundboard Settings" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}" Margin="0, 0, 0, 5"/>
-            <controls:SettingsCard Header="Grid View" Description="Display the sounds in your soundboard in a grid instead of a list." HeaderIcon="{ui:FontIcon Glyph=&#xF0E2;}">
+            <controls:SettingsCard Header="Grid View" Description="Display the sounds in your soundboard in a grid instead of a list." HeaderIcon="{ui:FontIcon Glyph=&#xF0E2;}" Margin="0, 0, 0, 5">
+                <ToggleSwitch/>
+            </controls:SettingsCard>
+            <controls:SettingsCard Header="Audio Modulation" Description="Feed soundboard audio through the Voicebox modulators." Margin="0, 0, 0, 5" IsEnabled="False">
+                <controls:SettingsCard.HeaderIcon>
+                    <icons:FluentFilledIcon Symbol="DataLine20Filled"/>
+                </controls:SettingsCard.HeaderIcon>
                 <ToggleSwitch/>
             </controls:SettingsCard>
         </StackPanel>
