@@ -1,3 +1,4 @@
+using Clankboard.Systems;
 using Clankboard.Utils;
 using Clankboard.Utils.Events;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -35,6 +36,7 @@ namespace Clankboard
         public static AppMessagingEvents g_appMessagingEvents = new();
         public static AppContentDialogProperties g_appContentDialogProperties = new();
         //public static AuxSoftwareMgr g_auxSoftwareMgr = new();
+        private SettingsSystemViewmodel settingsViewmodel = SettingsSystemViewmodel.Instance; // Used for the mute toggler
 
         public static MainWindowInfobarViewmodel infobarViewmodel = new();
 
