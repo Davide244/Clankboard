@@ -54,7 +54,7 @@
                     </AppBarButton>
                     <AppBarSeparator/>
                     <AppBarButton Icon="Share" Label="Voicebox" IsEnabled="False"/>
-                    <AppBarToggleButton  Label="Mute" IsChecked="{x:Bind settingsViewmodel.MicrophoneMuted, Mode=TwoWay}">
+                    <AppBarToggleButton  Label="Mute" IsChecked="{x:Bind settingsViewmodel.MicrophoneMuted, Mode=TwoWay}" IsEnabled="{x:Bind settingsViewmodel.AudioMixingEnabled, Mode=OneWay}">
                         <AppBarToggleButton.Icon>
                             <FontIcon Glyph="&#xF781;" />
                         </AppBarToggleButton.Icon>

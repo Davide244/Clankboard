@@ -55,7 +55,7 @@
                     <ToggleSwitch IsOn="{x:Bind settingsViewmodel.AudioMixingEnabled, Mode=TwoWay}"/>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard Header="Microphone Mute" HeaderIcon="{ui:FontIcon Glyph=&#xF4C3;}" Description="Mutes your microphone input." Margin="0, 0, 0, 5">
+                <controls:SettingsCard Header="Microphone Mute" HeaderIcon="{ui:FontIcon Glyph=&#xF4C3;}" Description="Mutes your microphone input." Margin="0, 0, 0, 5" IsEnabled="{x:Bind settingsViewmodel.AudioMixingEnabled, Mode=OneWay}">
                     <ToggleSwitch IsOn="{x:Bind settingsViewmodel.MicrophoneMuted, Mode=TwoWay}"/>
                 </controls:SettingsCard>
 

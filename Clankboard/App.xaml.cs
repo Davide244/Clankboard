@@ -30,6 +30,7 @@ namespace Clankboard
     public partial class App : Application
     {
         public static string AppDataPath;
+        public static AppDataFolderManager appDataFolderManager = new();
 
 
         /// <summary>
