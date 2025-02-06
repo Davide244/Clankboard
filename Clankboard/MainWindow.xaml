@@ -9,6 +9,7 @@
     xmlns:winuiex="using:WinUIEx"
     xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals"
     mc:Ignorable="d"
+    Closed="WindowEx_Closed"
     TaskBarIcon="Assets\icon.ico"
     Title="Clankboard"
     Width="700"
@@ -54,7 +55,7 @@
                     </AppBarButton>
                     <AppBarSeparator/>
                     <AppBarButton Icon="Share" Label="Voicebox" IsEnabled="False"/>
-                    <AppBarToggleButton  Label="Mute" IsChecked="{x:Bind settingsViewmodel.MicrophoneMuted, Mode=TwoWay}" IsEnabled="{x:Bind settingsViewmodel.AudioMixingEnabled, Mode=OneWay}">
+                    <AppBarToggleButton  Label="Mute" x:Name="MuteButton" IsChecked="{x:Bind settingsViewmodel.MicrophoneMuted, Mode=TwoWay}" IsEnabled="{x:Bind settingsViewmodel.AudioMixingEnabled, Mode=OneWay}" Click="MuteButton_Click">
                         <AppBarToggleButton.Icon>
                             <FontIcon Glyph="&#xF781;" />
                         </AppBarToggleButton.Icon>
@@ -69,7 +70,7 @@
         </Grid>
 
         <Grid Grid.Row="2" Margin="0" x:Name="NavFrameParent">
-            <Frame x:Name="NavigationFrame" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Frame x:Name="NavigationFrame" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Navigated="NavigationFrame_Navigated">
                 <TransitionCollection>
                     <NavigationThemeTransition/>
                 </TransitionCollection>

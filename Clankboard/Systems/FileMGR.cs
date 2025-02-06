@@ -18,6 +18,21 @@ namespace Clankboard.Systems
         }
     }
 
+    public struct SettingsFile
+    {
+        public bool AudioMixingEnabled { get; set; }
+        public bool InputLoopbackEnabled { get; set; }
+        public bool MicrophoneMuted { get; set; }
+        public int InputVolume { get; set; }
+        public int OutputVolume { get; set; }
+        public int LocalOutputVolume { get; set; }
+        public bool GridViewInSoundboardEnabled { get; set; }
+
+        public bool SkipYTDLPDownloadConfirmationDialog { get; set; }
+        public bool SkipFFMPEGDownloadConfirmationDialog { get; set; }
+        public bool SkipFFPROBEDownloadConfirmationDialog { get; set; }
+    }
+
     public class SoundboardFile : LoadedClankFile
     {
         public SoundboardFile(string name, string path) : base(name, path) 

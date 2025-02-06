@@ -63,5 +63,35 @@ namespace Clankboard.Utils
                 Directory.CreateDirectory(auxSoftwareFolder);
             }
         }
+
+        /// <summary>
+        /// Check if yt-dlp is installed
+        /// </summary>
+        /// <returns>bool which indicates if yt-dlp is installed.</returns>
+        public bool checkYtDlpPath()
+        {
+            ytDlpPath = Path.Combine(auxSoftwareFolder, "yt-dlp.exe");
+            return File.Exists(ytDlpPath);
+        }
+
+        /// <summary>
+        /// Check if ffmpeg is installed
+        /// </summary>
+        /// <returns>bool which indicates if ffmpeg is installed.</returns>
+        public bool checkFfmpegPath()
+        {
+            ffmpegPath = Path.Combine(auxSoftwareFolder, "ffmpeg.exe");
+            return File.Exists(ffmpegPath);
+        }
+
+        /// <summary>
+        /// Check if ffprobe is installed
+        /// </summary>
+        /// <returns>bool which indicates if ffprobe is installed.</returns>
+        public bool checkFfprobePath()
+        {
+            ffprobePath = Path.Combine(auxSoftwareFolder, "ffprobe.exe");
+            return File.Exists(ffprobePath);
+        }
     }
 }

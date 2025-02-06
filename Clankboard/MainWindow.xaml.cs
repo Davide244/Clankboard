@@ -137,6 +137,21 @@ namespace Clankboard
         {
             //await g_appMessagingEvents.ShowMessageBox("", "", "", null, null, ContentDialogButton.None, new Dialogs.AuxSoftwareUpdatingDialog());
         }
+
+        private void NavigationFrame_Navigated(object sender, NavigationEventArgs e)
+        {
+            SettingsSystemViewmodel.Instance.Save();
+        }
+
+        private void MuteButton_Click(object sender, RoutedEventArgs e)
+        {
+            SettingsSystemViewmodel.Instance.Save();
+        }
+
+        private void WindowEx_Closed(object sender, WindowEventArgs args)
+        {
+            SettingsSystemViewmodel.Instance.Save();
+        }
     }
 
     public partial class MainWindowInfobar : ObservableObject
