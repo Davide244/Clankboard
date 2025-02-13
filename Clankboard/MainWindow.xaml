@@ -38,13 +38,13 @@
 
         <Grid Grid.Row="0" x:Name="AppTitleBar">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition x:Name="LeftPaddingColumn" Width="8"/>
+                <ColumnDefinition x:Name="LeftPaddingColumn" Width="10"/>
                 <ColumnDefinition x:Name="IconColumn" Width="auto"/>
                 <ColumnDefinition x:Name="TitleColumn" Width="auto"/>
                 <ColumnDefinition x:Name="RightDragColumn" Width="*"/>
                 <ColumnDefinition x:Name="NonClientSystemButtons" Width="140"/>
             </Grid.ColumnDefinitions>
-            <Image Source="/Assets/AppIcons/Square44x44Logo.scale-200.png" HorizontalAlignment="Left" Width="16" Height="16" Margin="0" Grid.Column="1" />
+            <Image Source="/Assets/AppIcons/Square44x44Logo.scale-200.png" HorizontalAlignment="Left" Width="24" Height="24" Margin="0" Grid.Column="1" />
             <TextBlock x:Name="AppTitleBarText" VerticalAlignment="Center" TextWrapping="NoWrap" Style="{StaticResource CaptionTextBlockStyle}" Margin="8, 0, 0, 0" Text="Clankboard" Grid.Column="2"/>
             <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right" Grid.Row="0" HorizontalAlignment="Center" x:Name="MainCommandBar" Grid.Column="3">
                 <CommandBar.PrimaryCommands>

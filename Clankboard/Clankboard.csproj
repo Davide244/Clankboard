@@ -14,11 +14,16 @@
     <DefaultLanguage>en</DefaultLanguage>
     <WindowsSdkPackageVersion>10.0.22621.38</WindowsSdkPackageVersion>
     <SupportedOSPlatformVersion>10.0.20348.0</SupportedOSPlatformVersion>
-    <ApplicationIcon>logo.ico</ApplicationIcon>
+    <ApplicationIcon>Assets\icon_indev.ico</ApplicationIcon>
     <PackageCertificateThumbprint>B7B00588EC1F9298A052ADEFFF62E8EF6942D0F6</PackageCertificateThumbprint>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
   </PropertyGroup>
   <ItemGroup>
+    <Content Remove="Assets\AppIcons\logo96.scale-100.png" />
+    <Content Remove="Assets\AppIcons\logo96.scale-125.png" />
+    <Content Remove="Assets\AppIcons\logo96.scale-150.png" />
+    <Content Remove="Assets\AppIcons\logo96.scale-200.png" />
+    <Content Remove="Assets\AppIcons\logo96.scale-400.png" />
     <Content Remove="Assets\AppIcons\SplashScreen.scale-400.png" />
     <Content Remove="Assets\AppIcons\StoreLogo.scale-100.png" />
     <Content Remove="Assets\AppIcons\StoreLogo.scale-125.png" />
@@ -37,10 +42,6 @@
     <None Remove="Pages\SettingsPages\GeneralSettingsPage.xaml" />
     <None Remove="Pages\SettingsPages\SoundboardSettingsPage.xaml" />
     <None Remove="Pages\SoundboardPage.xaml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="logo.ico" />
   </ItemGroup>
 
   <ItemGroup>
