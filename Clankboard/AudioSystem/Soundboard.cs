@@ -213,7 +213,7 @@ namespace Clankboard.AudioSystem
             {
                 // Remove the item from the soundboard
                 soundboardViewmodel.SoundboardItems.Remove(item);
-                Debug.WriteLine("DOWNLOAD FAILED! : " + result.ErrorOutput);
+                Debug.WriteLine("***** DOWNLOAD FAILED! : " + result.ErrorOutput);
             }
         }
 
