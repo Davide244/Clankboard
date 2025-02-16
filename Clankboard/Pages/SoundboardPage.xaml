@@ -152,77 +152,86 @@
                         </DataTemplate>
                     </ItemsView.ItemTemplate>
                 </ItemsView>-->
-                <StackPanel>
-                    <ItemsView x:Name="SoundboardListView" SelectionMode="Extended" Margin="15, 0, 15, 0">
-                        <ItemsView.Layout>
-                            <StackLayout Spacing="4"/>
-                            <!--UniformGridLayout Orientation="Horizontal" MinItemWidth="250" MinItemHeight="40" MinColumnSpacing="4" MinRowSpacing="4"/-->
-                        </ItemsView.Layout>
+                <Grid>
+                    <StackPanel>
+                        <ItemsView x:Name="SoundboardListView" SelectionMode="Extended" Margin="15, 0, 15, 0">
+                            <ItemsView.Layout>
+                                <StackLayout Spacing="4"/>
+                                <!--UniformGridLayout Orientation="Horizontal" MinItemWidth="250" MinItemHeight="40" MinColumnSpacing="4" MinRowSpacing="4"/-->
+                            </ItemsView.Layout>
 
-                        <ItemsView.ItemTemplate>
-                            <DataTemplate x:DataType="audioSystem:SoundboardItem">
-                                <ItemContainer Height="40" CanDrag="True">
-                                    <ItemContainer.ContextFlyout>
-                                        <MenuFlyout>
-                                            <MenuFlyoutItem x:Name="SoundboardContextFlyoutViewInExplorerBtn" Icon="Folder" Text="Show in Explorer" IsEnabled="{x:Bind CanClickViewInExplorer, Mode=OneWay}" Click="SoundboardContextFlyoutViewInExplorerBtn_Click"/>
-                                            <MenuFlyoutItem Icon="Save"  Text="Export to" IsEnabled="{x:Bind CanClickExport, Mode=OneWay}"/>
-                                            <MenuFlyoutItem Icon="Setting"  Text="Configure" IsEnabled="{x:Bind CanClickConfigure, Mode=OneWay}"/>
-                                            <MenuFlyoutItem Icon="Play" Text="Play" IsEnabled="{x:Bind IsPlayButtonEnabled, Mode=OneWay}"/>
-                                        </MenuFlyout>
-                                    </ItemContainer.ContextFlyout>
-                                    <StackPanel>
-                                        <Grid Background="{ThemeResource LayerOnAcrylicFillColorDefaultBrush}" BorderBrush="{ThemeResource ControlStrokeColorSecondaryBrush}" BorderThickness="1" Padding="5" Margin="0, 0, 0, 0" Height="40" CornerRadius="5">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="25"/>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="auto"/>
-                                            </Grid.ColumnDefinitions>
+                            <ItemsView.ItemTemplate>
+                                <DataTemplate x:DataType="audioSystem:SoundboardItem">
+                                    <ItemContainer Height="40" CanDrag="True">
+                                        <ItemContainer.ContextFlyout>
+                                            <MenuFlyout>
+                                                <MenuFlyoutItem x:Name="SoundboardContextFlyoutViewInExplorerBtn" Icon="Folder" Text="Show in Explorer" IsEnabled="{x:Bind CanClickViewInExplorer, Mode=OneWay}" Click="SoundboardContextFlyoutViewInExplorerBtn_Click"/>
+                                                <MenuFlyoutItem Icon="Save"  Text="Export to" IsEnabled="{x:Bind CanClickExport, Mode=OneWay}"/>
+                                                <MenuFlyoutItem Icon="Setting"  Text="Configure" IsEnabled="{x:Bind CanClickConfigure, Mode=OneWay}"/>
+                                                <MenuFlyoutSeparator/>
+                                                <MenuFlyoutItem Icon="Play" Text="Play" IsEnabled="{x:Bind IsPlayButtonEnabled, Mode=OneWay}"/>
+                                            </MenuFlyout>
+                                        </ItemContainer.ContextFlyout>
+                                        <StackPanel>
+                                            <Grid Background="{ThemeResource LayerOnAcrylicFillColorDefaultBrush}" BorderBrush="{ThemeResource ControlStrokeColorSecondaryBrush}" BorderThickness="1" Padding="5" Margin="0, 0, 0, 0" Height="40" CornerRadius="5">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="25"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="auto"/>
+                                                </Grid.ColumnDefinitions>
 
-                                            <Grid>
-                                                <FontIcon Glyph="{x:Bind ItemIcon, Mode=OneTime}"/>
-                                                <InfoBadge Style="{ThemeResource CriticalIconInfoBadgeStyle}" IconSource="{ui:FontIconSource Glyph=&#xEDAE;}" Height="15" Width="15" Visibility="{x:Bind ItemErrorIndicatorVisibility, Mode=OneWay}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0, 0, -3, -3"/>
-                                            </Grid>
-                                            <ProgressBar IsIndeterminate="True" Grid.ColumnSpan="3" Margin="-5, -7" VerticalAlignment="Bottom" Visibility="{x:Bind ItemLoadingIndicatorsVisibility, Mode=OneWay}"/>
-                                            <Grid Grid.ColumnSpan="3" Background="{ThemeResource ControlStrokeColorSecondary}" Margin="-5, -6" Height="2" VerticalAlignment="Bottom"/>
-
-                                            <Grid Grid.Column="1" Margin="5, 0, 4, 0">
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="15"/>
-                                                    <RowDefinition Height="*"/>
-                                                </Grid.RowDefinitions>
                                                 <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="auto"/>
-                                                        <ColumnDefinition Width="*"/>
-                                                    </Grid.ColumnDefinitions>
-                                                    <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="0, 0, 0, 0" Height="15">
-                                                        <StackPanel Orientation="Horizontal" Background="{ThemeResource SystemFillColorAttentionBackgroundBrush}" CornerRadius="3" BorderBrush="{ThemeResource SurfaceStrokeColorDefaultBrush}" BorderThickness="1" Visibility="{x:Bind ItemLoadingIndicatorsVisibility, Mode=OneWay}" Margin="0, 0, 3, 0">
-                                                            <TextBlock Text="Downloading · " Style="{StaticResource CaptionTextBlockStyle}" FontSize="10" VerticalAlignment="Center" Margin="4, 0"/>
-                                                            <TextBlock Text="{x:Bind ItemProgressRingProgress, Mode=OneWay}" Style="{StaticResource CaptionTextBlockStyle}" FontSize="10" VerticalAlignment="Center" Margin="0, 0, 0, 0"/>
-                                                            <TextBlock Text="%" Style="{StaticResource CaptionTextBlockStyle}" FontSize="10" VerticalAlignment="Center" Margin="0, 0, 4, 0"/>
-                                                        </StackPanel>
-                                                        <StackPanel Orientation="Horizontal" Background="{ThemeResource SystemFillColorCautionBackgroundBrush}" CornerRadius="3" BorderBrush="{ThemeResource SurfaceStrokeColorDefaultBrush}" BorderThickness="1" Visibility="{x:Bind ItemErrorIndicatorVisibility, Mode=OneWay}" Margin="0, 0, 3, 0">
-                                                            <FontIcon Glyph="&#xE7BA;" FontSize="8" Margin="0, 0, 2, 0"/>
-                                                            <TextBlock Text="Not Found" FontSize="8" VerticalAlignment="Center"/>
-                                                        </StackPanel>
-                                                    </StackPanel>
-                                                    <TextBlock Grid.Column="1" Text="{x:Bind ItemName, Mode=OneWay}" VerticalAlignment="Center" Style="{ThemeResource BodyStrongTextBlockStyle}" TextTrimming="CharacterEllipsis"/>
+                                                    <FontIcon Glyph="{x:Bind ItemIcon, Mode=OneTime}"/>
+                                                    <InfoBadge Style="{ThemeResource CriticalIconInfoBadgeStyle}" IconSource="{ui:FontIconSource Glyph=&#xEDAE;}" Height="15" Width="15" Visibility="{x:Bind ItemErrorIndicatorVisibility, Mode=OneWay}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0, 0, -3, -3"/>
                                                 </Grid>
-                                                <TextBlock Grid.Row="1" Text="{x:Bind ItemLocationText}" FontSize="11" TextTrimming="CharacterEllipsis"/>
+                                                <ProgressBar IsIndeterminate="True" Grid.ColumnSpan="3" Margin="-5, -7" VerticalAlignment="Bottom" Visibility="{x:Bind ItemLoadingIndicatorsVisibility, Mode=OneWay}"/>
+                                                <Grid Grid.ColumnSpan="3" Background="{ThemeResource ControlStrokeColorSecondary}" Margin="-5, -6" Height="2" VerticalAlignment="Bottom"/>
+
+                                                <Grid Grid.Column="1" Margin="5, 0, 4, 0">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="15"/>
+                                                        <RowDefinition Height="*"/>
+                                                    </Grid.RowDefinitions>
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="auto"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="0, 0, 0, 0" Height="15">
+                                                            <StackPanel Orientation="Horizontal" Background="{ThemeResource SystemFillColorAttentionBackgroundBrush}" CornerRadius="3" BorderBrush="{ThemeResource SurfaceStrokeColorDefaultBrush}" BorderThickness="1" Visibility="{x:Bind ItemLoadingIndicatorsVisibility, Mode=OneWay}" Margin="0, 0, 3, 0">
+                                                                <TextBlock Text="Downloading · " Style="{StaticResource CaptionTextBlockStyle}" FontSize="10" VerticalAlignment="Center" Margin="4, 0"/>
+                                                                <TextBlock Text="{x:Bind ItemProgressRingProgress, Mode=OneWay}" Style="{StaticResource CaptionTextBlockStyle}" FontSize="10" VerticalAlignment="Center" Margin="0, 0, 0, 0"/>
+                                                                <TextBlock Text="%" Style="{StaticResource CaptionTextBlockStyle}" FontSize="10" VerticalAlignment="Center" Margin="0, 0, 4, 0"/>
+                                                            </StackPanel>
+                                                            <StackPanel Orientation="Horizontal" Background="{ThemeResource SystemFillColorCautionBackgroundBrush}" CornerRadius="3" BorderBrush="{ThemeResource SurfaceStrokeColorDefaultBrush}" BorderThickness="1" Visibility="{x:Bind ItemErrorIndicatorVisibility, Mode=OneWay}" Margin="0, 0, 3, 0">
+                                                                <FontIcon Glyph="&#xE7BA;" FontSize="8" Margin="0, 0, 2, 0"/>
+                                                                <TextBlock Text="Not Found" FontSize="8" VerticalAlignment="Center"/>
+                                                            </StackPanel>
+                                                        </StackPanel>
+                                                        <TextBlock Grid.Column="1" Text="{x:Bind ItemName, Mode=OneWay}" VerticalAlignment="Center" Style="{ThemeResource BodyStrongTextBlockStyle}" TextTrimming="CharacterEllipsis"/>
+                                                    </Grid>
+                                                    <TextBlock Grid.Row="1" Text="{x:Bind ItemLocationText}" FontSize="11" TextTrimming="CharacterEllipsis"/>
+                                                </Grid>
+                                                <StackPanel Spacing="5" Orientation="Horizontal" Grid.Column="3">
+                                                    <HyperlinkButton Content="Ctrl + Alt + E" Padding="3" FontSize="10"/>
+                                                    <Button Foreground="LightGreen" HorizontalAlignment="Right" VerticalAlignment="Center" IsEnabled="{x:Bind IsPlayButtonEnabled, Mode=OneWay}" Width="30" Height="30" Padding="0">
+                                                        <FontIcon Glyph="&#xF5B0;" FontSize="15"/>
+                                                    </Button>
+                                                </StackPanel>
                                             </Grid>
-                                            <StackPanel Spacing="5" Orientation="Horizontal" Grid.Column="3">
-                                                <HyperlinkButton Content="Ctrl + Alt + E" Padding="3" FontSize="10"/>
-                                                <Button Foreground="LightGreen" HorizontalAlignment="Right" VerticalAlignment="Center" IsEnabled="{x:Bind IsPlayButtonEnabled, Mode=OneWay}" Width="30" Height="30" Padding="0">
-                                                    <FontIcon Glyph="&#xF5B0;" FontSize="15"/>
-                                                </Button>
-                                            </StackPanel>
-                                        </Grid>
-                                    </StackPanel>
-                                </ItemContainer>
-                            </DataTemplate>
-                        </ItemsView.ItemTemplate>
-                    </ItemsView>
-                </StackPanel>
+                                        </StackPanel>
+                                    </ItemContainer>
+                                </DataTemplate>
+                            </ItemsView.ItemTemplate>
+                        </ItemsView>
+                    </StackPanel>
+
+                    <StackPanel x:Name="NoItemsDisplay" VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="20">
+                        <FontIcon FontFamily="{StaticResource ClankboardSymbolFont}" Glyph="&#x41;" FontSize="100"/>
+                        <TextBlock Text="Soundboard Empty." Style="{StaticResource TitleTextBlockStyle}"/>
+                    </StackPanel>
+                </Grid>
+                
 
             </ScrollViewer>
 

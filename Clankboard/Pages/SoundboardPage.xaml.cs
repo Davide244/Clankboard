@@ -10,6 +10,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -36,16 +37,30 @@ namespace Clankboard.Pages
 
             // Set data source for the soundboard list view
             SoundboardListView.ItemsSource = soundBoard.soundboardViewmodel.SoundboardItems;
+            soundBoard.soundboardViewmodel.SoundboardItems.CollectionChanged += SoundboardItems_CollectionChanged;
 
             // Add random soundboard items for testing
-            soundBoard.Add(new SoundboardItem("Test Item", @"C:\Windows\Windows.mp3", SoundboardItemType.LocalFile, "", true, false));
-            soundBoard.Add(new SoundboardItem("Test Item 2", @"C:\Windows\Windows.mp3", SoundboardItemType.LocalFile, "", true, false, true));
-            soundBoard.Add(new SoundboardItem("Test Item with really really looooooooong name oooo soo long", @"C:\Users\Really\Long\File\Path\That\Exceeds\The\Max\Width\Of\Display.mp3", SoundboardItemType.LocalFile, "", true, false));
-            soundBoard.Add(new SoundboardItem("Test Item Downloaded Item", @"https://www.youtube.com/watch?v=WyQ7z8BMwwk", SoundboardItemType.DownloadedFile, "", true, false, false));
-            soundBoard.Add(new SoundboardItem("Test Item Downloading Item", @"https://www.youtube.com/watch?v=WyQ7z8BMwwk", SoundboardItemType.DownloadedFile, "", false, true, false));
-            soundBoard.Add(new SoundboardItem("Test Item Downloaded Item w/ Errors", @"https://www.youtube.com/watch?v=WyQ7z8BMwwk", SoundboardItemType.DownloadedFile, "", true, false, true));
-            soundBoard.Add(new SoundboardItem("Test TTS Item", "Hi, This is some test TTS Text!", SoundboardItemType.TTSFile, "", true, false, false));
-            soundBoard.Add(new SoundboardItem("Test TTS Item w/ Errors", "Hi, This is some test TTS Text!", SoundboardItemType.TTSFile, "", true, false, true));
+            //soundBoard.Add(new SoundboardItem("Test Item", @"C:\Windows\Windows.mp3", SoundboardItemType.LocalFile, "", true, false));
+            //soundBoard.Add(new SoundboardItem("Test Item 2", @"C:\Windows\Windows.mp3", SoundboardItemType.LocalFile, "", true, false, true));
+            //soundBoard.Add(new SoundboardItem("Test Item with really really looooooooong name oooo soo long", @"C:\Users\Really\Long\File\Path\That\Exceeds\The\Max\Width\Of\Display.mp3", SoundboardItemType.LocalFile, "", true, false));
+            //soundBoard.Add(new SoundboardItem("Test Item Downloaded Item", @"https://www.youtube.com/watch?v=WyQ7z8BMwwk", SoundboardItemType.DownloadedFile, "", true, false, false));
+            //soundBoard.Add(new SoundboardItem("Test Item Downloading Item", @"https://www.youtube.com/watch?v=WyQ7z8BMwwk", SoundboardItemType.DownloadedFile, "", false, true, false));
+            //soundBoard.Add(new SoundboardItem("Test Item Downloaded Item w/ Errors", @"https://www.youtube.com/watch?v=WyQ7z8BMwwk", SoundboardItemType.DownloadedFile, "", true, false, true));
+            //soundBoard.Add(new SoundboardItem("Test TTS Item", "Hi, This is some test TTS Text!", SoundboardItemType.TTSFile, "", true, false, false));
+            //soundBoard.Add(new SoundboardItem("Test TTS Item w/ Errors", "Hi, This is some test TTS Text!", SoundboardItemType.TTSFile, "", true, false, true));
+        }
+
+        private void SoundboardItems_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            // Check if the soundboard is empty. If it is, show the empty soundboard message, otherwise hide it.
+            if (soundBoard.soundboardViewmodel.SoundboardItems.Count == 0)
+            {
+                NoItemsDisplay.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                NoItemsDisplay.Visibility = Visibility.Collapsed;
+            }
         }
 
         private async void AddLocalSoundFile_Click(object sender, RoutedEventArgs e)

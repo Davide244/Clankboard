@@ -49,7 +49,8 @@
                     <GradientStop Offset="1.0" Color="{StaticResource ControlStrokeColorDefault}" />
                 </LinearGradientBrush.GradientStops>
             </LinearGradientBrush>
-            
+
+            <FontFamily x:Key="ClankboardSymbolFont">/Assets/ClankboardSymbolFont.ttf/#Clankboard Symbol Font</FontFamily>
             
         </ResourceDictionary>
     </Application.Resources>
