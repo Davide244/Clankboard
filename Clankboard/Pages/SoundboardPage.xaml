@@ -9,6 +9,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:CommunityToolkit.WinUI.Controls"
     xmlns:ui="using:CommunityToolkit.WinUI" xmlns:media="using:ABI.Microsoft.UI.Xaml.Media"
+    xmlns:icons="using:FluentIcon.WinUI"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -115,8 +116,18 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Text="Soundboard" Margin="10, 2, 0, 0" Style="{StaticResource BodyStrongTextBlockStyle}" Foreground="{ThemeResource TextFillColorTertiaryBrush}"/>
-            <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" Grid.RowSpan="2">
+            <Grid Margin="10, 10, 10, 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Horizontal" Spacing="5" Margin="0, 0, 10, 0">
+                    <TextBlock Text="Soundboard" Margin="10, 0, 0, 0" Style="{StaticResource SubtitleTextBlockStyle}" Foreground="{ThemeResource TextFillColorTertiaryBrush}"/>
+                    <FontIcon Glyph="&#xE8D6;" FontSize="20" Foreground="{ThemeResource TextFillColorTertiaryBrush}"/>
+                </StackPanel>
+                <AutoSuggestBox QueryIcon="Find" MaxWidth="500" Grid.Column="1" PlaceholderText="Search Audio" Margin="10, 0, 0, 0" HorizontalAlignment="Left"/>
+            </Grid>
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" Grid.RowSpan="2" Margin="0, 10, 0, 5">
                 <!--<ItemsView x:Name="SoundboardListView" CanDrag="True" SelectionMode="Extended" Margin="10, 0, 10, 0" IsItemInvokedEnabled="True">
                     <ItemsView.Layout>
                         <StackLayout Spacing="5"/>
@@ -236,7 +247,10 @@
             </ScrollViewer>
 
             <AppBarSeparator Grid.Column="1" Grid.RowSpan="3" Visibility="Visible"/>
-            <TextBlock Text="Currently Playing" Margin="10, 2, 0, 0" Style="{StaticResource BodyStrongTextBlockStyle}" Foreground="{ThemeResource TextFillColorTertiaryBrush}" Grid.Column="2" Visibility="Visible"/>
+            <StackPanel Orientation="Horizontal" Spacing="5" Margin="0, 3, 10, 0" Grid.Column="2" Height="32">
+                <TextBlock Text="Currently Playing" Margin="10, 0, 0, 0" Style="{StaticResource SubtitleTextBlockStyle}" Foreground="{ThemeResource TextFillColorTertiaryBrush}" VerticalAlignment="Center"/>
+                <icons:FluentRegularIcon Symbol="NavigationPlay20Regular" FontSize="20" Foreground="{ThemeResource TextFillColorTertiaryBrush}" Margin="0, 2.5, 0, 0"/>
+            </StackPanel>
 
             <ScrollViewer Grid.Row="2" Grid.Column="2" MinWidth="200" Margin="10, 5, 10, 0" Visibility="Visible">
                 <ListView x:Name="CurrentlyPlayingListView" SelectionMode="Extended" CanReorderItems="False" CanDragItems="False">
