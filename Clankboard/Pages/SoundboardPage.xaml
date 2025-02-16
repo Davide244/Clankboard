@@ -49,7 +49,7 @@
                             <MenuFlyoutSeparator/>
                             <MenuFlyoutItem Text="Merge Soundboard">
                                 <MenuFlyoutItem.Icon>
-                                    <ImageIcon Source="/Assets/logo.png" Width="16" Height="16"/>
+                                    <ImageIcon Source="/Assets/logo_indev.png" Width="16" Height="16"/>
                                 </MenuFlyoutItem.Icon>
                             </MenuFlyoutItem>
                         </MenuFlyout>
