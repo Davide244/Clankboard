@@ -63,7 +63,7 @@
                     <AppBarSeparator/>
                 </CommandBar.PrimaryCommands>
                 <CommandBar.SecondaryCommands>
-                    <AppBarButton Icon="Help" Label="About Clankboard"/>
+                    <AppBarButton x:Name="AboutButton" Icon="Help" Label="About Clankboard" Click="AboutButton_Click"/>
                     <AppBarButton Icon="Share" Label="Share Soundboard"/>
                 </CommandBar.SecondaryCommands>
             </CommandBar>

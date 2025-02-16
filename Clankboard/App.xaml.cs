@@ -24,6 +24,15 @@ using Clankboard.Utils;
 
 namespace Clankboard
 {
+    public enum AppVersionType
+    {
+        Indev,
+        Alpha,
+        Beta,
+        ReleaseCandidate,
+        Release
+    }
+
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
@@ -31,6 +40,8 @@ namespace Clankboard
     {
         public static string AppDataPath;
         public static AppDataFolderManager appDataFolderManager = new();
+
+        public const AppVersionType appVersionType = AppVersionType.Indev; // Change this to the current version type before publishing!!
 
 
         /// <summary>

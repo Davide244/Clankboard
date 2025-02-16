@@ -1,3 +1,4 @@
+using Clankboard.Dialogs;
 using Clankboard.Systems;
 using Clankboard.Utils;
 using Clankboard.Utils.Events;
@@ -151,6 +152,12 @@ namespace Clankboard
         private void WindowEx_Closed(object sender, WindowEventArgs args)
         {
             SettingsSystemViewmodel.Instance.Save();
+        }
+
+        private void AboutButton_Click(object sender, RoutedEventArgs e)
+        {
+            AboutDialog aboutDialog = new();
+            g_appMessagingEvents.ShowMessageBox("", "", "Okay", null, null, ContentDialogButton.Close, aboutDialog);
         }
     }
 
