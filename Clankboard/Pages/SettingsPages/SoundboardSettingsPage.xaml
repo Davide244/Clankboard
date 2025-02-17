@@ -17,12 +17,32 @@
             <controls:SettingsCard Header="Grid View" Description="Display the sounds in your soundboard in a grid instead of a list." HeaderIcon="{ui:FontIcon Glyph=&#xF0E2;}" Margin="0, 0, 0, 5">
                 <ToggleSwitch/>
             </controls:SettingsCard>
+            <controls:SettingsCard Header="Stacking" Description="Allow multiple audio files to play and stack." HeaderIcon="{ui:FontIcon Glyph=&#xE81E;}" Margin="0, 0, 0, 5">
+                <ToggleSwitch/>
+            </controls:SettingsCard>
             <controls:SettingsCard Header="Audio Modulation" Description="Force all soundboard audio through the Voicebox modulators. This ignores the 'Feed through VoiceBox modulator' on audio and makes all audio pass through." Margin="0, 0, 0, 5" IsEnabled="False">
                 <controls:SettingsCard.HeaderIcon>
                     <icons:FluentFilledIcon Symbol="DataLine20Filled"/>
                 </controls:SettingsCard.HeaderIcon>
                 <ToggleSwitch/>
             </controls:SettingsCard>
+            <controls:SettingsExpander Header="Speaker Priority" Description="If turned on, soundboard audio is made quieter when there is an audio input from the input device." Margin="0, 0, 0, 5">
+                <controls:SettingsExpander.HeaderIcon>
+                    <icons:FluentRegularIcon Symbol="Headset20Regular"/>
+                </controls:SettingsExpander.HeaderIcon>
+                <controls:SettingsExpander.Items>
+                    <controls:SettingsCard Header="Volume" Description="Reduce audio to this volume, when this system is active." HeaderIcon="{ui:FontIcon Glyph=&#xE767;}">
+                        <Slider Maximum="100" Minimum="0" Value="100"/>
+                    </controls:SettingsCard>
+                    <controls:SettingsCard Header="Smooth Transition" Description="Smoothly transition to and from the lower volume.">
+                        <controls:SettingsCard.HeaderIcon>
+                            <icons:FluentRegularIcon Symbol="CatchUp24Regular"/>
+                        </controls:SettingsCard.HeaderIcon>
+                        <ToggleSwitch/>
+                    </controls:SettingsCard>
+                </controls:SettingsExpander.Items>
+                <ToggleSwitch/>
+            </controls:SettingsExpander>
         </StackPanel>
     </ScrollView>
 </Page>
