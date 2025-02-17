@@ -11,7 +11,8 @@
     xmlns:ui="using:CommunityToolkit.WinUI" xmlns:media="using:ABI.Microsoft.UI.Xaml.Media"
     xmlns:icons="using:FluentIcon.WinUI"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    NavigationCacheMode="Required">
 
     <Grid Background="Transparent">
         <Grid.RowDefinitions>
