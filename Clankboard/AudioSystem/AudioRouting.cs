@@ -12,8 +12,16 @@ namespace Clankboard.AudioSystem
     /// </summary>
     public class AudioRouting
     {
+        /*
+         * FLOW OF AUDIO FROM SOUNDBOARD
+         * 
+         *  SOUND ------> RESAMPLER -----------------------------> MIXER -----> Mixer -----> Main Output
+         *                    |----------> VoiceBox modulator -------^            |--------> Local Output
+         * 
+         */
 
-        // 3 NAudio mixer instances for the 2 different audio systems.
+
+        // 2 NAudio mixer instances for the 2 different audio systems.
         private NAudio.Wave.WaveMixerStream32 soundboardAudioMixer; // Mixes soundboard audio together into one stream.
         private NAudio.Wave.WaveMixerStream32 mainOutputMixer;      // Mixes mixed soundboard audio with the microphonen for the main output.
     }
