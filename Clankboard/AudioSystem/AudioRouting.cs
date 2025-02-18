@@ -24,5 +24,7 @@ namespace Clankboard.AudioSystem
         // 2 NAudio mixer instances for the 2 different audio systems.
         private NAudio.Wave.WaveMixerStream32 soundboardAudioMixer; // Mixes soundboard audio together into one stream.
         private NAudio.Wave.WaveMixerStream32 mainOutputMixer;      // Mixes mixed soundboard audio with the microphonen for the main output.
+
+
     }
 }

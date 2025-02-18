@@ -13,6 +13,7 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using Clankboard.Systems;
+using Clankboard.AudioSystem;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -26,12 +27,15 @@ namespace Clankboard.Pages
     {
         private SettingsSystemViewmodel settingsViewmodel = SettingsSystemViewmodel.Instance;
 
+        private ClankAudioDeviceManager audioDeviceManager = new();
+
 
         public SettingsPage()
         {
             this.InitializeComponent();
 
             SettingsNavigationFrame.Navigate(typeof(SettingsPages.GeneralSettingsPage));
+            audioDeviceManager.UpdateOutputDevices();
         }
 
         private void SettingsSelectorBar_SelectionChanged(SelectorBar sender, SelectorBarSelectionChangedEventArgs args)
