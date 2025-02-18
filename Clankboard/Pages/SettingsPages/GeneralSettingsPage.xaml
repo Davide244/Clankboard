@@ -51,7 +51,7 @@
                     </controls:SettingsExpander.Items>
                 </controls:SettingsExpander>
 
-                <controls:SettingsCard Header="Enable Audio Mixing" HeaderIcon="{ui:FontIcon Glyph=&#xF4C3;}" Description="This setting allows you to disable the app mixing your microphone. The microphpone audio will not be captured when recorded." Margin="0, 0, 0, 5">
+                <controls:SettingsCard Header="Enable Audio Mixing" HeaderIcon="{ui:FontIcon Glyph=&#xF4C3;}" Description="This setting allows you to disable the app mixing your microphone. The microphpone audio will not be captured when mixing is disabled." Margin="0, 0, 0, 5">
                     <ToggleSwitch IsOn="{x:Bind settingsViewmodel.AudioMixingEnabled, Mode=TwoWay}"/>
                 </controls:SettingsCard>
 
