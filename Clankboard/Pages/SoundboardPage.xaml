@@ -166,16 +166,16 @@
                 </ItemsView>-->
                 <Grid>
                     <StackPanel>
-                        <ItemsView x:Name="SoundboardListView" SelectionMode="Extended" Margin="15, 0, 15, 0">
-                            <ItemsView.Layout>
+                        <ListView x:Name="SoundboardListView" SelectionMode="Extended" Margin="15, 0, 15, 0" CanReorderItems="True" CanDragItems="True">
+                            <!--ItemsView.Layout>
                                 <StackLayout Spacing="4"/>
-                                <!--UniformGridLayout Orientation="Horizontal" MinItemWidth="250" MinItemHeight="40" MinColumnSpacing="4" MinRowSpacing="4"/-->
-                            </ItemsView.Layout>
+                                <UniformGridLayout Orientation="Horizontal" MinItemWidth="250" MinItemHeight="40" MinColumnSpacing="4" MinRowSpacing="4"/>
+                            </ItemsView.Layout-->
 
-                            <ItemsView.ItemTemplate>
+                            <ListView.ItemTemplate>
                                 <DataTemplate x:DataType="audioSystem:SoundboardItem">
-                                    <ItemContainer Height="40" CanDrag="True">
-                                        <ItemContainer.ContextFlyout>
+                                    <Grid Height="40" HorizontalAlignment="Stretch" Margin="-13, 2, -9, 2">
+                                        <Grid.ContextFlyout>
                                             <MenuFlyout>
                                                 <MenuFlyoutItem x:Name="SoundboardContextFlyoutViewInExplorerBtn" Icon="Folder" Text="Show in Explorer" IsEnabled="{x:Bind CanClickViewInExplorer, Mode=OneWay}" Click="SoundboardContextFlyoutViewInExplorerBtn_Click"/>
                                                 <MenuFlyoutItem Icon="Save"  Text="Export to" IsEnabled="{x:Bind CanClickExport, Mode=OneWay}"/>
@@ -183,7 +183,7 @@
                                                 <MenuFlyoutSeparator/>
                                                 <MenuFlyoutItem Icon="Play" Text="Play" IsEnabled="{x:Bind IsPlayButtonEnabled, Mode=OneWay}"/>
                                             </MenuFlyout>
-                                        </ItemContainer.ContextFlyout>
+                                        </Grid.ContextFlyout>
                                         <StackPanel>
                                             <Grid Background="{ThemeResource LayerOnAcrylicFillColorDefaultBrush}" BorderBrush="{ThemeResource ControlStrokeColorSecondaryBrush}" BorderThickness="1" Padding="5" Margin="0, 0, 0, 0" Height="40" CornerRadius="5">
                                                 <Grid.ColumnDefinitions>
@@ -232,10 +232,10 @@
                                                 </StackPanel>
                                             </Grid>
                                         </StackPanel>
-                                    </ItemContainer>
+                                    </Grid>
                                 </DataTemplate>
-                            </ItemsView.ItemTemplate>
-                        </ItemsView>
+                            </ListView.ItemTemplate>
+                        </ListView>
                     </StackPanel>
 
                     <StackPanel x:Name="NoItemsDisplay" VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="20">
