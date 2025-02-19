@@ -166,7 +166,7 @@
                 </ItemsView>-->
                 <Grid>
                     <StackPanel>
-                        <ListView x:Name="SoundboardListView" SelectionMode="Extended" Margin="15, 0, 15, 0" CanReorderItems="True" CanDragItems="True">
+                        <ListView x:Name="SoundboardListView" SelectionMode="Extended" Margin="15, 0, 15, 0" CanReorderItems="True" CanDragItems="True" AllowDrop="True">
                             <!--ItemsView.Layout>
                                 <StackLayout Spacing="4"/>
                                 <UniformGridLayout Orientation="Horizontal" MinItemWidth="250" MinItemHeight="40" MinColumnSpacing="4" MinRowSpacing="4"/>
