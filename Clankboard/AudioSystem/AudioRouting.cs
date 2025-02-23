@@ -20,6 +20,8 @@ namespace Clankboard.AudioSystem
          * 
          */
 
+        public const int SAMPLE_RATE = 44100; // Sample rate for the audio system. This only applies, if no microphone is used. If a microphone is used, the sample rate is determined by the microphone.
+
 
         // 2 NAudio mixer instances for the 2 different audio systems.
         private NAudio.Wave.WaveMixerStream32 soundboardAudioMixer; // Mixes soundboard audio together into one stream.
