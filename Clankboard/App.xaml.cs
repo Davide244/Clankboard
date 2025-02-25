@@ -18,6 +18,7 @@ using Windows.Foundation.Collections;
 using System.Threading;
 using System.Threading.Tasks;
 using Clankboard.Utils;
+using Clankboard.AudioSystem;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -40,6 +41,7 @@ namespace Clankboard
     {
         public static string AppDataPath;
         public static AppDataFolderManager appDataFolderManager = new();
+        public static ClankAudioDeviceManager appAudioDeviceManager = new();
 
         public const AppVersionType appVersionType = AppVersionType.Indev; // Change this to the current version type before publishing!!
 

@@ -23,23 +23,18 @@
                             <controls:SettingsCard.HeaderIcon>
                                 <FontIcon Glyph="&#xE964;" />
                             </controls:SettingsCard.HeaderIcon>
-                            <ComboBox PlaceholderText="Not selected">
-                                <ComboBox.Items>
-                                    <ComboBoxItem>
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="auto"/>
-                                                <ColumnDefinition Width="*"/>
-                                            </Grid.ColumnDefinitions>
-
-                                            <FontIcon Glyph="&#xe95f;" FontSize="13"/>
-                                            <StackPanel Orientation="Vertical" Grid.Column="1">
-                                                <TextBlock Text="Remote Audio"/>
-                                                <TextBlock FontSize="8" Margin="0, -2, 0, 0" Text="0000-0000-00000"/>
+                            <ComboBox x:Name="outputDeviceComboBox" PlaceholderText="Not selected">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate x:DataType="local:AudioDevicePickerDropdownItem">
+                                        <StackPanel Orientation="Horizontal"  ToolTipService.ToolTip="{x:Bind DeviceID, Mode=OneWay}">
+                                            <FontIcon Glyph="{x:Bind IconGlyph, Mode=OneWay}" FontSize="13" FontFamily="{x:Bind IconFontFamily, Mode=OneWay}" Margin="0, 0, 10, 0"/>
+                                            <StackPanel Orientation="Vertical">
+                                                <TextBlock Text="{x:Bind DeviceName, Mode=OneWay}"/>
+                                                <TextBlock FontSize="8" Margin="0, -2, 0, 0" Text="{x:Bind DeviceType, Mode=OneWay}" Foreground="{ThemeResource TextFillColorTertiaryBrush}"/>
                                             </StackPanel>
-                                        </Grid>
-                                    </ComboBoxItem>
-                                </ComboBox.Items>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
                             </ComboBox>
                         </controls:SettingsCard>
                         <controls:SettingsCard Header="Local Output Device" Description="The audio output device where audio gets looped back to you, so you can hear what you played, or are saying.">

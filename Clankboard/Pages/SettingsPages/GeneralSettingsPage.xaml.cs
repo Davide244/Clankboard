@@ -1,3 +1,4 @@
+using Clankboard.AudioSystem;
 using Clankboard.Systems;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Xaml;
@@ -7,9 +8,11 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using NAudio.CoreAudioApi;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -27,10 +30,31 @@ namespace Clankboard.Pages.SettingsPages
     public sealed partial class GeneralSettingsPage : Page
     {
         private SettingsSystemViewmodel settingsViewmodel = SettingsSystemViewmodel.Instance;
+        private AudioDevicePickerViewModel audioDevicePickerViewModel = new AudioDevicePickerViewModel();
 
         public GeneralSettingsPage()
         {
             this.InitializeComponent();
+
+            // Update audio devices
+            App.appAudioDeviceManager.UpdateInputDevices();
+            App.appAudioDeviceManager.UpdateOutputDevices();
+
+            // Set data sources
+            outputDeviceComboBox.ItemsSource = audioDevicePickerViewModel.OutputDevices;
+
+            // Add output devices to the dropdown ObservableCollections
+            foreach (MMDevice device in App.appAudioDeviceManager.availableOutputDevices)
+            {
+                mmresIconDeviceTypeInformation iconInfo = App.appAudioDeviceManager.GetDeviceTypeIconInformation(device);
+                audioDevicePickerViewModel.OutputDevices.Add(new AudioDevicePickerDropdownItem(device.FriendlyName, device.ID, iconInfo.iconName, true, iconInfo.iconGlyph, iconInfo.iconFontFamily));
+            }
+
+            // console.writeline the names of the out devices in the viewmodel
+            foreach (AudioDevicePickerDropdownItem item in audioDevicePickerViewModel.OutputDevices)
+            {
+                Debug.WriteLine("DEVICE NAME: " + item.DeviceName);
+            }
         }
     }
 
@@ -42,13 +66,25 @@ namespace Clankboard.Pages.SettingsPages
         private string _deviceID;
 
         [ObservableProperty]
+        private string _deviceType;
+
+        [ObservableProperty]
         private bool _isSelectable = true;
 
-        public AudioDevicePickerDropdownItem(string deviceName, string deviceID, bool isSelectable)
+        [ObservableProperty]
+        private string _iconGlyph;
+
+        [ObservableProperty]
+        private string _iconFontFamily;
+
+        public AudioDevicePickerDropdownItem(string deviceName, string deviceID, string deviceType, bool isSelectable, string iconGlyph, string iconFontFamily = null)
         {
             DeviceName = deviceName;
             DeviceID = deviceID;
+            DeviceType = deviceType;
             IsSelectable = isSelectable;
+            IconGlyph = iconGlyph;
+            IconFontFamily = iconFontFamily;
         }
     }
 

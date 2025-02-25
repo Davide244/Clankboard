@@ -13,16 +13,9 @@ namespace Clankboard.AudioSystem
 {
     public class ClankAudioDeviceManager
     {
-        private List<MMDevice> availableOutputDevices = new List<MMDevice>();
-        private List<MMDevice> availableInputDevices = new List<MMDevice>();
+        public List<MMDevice> availableOutputDevices = new List<MMDevice>();
+        public List<MMDevice> availableInputDevices = new List<MMDevice>();
 
-
-        public struct mmresIconDeviceTypeInformation 
-        {
-            public string iconGlyph;
-            public string iconName;
-            public string iconFontFamily;
-        }
         /// <summary>
         /// The key is the mmres icon number, the value is the icon glyph.
         /// </summary>
@@ -60,6 +53,7 @@ namespace Clankboard.AudioSystem
 
         public void UpdateOutputDevices(DeviceState filter = DeviceState.Active) 
         {
+            availableOutputDevices.Clear();
             MMDeviceEnumerator enumerator = new MMDeviceEnumerator();
 
             foreach (MMDevice device in enumerator.EnumerateAudioEndPoints(DataFlow.Render, filter))
@@ -78,6 +72,7 @@ namespace Clankboard.AudioSystem
 
         public void UpdateInputDevices(DeviceState filter = DeviceState.Active)
         {
+            availableInputDevices.Clear();
             MMDeviceEnumerator enumerator = new MMDeviceEnumerator();
 
             foreach (MMDevice device in enumerator.EnumerateAudioEndPoints(DataFlow.Capture, filter))
@@ -99,7 +94,13 @@ namespace Clankboard.AudioSystem
             return device.AudioClient.MixFormat.SampleRate;
         }
 
-        public mmresIconDeviceTypeInformation getDeviceTypeIconAndName(MMDevice device)
+        /// <summary>
+        /// Returns the device type of the device.
+        /// Used to display the correct icon for the device type in selector dropdowns.
+        /// </summary>
+        /// <param name="device">The device to be checked.</param>
+        /// <returns>mmres Icon Info.</returns>
+        public mmresIconDeviceTypeInformation GetDeviceTypeIconInformation(MMDevice device)
         {
             if (device.IconPath == null)
             {
@@ -113,16 +114,9 @@ namespace Clankboard.AudioSystem
                 return mmresWinui3IconAlternatives[-1];
             }
 
-            string[] iconPathParts2 = iconPathParts[1].Split(';');
-
-            if (iconPathParts2.Length < 2)
-            {
-                return mmresWinui3IconAlternatives[-1];
-            }
-
             int iconNumber = -1;
 
-            if (!int.TryParse(iconPathParts2[1], out iconNumber))
+            if (!int.TryParse(iconPathParts[1], out iconNumber))
             {
                 return mmresWinui3IconAlternatives[-1];
             }
@@ -136,6 +130,13 @@ namespace Clankboard.AudioSystem
                 return mmresWinui3IconAlternatives[-1];
             }
         }
+    }
+
+    public struct mmresIconDeviceTypeInformation
+    {
+        public string iconGlyph;
+        public string iconName;
+        public string iconFontFamily;
     }
 
     /// <summary>
