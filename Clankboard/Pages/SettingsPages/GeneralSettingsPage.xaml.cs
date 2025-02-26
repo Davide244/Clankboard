@@ -42,12 +42,22 @@ namespace Clankboard.Pages.SettingsPages
 
             // Set data sources
             outputDeviceComboBox.ItemsSource = audioDevicePickerViewModel.OutputDevices;
+            localOutputDeviceComboBox.ItemsSource = audioDevicePickerViewModel.LocalOutputDevices;
+            inputDeviceComboBox.ItemsSource = audioDevicePickerViewModel.InputDevices;
 
             // Add output devices to the dropdown ObservableCollections
             foreach (MMDevice device in App.appAudioDeviceManager.availableOutputDevices)
             {
                 mmresIconDeviceTypeInformation iconInfo = App.appAudioDeviceManager.GetDeviceTypeIconInformation(device);
                 audioDevicePickerViewModel.OutputDevices.Add(new AudioDevicePickerDropdownItem(device.FriendlyName, device.ID, iconInfo.iconName, true, iconInfo.iconGlyph, iconInfo.iconFontFamily));
+                audioDevicePickerViewModel.LocalOutputDevices.Add(new AudioDevicePickerDropdownItem(device.FriendlyName, device.ID, iconInfo.iconName, true, iconInfo.iconGlyph, iconInfo.iconFontFamily));
+            }
+
+            // input devices
+            foreach (MMDevice device in App.appAudioDeviceManager.availableInputDevices)
+            {
+                mmresIconDeviceTypeInformation iconInfo = App.appAudioDeviceManager.GetDeviceTypeIconInformation(device);
+                audioDevicePickerViewModel.InputDevices.Add(new AudioDevicePickerDropdownItem(device.FriendlyName, device.ID, iconInfo.iconName, true, iconInfo.iconGlyph, iconInfo.iconFontFamily));
             }
 
             // console.writeline the names of the out devices in the viewmodel

@@ -17,17 +17,29 @@
                 <controls:SettingsExpander Header="Audio I / O" HeaderIcon="Audio" Margin="0, 0, 0, 5" Description="Set the input device, local output device, and virtual audio cable output device.">
                     <controls:SettingsExpander.Items>
                         <controls:SettingsCard Header="Input Device" HeaderIcon="Microphone" Description="Usually the microphone that records your voice. Can also be the output of a mixer setup for example." IsEnabled="{x:Bind settingsViewmodel.AudioMixingEnabled, Mode=OneWay}">
-                            <ComboBox PlaceholderText="Not selected"/>
+                            <ComboBox x:Name="inputDeviceComboBox" PlaceholderText="Not selected" Width="180">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate x:DataType="local:AudioDevicePickerDropdownItem">
+                                        <StackPanel Orientation="Horizontal"  ToolTipService.ToolTip="{x:Bind DeviceID, Mode=OneWay}">
+                                            <FontIcon Glyph="{x:Bind IconGlyph, Mode=OneWay}" FontSize="13" Margin="0, 0, 10, 0"/>
+                                            <StackPanel Orientation="Vertical">
+                                                <TextBlock Text="{x:Bind DeviceName, Mode=OneWay}"/>
+                                                <TextBlock FontSize="8" Margin="0, -2, 0, 0" Text="{x:Bind DeviceType, Mode=OneWay}" Foreground="{ThemeResource TextFillColorTertiaryBrush}"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
                         </controls:SettingsCard>
                         <controls:SettingsCard Header="Output Device" Description="All audio mixed and played in this app gets sent to this output. This is usually set to a virtual audio cable.">
                             <controls:SettingsCard.HeaderIcon>
                                 <FontIcon Glyph="&#xE964;" />
                             </controls:SettingsCard.HeaderIcon>
-                            <ComboBox x:Name="outputDeviceComboBox" PlaceholderText="Not selected">
+                            <ComboBox x:Name="outputDeviceComboBox" PlaceholderText="Not selected" Width="180">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate x:DataType="local:AudioDevicePickerDropdownItem">
                                         <StackPanel Orientation="Horizontal"  ToolTipService.ToolTip="{x:Bind DeviceID, Mode=OneWay}">
-                                            <FontIcon Glyph="{x:Bind IconGlyph, Mode=OneWay}" FontSize="13" FontFamily="{x:Bind IconFontFamily, Mode=OneWay}" Margin="0, 0, 10, 0"/>
+                                            <FontIcon Glyph="{x:Bind IconGlyph, Mode=OneWay}" FontSize="13" Margin="0, 0, 10, 0"/>
                                             <StackPanel Orientation="Vertical">
                                                 <TextBlock Text="{x:Bind DeviceName, Mode=OneWay}"/>
                                                 <TextBlock FontSize="8" Margin="0, -2, 0, 0" Text="{x:Bind DeviceType, Mode=OneWay}" Foreground="{ThemeResource TextFillColorTertiaryBrush}"/>
@@ -41,7 +53,19 @@
                             <controls:SettingsCard.HeaderIcon>
                                 <FontIcon Glyph="&#xE7F5;" />
                             </controls:SettingsCard.HeaderIcon>
-                            <ComboBox PlaceholderText="Not selected"/>
+                            <ComboBox x:Name="localOutputDeviceComboBox" PlaceholderText="Not selected" Width="180">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate x:DataType="local:AudioDevicePickerDropdownItem">
+                                        <StackPanel Orientation="Horizontal"  ToolTipService.ToolTip="{x:Bind DeviceID, Mode=OneWay}">
+                                            <FontIcon Glyph="{x:Bind IconGlyph, Mode=OneWay}" FontSize="13" Margin="0, 0, 10, 0"/>
+                                            <StackPanel Orientation="Vertical">
+                                                <TextBlock Text="{x:Bind DeviceName, Mode=OneWay}"/>
+                                                <TextBlock FontSize="8" Margin="0, -2, 0, 0" Text="{x:Bind DeviceType, Mode=OneWay}" Foreground="{ThemeResource TextFillColorTertiaryBrush}"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
                         </controls:SettingsCard>
                     </controls:SettingsExpander.Items>
                 </controls:SettingsExpander>
@@ -50,7 +74,7 @@
                     <ToggleSwitch IsOn="{x:Bind settingsViewmodel.AudioMixingEnabled, Mode=TwoWay}"/>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard Header="Microphone Mute" HeaderIcon="{ui:FontIcon Glyph=&#xF4C3;}" Description="Mutes your microphone input." Margin="0, 0, 0, 5" IsEnabled="{x:Bind settingsViewmodel.AudioMixingEnabled, Mode=OneWay}">
+                <controls:SettingsCard Header="Microphone Mute" HeaderIcon="{ui:FontIcon Glyph=&#xF781;}" Description="Mutes your microphone input." Margin="0, 0, 0, 5" IsEnabled="{x:Bind settingsViewmodel.AudioMixingEnabled, Mode=OneWay}">
                     <ToggleSwitch IsOn="{x:Bind settingsViewmodel.MicrophoneMuted, Mode=TwoWay}"/>
                 </controls:SettingsCard>
 
