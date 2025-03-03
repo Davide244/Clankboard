@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Media.SpeechSynthesis;
 using YoutubeDLSharp;
+using YoutubeDLSharp.Converters;
 using YoutubeDLSharp.Metadata;
 
 namespace Clankboard.AudioSystem
@@ -217,13 +218,13 @@ namespace Clankboard.AudioSystem
             }
         }
 
-        public void Add(string TTSText, int speed, int volume, bool embedded) 
+        public void Add(string itemName, string TTSText, int speed, int volume, bool embedded) 
         {
             // If file is embedded, bake the TTS audio into a .wav file.
             // Otherwise we will just save the TTS without a file path.
 
             // Add the file to the soundboard
-            SoundboardItem item = new SoundboardItem("TTS", TTSText, SoundboardItemType.TTSFile, null, false, false);
+            SoundboardItem item = new SoundboardItem(itemName, "„" + TTSText + "”", SoundboardItemType.TTSFile, null, false, false);
 
             SpeechSynthesizer synthesizer = new SpeechSynthesizer();
             // Generate the TTS audio file

@@ -27,7 +27,7 @@ namespace Clankboard.Dialogs
         private static int lastSelectedComboboxIndex = -1;
 
         public static string userSelectedText;
-        private Viewmodels.AddTTSAudioDialogViewModel viewModel = new Viewmodels.AddTTSAudioDialogViewModel();
+        public Viewmodels.AddTTSAudioDialogViewModel viewModel = new Viewmodels.AddTTSAudioDialogViewModel();
 
         public AddTTSAudioDialog()
         {
@@ -48,7 +48,7 @@ namespace Clankboard.Dialogs
         {
             lastSelectedComboboxIndex = voicesComboBox.SelectedIndex;
 
-            if (voicesComboBox.SelectedItem != null && textTextBox.Text != String.Empty)
+            if (voicesComboBox.SelectedItem != null && textTextBox.Text != String.Empty && NameTextBox.Text != String.Empty)
             {
                 MainWindow.g_appContentDialogProperties.IsPrimaryButtonEnabled = true;
             }
@@ -60,7 +60,19 @@ namespace Clankboard.Dialogs
 
         private void textTextBox_KeyDown(object sender, KeyRoutedEventArgs e)
         {
-            if (voicesComboBox.SelectedItem != null && textTextBox.Text != String.Empty)
+            if (voicesComboBox.SelectedItem != null && textTextBox.Text != String.Empty && NameTextBox.Text != String.Empty)
+            {
+                MainWindow.g_appContentDialogProperties.IsPrimaryButtonEnabled = true;
+            }
+            else
+            {
+                MainWindow.g_appContentDialogProperties.IsPrimaryButtonEnabled = false;
+            }
+        }
+
+        private void NameTextBox_KeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if (voicesComboBox.SelectedItem != null && textTextBox.Text != String.Empty && NameTextBox.Text != String.Empty)
             {
                 MainWindow.g_appContentDialogProperties.IsPrimaryButtonEnabled = true;
             }
@@ -76,19 +88,22 @@ namespace Clankboard.Dialogs
         public partial class AddTTSAudioDialogViewModel : ObservableObject
         {
             [ObservableProperty]
-            public int _speedMultiplierValue;
+            private string _name;
 
             [ObservableProperty]
-            public int _volumeValue;
+            private int _speedMultiplierValue;
 
             [ObservableProperty]
-            public AudioSystem.TTSVoice _selectedVoice;
+            private int _volumeValue;
 
             [ObservableProperty]
-            public string _ttsText;
+            private AudioSystem.TTSVoice _selectedVoice;
 
             [ObservableProperty]
-            public bool _embedFile;
+            private string _ttsText;
+
+            [ObservableProperty]
+            private bool _embedFile;
 
             public AddTTSAudioDialogViewModel()
             {

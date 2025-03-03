@@ -125,11 +125,12 @@ namespace Clankboard.Pages
 
         private async void AddTTSAudio_Click(object sender, RoutedEventArgs e)
         {
-            ContentDialogResult result = await MainWindow.g_appMessagingEvents.ShowMessageBox("Add Text to Speech Audio", "", "Cancel", "Add", null, ContentDialogButton.Primary, new Dialogs.AddTTSAudioDialog());
+            AddTTSAudioDialog dialog = new AddTTSAudioDialog();
+            ContentDialogResult result = await MainWindow.g_appMessagingEvents.ShowMessageBox("Add Text to Speech Audio", "", "Cancel", "Add", null, ContentDialogButton.Primary, dialog);
 
             if (result == ContentDialogResult.Primary)
             {
-                soundBoard.Add("Test TTS", 1, 100, false);
+                soundBoard.Add(dialog.viewModel.Name, dialog.viewModel.TtsText, dialog.viewModel.SpeedMultiplierValue, dialog.viewModel.SpeedMultiplierValue, false);
             }
         }
     }
