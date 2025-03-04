@@ -10,6 +10,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Media.SpeechSynthesis;
+using Windows.Storage.Streams;
 using YoutubeDLSharp;
 using YoutubeDLSharp.Converters;
 using YoutubeDLSharp.Metadata;
@@ -218,33 +219,36 @@ namespace Clankboard.AudioSystem
             }
         }
 
-        public void Add(string itemName, string TTSText, int speed, int volume, bool embedded) 
+        public async void Add(string itemName, string TTSText, int speed, int volume, bool embedded)
         {
-            // If file is embedded, bake the TTS audio into a .wav file.
-            // Otherwise we will just save the TTS without a file path.
-
             // Add the file to the soundboard
             SoundboardItem item = new SoundboardItem(itemName, "„" + TTSText + "”", SoundboardItemType.TTSFile, null, false, false);
 
             SpeechSynthesizer synthesizer = new SpeechSynthesizer();
-            // Generate the TTS audio file
-            // Save the file: [SHA1 of text].wav
             string fileName = Convert.ToHexString(SHA1.HashData(Encoding.UTF8.GetBytes(TTSText))) + ".wav";
+            string filePath = Path.Combine(App.AppDataPath, fileName);
 
-            MemoryStream stream = new MemoryStream();
+            try
+            {
+                using (var stream = new InMemoryRandomAccessStream())
+                {
+                    synthesizer.Options.SpeakingRate = speed;
+                    var speechStream = await synthesizer.SynthesizeTextToStreamAsync(TTSText);
 
-            synthesizer.Options.SpeakingRate = 1;
-            // Set the stream to stream and speak asynchronously instantly
-            synthesizer.SynthesizeTextToStreamAsync(TTSText);
+                    using (var fileStream = File.Create(filePath))
+                    {
+                        speechStream.AsStreamForRead().CopyTo(fileStream);
+                    }
+                }
 
-
-            // Generate the TTS audio
-
-
-            item.SetInteractionEnabled(true);
-
-
-            soundboardViewmodel.SoundboardItems.Add(item);
+                item.PhysicalFilePath = filePath;
+                item.SetInteractionEnabled(true);
+                soundboardViewmodel.SoundboardItems.Add(item);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Fehler beim Schreiben der Datei: {ex.Message}");
+            }
         }
     }
 }
