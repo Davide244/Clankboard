@@ -67,8 +67,14 @@ namespace Clankboard
 
 
 #if DEBUG
-            infobarViewmodel.MainWindowInfobars.Add(new MainWindowInfobar("Debug Mode", "You are running a debug build of Clankboard. Expect worse performance and bugs.", InfoBarSeverity.Warning));
+            infobarViewmodel.MainWindowInfobars.Add(new MainWindowInfobar("Debug Mode", "You are running a debug build of Clankboard. Expect worse performance and bugs.", InfoBarSeverity.Informational));
 #endif
+
+            // Check if the user has set an output device.
+            if (settingsViewmodel.SelectedOutputDeviceIndex == 0)
+            {
+                infobarViewmodel.MainWindowInfobars.Add(new MainWindowInfobar("No Output Device Set", "You have not set an output device. The app is not able to output audio data.", InfoBarSeverity.Warning, false));
+            }
         }
 
         private async Task<ContentDialogResult> AppMessagingEvents_AppShowMessageBox(object sender, RoutedEventArgs e, string Title, string Text, string CloseButtonText, string PrimaryButtonText, string SecondaryButtonText, ContentDialogButton DefaultButton = ContentDialogButton.None, object content = null)

@@ -27,6 +27,12 @@ namespace Clankboard.AudioSystem
         private NAudio.Wave.WaveMixerStream32 soundboardAudioMixer; // Mixes soundboard audio together into one stream.
         private NAudio.Wave.WaveMixerStream32 mainOutputMixer;      // Mixes mixed soundboard audio with the microphonen for the main output.
 
+        public AudioRouting() 
+        {
+            soundboardAudioMixer = new NAudio.Wave.WaveMixerStream32();
+            mainOutputMixer = new NAudio.Wave.WaveMixerStream32();
 
+
+        }
     }
 }

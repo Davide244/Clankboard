@@ -31,6 +31,10 @@ namespace Clankboard.Systems
         public bool SkipYTDLPDownloadConfirmationDialog { get; set; }
         public bool SkipFFMPEGDownloadConfirmationDialog { get; set; }
         public bool SkipFFPROBEDownloadConfirmationDialog { get; set; }
+
+        public int SelectedOutputDeviceIndex { get; set; }
+        public int SelectedLocalOutputDeviceIndex { get; set; }
+        public int SelectedInputDeviceIndex { get; set; }
     }
 
     public class SoundboardFile : LoadedClankFile

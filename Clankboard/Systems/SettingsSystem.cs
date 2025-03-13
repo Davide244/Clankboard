@@ -56,6 +56,13 @@ namespace Clankboard.Systems
         [ObservableProperty]
         private bool _skipFFPROBEDownloadConfirmationDialog;
 
+        [ObservableProperty]
+        public int _selectedOutputDeviceIndex;
+        [ObservableProperty]
+        public int _selectedLocalOutputDeviceIndex;
+        [ObservableProperty]
+        public int _selectedInputDeviceIndex;
+
         public SettingsSystemViewmodel()
         {
             AudioMixingEnabled = true;
@@ -124,6 +131,10 @@ namespace Clankboard.Systems
             settings.SkipYTDLPDownloadConfirmationDialog = SkipYTDLPDownloadConfirmationDialog;
             settings.SkipFFMPEGDownloadConfirmationDialog = SkipFFMPEGDownloadConfirmationDialog;
             settings.SkipFFPROBEDownloadConfirmationDialog = SkipFFPROBEDownloadConfirmationDialog;
+
+            settings.SelectedOutputDeviceIndex = SelectedOutputDeviceIndex;
+            settings.SelectedLocalOutputDeviceIndex = SelectedLocalOutputDeviceIndex;
+            settings.SelectedInputDeviceIndex = SelectedInputDeviceIndex;
 
             // Serialize the settings
             string json = JsonConvert.SerializeObject(settings, Formatting.Indented);
