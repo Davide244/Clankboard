@@ -35,10 +35,18 @@ namespace Clankboard.Pages.SettingsPages
         public GeneralSettingsPage()
         {
             this.InitializeComponent();
+        }
 
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        {
             // Update audio devices
             App.appAudioDeviceManager.UpdateInputDevices();
             App.appAudioDeviceManager.UpdateOutputDevices();
+
+            // Clear viewmodel
+            audioDevicePickerViewModel.OutputDevices.Clear();
+            audioDevicePickerViewModel.LocalOutputDevices.Clear();
+            audioDevicePickerViewModel.InputDevices.Clear();
 
             // Set data sources
             outputDeviceComboBox.ItemsSource = audioDevicePickerViewModel.OutputDevices;
