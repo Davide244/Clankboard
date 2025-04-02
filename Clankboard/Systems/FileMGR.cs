@@ -8,12 +8,10 @@ namespace Clankboard.Systems
 {
     public abstract class LoadedClankFile 
     {
-        public string Name { get; private set; }
-        public string Path { get; private set; }
+        private string Path;
 
-        public LoadedClankFile(string name, string path) 
+        public LoadedClankFile(string path) 
         {
-            Name = name;
             Path = path;
         }
     }
