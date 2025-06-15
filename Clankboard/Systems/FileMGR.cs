@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -37,7 +37,7 @@ namespace Clankboard.Systems
 
     public class SoundboardFile : LoadedClankFile
     {
-        public SoundboardFile(string name, string path) : base(name, path) 
+        public SoundboardFile(string name, string path) : base(path) 
         {
 
         }
