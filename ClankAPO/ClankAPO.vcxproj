@@ -46,7 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Midl Include="ClankAPOInterface.idl" />
-    <Midl Include="ClankAPO.idl" />
+    <Midl Include="ClankAPOdll.idl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E1F03691-46E6-4D02-C57D-8B5968C353FE}</ProjectGuid>

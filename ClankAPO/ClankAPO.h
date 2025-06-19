@@ -20,6 +20,13 @@
 #include <devicetopology.h>
 #include <RTWorkQ.h>
 
+// Generated headers
+#include "ClankAPOdll.h"
+#include "ClankAPOInterface.h"
+
+#include "resource.h"
+#include "vcpkg_installed/vcpkg/pkgs/wil_x64-windows/include/wil/com.h"
+
 _Analysis_mode_(_Analysis_code_type_user_driver_) // Analysis mode for user-mode driver code
 
 
@@ -48,5 +55,106 @@ class CClankAPO_MFX :
 	public IAudioSystemEffects3,
 	public IClankAPO_MFX
 {
+public:
+	CClankAPO_MFX()
+		:CBaseAudioProcessingObject(CLANK_APO_MFX_CONTEXT),
+		, m_hEffectsChangedEvent(NULL)
+		, m_AudioProcessingMode(AUDIO_SIGNALPROCESSINGMODE_DEFAULT)
+		, m_fEnableSwapMFX(FALSE)
+	{
+		m_pf32Coefficients = NULL;
+	}
 
+	virtual ~CSwapAPOMFX();    // destructor
+
+	DECLARE_REGISTRY_RESOURCEID(IDR_CLANKAPO_MFX);
+
+	BEGIN_COM_MAP(CClankAPO_MFX)
+		COM_INTERFACE_ENTRY(IClankAPO_MFX)
+		COM_INTERFACE_ENTRY(IAudioSystemEffects)
+		COM_INTERFACE_ENTRY(IAudioSystemEffects2)
+		COM_INTERFACE_ENTRY(IAudioSystemEffects3)
+		// IAudioSystemEffectsCustomFormats may be optionally supported
+		// by APOs that attach directly to the connector in the DEFAULT mode streaming graph
+		COM_INTERFACE_ENTRY(IAudioSystemEffectsCustomFormats)
+		COM_INTERFACE_ENTRY(IMMNotificationClient)
+		COM_INTERFACE_ENTRY(IAudioProcessingObjectNotifications)
+		COM_INTERFACE_ENTRY(IAudioProcessingObjectRT)
+		COM_INTERFACE_ENTRY(IAudioProcessingObject)
+		COM_INTERFACE_ENTRY(IAudioProcessingObjectConfiguration)
+	END_COM_MAP()
+
+	DECLARE_PROTECT_FINAL_CONSTRUCT();
+
+public:
+	STDMETHOD_(void, APOProcess)(UINT32 u32NumInputConnections,
+		APO_CONNECTION_PROPERTY** ppInputConnections, UINT32 u32NumOutputConnections,
+		APO_CONNECTION_PROPERTY** ppOutputConnections);
+
+	STDMETHOD(GetLatency)(HNSTIME* pTime);
+
+	STDMETHOD(LockForProcess)(UINT32 u32NumInputConnections,
+		APO_CONNECTION_DESCRIPTOR** ppInputConnections,
+		UINT32 u32NumOutputConnections, APO_CONNECTION_DESCRIPTOR** ppOutputConnections);
+
+	STDMETHOD(Initialize)(UINT32 cbDataSize, BYTE* pbyData);
+
+	// IAudioSystemEffects2
+	STDMETHOD(GetEffectsList)(_Outptr_result_buffer_maybenull_(*pcEffects)  LPGUID* ppEffectsIds, _Out_ UINT* pcEffects, _In_ HANDLE Event);
+
+	// IAudioSystemEffects3
+	STDMETHOD(GetControllableSystemEffectsList)(_Outptr_result_buffer_maybenull_(*numEffects) AUDIO_SYSTEMEFFECT** effects, _Out_ UINT* numEffects, _In_opt_ HANDLE event);
+
+	STDMETHOD(SetAudioSystemEffectState)(GUID effectId, AUDIO_SYSTEMEFFECT_STATE state);
+
+	virtual HRESULT ValidateAndCacheConnectionInfo(
+		UINT32 u32NumInputConnections,
+		APO_CONNECTION_DESCRIPTOR** ppInputConnections,
+		UINT32 u32NumOutputConnections,
+		APO_CONNECTION_DESCRIPTOR** ppOutputConnections);
+
+	// IMMNotificationClient
+	STDMETHODIMP OnDeviceStateChanged(LPCWSTR pwstrDeviceId, DWORD dwNewState)
+	{
+		UNREFERENCED_PARAMETER(pwstrDeviceId);
+		UNREFERENCED_PARAMETER(dwNewState);
+		return S_OK;
+	}
+	STDMETHODIMP OnDeviceAdded(LPCWSTR pwstrDeviceId)
+	{
+		UNREFERENCED_PARAMETER(pwstrDeviceId);
+		return S_OK;
+	}
+	STDMETHODIMP OnDeviceRemoved(LPCWSTR pwstrDeviceId)
+	{
+		UNREFERENCED_PARAMETER(pwstrDeviceId);
+		return S_OK;
+	}
+	STDMETHODIMP OnDefaultDeviceChanged(EDataFlow flow, ERole role, LPCWSTR pwstrDefaultDeviceId)
+	{
+		UNREFERENCED_PARAMETER(flow);
+		UNREFERENCED_PARAMETER(role);
+		UNREFERENCED_PARAMETER(pwstrDefaultDeviceId);
+		return S_OK;
+	}
+	STDMETHODIMP OnPropertyValueChanged(LPCWSTR pwstrDeviceId, const PROPERTYKEY key);
+
+	// IAudioProcessingObjectNotifications
+	STDMETHODIMP GetApoNotificationRegistrationInfo(_Out_writes_(*count) APO_NOTIFICATION_DESCRIPTOR** apoNotifications, _Out_ DWORD* count);
+	STDMETHODIMP_(void) HandleNotification(_In_ APO_NOTIFICATION* apoNotification);
+
+	// IAudioSystemEffectsCustomFormats
+	// This interface may be optionally supported by APOs that attach directly to the connector in the DEFAULT mode streaming graph
+	STDMETHODIMP GetFormatCount(UINT* pcFormats);
+	STDMETHODIMP GetFormat(UINT nFormat, IAudioMediaType** ppFormat);
+	STDMETHODIMP GetFormatRepresentation(UINT nFormat, _Outptr_ LPWSTR* ppwstrFormatRep);
+
+	// IAudioProcessingObject
+	STDMETHODIMP IsOutputFormatSupported(IAudioMediaType* pOppositeFormat, IAudioMediaType* pRequestedOutputFormat, IAudioMediaType** ppSupportedOutputFormat);
+
+	STDMETHODIMP CheckCustomFormats(IAudioMediaType* pRequestedFormat);
+
+	STDMETHODIMP DoWorkOnRealTimeThread();
+
+	void HandleWorkItemCompleted(_In_ IRtwqAsyncResult* asyncResult);
 };

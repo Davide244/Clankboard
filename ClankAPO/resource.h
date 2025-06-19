@@ -2,6 +2,9 @@
 // Microsoft Visual C++ generated include file.
 // Used by Resource.rc
 
+#define IDR_CLANKAPO_MFX                  110
+#define IDR_CLANKAPO_SFX                  111 
+
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED

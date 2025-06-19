@@ -51,8 +51,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,0,5
- PRODUCTVERSION 1,0,0,5
+ FILEVERSION 1,0,0,7
+ PRODUCTVERSION 1,0,0,7
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -69,12 +69,12 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "D244"
             VALUE "FileDescription", "COM APO which lets clankboard run effects and sounds directly through the microhone input."
-            VALUE "FileVersion", "1,0,0,5"
+            VALUE "FileVersion", "1,0,0,7"
             VALUE "InternalName", "ClankAPO.dll"
             VALUE "LegalCopyright", "Copyright (C) 2025"
             VALUE "OriginalFilename", "ClankAPO.dll"
             VALUE "ProductName", "Clankboard Audio Processing Object"
-            VALUE "ProductVersion", "1,0,0,5"
+            VALUE "ProductVersion", "1,0,0,7"
         END
     END
     BLOCK "VarFileInfo"

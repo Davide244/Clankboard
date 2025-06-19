@@ -36,7 +36,7 @@
     <Midl Include="ClankAPOInterface.idl">
       <Filter>Source Files</Filter>
     </Midl>
-    <Midl Include="ClankAPO.idl">
+    <Midl Include="ClankAPOdll.idl">
       <Filter>Source Files</Filter>
     </Midl>
   </ItemGroup>
