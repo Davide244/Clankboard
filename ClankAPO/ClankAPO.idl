@@ -1,0 +1,42 @@
+import "oaidl.idl";
+import "ocidl.idl";
+import "ClankAPOInterface.idl";
+
+[
+    uuid(7092F0B2-D28D-4095-95A7-6C37A97432A2),
+    version(1.0)
+]
+library ClankAPODlllib
+{
+    importlib("stdole2.tlb");
+
+    // for Swap APO - MFX
+    [
+        uuid(06687E71-F043-403A-BF49-CB591BA6E103)
+    ]
+        coclass CClankAPO_MFX
+    {
+        interface IAudioProcessingObject;
+        interface IAudioProcessingObjectRT;
+        interface IAudioProcessingObjectConfiguration;
+        interface IMMNotificationClient;
+        interface IAudioSystemEffects;
+        [default] interface IClankAPO_MFX;
+    };
+
+    // for Swap APO - SFX
+    [
+        uuid(B48DEA3F-D962-425a-8D9A-9A5BB37A9904)
+    ]
+        coclass CClankAPO_SFX
+    {
+        interface IAudioProcessingObject;
+        interface IAudioProcessingObjectRT;
+        interface IAudioProcessingObjectConfiguration;
+        interface IMMNotificationClient;
+        interface IAudioSystemEffects;
+        [default] interface IClankAPO_SFX;
+    };
+
+
+}

@@ -9,4 +9,11 @@
  * ==============================================================================
  **/
 
+#include <atlbase.h>
+#include <atlcom.h>
+#include <atlcoll.h>
+#include <atlsync.h>
+#include <mmreg.h>
+
+#include "resource.h"
 #include "ClankAPO.h"

@@ -39,6 +39,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ClankAPO.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="ClankAPOInterface.idl" />
+    <Midl Include="ClankAPO.idl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E1F03691-46E6-4D02-C57D-8B5968C353FE}</ProjectGuid>
@@ -148,6 +156,12 @@
     <Link>
       <AdditionalDependencies>%(AdditionalDependencies);onecoreuap.lib</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>..\tools\VInc.exe "Resource.rc" x.x.x.+</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Update build number.</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -157,6 +171,12 @@
     <Link>
       <AdditionalDependencies>%(AdditionalDependencies);onecoreuap.lib</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>..\tools\VInc.exe "Resource.rc" x.x.x.+</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Update build number.</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <ClCompile>
