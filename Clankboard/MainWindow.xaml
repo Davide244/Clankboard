@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <winuiex:WindowEx
     x:Class="Clankboard.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -7,7 +8,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:winuiex="using:WinUIEx"
-    xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals"
     mc:Ignorable="d"
     Closed="WindowEx_Closed"
     TaskBarIcon="Assets\icon.ico"
@@ -20,86 +20,106 @@
     <!--700-->
 
     <winuiex:WindowEx.SystemBackdrop>
-        <DesktopAcrylicBackdrop/>
+        <DesktopAcrylicBackdrop />
     </winuiex:WindowEx.SystemBackdrop>
 
 
     <Grid x:Name="rootGrid" Loaded="rootGrid_Loaded">
         <Grid.RowDefinitions>
-            <RowDefinition Height="48"/>
+            <RowDefinition Height="48" />
             <!--Title bar-->
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto" />
             <!--Command bar-->
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="*" />
             <!--Content-->
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto" />
             <!--Messages-->
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" x:Name="AppTitleBar">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition x:Name="LeftPaddingColumn" Width="10"/>
-                <ColumnDefinition x:Name="IconColumn" Width="auto"/>
-                <ColumnDefinition x:Name="TitleColumn" Width="auto"/>
-                <ColumnDefinition x:Name="RightDragColumn" Width="*"/>
-                <ColumnDefinition x:Name="NonClientSystemButtons" Width="140"/>
+                <ColumnDefinition x:Name="LeftPaddingColumn" Width="10" />
+                <ColumnDefinition x:Name="IconColumn" Width="auto" />
+                <ColumnDefinition x:Name="TitleColumn" Width="auto" />
+                <ColumnDefinition x:Name="RightDragColumn" Width="*" />
+                <ColumnDefinition x:Name="NonClientSystemButtons" Width="140" />
             </Grid.ColumnDefinitions>
-            <Image Source="/Assets/AppIcons/Square44x44Logo.scale-200.png" HorizontalAlignment="Left" Width="24" Height="24" Margin="0" Grid.Column="1" />
-            <TextBlock x:Name="AppTitleBarText" VerticalAlignment="Center" TextWrapping="NoWrap" Style="{StaticResource CaptionTextBlockStyle}" Margin="8, 0, 0, 0" Text="Clankboard" Grid.Column="2"/>
-            <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right" Grid.Row="0" HorizontalAlignment="Center" x:Name="MainCommandBar" Grid.Column="3">
+            <Image Source="/Assets/AppIcons/Square44x44Logo.scale-200.png" HorizontalAlignment="Left" Width="24"
+                   Height="24" Margin="0" Grid.Column="1" />
+            <TextBlock x:Name="AppTitleBarText" VerticalAlignment="Center" TextWrapping="NoWrap"
+                       Style="{StaticResource CaptionTextBlockStyle}" Margin="8, 0, 0, 0" Text="Clankboard"
+                       Grid.Column="2" />
+            <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right" Grid.Row="0"
+                        HorizontalAlignment="Center" x:Name="MainCommandBar" Grid.Column="3">
                 <CommandBar.PrimaryCommands>
                     <AppBarButton x:Name="TitlebarSettingsButton" Label="Settings" Click="SettingsButton_Click">
                         <AppBarButton.Icon>
-                            <FontIcon Glyph="&#xE713;" x:Name="TitlebarSettingsButtonIcon"/>
+                            <FontIcon Glyph="&#xE713;" x:Name="TitlebarSettingsButtonIcon" />
                         </AppBarButton.Icon>
                     </AppBarButton>
-                    <AppBarSeparator/>
-                    <AppBarButton Icon="Share" Label="Voicebox" IsEnabled="False"/>
-                    <AppBarToggleButton  Label="Mute" x:Name="MuteButton" IsChecked="{x:Bind settingsViewmodel.MicrophoneMuted, Mode=TwoWay}" IsEnabled="{x:Bind settingsViewmodel.AudioMixingEnabled, Mode=OneWay}" Click="MuteButton_Click">
+                    <AppBarSeparator />
+                    <AppBarButton Icon="Share" Label="Voicebox" IsEnabled="False" />
+                    <AppBarToggleButton Label="Mute" x:Name="MuteButton"
+                                        IsChecked="{x:Bind settingsViewmodel.MicrophoneMuted, Mode=TwoWay}"
+                                        IsEnabled="{x:Bind settingsViewmodel.AudioMixingEnabled, Mode=OneWay}"
+                                        Click="MuteButton_Click">
                         <AppBarToggleButton.Icon>
                             <FontIcon Glyph="&#xF781;" />
                         </AppBarToggleButton.Icon>
                     </AppBarToggleButton>
-                    <AppBarSeparator/>
+                    <AppBarSeparator />
                 </CommandBar.PrimaryCommands>
                 <CommandBar.SecondaryCommands>
-                    <AppBarButton x:Name="AboutButton" Icon="Help" Label="About Clankboard" Click="AboutButton_Click"/>
-                    <AppBarButton Icon="Share" Label="Share Soundboard"/>
+                    <AppBarButton x:Name="AboutButton" Icon="Help" Label="About Clankboard" Click="AboutButton_Click" />
+                    <AppBarButton Icon="Share" Label="Share Soundboard" />
                 </CommandBar.SecondaryCommands>
             </CommandBar>
         </Grid>
 
         <Grid Grid.Row="2" Margin="0" x:Name="NavFrameParent">
-            <Frame x:Name="NavigationFrame" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Navigated="NavigationFrame_Navigated">
+            <Frame x:Name="NavigationFrame" Background="Transparent" HorizontalAlignment="Stretch"
+                   VerticalAlignment="Stretch" Navigated="NavigationFrame_Navigated">
                 <TransitionCollection>
-                    <NavigationThemeTransition/>
+                    <NavigationThemeTransition />
                 </TransitionCollection>
             </Frame>
-            <Image Source="ms-appx:///Assets/shadow.png" Visibility="Visible" VerticalAlignment="Top" HorizontalAlignment="Stretch" Stretch="Fill" Height="20" Opacity="0.5"/>
+            <Image Source="ms-appx:///Assets/shadow.png" Visibility="Visible" VerticalAlignment="Top"
+                   HorizontalAlignment="Stretch" Stretch="Fill" Height="20" Opacity="0.5" />
         </Grid>
 
-        <StackPanel Grid.Row="3" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="20, 5, 20, 10" Visibility="Collapsed">
-            <InfoBar Title="Aux Software Upate" Message="Auxiliary software is currently being updated." Severity="Informational" IsOpen="True" Margin="0, 0, 0, 5" IsClosable="False">
+        <StackPanel Grid.Row="3" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                    Padding="20, 5, 20, 10" Visibility="Collapsed">
+            <InfoBar Title="Aux Software Upate" Message="Auxiliary software is currently being updated."
+                     Severity="Informational" IsOpen="True" Margin="0, 0, 0, 5" IsClosable="False">
                 <Grid>
-                    <ProgressBar IsEnabled="True" HorizontalAlignment="Stretch" Margin="-50, 0, 0, -1" IsIndeterminate="True"/>
-                    <Grid Grid.ColumnSpan="3" Background="{ThemeResource ControlStrokeColorSecondary}" Margin="-50, 0, 0, -0" Height="2" VerticalAlignment="Bottom"/>
+                    <ProgressBar IsEnabled="True" HorizontalAlignment="Stretch" Margin="-50, 0, 0, -1"
+                                 IsIndeterminate="True" />
+                    <Grid Grid.ColumnSpan="3" Background="{ThemeResource ControlStrokeColorSecondary}"
+                          Margin="-50, 0, 0, -0" Height="2" VerticalAlignment="Bottom" />
                 </Grid>
             </InfoBar>
-            <InfoBar Title="Ongoing Downloads" Message="Files are currently being downloaded." Severity="Informational" IsOpen="True" Margin="0, 0, 0, 5"/>
-            <InfoBar Title="Debug Mode" Message="You are running an unoptimized debug version of Clankboard." Severity="Informational" IsOpen="True" Margin="0, 0, 0, 5"/>
+            <InfoBar Title="Ongoing Downloads" Message="Files are currently being downloaded." Severity="Informational"
+                     IsOpen="True" Margin="0, 0, 0, 5" />
+            <InfoBar Title="Debug Mode" Message="You are running an unoptimized debug version of Clankboard."
+                     Severity="Informational" IsOpen="True" Margin="0, 0, 0, 5" />
         </StackPanel>
         <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Grid.Row="3">
             <ListView SelectionMode="None" x:Name="InfobarList" Margin="-5, 0, 0, 10">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="local:MainWindowInfobar">
                         <Grid>
-                            <InfoBar Title="{x:Bind Title, Mode=OneTime}" Message="{x:Bind Text, Mode=OneTime}" IsClosable="{x:Bind IsCloseable, Mode=OneWay}" Severity="{x:Bind Severity, Mode=OneTime}" IsOpen="True" Margin="0, 0, 0, 4" CloseButtonClick="InfoBar_CloseButtonClick">
+                            <InfoBar Title="{x:Bind Title}" Message="{x:Bind Text}"
+                                     IsClosable="{x:Bind IsCloseable, Mode=OneWay}" Severity="{x:Bind Severity}"
+                                     IsOpen="True" Margin="0, 0, 0, 4" CloseButtonClick="InfoBar_CloseButtonClick">
                                 <InfoBar.ActionButton>
-                                    <HyperlinkButton Content="{x:Bind ActionButtonText, Mode=OneTime}" Visibility="{x:Bind ActionButtonVisibility, Mode=OneTime}"/>
+                                    <HyperlinkButton Content="{x:Bind ActionButtonText}"
+                                                     Visibility="{x:Bind ActionButtonVisibility}" />
                                 </InfoBar.ActionButton>
                                 <Grid Visibility="{x:Bind BottomScrollBarVisibity, Mode=OneWay}">
-                                    <ProgressBar IsEnabled="True" HorizontalAlignment="Stretch" Margin="-50, 0, -50, -1" IsIndeterminate="True"/>
-                                    <Grid Grid.ColumnSpan="3" Background="{ThemeResource ControlStrokeColorSecondary}" Margin="-50, 0, -50, -0" Height="2" VerticalAlignment="Bottom"/>
+                                    <ProgressBar IsEnabled="True" HorizontalAlignment="Stretch"
+                                                 Margin="-50, 0, -50, -1" IsIndeterminate="True" />
+                                    <Grid Grid.ColumnSpan="3" Background="{ThemeResource ControlStrokeColorSecondary}"
+                                          Margin="-50, 0, -50, -0" Height="2" VerticalAlignment="Bottom" />
                                 </Grid>
                             </InfoBar>
                         </Grid>
