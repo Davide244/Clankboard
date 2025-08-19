@@ -18,6 +18,9 @@
     <ClCompile Include="ClankAPO.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ClankAPOMFX.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ClankAPO.h">
@@ -39,5 +42,9 @@
     <Midl Include="ClankAPOdll.idl">
       <Filter>Source Files</Filter>
     </Midl>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="vcpkg-configuration.json" />
+    <None Include="vcpkg.json" />
   </ItemGroup>
 </Project>

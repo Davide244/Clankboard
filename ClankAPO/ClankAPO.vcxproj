@@ -36,6 +36,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ClankAPO.cpp" />
+    <ClCompile Include="ClankAPOMFX.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ClankAPO.h" />
@@ -47,6 +48,10 @@
   <ItemGroup>
     <Midl Include="ClankAPOInterface.idl" />
     <Midl Include="ClankAPOdll.idl" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="vcpkg-configuration.json" />
+    <None Include="vcpkg.json" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E1F03691-46E6-4D02-C57D-8B5968C353FE}</ProjectGuid>
