@@ -24,8 +24,29 @@ jobs:
       - name: Build solution
         run: dotnet build --no-restore --configuration Release --output ./build_output
 
-      - name: Run tests
-        run: dotnet test --no-build --configuration Release --verbosity normal
+      # --- Coverage enforcement ---
+      # Threshold options:
+      #  -p:Threshold=80           -> percent required
+      #  -p:ThresholdType=line     -> line | branch | method
+      #  -p:ThresholdStat=total    -> total | average
+      - name: Test with coverage & threshold
+        run: >
+          dotnet test
+          --no-build
+          --configuration Release
+          /p:CollectCoverage=true
+          /p:CoverletOutputFormat=cobertura
+          /p:CoverletOutput=./TestResults/Coverage/coverage.xml
+          /p:Threshold=80
+          /p:ThresholdType=line
+          /p:ThresholdStat=total
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-cobertura
+          path: '**/TestResults/Coverage/coverage.xml'
+          if-no-files-found: error
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
