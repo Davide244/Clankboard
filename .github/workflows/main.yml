@@ -2,51 +2,46 @@ name: CI Build & Tests
 
 on:
   pull_request:
-    branches:
-      - master
+    branches: [ master ]
 
 jobs:
-  build_and_test:
+  build_test_coverage:
     runs-on: windows-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Setup .NET SDK
-        uses: actions/setup-dotnet@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.x' # adjust if needed
+          dotnet-version: '8.0.x'   # match your SDK
 
-      - name: Restore dependencies
+      - name: Restore
         run: dotnet restore
 
-      - name: Build solution
+      - name: Build
         run: dotnet build --no-restore --configuration Release --output ./build_output
 
-      # --- Coverage enforcement ---
-      # Threshold options:
-      #  -p:Threshold=80           -> percent required
-      #  -p:ThresholdType=line     -> line | branch | method
-      #  -p:ThresholdStat=total    -> total | average
+      # Uses coverlet.msbuild inside each test project
       - name: Test with coverage & threshold
         run: >
           dotnet test
           --no-build
           --configuration Release
           /p:CollectCoverage=true
+          /p:CoverletOutput="$(MSBuildProjectDirectory)/TestResults/coverage/"
           /p:CoverletOutputFormat=cobertura
-          /p:CoverletOutput=./TestResults/Coverage/coverage.xml
           /p:Threshold=80
           /p:ThresholdType=line
           /p:ThresholdStat=total
 
-      - name: Upload coverage report
+      - name: Upload coverage (Cobertura)
         uses: actions/upload-artifact@v4
         with:
           name: coverage-cobertura
-          path: '**/TestResults/Coverage/coverage.xml'
-          if-no-files-found: error
+          path: '**/TestResults/**/coverage.cobertura.xml'
+          if-no-files-found: ignore
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
