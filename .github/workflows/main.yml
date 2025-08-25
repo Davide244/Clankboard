@@ -30,7 +30,7 @@ jobs:
           --no-build
           --configuration Release
           /p:CollectCoverage=true
-          /p:CoverletOutput="$(MSBuildProjectDirectory)/TestResults/coverage/"
+          /p:CoverletOutput=./TestResults/Coverage/coverage.xml
           /p:CoverletOutputFormat=cobertura
           /p:Threshold=80
           /p:ThresholdType=line
@@ -40,7 +40,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: coverage-cobertura
-          path: '**/TestResults/**/coverage.cobertura.xml'
+          path: './TestResults/Coverage/coverage.xml'
           if-no-files-found: ignore
 
       - name: Upload build artifact
