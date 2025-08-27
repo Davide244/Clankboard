@@ -35,4 +35,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: bins-Release
-          path: '**/bin/Release/**'
+          path: '**/bin/Release/**/*'
