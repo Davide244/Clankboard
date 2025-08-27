@@ -1,54 +1,44 @@
 name: CI Build & Tests
-
 on:
   push:
-    branches: [ master ]          # runs after merges/direct pushes
+    branches: [ master ]
   pull_request:
-    branches: [ master ]          # runs on PRs targeting master
-
-concurrency:
-  group: ci-${{ github.event.pull_request.number || github.sha }}
-  cancel-in-progress: true
+    branches: [ master ]
 
 jobs:
   build:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '8.0.x'
-          cache: true
-          cache-dependency-path: '**/*.csproj'
+        with: { dotnet-version: '8.0.x' }
 
-      - name: Restore
-        run: dotnet restore
-
+      - run: dotnet restore
       - name: Build (Release)
         run: dotnet build --no-restore --configuration Release
 
-      - name: Upload compiled bins (Release)
+      - name: Upload compiled bins
         uses: actions/upload-artifact@v4
         with:
           name: bins-Release
-          path: '**/bin/Release/**'
+          path: '**/bin/Release/**/*'
+          if-no-files-found: error
 
-  run_unit_test:
+  test:
     needs: build
+    # run on PRs and pushes to master
+    if: ${{ github.event_name == 'pull_request' || github.ref == 'refs/heads/master' }}
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '8.0.x'
+        with: { dotnet-version: '8.0.x' }
 
       - name: Download build output
         uses: actions/download-artifact@v4
         with:
           name: bins-Release
-          path: '**/bin/Release/**'
+          path: .
 
       - name: Test with coverage & threshold
         run: >
