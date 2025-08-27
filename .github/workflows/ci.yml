@@ -34,7 +34,7 @@ jobs:
           name: bins-Release
           path: '**/bin/Release/**'
 
-  test:
+  run_unit_test:
     needs: build
     runs-on: windows-latest
     steps:
@@ -48,7 +48,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: bins-Release
-          path: .
+          path: '**/bin/Release/**'
 
       - name: Test with coverage & threshold
         run: >
