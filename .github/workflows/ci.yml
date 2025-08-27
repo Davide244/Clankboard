@@ -1,0 +1,60 @@
+name: CI Build & Tests
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with: { dotnet-version: '8.0.x' }
+
+      - run: dotnet restore
+      - name: Build (Release)
+        run: dotnet build --no-restore --configuration Release
+
+      - name: Upload compiled bins
+        uses: actions/upload-artifact@v4
+        with:
+          name: bins-Release
+          path: '**/bin/ARM64/Release/**/*'
+          if-no-files-found: error
+
+  test:
+    needs: build
+    # run on PRs and pushes to master
+    if: ${{ github.event_name == 'pull_request' || github.ref == 'refs/heads/master' }}
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with: { dotnet-version: '8.0.x' }
+
+      - name: Download build output
+        uses: actions/download-artifact@v4
+        with:
+          name: bins-Release
+          path: .
+
+      - name: Test with coverage & threshold
+        run: >
+          dotnet test
+          --no-build
+          --configuration Release
+          /p:CollectCoverage=true
+          /p:CoverletOutput=./TestResults/Coverage/coverage.xml
+          /p:CoverletOutputFormat=cobertura
+          /p:Threshold=80
+          /p:ThresholdType=line
+          /p:ThresholdStat=total
+
+      - name: Upload coverage (Cobertura)
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-cobertura
+          path: '**/TestResults/Coverage/coverage.xml'
+          if-no-files-found: ignore
