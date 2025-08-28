@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Clankboard", "Clankboard\Clankboard.csproj", "{6481BE1B-F433-4989-AD98-08D41F286093}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Clankboard", "src\Clankboard\Clankboard.csproj", "{6481BE1B-F433-4989-AD98-08D41F286093}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clankboard.Test", "Clankboard.Test\Clankboard.Test.csproj", "{DB48ED56-6B56-4F1B-85CB-20367C60E73E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clankboard.Test", "src\test\Clankboard.Test\Clankboard.Test.csproj", "{DB48ED56-6B56-4F1B-85CB-20367C60E73E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
