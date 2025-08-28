@@ -36,7 +36,7 @@
             <!--Messages-->
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" x:Name="AppTitleBar">
+        <!--Grid Grid.Row="0" x:Name="AppTitleBar">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition x:Name="LeftPaddingColumn" Width="10" />
                 <ColumnDefinition x:Name="IconColumn" Width="auto" />
@@ -74,7 +74,40 @@
                     <AppBarButton Icon="Share" Label="Share Soundboard" />
                 </CommandBar.SecondaryCommands>
             </CommandBar>
-        </Grid>
+        </Grid-->
+
+        <TitleBar Grid.Row="0"
+                  Title="Clankboard"
+                  Subtitle="INDEV"
+                  IsBackButtonVisible="True"
+                  IsBackButtonEnabled="{x:Bind NavigationFrame.CanGoBack, Mode=OneWay}"
+                  BackRequested="TitleBar_OnBackRequested">
+            <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right" Grid.Row="0"
+                        HorizontalAlignment="Center" x:Name="MainCommandBar" Grid.Column="3">
+                <CommandBar.PrimaryCommands>
+                    <AppBarButton x:Name="TitlebarSettingsButton" Label="Settings" LabelPosition="Collapsed"  Click="SettingsButton_Click">
+                        <AppBarButton.Icon>
+                            <FontIcon Glyph="&#xE713;" x:Name="TitlebarSettingsButtonIcon" />
+                        </AppBarButton.Icon>
+                    </AppBarButton>
+                    <AppBarSeparator />
+                    <AppBarButton Icon="Share" Label="Voicebox" IsEnabled="False" />
+                    <AppBarToggleButton Label="Mute" x:Name="MuteButton"
+                                        IsChecked="{x:Bind settingsViewmodel.MicrophoneMuted, Mode=TwoWay}"
+                                        IsEnabled="{x:Bind settingsViewmodel.AudioMixingEnabled, Mode=OneWay}"
+                                        Click="MuteButton_Click">
+                        <AppBarToggleButton.Icon>
+                            <FontIcon Glyph="&#xF781;" />
+                        </AppBarToggleButton.Icon>
+                    </AppBarToggleButton>
+                    <AppBarSeparator />
+                </CommandBar.PrimaryCommands>
+                <CommandBar.SecondaryCommands>
+                    <AppBarButton x:Name="AboutButton" Icon="Help" Label="About Clankboard" Click="AboutButton_Click" />
+                    <AppBarButton Icon="Share" Label="Share Soundboard" />
+                </CommandBar.SecondaryCommands>
+            </CommandBar>
+        </TitleBar>
 
         <Grid Grid.Row="2" Margin="0" x:Name="NavFrameParent">
             <Frame x:Name="NavigationFrame" Background="Transparent" HorizontalAlignment="Stretch"

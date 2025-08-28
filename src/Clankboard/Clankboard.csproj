@@ -12,6 +12,8 @@
     <UseWinUI>true</UseWinUI>
     <EnableMsixTooling>true</EnableMsixTooling>
     <DefaultLanguage>en</DefaultLanguage>
+	  <XamlDebuggingInformation>True</XamlDebuggingInformation>
+	  <DisableXbfLineInfo>False</DisableXbfLineInfo>
     <SupportedOSPlatformVersion>10.0.20348.0</SupportedOSPlatformVersion>
     <Configurations>Indev;Alpha;Beta;Release-Candidate;Release</Configurations>
     <WindowsPackageType>MSIX</WindowsPackageType>

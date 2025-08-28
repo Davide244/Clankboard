@@ -14,6 +14,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Navigation;
 using WinUIEx;
+using TitleBar = Microsoft.UI.Xaml.Controls.TitleBar;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -116,14 +117,14 @@ public sealed partial class MainWindow : WindowEx
         if (NavigationFrame.Content is SettingsPage)
         {
             NavigationFrame.GoBack();
-            TitlebarSettingsButton.Label = "Settings";
-            TitlebarSettingsButtonIcon.Glyph = settingIcon;
+            //TitlebarSettingsButton.Label = "Settings";
+            //TitlebarSettingsButtonIcon.Glyph = settingIcon;
         }
         else
         {
             NavigationFrame.Navigate(typeof(SettingsPage));
-            TitlebarSettingsButton.Label = "Back    ";
-            TitlebarSettingsButtonIcon.Glyph = backIcon;
+            //TitlebarSettingsButton.Label = "Back    ";
+            //TitlebarSettingsButtonIcon.Glyph = backIcon;
         }
     }
 
@@ -160,6 +161,11 @@ public sealed partial class MainWindow : WindowEx
     {
         AboutDialog aboutDialog = new();
         g_appMessagingEvents.ShowMessageBox("", "", "Okay", null, null, ContentDialogButton.Close, aboutDialog);
+    }
+
+    private void TitleBar_OnBackRequested(TitleBar sender, object args)
+    {
+        NavigationFrame.GoBack();
     }
 }
 
