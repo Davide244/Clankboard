@@ -12,7 +12,6 @@
     <UseWinUI>true</UseWinUI>
     <EnableMsixTooling>true</EnableMsixTooling>
     <DefaultLanguage>en</DefaultLanguage>
-    <WindowsSdkPackageVersion>10.0.22621.38</WindowsSdkPackageVersion>
     <SupportedOSPlatformVersion>10.0.20348.0</SupportedOSPlatformVersion>
     <Configurations>Indev;Alpha;Beta;Release-Candidate;Release</Configurations>
     <WindowsPackageType>MSIX</WindowsPackageType>
@@ -127,16 +126,16 @@
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-    <PackageReference Include="CommunityToolkit.WinUI.Controls.Primitives" Version="8.1.240916" />
-    <PackageReference Include="CommunityToolkit.WinUI.Controls.Segmented" Version="8.1.240916" />
-    <PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" Version="8.1.240916" />
-    <PackageReference Include="CommunityToolkit.WinUI.Extensions" Version="8.1.240916" />
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.Primitives" Version="8.2.250402" />
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.Segmented" Version="8.2.250402" />
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" Version="8.2.250402" />
+    <PackageReference Include="CommunityToolkit.WinUI.Extensions" Version="8.2.250402" />
     <PackageReference Include="kitUIN.FluentIcon.WinUI.Filled" Version="1.2.250" />
     <PackageReference Include="kitUIN.FluentIcon.WinUI.Regular" Version="1.2.250" />
-    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.1742" />
-    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.6.250108002" />
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.4948" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.7.250606001" />
     <PackageReference Include="NAudio" Version="2.2.1" />
-    <PackageReference Include="WinUIEx" Version="2.5.1" />
+    <PackageReference Include="WinUIEx" Version="2.7.0" />
     <PackageReference Include="YoutubeDLSharp" Version="1.1.2" />
     <Manifest Include="$(ApplicationManifest)" />
   </ItemGroup>
@@ -198,19 +197,7 @@
     <HasPackageAndPublishMenu>true</HasPackageAndPublishMenu>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)'=='Indev'">
-	  <DefineConstants>DISABLE_XAML_GENERATED_MAIN</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)'=='Alpha'">
-	  <DefineConstants>DISABLE_XAML_GENERATED_MAIN</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)'=='Beta'">
-	  <DefineConstants>DISABLE_XAML_GENERATED_MAIN</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)'=='Release Candidate'">
-	  <DefineConstants>DISABLE_XAML_GENERATED_MAIN</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+  <PropertyGroup>
 	  <DefineConstants>DISABLE_XAML_GENERATED_MAIN</DefineConstants>
   </PropertyGroup>
 </Project>

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.IO;
 using Clankboard.AudioSystem;
-using Clankboard.NativeInterop;
 using Clankboard.Utils;
 using Microsoft.UI.Xaml;
+using WinUIEx;
+using SplashScreen = Clankboard.NativeInterop.SplashScreen;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -32,17 +33,18 @@ public partial class App : Application
     public static ClankAudioDeviceManager appAudioDeviceManager = new();
 
     public static Window m_window;
-    public SplashScreen m_splashScreen;
+    private SimpleSplashScreen m_splashScreen;
 
     /// <summary>
     ///     Initializes the singleton application object.  This is the first line of authored code
     ///     executed, and as such is the logical equivalent of main() or WinMain().
     /// </summary>
-    public App()
+    public App(SimpleSplashScreen splashScreen)
     {
+        m_splashScreen = splashScreen;
+
         InitializeComponent();
         setupAppData();
-        LaunchTask();
     }
 
     private void setupAppData()
@@ -63,14 +65,8 @@ public partial class App : Application
     {
         m_window = new MainWindow();
         m_window.Activate();
-    }
 
-    private async void LaunchTask()
-    {
-        m_splashScreen = new SplashScreen();
-        m_splashScreen.Initialize();
-
-        var hBitmap = await m_splashScreen.GetBitmap(@"Assets\AppIcons\SplashScreen.scale-400.png");
-        m_splashScreen.DisplaySplash(IntPtr.Zero, hBitmap, null);
+        m_splashScreen?.Hide();
+        m_splashScreen = null;
     }
 }
