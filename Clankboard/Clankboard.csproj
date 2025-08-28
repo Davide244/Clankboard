@@ -14,22 +14,96 @@
     <DefaultLanguage>en</DefaultLanguage>
     <WindowsSdkPackageVersion>10.0.22621.38</WindowsSdkPackageVersion>
     <SupportedOSPlatformVersion>10.0.20348.0</SupportedOSPlatformVersion>
-    <ApplicationIcon>Assets\icon_indev.ico</ApplicationIcon>
-    <PackageCertificateThumbprint>B7B00588EC1F9298A052ADEFFF62E8EF6942D0F6</PackageCertificateThumbprint>
-    <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
+    <Configurations>Indev;Alpha;Beta;Release-Candidate;Release</Configurations>
+    <WindowsPackageType>MSIX</WindowsPackageType>
   </PropertyGroup>
+
+	<ItemGroup Condition="'$(Configuration)'!='Release'">
+		<Compile Remove="Assets\ManifestGraphics\RELEASE\**" />
+		<Content Remove="Assets\ManifestGraphics\RELEASE\**" />
+		<EmbeddedResource Remove="Assets\ManifestGraphics\RELEASE\**" />
+		<None Remove="Assets\ManifestGraphics\RELEASE\**" />
+		<Page Remove="Assets\ManifestGraphics\RELEASE\**" />
+		<PRIResource Remove="Assets\ManifestGraphics\RELEASE\**" />
+	</ItemGroup>
+	<ItemGroup Condition="'$(Configuration)'!='Release-Candidate'">
+		<Compile Remove="Assets\ManifestGraphics\RELEASE-CANDIDATE\**" />
+		<Content Remove="Assets\ManifestGraphics\RELEASE-CANDIDATE\**" />
+		<EmbeddedResource Remove="Assets\ManifestGraphics\RELEASE-CANDIDATE\**" />
+		<None Remove="Assets\ManifestGraphics\RELEASE-CANDIDATE\**" />
+		<Page Remove="Assets\ManifestGraphics\RELEASE-CANDIDATE\**" />
+		<PRIResource Remove="Assets\ManifestGraphics\RELEASE-CANDIDATE\**" />
+	</ItemGroup>
+	<ItemGroup Condition="'$(Configuration)'!='Beta'">
+		<Compile Remove="Assets\ManifestGraphics\BETA\**" />
+		<Content Remove="Assets\ManifestGraphics\BETA\**" />
+		<EmbeddedResource Remove="Assets\ManifestGraphics\BETA\**" />
+		<None Remove="Assets\ManifestGraphics\BETA\**" />
+		<Page Remove="Assets\ManifestGraphics\BETA\**" />
+		<PRIResource Remove="Assets\ManifestGraphics\BETA\**" />
+	</ItemGroup>
+	<ItemGroup Condition="'$(Configuration)'!='Alpha'">
+		<Compile Remove="Assets\ManifestGraphics\ALPHA\**" />
+		<Content Remove="Assets\ManifestGraphics\ALPHA\**" />
+		<EmbeddedResource Remove="Assets\ManifestGraphics\ALPHA\**" />
+		<None Remove="Assets\ManifestGraphics\ALPHA\**" />
+		<Page Remove="Assets\ManifestGraphics\ALPHA\**" />
+		<PRIResource Remove="Assets\ManifestGraphics\ALPHA\**" />
+	</ItemGroup>
+	<ItemGroup Condition="'$(Configuration)'!='Indev'">
+		<Compile Remove="Assets\ManifestGraphics\INDEV\**" />
+		<Content Remove="Assets\ManifestGraphics\INDEV\**" />
+		<EmbeddedResource Remove="Assets\ManifestGraphics\INDEV\**" />
+		<None Remove="Assets\ManifestGraphics\INDEV\**" />
+		<Page Remove="Assets\ManifestGraphics\INDEV\**" />
+		<PRIResource Remove="Assets\ManifestGraphics\INDEV\**" />
+	</ItemGroup>
+
   <ItemGroup>
-    <Content Remove="Assets\AppIcons\logo96.scale-100.png" />
-    <Content Remove="Assets\AppIcons\logo96.scale-125.png" />
-    <Content Remove="Assets\AppIcons\logo96.scale-150.png" />
-    <Content Remove="Assets\AppIcons\logo96.scale-200.png" />
-    <Content Remove="Assets\AppIcons\logo96.scale-400.png" />
-    <Content Remove="Assets\AppIcons\SplashScreen.scale-400.png" />
-    <Content Remove="Assets\AppIcons\StoreLogo.scale-100.png" />
-    <Content Remove="Assets\AppIcons\StoreLogo.scale-125.png" />
-    <Content Remove="Assets\AppIcons\StoreLogo.scale-150.png" />
-    <Content Remove="Assets\AppIcons\StoreLogo.scale-200.png" />
-    <Content Remove="Assets\AppIcons\StoreLogo.scale-400.png" />
+    <Content Remove="Assets\ManifestGraphics\ALPHA\logo96.scale-100.png" />
+    <Content Remove="Assets\ManifestGraphics\ALPHA\logo96.scale-125.png" />
+    <Content Remove="Assets\ManifestGraphics\ALPHA\logo96.scale-150.png" />
+    <Content Remove="Assets\ManifestGraphics\ALPHA\logo96.scale-200.png" />
+    <Content Remove="Assets\ManifestGraphics\ALPHA\logo96.scale-400.png" />
+    <Content Remove="Assets\ManifestGraphics\ALPHA\SplashScreen.scale-400.png" />
+    <Content Remove="Assets\ManifestGraphics\ALPHA\StoreLogo.scale-100.png" />
+    <Content Remove="Assets\ManifestGraphics\ALPHA\StoreLogo.scale-125.png" />
+    <Content Remove="Assets\ManifestGraphics\ALPHA\StoreLogo.scale-150.png" />
+    <Content Remove="Assets\ManifestGraphics\ALPHA\StoreLogo.scale-200.png" />
+    <Content Remove="Assets\ManifestGraphics\ALPHA\StoreLogo.scale-400.png" />
+    <Content Remove="Assets\ManifestGraphics\BETA\logo96.scale-100.png" />
+    <Content Remove="Assets\ManifestGraphics\BETA\logo96.scale-125.png" />
+    <Content Remove="Assets\ManifestGraphics\BETA\logo96.scale-150.png" />
+    <Content Remove="Assets\ManifestGraphics\BETA\logo96.scale-200.png" />
+    <Content Remove="Assets\ManifestGraphics\BETA\logo96.scale-400.png" />
+    <Content Remove="Assets\ManifestGraphics\BETA\SplashScreen.scale-400.png" />
+    <Content Remove="Assets\ManifestGraphics\BETA\StoreLogo.scale-100.png" />
+    <Content Remove="Assets\ManifestGraphics\BETA\StoreLogo.scale-125.png" />
+    <Content Remove="Assets\ManifestGraphics\BETA\StoreLogo.scale-150.png" />
+    <Content Remove="Assets\ManifestGraphics\BETA\StoreLogo.scale-200.png" />
+    <Content Remove="Assets\ManifestGraphics\BETA\StoreLogo.scale-400.png" />
+    <Content Remove="Assets\ManifestGraphics\INDEV\logo96.scale-100.png" />
+    <Content Remove="Assets\ManifestGraphics\INDEV\logo96.scale-125.png" />
+    <Content Remove="Assets\ManifestGraphics\INDEV\logo96.scale-150.png" />
+    <Content Remove="Assets\ManifestGraphics\INDEV\logo96.scale-200.png" />
+    <Content Remove="Assets\ManifestGraphics\INDEV\logo96.scale-400.png" />
+    <Content Remove="Assets\ManifestGraphics\INDEV\SplashScreen.scale-400.png" />
+    <Content Remove="Assets\ManifestGraphics\INDEV\StoreLogo.scale-100.png" />
+    <Content Remove="Assets\ManifestGraphics\INDEV\StoreLogo.scale-125.png" />
+    <Content Remove="Assets\ManifestGraphics\INDEV\StoreLogo.scale-150.png" />
+    <Content Remove="Assets\ManifestGraphics\INDEV\StoreLogo.scale-200.png" />
+    <Content Remove="Assets\ManifestGraphics\INDEV\StoreLogo.scale-400.png" />
+    <Content Remove="Assets\ManifestGraphics\RELEASE\logo96.scale-100.png" />
+    <Content Remove="Assets\ManifestGraphics\RELEASE\logo96.scale-125.png" />
+    <Content Remove="Assets\ManifestGraphics\RELEASE\logo96.scale-150.png" />
+    <Content Remove="Assets\ManifestGraphics\RELEASE\logo96.scale-200.png" />
+    <Content Remove="Assets\ManifestGraphics\RELEASE\logo96.scale-400.png" />
+    <Content Remove="Assets\ManifestGraphics\RELEASE\SplashScreen.scale-400.png" />
+    <Content Remove="Assets\ManifestGraphics\RELEASE\StoreLogo.scale-100.png" />
+    <Content Remove="Assets\ManifestGraphics\RELEASE\StoreLogo.scale-125.png" />
+    <Content Remove="Assets\ManifestGraphics\RELEASE\StoreLogo.scale-150.png" />
+    <Content Remove="Assets\ManifestGraphics\RELEASE\StoreLogo.scale-200.png" />
+    <Content Remove="Assets\ManifestGraphics\RELEASE\StoreLogo.scale-400.png" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Assets\icon.ico" />
@@ -40,10 +114,15 @@
     <None Remove="Dialogs\AuxSoftwareUpdatingDialog.xaml" />
     <None Remove="Dialogs\DownloadFileDialog.xaml" />
     <None Remove="Dialogs\EditSoundboardItemDialog.xaml" />
-    <None Remove="Pages\SettingsPage.xaml" />
-    <None Remove="Pages\SettingsPages\GeneralSettingsPage.xaml" />
-    <None Remove="Pages\SettingsPages\SoundboardSettingsPage.xaml" />
-    <None Remove="Pages\SoundboardPage.xaml" />
+    <None Remove="Views\Pages\Settings\General\GeneralSettingsPage.xaml" />
+    <None Remove="Views\Pages\Settings\General\SoundboardSettingsPage.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Condition="'$(Configuration)'=='Release'" Include="Clankboard.appxmanifest" />
+    <AppxManifest Condition="'$(Configuration)'=='Release-Candidate'" Include="Clankboard.RELEASECANDIDATE.appxmanifest" />
+    <AppxManifest Condition="'$(Configuration)'=='Beta'" Include="Clankboard.BETA.appxmanifest" />
+    <AppxManifest Condition="'$(Configuration)'=='Alpha'" Include="Clankboard.ALPHA.appxmanifest" />
+    <AppxManifest Condition="'$(Configuration)'=='Indev'" Include="Clankboard.INDEV.appxmanifest" />
   </ItemGroup>
 
   <ItemGroup>
@@ -81,17 +160,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Pages\SettingsPages\SoundboardSettingsPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
     <Page Update="Dialogs\AuxSoftwareUpdatingDialog.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Update="Pages\SettingsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
@@ -101,24 +170,23 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Pages\SoundboardPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
     <Page Update="Dialogs\DownloadFileDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Pages\SettingsPages\GeneralSettingsPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
+    <Folder Include="Assets\Icon\" />
     <Folder Include="Views\Dialogs\" />
     <Folder Include="Views\Pages\Soundboard\" />
     <Folder Include="Views\Pages\Settings\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Clankboard.ALPHA.appxmanifest">
+      <SubType>Designer</SubType>
+    </None>
+    <None Update="Clankboard.INDEV.appxmanifest">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
 
   <!--
@@ -130,22 +198,19 @@
     <HasPackageAndPublishMenu>true</HasPackageAndPublishMenu>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <DefineConstants>DISABLE_XAML_GENERATED_MAIN</DefineConstants>
+  <PropertyGroup Condition="'$(Configuration)'=='Indev'">
+	  <DefineConstants>DISABLE_XAML_GENERATED_MAIN</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
-    <DefineConstants>DISABLE_XAML_GENERATED_MAIN</DefineConstants>
+  <PropertyGroup Condition="'$(Configuration)'=='Alpha'">
+	  <DefineConstants>DISABLE_XAML_GENERATED_MAIN</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
-    <DefineConstants>DISABLE_XAML_GENERATED_MAIN</DefineConstants>
+  <PropertyGroup Condition="'$(Configuration)'=='Beta'">
+	  <DefineConstants>DISABLE_XAML_GENERATED_MAIN</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <DefineConstants>DISABLE_XAML_GENERATED_MAIN</DefineConstants>
+  <PropertyGroup Condition="'$(Configuration)'=='Release Candidate'">
+	  <DefineConstants>DISABLE_XAML_GENERATED_MAIN</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|arm64'">
-    <DefineConstants>DISABLE_XAML_GENERATED_MAIN</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|arm64'">
-    <DefineConstants>DISABLE_XAML_GENERATED_MAIN</DefineConstants>
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+	  <DefineConstants>DISABLE_XAML_GENERATED_MAIN</DefineConstants>
   </PropertyGroup>
 </Project>
