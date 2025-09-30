@@ -40,7 +40,7 @@ public sealed partial class MainWindow : WindowEx
     public MainWindow()
     {
         InitializeComponent();
-        NavigationFrame.Navigate(typeof(SoundboardPage));
+        NavigationFrame.Navigate(typeof(SoundboardPageView));
 
         //this.PersistenceId = "ClankMainWindow";
 
