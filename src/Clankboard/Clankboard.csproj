@@ -177,8 +177,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\Icon\" />
+    <Folder Include="Systems\File\" />
+    <Folder Include="Systems\AppData\" />
+    <Folder Include="Systems\TTS\" />
     <Folder Include="Views\Dialogs\" />
-    <Folder Include="Views\Pages\Soundboard\" />
     <Folder Include="Views\Pages\Settings\" />
   </ItemGroup>
   <ItemGroup>
