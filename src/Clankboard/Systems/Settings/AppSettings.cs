@@ -14,24 +14,27 @@ namespace Clankboard.Systems.Settings
     /// </summary>
     public class AppSettings
     {
-        #region Audio Related Settings
-        // Audio related settings
+    #region General Audio Settings
         public bool AudioMixingEnabled { get; set; } = true;
         public bool InputLoopbackEnabled { get; set; } = false;
         public bool MicrophoneMuted { get; set; } = false;
 
+        // Volume levels (0-100)
         public int InputVolume { get; set; } = 100;
         public int LocalOutputVolume { get; set; } = 100;
         public int OutputVolume { get; set; } = 100;
         #endregion
-        
-    #region UI settings
+
+        // Selected device indices (-1 indicates no selection)
         public int SelectedInputDeviceIndex { get; set; } = -1;
         public int SelectedLocalOutputDeviceIndex { get; set; } = -1;
 
         public int SelectedOutputDeviceIndex { get; set; } = -1;
+    #endregion
 
+    #region UI Settings
         // Confirmation Dialog Skips
+        public bool SkipYTDLPDownloadConfirmationDialog { get; set; } = true;
         public bool SkipFFMPEGDownloadConfirmationDialog { get; set; } = false;
         public bool SkipFFPROBEDownloadConfirmationDialog { get; set; } = false;
         public bool SkipYTDLPDownloadConfirmationDialog { get; set; } = true;
