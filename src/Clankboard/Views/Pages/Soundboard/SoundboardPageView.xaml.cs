@@ -12,40 +12,39 @@ using WinRT.Interop;
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace Clankboard.Pages;
+namespace Clankboard.Views.Pages.Soundboard;
 
 /// <summary>
 ///     An empty page that can be used on its own or navigated to within a Frame.
 /// </summary>
 public sealed partial class SoundboardPageView : Page
 {
-    private readonly Soundboard soundBoard = new();
+    //private readonly Soundboard soundBoard = new();
+    private SoundboardPageViewModel viewModel = new();
 
     public SoundboardPageView()
     {
         InitializeComponent();
 
-        // Set data source for the soundboard list view
-        SoundboardListView.ItemsSource = soundBoard.soundboardViewmodel.SoundboardItems;
         soundBoard.soundboardViewmodel.SoundboardItems.CollectionChanged += SoundboardItems_CollectionChanged;
 
         // Add random soundboard items for testing
-        soundBoard.Add(new SoundboardItem("Test Item", @"C:\Windows\Windows.mp3", SoundboardItemType.LocalFile, ""));
-        soundBoard.Add(new SoundboardItem("Test Item 2", @"C:\Windows\Windows.mp3", SoundboardItemType.LocalFile, "",
-            true, false, true));
-        soundBoard.Add(new SoundboardItem("Test Item with really really looooooooong name oooo soo long",
-            @"C:\Users\Really\Long\File\Path\That\Exceeds\The\Max\Width\Of\Display.mp3", SoundboardItemType.LocalFile,
-            ""));
-        soundBoard.Add(new SoundboardItem("Test Item Downloaded Item", @"https://www.youtube.com/watch?v=WyQ7z8BMwwk",
-            SoundboardItemType.DownloadedFile, ""));
-        soundBoard.Add(new SoundboardItem("Test Item Downloading Item", @"https://www.youtube.com/watch?v=WyQ7z8BMwwk",
-            SoundboardItemType.DownloadedFile, "", false, true));
-        soundBoard.Add(new SoundboardItem("Test Item Downloaded Item w/ Errors",
-            @"https://www.youtube.com/watch?v=WyQ7z8BMwwk", SoundboardItemType.DownloadedFile, "", true, false, true));
-        soundBoard.Add(new SoundboardItem("Test TTS Item", "Hi, This is some test TTS Text!",
-            SoundboardItemType.TTSFile, ""));
-        soundBoard.Add(new SoundboardItem("Test TTS Item w/ Errors", "Hi, This is some test TTS Text!",
-            SoundboardItemType.TTSFile, "", true, false, true));
+        //soundBoard.Add(new SoundboardItem("Test Item", @"C:\Windows\Windows.mp3", SoundboardItemType.LocalFile, ""));
+        //soundBoard.Add(new SoundboardItem("Test Item 2", @"C:\Windows\Windows.mp3", SoundboardItemType.LocalFile, "",
+        //    true, false, true));
+        //soundBoard.Add(new SoundboardItem("Test Item with really really looooooooong name oooo soo long",
+        //    @"C:\Users\Really\Long\File\Path\That\Exceeds\The\Max\Width\Of\Display.mp3", SoundboardItemType.LocalFile,
+        //    ""));
+        //soundBoard.Add(new SoundboardItem("Test Item Downloaded Item", @"https://www.youtube.com/watch?v=WyQ7z8BMwwk",
+        //    SoundboardItemType.DownloadedFile, ""));
+        //soundBoard.Add(new SoundboardItem("Test Item Downloading Item", @"https://www.youtube.com/watch?v=WyQ7z8BMwwk",
+        //    SoundboardItemType.DownloadedFile, "", false, true));
+        //soundBoard.Add(new SoundboardItem("Test Item Downloaded Item w/ Errors",
+        //    @"https://www.youtube.com/watch?v=WyQ7z8BMwwk", SoundboardItemType.DownloadedFile, "", true, false, true));
+        //soundBoard.Add(new SoundboardItem("Test TTS Item", "Hi, This is some test TTS Text!",
+        //    SoundboardItemType.TTSFile, ""));
+        //soundBoard.Add(new SoundboardItem("Test TTS Item w/ Errors", "Hi, This is some test TTS Text!",
+        //    SoundboardItemType.TTSFile, "", true, false, true));
     }
 
     private void SoundboardItems_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

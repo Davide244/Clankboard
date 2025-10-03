@@ -25,31 +25,18 @@ public enum SoundboardItemType
 public partial class SoundboardItem : ObservableObject
 {
     [ObservableProperty] public bool _canClickConfigure;
-
     [ObservableProperty] public bool _canClickExport;
-
     [ObservableProperty] public bool _canClickViewInExplorer;
-
     [ObservableProperty] public bool _isPlayButtonEnabled;
-
     [ObservableProperty] public string _itemErrorIndicatorVisibility;
-
     [ObservableProperty] public string _itemIcon;
-
     [ObservableProperty] public string _itemIconColor;
-
     [ObservableProperty] public string _itemIconVisibility;
-
     [ObservableProperty] public string _itemKeybindText;
-
     [ObservableProperty] public string _itemLoadingIndicatorsVisibility;
-
     [ObservableProperty] public string _itemLocationText;
-
     [ObservableProperty] public string _itemName;
-
     [ObservableProperty] public int _itemProgressRingProgress;
-
     [ObservableProperty] public bool _userDeletionEnabled;
 
 

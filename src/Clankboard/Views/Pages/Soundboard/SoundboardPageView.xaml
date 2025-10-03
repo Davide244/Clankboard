@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <Page
-    x:Class="Clankboard.Pages.SoundboardPageView"
+    x:Class="Clankboard.Views.Pages.Soundboard.SoundboardPageView"
+    xmlns:SoundboardPage="using:Clankboard.Views.Pages.Soundboard"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:audioSystem="using:Clankboard.AudioSystem"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="using:CommunityToolkit.WinUI"
+    xmlns:uiConverters="using:CommunityToolkit.WinUI.Converters"
     xmlns:icons="using:FluentIcon.WinUI"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
@@ -169,15 +170,20 @@
                     </ItemsView.ItemTemplate>
                 </ItemsView>-->
                 <Grid>
-                    <ListView x:Name="SoundboardListView" SelectionMode="Extended" Margin="15, 0, 15, 0"
-                              CanReorderItems="True" CanDragItems="True" AllowDrop="True">
+                    <ListView x:Name="SoundboardListView"
+                              ItemsSource="{x:Bind viewModel.SoundboardItems, Mode=OneWay}"
+                              SelectionMode="Extended"
+                              Margin="15, 0, 15, 0"
+                              CanReorderItems="True"
+                              CanDragItems="True"
+                              AllowDrop="True">
                         <!--ItemsView.Layout>
         <StackLayout Spacing="4"/>
         <UniformGridLayout Orientation="Horizontal" MinItemWidth="250" MinItemHeight="40" MinColumnSpacing="4" MinRowSpacing="4"/>
     </ItemsView.Layout-->
 
                         <ListView.ItemTemplate>
-                            <DataTemplate x:DataType="audioSystem:SoundboardItem">
+                            <DataTemplate x:DataType="SoundboardPage:SoundboardListItem">
                                 <Grid Height="40" HorizontalAlignment="Stretch" Margin="-13, 2, -9, 2">
                                     <Grid.ContextFlyout>
                                         <MenuFlyout>
@@ -294,7 +300,10 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                    <StackPanel x:Name="NoItemsDisplay" VerticalAlignment="Center" HorizontalAlignment="Center"
+                    <StackPanel x:Name="NoItemsDisplay"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Visibility="{x:Bind viewModel.NoItemsDisplayVisible, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"
                                 Spacing="20">
                         <FontIcon FontFamily="{StaticResource ClankboardSymbolFont}" Glyph="&#x41;" FontSize="100" />
                         <TextBlock Text="Soundboard Empty." Style="{StaticResource TitleTextBlockStyle}" />
