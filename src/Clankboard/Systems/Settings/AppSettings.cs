@@ -23,6 +23,7 @@ namespace Clankboard.Systems.Settings
         public int InputVolume { get; set; } = 100;
         public int LocalOutputVolume { get; set; } = 100;
         public int OutputVolume { get; set; } = 100;
+        #endregion
 
         // Selected device indices (-1 indicates no selection)
         public int SelectedInputDeviceIndex { get; set; } = -1;
@@ -36,6 +37,7 @@ namespace Clankboard.Systems.Settings
         public bool SkipYTDLPDownloadConfirmationDialog { get; set; } = true;
         public bool SkipFFMPEGDownloadConfirmationDialog { get; set; } = false;
         public bool SkipFFPROBEDownloadConfirmationDialog { get; set; } = false;
+        public bool SkipYTDLPDownloadConfirmationDialog { get; set; } = true;
     #endregion
 
 
