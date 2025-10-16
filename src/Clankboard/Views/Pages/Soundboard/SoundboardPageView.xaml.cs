@@ -25,35 +25,6 @@ public sealed partial class SoundboardPageView : Page
     public SoundboardPageView()
     {
         InitializeComponent();
-
-        soundBoard.soundboardViewmodel.SoundboardItems.CollectionChanged += SoundboardItems_CollectionChanged;
-
-        // Add random soundboard items for testing
-        //soundBoard.Add(new SoundboardItem("Test Item", @"C:\Windows\Windows.mp3", SoundboardItemType.LocalFile, ""));
-        //soundBoard.Add(new SoundboardItem("Test Item 2", @"C:\Windows\Windows.mp3", SoundboardItemType.LocalFile, "",
-        //    true, false, true));
-        //soundBoard.Add(new SoundboardItem("Test Item with really really looooooooong name oooo soo long",
-        //    @"C:\Users\Really\Long\File\Path\That\Exceeds\The\Max\Width\Of\Display.mp3", SoundboardItemType.LocalFile,
-        //    ""));
-        //soundBoard.Add(new SoundboardItem("Test Item Downloaded Item", @"https://www.youtube.com/watch?v=WyQ7z8BMwwk",
-        //    SoundboardItemType.DownloadedFile, ""));
-        //soundBoard.Add(new SoundboardItem("Test Item Downloading Item", @"https://www.youtube.com/watch?v=WyQ7z8BMwwk",
-        //    SoundboardItemType.DownloadedFile, "", false, true));
-        //soundBoard.Add(new SoundboardItem("Test Item Downloaded Item w/ Errors",
-        //    @"https://www.youtube.com/watch?v=WyQ7z8BMwwk", SoundboardItemType.DownloadedFile, "", true, false, true));
-        //soundBoard.Add(new SoundboardItem("Test TTS Item", "Hi, This is some test TTS Text!",
-        //    SoundboardItemType.TTSFile, ""));
-        //soundBoard.Add(new SoundboardItem("Test TTS Item w/ Errors", "Hi, This is some test TTS Text!",
-        //    SoundboardItemType.TTSFile, "", true, false, true));
-    }
-
-    private void SoundboardItems_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-    {
-        // Check if the soundboard is empty. If it is, show the empty soundboard message, otherwise hide it.
-        if (soundBoard.soundboardViewmodel.SoundboardItems.Count == 0)
-            NoItemsDisplay.Visibility = Visibility.Visible;
-        else
-            NoItemsDisplay.Visibility = Visibility.Collapsed;
     }
 
     private async void AddLocalSoundFile_Click(object sender, RoutedEventArgs e)
@@ -84,7 +55,7 @@ public sealed partial class SoundboardPageView : Page
 
         // Multiselect is supported
         var files = await fileOpenPicker.PickMultipleFilesAsync();
-        if (files.Count > 0) soundBoard.Add(files.ToList());
+        if (files.Count > 0) viewModel.SoundboardItems.Add(files.ToList());
     }
 
     private async void DownloadSoundFile_Click(object sender, RoutedEventArgs e)
@@ -116,7 +87,7 @@ public sealed partial class SoundboardPageView : Page
     {
         var dialog = new AddTTSAudioDialog();
         var result = await MainWindow.g_appMessagingEvents.ShowMessageBox("Add Text to Speech Audio", "", "Cancel",
-            "Add", null, ContentDialogButton.Primary, dialog);
+            "Add", null, ContentDialogButton.Primary, dialog); 
 
         if (result == ContentDialogResult.Primary)
             soundBoard.Add(dialog.viewModel.Name, dialog.viewModel.TtsText, dialog.viewModel.SpeedMultiplierValue,

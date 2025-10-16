@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -11,6 +12,10 @@ namespace Clankboard.Views.Pages.Soundboard
         private ObservableCollection<SoundboardListItem> _soundboardItems = new();
 
         [ObservableProperty] private bool _noItemsDisplayVisible = true;
+
+        // Commands
+        [ObservableProperty] private RelayCommand _addLocalSoundFileCommand;
+        [ObservableProperty] private RelayCommand _clearSoundboardCommand;
 
 
         public SoundboardPageViewModel()

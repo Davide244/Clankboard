@@ -6,6 +6,7 @@ using Clankboard.Dialogs;
 using Clankboard.Pages;
 using Clankboard.Systems;
 using Clankboard.Utils.Events;
+using Clankboard.Views.Pages.Soundboard;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI;
 using Microsoft.UI.Windowing;
