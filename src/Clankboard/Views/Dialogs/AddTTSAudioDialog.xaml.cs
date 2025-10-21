@@ -1,5 +1,6 @@
 using Clankboard.AudioSystem;
 using Clankboard.Dialogs.Viewmodels;
+using Clankboard.Services.TTS;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
@@ -14,19 +15,22 @@ namespace Clankboard.Dialogs
     /// </summary>
     public sealed partial class AddTTSAudioDialog : Page
     {
+        // SERVICES
+        private readonly ITTSService ttsService;
+
         private static int lastSelectedComboboxIndex = -1;
 
         public static string userSelectedText;
         public AddTTSAudioDialogViewModel viewModel = new();
 
-        public AddTTSAudioDialog()
+        public AddTTSAudioDialog(ITTSService ttsService)
         {
+            this.ttsService = ttsService;
+
             InitializeComponent();
 
-            TTSHelper.UpdateInstalledVoices();
-
             // Set ItemSource of voicesComboBox
-            voicesComboBox.ItemsSource = TTSVoices.Instance.InstalledVoices;
+            voicesComboBox.ItemsSource = ttsService.GetTTSVoiceList().Result;
 
             if (lastSelectedComboboxIndex != -1) voicesComboBox.SelectedIndex = lastSelectedComboboxIndex;
         }
@@ -79,7 +83,7 @@ namespace Clankboard.Dialogs
 
             public AddTTSAudioDialogViewModel()
             {
-                SpeedMultiplierValue = 0;
+                SpeedMultiplierValue = 1;
                 VolumeValue = 100;
                 EmbedFile = false;
             }

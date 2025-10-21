@@ -8,6 +8,7 @@ using Clankboard.Dialogs;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using WinRT.Interop;
+using Clankboard.Services.TTS;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -19,11 +20,14 @@ namespace Clankboard.Views.Pages.Soundboard;
 /// </summary>
 public sealed partial class SoundboardPageView : Page
 {
+    private readonly ITTSService ttsService;
+
     //private readonly Soundboard soundBoard = new();
     private SoundboardPageViewModel viewModel = new();
 
-    public SoundboardPageView()
+    public SoundboardPageView(ITTSService ttsService)
     {
+        this.ttsService = ttsService;
         InitializeComponent();
     }
 
@@ -55,7 +59,10 @@ public sealed partial class SoundboardPageView : Page
 
         // Multiselect is supported
         var files = await fileOpenPicker.PickMultipleFilesAsync();
-        if (files.Count > 0) viewModel.SoundboardItems.Add(files.ToList());
+        //if (files.Count > 0) viewModel.SoundboardItems.Add(files.ToList());
+
+        //temp NotImplemented messagebox
+
     }
 
     private async void DownloadSoundFile_Click(object sender, RoutedEventArgs e)
@@ -68,11 +75,11 @@ public sealed partial class SoundboardPageView : Page
         var result = await MainWindow.g_appMessagingEvents.ShowMessageBox("Download File", "", "Cancel",
             "Download File", null, ContentDialogButton.Primary, downloadFileDialog);
 
-        if (result == ContentDialogResult.Primary)
-            soundBoard.AddInternetAudio(DownloadFileDialog.userSelectedFileUrl,
-                DownloadFileDialog.overrideFileName && DownloadFileDialog.userSelectedFileName != ""
-                    ? DownloadFileDialog.userSelectedFileName
-                    : null);
+        //if (result == ContentDialogResult.Primary)
+        //    soundBoard.AddInternetAudio(DownloadFileDialog.userSelectedFileUrl,
+        //        DownloadFileDialog.overrideFileName && DownloadFileDialog.userSelectedFileName != ""
+        //            ? DownloadFileDialog.userSelectedFileName
+        //            : null);
         // TODO: Add download logic.
     }
 
@@ -85,12 +92,12 @@ public sealed partial class SoundboardPageView : Page
 
     private async void AddTTSAudio_Click(object sender, RoutedEventArgs e)
     {
-        var dialog = new AddTTSAudioDialog();
+        var dialog = new AddTTSAudioDialog(ttsService);
         var result = await MainWindow.g_appMessagingEvents.ShowMessageBox("Add Text to Speech Audio", "", "Cancel",
             "Add", null, ContentDialogButton.Primary, dialog); 
 
-        if (result == ContentDialogResult.Primary)
-            soundBoard.Add(dialog.viewModel.Name, dialog.viewModel.TtsText, dialog.viewModel.SpeedMultiplierValue,
-                dialog.viewModel.SpeedMultiplierValue, false);
+        //if (result == ContentDialogResult.Primary)
+        //    soundBoard.Add(dialog.viewModel.Name, dialog.viewModel.TtsText, dialog.viewModel.SpeedMultiplierValue,
+        //        dialog.viewModel.SpeedMultiplierValue, false);
     }
 }

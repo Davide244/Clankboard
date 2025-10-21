@@ -7,6 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:clankAS="using:Clankboard.AudioSystem"
+    xmlns:clankS="using:Clankboard.Services.TTS"
     mc:Ignorable="d"
     Background="Transparent">
 
@@ -44,7 +45,7 @@
                               SelectedValue="{x:Bind viewModel.SelectedVoice, Mode=TwoWay}"
                               SelectionChanged="voicesComboBox_SelectionChanged">
                         <ComboBox.ItemTemplate>
-                            <DataTemplate x:DataType="clankAS:TTSVoice">
+                            <DataTemplate x:DataType="clankS:TTSVoice">
                                 <StackPanel Orientation="Horizontal">
                                     <FontIcon Glyph="&#xEFA9;" FontSize="13" />
                                     <Grid>
@@ -105,9 +106,25 @@
                                Minimum="1" Maximum="100" Value="{x:Bind viewModel.VolumeValue, Mode=TwoWay}" />
                 </Grid>
 
-                <TextBox x:Name="textTextBox" PlaceholderText="Text that will be said by the voice." Header="Text"
-                         Margin="0, 10, 0, 0" AcceptsReturn="True" MaxHeight="200"
-                         Text="{x:Bind viewModel.TtsText, Mode=TwoWay}" KeyDown="textTextBox_KeyDown" />
+                <Grid Margin="0, 10, 0, 0" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="textTextBox" 
+                             PlaceholderText="Text that will be said by the voice." 
+                             Header="Text"
+                             AcceptsReturn="True" 
+                             MaxHeight="200"
+                             Text="{x:Bind viewModel.TtsText, Mode=TwoWay}" 
+                             KeyDown="textTextBox_KeyDown" />
+                    <Button Grid.Column="1" 
+                            Margin="10, 0, 0, 0" 
+                            VerticalAlignment="Bottom" 
+                            ToolTipService.ToolTip="Play Preview" >
+                        <SymbolIcon Symbol="Play"/>
+                    </Button>
+                </Grid>
             </StackPanel>
         </ScrollView>
     </Grid>

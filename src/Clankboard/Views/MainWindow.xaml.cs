@@ -8,6 +8,7 @@ using Clankboard.Systems;
 using Clankboard.Utils.Events;
 using Clankboard.Views.Pages.Soundboard;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
@@ -41,7 +42,7 @@ public sealed partial class MainWindow : WindowEx
     public MainWindow()
     {
         InitializeComponent();
-        NavigationFrame.Navigate(typeof(SoundboardPageView));
+        NavigateTo<SoundboardPageView>();
 
         //this.PersistenceId = "ClankMainWindow";
 
@@ -69,6 +70,15 @@ public sealed partial class MainWindow : WindowEx
             infobarViewmodel.MainWindowInfobars.Add(new MainWindowInfobar("No Output Device Set",
                 "You have not set an output device. The app is not able to output audio data.", InfoBarSeverity.Warning,
                 false));
+    }
+
+    private void NavigateTo<T>() where T : Page
+    {
+        // DI
+        var page = App.Services.GetRequiredService<T>();
+        NavigationFrame.Navigate(page.GetType());
+
+        //NavigationFrame.Navigate(typeof(T));
     }
 
     public static ContentDialog dialog { get; private set; }

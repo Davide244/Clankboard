@@ -5,10 +5,12 @@
 
 namespace Clankboard
 {
+    using AudioSystem;
+    using Clankboard.Services.TTS;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.UI.Xaml;
     using System;
     using System.IO;
-    using AudioSystem;
-    using Microsoft.UI.Xaml;
     using Utils;
     using WinUIEx;
 
@@ -28,6 +30,8 @@ namespace Clankboard
     {
         public const AppVersionType appVersionType = AppVersionType.Indev; // Change this to the current version type before publishing!!
 
+        public static IServiceProvider Services { get; private set; }
+
         public static string AppDataPath;
         public static AppDataFolderManager appDataFolderManager = new();
         public static ClankAudioDeviceManager appAudioDeviceManager = new();
@@ -38,8 +42,19 @@ namespace Clankboard
         {
             m_splashScreen = splashScreen;
 
+            Services = registerAppServices().BuildServiceProvider();
+
             InitializeComponent();
             setupAppData();
+        }
+
+        private ServiceCollection registerAppServices() 
+        {
+            var services = new ServiceCollection();
+            services.AddSingleton<ITTSService, TTSService>();
+            // ...
+
+            return services;
         }
 
         private void setupAppData()

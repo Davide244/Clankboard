@@ -136,6 +136,7 @@
     <PackageReference Include="CommunityToolkit.WinUI.Extensions" Version="8.2.250402" />
     <PackageReference Include="kitUIN.FluentIcon.WinUI.Filled" Version="1.2.250" />
     <PackageReference Include="kitUIN.FluentIcon.WinUI.Regular" Version="1.2.250" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.10" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.4948" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.7.250606001" />
     <PackageReference Include="NAudio" Version="2.2.1" />
@@ -179,6 +180,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\Icon\" />
+    <Folder Include="Models\" />
     <Folder Include="Systems\File\" />
     <Folder Include="Systems\AppData\" />
     <Folder Include="Systems\TTS\" />
