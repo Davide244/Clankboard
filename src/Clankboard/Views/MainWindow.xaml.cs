@@ -4,8 +4,9 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Clankboard.Dialogs;
 using Clankboard.Pages;
+using Clankboard.Services.Dialog;
+using Clankboard.Services.Navigation;
 using Clankboard.Systems;
-using Clankboard.Utils.Events;
 using Clankboard.Views.Pages.Soundboard;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,7 +14,6 @@ using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Navigation;
 using WinUIEx;
 using TitleBar = Microsoft.UI.Xaml.Controls.TitleBar;
@@ -31,18 +31,25 @@ public sealed partial class MainWindow : WindowEx
     private const string settingIcon = "\uE713";
     private const string backIcon = "\uE72B";
 
-    public static AppMessagingEvents g_appMessagingEvents = new();
-    public static AppContentDialogProperties g_appContentDialogProperties = new();
-
     public static MainWindowInfobarViewmodel infobarViewmodel = new();
 
     //public static AuxSoftwareMgr g_auxSoftwareMgr = new();
     private SettingsSystemViewmodel settingsViewmodel = SettingsSystemViewmodel.Instance; // Used for the mute toggler
+    private readonly INavigationService _navigationService;
+    private readonly IDialogService _dialogService;
 
     public MainWindow()
     {
+        _navigationService = App.Services.GetRequiredService<INavigationService>();
+        _dialogService = App.Services.GetRequiredService<IDialogService>();
+        
         InitializeComponent();
-        NavigateTo<SoundboardPageView>();
+        
+        // Initialize the navigation service with the Frame
+        _navigationService.Frame = NavigationFrame;
+        
+        // Navigate to the initial page
+        _navigationService.NavigateTo<SoundboardPageView>();
 
         //this.PersistenceId = "ClankMainWindow";
 
@@ -52,8 +59,6 @@ public sealed partial class MainWindow : WindowEx
         appWindow.TitleBar.ButtonBackgroundColor = Colors.Transparent;
         appWindow.TitleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
         appWindow.TitleBar.PreferredHeightOption = TitleBarHeightOption.Tall;
-
-        g_appMessagingEvents.AppShowMessageBox += AppMessagingEvents_AppShowMessageBox;
 
         // Set data source for the infobar list view
         InfobarList.ItemsSource = infobarViewmodel.MainWindowInfobars;
@@ -72,53 +77,6 @@ public sealed partial class MainWindow : WindowEx
                 false));
     }
 
-    private void NavigateTo<T>() where T : Page
-    {
-        // DI
-        var page = App.Services.GetRequiredService<T>();
-        NavigationFrame.Navigate(page.GetType());
-
-        //NavigationFrame.Navigate(typeof(T));
-    }
-
-    public static ContentDialog dialog { get; private set; }
-
-    private async Task<ContentDialogResult> AppMessagingEvents_AppShowMessageBox(object sender, RoutedEventArgs e,
-        string Title, string Text, string CloseButtonText, string PrimaryButtonText, string SecondaryButtonText,
-        ContentDialogButton DefaultButton = ContentDialogButton.None, object content = null)
-    {
-        // Disable all buttons
-        g_appContentDialogProperties.IsPrimaryButtonEnabled = false;
-        g_appContentDialogProperties.IsSecondaryButtonEnabled = false;
-
-        Debug.WriteLine("AppMessagingEvents_AppShowMessageBox");
-
-        dialog = new ContentDialog();
-
-        dialog.XamlRoot = rootGrid.XamlRoot;
-        dialog.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-        dialog.Title = Title;
-        if (PrimaryButtonText != null) dialog.PrimaryButtonText = PrimaryButtonText;
-        if (SecondaryButtonText != null) dialog.SecondaryButtonText = SecondaryButtonText;
-        dialog.CloseButtonText = CloseButtonText;
-        dialog.DefaultButton = DefaultButton;
-        if (content != null) dialog.Content = content;
-
-        var bindingPrimaryButtonEnabled = new Binding();
-        bindingPrimaryButtonEnabled.Source = g_appContentDialogProperties;
-        bindingPrimaryButtonEnabled.Path = new PropertyPath("IsPrimaryButtonEnabled");
-        bindingPrimaryButtonEnabled.Mode = BindingMode.OneWay;
-        dialog.SetBinding(ContentDialog.IsPrimaryButtonEnabledProperty, bindingPrimaryButtonEnabled);
-
-        var bindingSecondaryButtonEnabled = new Binding();
-        bindingSecondaryButtonEnabled.Source = g_appContentDialogProperties;
-        bindingSecondaryButtonEnabled.Path = new PropertyPath("IsSecondaryButtonEnabled");
-        bindingSecondaryButtonEnabled.Mode = BindingMode.OneWay;
-        dialog.SetBinding(ContentDialog.IsSecondaryButtonEnabledProperty, bindingSecondaryButtonEnabled);
-
-        return await dialog.ShowAsync();
-    }
-
     private void SettingsButton_Click(object sender, RoutedEventArgs e)
     {
         //NavigationFrame.Navigate(typeof(Pages.SettingsPage));
@@ -127,13 +85,13 @@ public sealed partial class MainWindow : WindowEx
 
         if (NavigationFrame.Content is SettingsPage)
         {
-            NavigationFrame.GoBack();
+            _navigationService.GoBack();
             //TitlebarSettingsButton.Label = "Settings";
             //TitlebarSettingsButtonIcon.Glyph = settingIcon;
         }
         else
         {
-            NavigationFrame.Navigate(typeof(SettingsPage));
+            _navigationService.NavigateTo<SettingsPage>();
             //TitlebarSettingsButton.Label = "Back    ";
             //TitlebarSettingsButtonIcon.Glyph = backIcon;
         }
@@ -168,15 +126,19 @@ public sealed partial class MainWindow : WindowEx
         SettingsSystemViewmodel.Instance.Save();
     }
 
-    private void AboutButton_Click(object sender, RoutedEventArgs e)
+    private async void AboutButton_Click(object sender, RoutedEventArgs e)
     {
-        AboutDialog aboutDialog = new();
-        g_appMessagingEvents.ShowMessageBox("", "", "Okay", null, null, ContentDialogButton.Close, aboutDialog);
+        var aboutDialog = new AboutDialog();
+        await _dialogService.ShowCustomAsync("About Clankboard", aboutDialog, new DialogOptions
+        {
+            CloseButtonText = "Okay",
+            DefaultButton = ContentDialogButton.Close
+        });
     }
 
     private void TitleBar_OnBackRequested(TitleBar sender, object args)
     {
-        NavigationFrame.GoBack();
+        _navigationService.GoBack();
     }
 }
 

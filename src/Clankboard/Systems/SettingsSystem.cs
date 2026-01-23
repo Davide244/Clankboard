@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using Clankboard.Services.Dialog;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml.Controls;
 using Newtonsoft.Json;
 
@@ -126,10 +128,14 @@ public partial class SettingsSystemViewmodel : ObservableObject
         {
             Debug.WriteLine("Could not save settings.json file to AppData. Exception Message: " + e.Message);
             // Display retry dialog to user.
-            var result = MainWindow.g_appMessagingEvents.ShowMessageBox("Error Saving Settings",
-                "An error occured while writing to the settings.json file. Settings have not been saved.", "Okay",
-                "Retry", null, ContentDialogButton.Primary).Result;
-            if (result == ContentDialogResult.Primary) Save(); // Retry the save procedure.
+            var dialogService = App.Services.GetRequiredService<IDialogService>();
+            var shouldRetry = dialogService.ShowConfirmationAsync(
+                "Error Saving Settings",
+                "An error occurred while writing to the settings.json file. Settings have not been saved.",
+                "Retry",
+                "Okay").Result;
+            
+            if (shouldRetry) Save(); // Retry the save procedure.
         }
     }
 

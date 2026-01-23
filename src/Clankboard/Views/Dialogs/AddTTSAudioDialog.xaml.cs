@@ -1,7 +1,9 @@
 using Clankboard.AudioSystem;
 using Clankboard.Dialogs.Viewmodels;
+using Clankboard.Services.Dialog;
 using Clankboard.Services.TTS;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 
@@ -17,6 +19,7 @@ namespace Clankboard.Dialogs
     {
         // SERVICES
         private readonly ITTSService ttsService;
+        private readonly IDialogService _dialogService;
 
         private static int lastSelectedComboboxIndex = -1;
 
@@ -26,6 +29,7 @@ namespace Clankboard.Dialogs
         public AddTTSAudioDialog(ITTSService ttsService)
         {
             this.ttsService = ttsService;
+            _dialogService = App.Services.GetRequiredService<IDialogService>();
 
             InitializeComponent();
 
@@ -35,33 +39,28 @@ namespace Clankboard.Dialogs
             if (lastSelectedComboboxIndex != -1) voicesComboBox.SelectedIndex = lastSelectedComboboxIndex;
         }
 
+        private void UpdatePrimaryButtonState()
+        {
+            bool isValid = voicesComboBox.SelectedItem != null 
+                        && !string.IsNullOrEmpty(textTextBox.Text) 
+                        && !string.IsNullOrEmpty(NameTextBox.Text);
+            _dialogService.SetPrimaryButtonEnabled(isValid);
+        }
+
         private void voicesComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             lastSelectedComboboxIndex = voicesComboBox.SelectedIndex;
-
-            if (voicesComboBox.SelectedItem != null && textTextBox.Text != string.Empty &&
-                NameTextBox.Text != string.Empty)
-                MainWindow.g_appContentDialogProperties.IsPrimaryButtonEnabled = true;
-            else
-                MainWindow.g_appContentDialogProperties.IsPrimaryButtonEnabled = false;
+            UpdatePrimaryButtonState();
         }
 
         private void textTextBox_KeyDown(object sender, KeyRoutedEventArgs e)
         {
-            if (voicesComboBox.SelectedItem != null && textTextBox.Text != string.Empty &&
-                NameTextBox.Text != string.Empty)
-                MainWindow.g_appContentDialogProperties.IsPrimaryButtonEnabled = true;
-            else
-                MainWindow.g_appContentDialogProperties.IsPrimaryButtonEnabled = false;
+            UpdatePrimaryButtonState();
         }
 
         private void NameTextBox_KeyDown(object sender, KeyRoutedEventArgs e)
         {
-            if (voicesComboBox.SelectedItem != null && textTextBox.Text != string.Empty &&
-                NameTextBox.Text != string.Empty)
-                MainWindow.g_appContentDialogProperties.IsPrimaryButtonEnabled = true;
-            else
-                MainWindow.g_appContentDialogProperties.IsPrimaryButtonEnabled = false;
+            UpdatePrimaryButtonState();
         }
     }
 

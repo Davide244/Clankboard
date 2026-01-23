@@ -6,7 +6,10 @@
 namespace Clankboard
 {
     using AudioSystem;
+    using Clankboard.Services.Dialog;
+    using Clankboard.Services.Navigation;
     using Clankboard.Services.TTS;
+    using Clankboard.Views.Pages.Soundboard;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.UI.Xaml;
     using System;
@@ -51,7 +54,15 @@ namespace Clankboard
         private ServiceCollection registerAppServices() 
         {
             var services = new ServiceCollection();
+            
+            // Core services
+            services.AddSingleton<INavigationService, NavigationService>();
+            services.AddSingleton<IDialogService>(_ => new DialogService(() => m_window?.Content?.XamlRoot));
             services.AddSingleton<ITTSService, TTSService>();
+            
+            // Pages
+            services.AddTransient<SoundboardPageView>();
+            services.AddTransient<Clankboard.Pages.SettingsPage>();
             // ...
 
             return services;

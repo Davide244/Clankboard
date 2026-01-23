@@ -5,6 +5,7 @@ using System.Linq;
 using Windows.Storage.Pickers;
 using Clankboard.AudioSystem;
 using Clankboard.Dialogs;
+using Clankboard.Services.Dialog;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using WinRT.Interop;
@@ -20,14 +21,16 @@ namespace Clankboard.Views.Pages.Soundboard;
 /// </summary>
 public sealed partial class SoundboardPageView : Page
 {
-    private readonly ITTSService ttsService;
+    private readonly ITTSService _ttsService;
+    private readonly IDialogService _dialogService;
 
     //private readonly Soundboard soundBoard = new();
     private SoundboardPageViewModel viewModel = new();
 
-    public SoundboardPageView(ITTSService ttsService)
+    public SoundboardPageView(ITTSService ttsService, IDialogService dialogService)
     {
-        this.ttsService = ttsService;
+        _ttsService = ttsService;
+        _dialogService = dialogService;
         InitializeComponent();
     }
 
@@ -72,8 +75,12 @@ public sealed partial class SoundboardPageView : Page
 
         // Open download file dialog code
         var downloadFileDialog = new DownloadFileDialog();
-        var result = await MainWindow.g_appMessagingEvents.ShowMessageBox("Download File", "", "Cancel",
-            "Download File", null, ContentDialogButton.Primary, downloadFileDialog);
+        var result = await _dialogService.ShowCustomAsync("Download File", downloadFileDialog, new DialogOptions
+        {
+            PrimaryButtonText = "Download File",
+            CloseButtonText = "Cancel",
+            DefaultButton = ContentDialogButton.Primary
+        });
 
         //if (result == ContentDialogResult.Primary)
         //    soundBoard.AddInternetAudio(DownloadFileDialog.userSelectedFileUrl,
@@ -92,9 +99,13 @@ public sealed partial class SoundboardPageView : Page
 
     private async void AddTTSAudio_Click(object sender, RoutedEventArgs e)
     {
-        var dialog = new AddTTSAudioDialog(ttsService);
-        var result = await MainWindow.g_appMessagingEvents.ShowMessageBox("Add Text to Speech Audio", "", "Cancel",
-            "Add", null, ContentDialogButton.Primary, dialog); 
+        var dialog = new AddTTSAudioDialog(_ttsService);
+        var result = await _dialogService.ShowCustomAsync("Add Text to Speech Audio", dialog, new DialogOptions
+        {
+            PrimaryButtonText = "Add",
+            CloseButtonText = "Cancel",
+            DefaultButton = ContentDialogButton.Primary
+        });
 
         //if (result == ContentDialogResult.Primary)
         //    soundBoard.Add(dialog.viewModel.Name, dialog.viewModel.TtsText, dialog.viewModel.SpeedMultiplierValue,

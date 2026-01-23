@@ -1,4 +1,6 @@
 using System;
+using Clankboard.Services.Dialog;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
@@ -12,6 +14,8 @@ namespace Clankboard.Dialogs;
 /// </summary>
 public sealed partial class DownloadFileDialog : Page
 {
+    private readonly IDialogService _dialogService;
+    
     // Using public static as WinUI 3 only allows for one instance of a dialog to be created.. Basically a singleton (Cheating :p)
     public static string userSelectedFileUrl;
     public static string userSelectedFileName;
@@ -19,6 +23,8 @@ public sealed partial class DownloadFileDialog : Page
 
     public DownloadFileDialog()
     {
+        _dialogService = App.Services.GetRequiredService<IDialogService>();
+        
         InitializeComponent();
 
         urlTextBox.RegexPattern =
@@ -28,10 +34,7 @@ public sealed partial class DownloadFileDialog : Page
 
     private void urlTextBox_validityChanged(object sender, EventArgs e)
     {
-        if (urlTextBox.hasErrors)
-            MainWindow.g_appContentDialogProperties.IsPrimaryButtonEnabled = false;
-        else
-            MainWindow.g_appContentDialogProperties.IsPrimaryButtonEnabled = true;
+        _dialogService.SetPrimaryButtonEnabled(!urlTextBox.hasErrors);
     }
 
     private void urlTextBox_TextChanged(object sender, TextChangedEventArgs e)
